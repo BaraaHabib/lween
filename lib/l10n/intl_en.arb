@@ -1,0 +1,15 @@
+{
+  "sorryThereAreNoEntityYet": "Sorry, there are no {entity} yet",
+  "retry": "Retry",
+  "noInternetConnection": "No internet connection",
+  "yes": "Yes",
+  "no": "No",
+  "logIn": "log in",
+  "invalidphonenumber": "invalidPhoneNumber",
+  "country": "Country",
+  "phoneNumber": "Phone number",
+  "password": "Password",
+  "signup": "Signup",
+  "welcomeToLweenApp": "أهلاً بك في تطبيق لوين",
+  "forgotPassword": "نسيت كلمة المرور؟"
+}
