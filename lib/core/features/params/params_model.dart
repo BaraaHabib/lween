@@ -33,8 +33,8 @@ abstract class ParamsModel<T extends BaseBodyModel>
 
   bool get hasFile {
     final jsonBody = body.toJson();
-    for (var v in jsonBody.entries.toList() ?? []) {
-      if (v.contains('file')) {
+    for (MapEntry<String, dynamic> v in jsonBody.entries.toList()) {
+      if (v.key == ('file')) {
         return true;
       }
     }

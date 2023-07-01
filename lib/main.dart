@@ -6,7 +6,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:lween/core/configurations/app_configuration.dart';
-import 'package:lween/core/configurations/styles/themes.dart';
+import 'package:lween/core/extended/validation/arabic_validation_overrides.dart';
+import 'package:lween/core/navigation/navigation_service.dart';
 import 'package:lween/core/routing/app_router.dart';
 import 'package:lween/generated/l10n.dart';
 import 'package:provider/provider.dart';
@@ -15,6 +16,7 @@ import 'package:lween/core/configurations/env.dart';
 import 'package:lween/core/locale/locale_provider.dart';
 import 'package:lween/core/storage/hive/app_storage.dart';
 import 'package:lween/injection_container.dart';
+AppRouter? appRouter;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,17 +26,13 @@ Future<void> main() async {
   // ));
   initInjection();
   await sl<LocaleProvider>().fetchLocale();
-  runApp(Lween());
+  runApp(const Lween());
 }
 
 class Lween extends HookWidget {
-  Lween({super.key});
+  const Lween({super.key});
 
   static AppStateModel get appState => sl<AppStateModel>();
-
-  static ThemeData get theme => Theme.of(
-    navigatorKey.currentContext!,
-  );
 
   static Environment get env => Environment();
 
@@ -45,10 +43,11 @@ class Lween extends HookWidget {
 
   static final navigatorKey = GlobalKey<NavigatorState>();
 
-  final appRouter = AppRouter(navigatorKey);
+  // final appRouter = AppRouter(navigatorKey);
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    appRouter ??= AppRouter(navigatorKey);
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
@@ -59,21 +58,33 @@ class Lween extends HookWidget {
         ),
       ],
       child: ScreenUtilInit(
-        designSize: const Size(360, 760),
+        designSize: const Size(360, 720),
         useInheritedMediaQuery: true,
-        builder:(ctx,child) => MaterialApp.router(
-          title: AppConfigurations.ApplicationName,
-          routerConfig: appRouter.config(),
-          theme: lightTheme,
-          localizationsDelegates: const [
-            S.delegate,
-            GlobalCupertinoLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            FormBuilderLocalizations.delegate,
-          ],
-          supportedLocales: S.delegate.supportedLocales,
-          locale: sl<LocaleProvider>().locale,
+        builder:(ctx,child) => Consumer<AppStateModel>(
+          builder: (context, appState ,child) {
+            return MaterialApp.router(
+              title: AppConfigurations.ApplicationName,
+              // routerConfig: appRouter.config(),
+              scrollBehavior: const ScrollBehaviorModified(),
+              routeInformationParser: appRouter!.defaultRouteParser(),
+              routerDelegate: appRouter!.delegate(
+                navigatorObservers: () => [
+                  NavigationService.navigatorObserver,
+                ],
+              ),
+              theme: appState.currentThemeData,
+              localizationsDelegates: const [
+                S.delegate,
+                GlobalCupertinoLocalizations.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                FormBuilderLocalizations.delegate,
+                OverrideFormBuilderLocalizationsAr.delegate,
+              ],
+              supportedLocales: S.delegate.supportedLocales,
+              locale: sl<LocaleProvider>().locale,
+            );
+          }
         ),
       ),
     );
@@ -166,5 +177,26 @@ class _MyHomePageState extends State<MyHomePage> {
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+}
+
+
+///Used to change default scroll physics
+class ScrollBehaviorModified extends ScrollBehavior {
+  const ScrollBehaviorModified();
+  @override
+  ScrollPhysics getScrollPhysics(BuildContext context) {
+    switch (getPlatform(context)) {
+      case TargetPlatform.iOS:
+        return const BouncingScrollPhysics();
+      case TargetPlatform.macOS:
+      case TargetPlatform.android:
+        return const BouncingScrollPhysics();
+      case TargetPlatform.fuchsia:
+      case TargetPlatform.linux:
+      case TargetPlatform.windows:
+        return const ClampingScrollPhysics();
+    }
+    // return null;
   }
 }

@@ -1,11 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lween/core/configurations/assets.dart';
 import 'package:lween/core/extended/numbers_ext.dart';
 import 'package:lween/core/widgets/app_button.dart';
 import 'package:lween/core/widgets/app_text_widget.dart';
-import 'package:lween/main.dart';
 
 import '../../generated/l10n.dart';
 import '../configurations/styles/styles.dart';

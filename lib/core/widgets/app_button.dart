@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:lween/core/configurations/styles/styles.dart';
 import 'package:lween/core/extended/numbers_ext.dart';
-import 'package:lween/main.dart';
 
 class AppButton extends StatelessWidget {
   const AppButton({
@@ -24,7 +23,7 @@ class AppButton extends StatelessWidget {
     return Center(
       child: ElevatedButton(
         onPressed: onTap,
-        style: Lween.theme.elevatedButtonTheme.style?.copyWith(
+        style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
           backgroundColor: MaterialStateProperty.all(color),
           side: borderColor == null
               ? null
@@ -57,7 +56,7 @@ class ExpandedAppButton extends StatelessWidget {
     return Center(
       child: ElevatedButton(
         onPressed: onTap,
-        style: Lween.theme.elevatedButtonTheme.style?.copyWith(
+        style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
           backgroundColor: MaterialStateProperty.all(color),
           side: borderColor == null
               ? null

@@ -88,3 +88,4 @@ class AppConfigurations {
 }
 
 const defaultFractionDigitsCount = 2;
+const minPasswordLength = 7;

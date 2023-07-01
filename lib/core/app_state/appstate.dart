@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:lween/core/configurations/styles/themes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:lween/core/navigation/logger.dart';
 import 'package:lween/core/services/files/file_manager.dart';
@@ -12,10 +13,14 @@ import 'package:lween/features/auth/bloc/account_bloc.dart';
 import 'package:lween/features/auth/params/refresh_token_params.dart';
 import 'package:lween/main.dart';
 import '../../../injection_container.dart';
-part 'app_components.dart';
+part 'device_info_mixin.dart';
+part 'theme_manager.dart';
 
+abstract class AppStateComponent extends ChangeNotifier{
 
-class AppStateModel extends ChangeNotifier with AppComponents {
+}
+
+class AppStateModel extends AppStateComponent with _DeviceInfoMixin, ThemeManager {
   bool _authenticated = false;
   bool _rememberMe = false;
   String? _userToken;
@@ -200,49 +205,4 @@ class AppStateModel extends ChangeNotifier with AppComponents {
     notifyListeners();
   }
 
-  //#region timezone
-  String get timeZone => ''; // TODO set time zone
-//#endregion
-
-//#region device info
-
-  static AndroidDeviceInfo? _androidInfo;
-
-  static AndroidDeviceInfo get androidInfo {
-    if (_androidInfo == null) {
-      throw Exception("can't request ios device info from android device");
-    } else {
-      return _androidInfo!;
-    }
-  }
-
-  static IosDeviceInfo? _iosInfo;
-
-  static IosDeviceInfo get iosInfo {
-    if (_iosInfo == null) {
-      throw Exception("can't request android device info from ios device");
-    } else {
-      return _iosInfo!;
-    }
-  }
-
-  static Future initDeviceInfo() async {
-    final deviceInfo = DeviceInfoPlugin();
-    if (Platform.isAndroid) {
-      _androidInfo = await deviceInfo.androidInfo;
-    } else if (Platform.isIOS) {
-      _iosInfo = await deviceInfo.iosInfo;
-    }
-    // final webBrowserInfo = await deviceInfo.webBrowserInfo;
-  }
-
-  String? get deviceId {
-    if (Platform.isAndroid) {
-      return _androidInfo?.id;
-    } else if (Platform.isIOS) {
-      return _iosInfo?.identifierForVendor;
-    }
-    return null;
-  }
-//#endregion
 }

@@ -1,6 +1,5 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lween/core/extended/numbers_ext.dart';
 
 class Styles {
@@ -14,8 +13,11 @@ class Styles {
 
   static const Color textButtonColor = Color(0xFF029BFA);
 
-  /// text field styles
+  static const lightFontColor = Color(0xFF110D32);
+  static const darkFontColor = Color(0xFFFFFFFF);
+  static const headLineFontColor = Color(0xFF89A3B4);
 
+  /// text field styles
   static const textFieldColor = Color(0xFFFFFFFF);
   static const textFieldLabelColor = Color(0xFF89A3B4);
 
@@ -68,6 +70,9 @@ class Styles {
 
   static const buttonSecondaryColor1 = Color(0xFF029BFA);
   static const buttonSecondaryColor2 = Color(0xFF0A7ADB);
+
+  /// dialogs
+  static const dialogBackgroundColor = Color(0xFFF4F9F9);
 }
 
 abstract class CommonSizes {

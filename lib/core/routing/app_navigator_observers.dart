@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:lween/core/navigation/logger.dart';
 
-import 'app_router.dart';
 
 class AppNavigatorObserver extends AutoRouterObserver {
   @override

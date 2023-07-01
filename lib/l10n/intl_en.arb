@@ -10,6 +10,20 @@
   "phoneNumber": "Phone number",
   "password": "Password",
   "signup": "Signup",
-  "welcomeToLweenApp": "أهلاً بك في تطبيق لوين",
-  "forgotPassword": "نسيت كلمة المرور؟"
+  "welcomeToLweenApp": "Welcome to Lween app",
+  "forgotPassword": "Forgot password",
+  "fullName": "full name",
+  "confirmPassword": "Confirm password",
+  "makeSureToEnterInformationAccuratly": "Make sure to enter the information accurately to complete the account creation process.",
+  "next": "Next",
+  "placeOfResidence": "Place of residence",
+  "city": "City",
+  "enterVerificationCode": "Enter verification code",
+  "resendCode": "Resend code",
+  "confirmAccount": "Confirm Account",
+  "enter": "Enter",
+  "send": "Send",
+  "resetPassword": "Reset Password",
+  "enterPhoneToSendCode": "Enter the phone number you used to create the account. We will send you a verification code to reset your password",
+  "verificationCode": "Verification code"
 }

@@ -1,8 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:lween/core/configurations/assets.dart';
 import 'package:lween/core/extended/get_utils/src/extensions/export.dart';
 import 'package:video_player/video_player.dart';
 import 'package:lween/core/configurations/styles/styles.dart';
@@ -108,19 +106,8 @@ class AppVideoState extends State<AppVideo> {
 
 
 class ControlsOverlay extends StatelessWidget {
-  const ControlsOverlay({required this.controller});
+  const ControlsOverlay({super.key, required this.controller});
 
-  static const List<Duration> _exampleCaptionOffsets = <Duration>[
-    Duration(seconds: -10),
-    Duration(seconds: -3),
-    Duration(seconds: -1, milliseconds: -500),
-    Duration(milliseconds: -250),
-    Duration.zero,
-    Duration(milliseconds: 250),
-    Duration(seconds: 1, milliseconds: 500),
-    Duration(seconds: 3),
-    Duration(seconds: 10),
-  ];
 
   final VideoPlayerController controller;
 

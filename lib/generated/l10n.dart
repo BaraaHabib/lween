@@ -160,21 +160,161 @@ class S {
     );
   }
 
-  /// `أهلاً بك في تطبيق لوين`
+  /// `Welcome to Lween app`
   String get welcomeToLweenApp {
     return Intl.message(
-      'أهلاً بك في تطبيق لوين',
+      'Welcome to Lween app',
       name: 'welcomeToLweenApp',
       desc: '',
       args: [],
     );
   }
 
-  /// `نسيت كلمة المرور؟`
+  /// `Forgot password`
   String get forgotPassword {
     return Intl.message(
-      'نسيت كلمة المرور؟',
+      'Forgot password',
       name: 'forgotPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `full name`
+  String get fullName {
+    return Intl.message(
+      'full name',
+      name: 'fullName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm password`
+  String get confirmPassword {
+    return Intl.message(
+      'Confirm password',
+      name: 'confirmPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Make sure to enter the information accurately to complete the account creation process.`
+  String get makeSureToEnterInformationAccuratly {
+    return Intl.message(
+      'Make sure to enter the information accurately to complete the account creation process.',
+      name: 'makeSureToEnterInformationAccuratly',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Next`
+  String get next {
+    return Intl.message(
+      'Next',
+      name: 'next',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Place of residence`
+  String get placeOfResidence {
+    return Intl.message(
+      'Place of residence',
+      name: 'placeOfResidence',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `City`
+  String get city {
+    return Intl.message(
+      'City',
+      name: 'city',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter verification code`
+  String get enterVerificationCode {
+    return Intl.message(
+      'Enter verification code',
+      name: 'enterVerificationCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Resend code`
+  String get resendCode {
+    return Intl.message(
+      'Resend code',
+      name: 'resendCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm Account`
+  String get confirmAccount {
+    return Intl.message(
+      'Confirm Account',
+      name: 'confirmAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter`
+  String get enter {
+    return Intl.message(
+      'Enter',
+      name: 'enter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send`
+  String get send {
+    return Intl.message(
+      'Send',
+      name: 'send',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reset Password`
+  String get resetPassword {
+    return Intl.message(
+      'Reset Password',
+      name: 'resetPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter the phone number you used to create the account. We will send you a verification code to reset your password`
+  String get enterPhoneToSendCode {
+    return Intl.message(
+      'Enter the phone number you used to create the account. We will send you a verification code to reset your password',
+      name: 'enterPhoneToSendCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Verification code`
+  String get verificationCode {
+    return Intl.message(
+      'Verification code',
+      name: 'verificationCode',
       desc: '',
       args: [],
     );

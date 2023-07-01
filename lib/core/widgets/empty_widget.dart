@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lween/core/configurations/styles/styles.dart';
 import 'package:lween/core/extended/numbers_ext.dart';
 import 'package:lween/core/widgets/app_button.dart';
-import 'package:lween/main.dart';
 
 import '../../../generated/l10n.dart';
 
@@ -40,7 +38,7 @@ class EmptyWidget extends StatelessWidget {
           25.vSpace,
           Text(
             S.of(context).sorryThereAreNoEntityYet(entity ?? ''),
-            style: Lween.theme.textTheme.displayMedium,
+            style: Theme.of(context).textTheme.displayMedium,
             textAlign: TextAlign.center,
           ),
           35.vSpace,

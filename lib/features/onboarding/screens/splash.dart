@@ -8,7 +8,6 @@ import 'package:lween/core/dialogs/app_dialogs.dart';
 import 'package:lween/core/routing/app_router.dart';
 
 import '../../../../../../core/configurations/assets.dart';
-import '../../../core/configurations/styles/styles.dart';
 import '../../../../../../core/navigation/navigation_service.dart';
 import '../../../../../../injection_container.dart';
 import '../bloc/splash_bloc.dart';
@@ -71,12 +70,12 @@ class SplashScreen extends HookWidget {
         //   const InboxScreenRoute(),
         // );
         NavigationService.of(context).clearAllAndPushNamed(
-          const SignInScreenRoute(),
+          const LogInScreenRoute(),
         );
         return;
       }
       NavigationService.of(context).clearAllAndPushNamed(
-        const SignInScreenRoute(),
+        const LogInScreenRoute(),
       );
     }
   }

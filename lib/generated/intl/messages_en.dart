@@ -24,22 +24,43 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "city": MessageLookupByLibrary.simpleMessage("City"),
+        "confirmAccount":
+            MessageLookupByLibrary.simpleMessage("Confirm Account"),
+        "confirmPassword":
+            MessageLookupByLibrary.simpleMessage("Confirm password"),
         "country": MessageLookupByLibrary.simpleMessage("Country"),
+        "enter": MessageLookupByLibrary.simpleMessage("Enter"),
+        "enterPhoneToSendCode": MessageLookupByLibrary.simpleMessage(
+            "Enter the phone number you used to create the account. We will send you a verification code to reset your password"),
+        "enterVerificationCode":
+            MessageLookupByLibrary.simpleMessage("Enter verification code"),
         "forgotPassword":
-            MessageLookupByLibrary.simpleMessage("نسيت كلمة المرور؟"),
+            MessageLookupByLibrary.simpleMessage("Forgot password"),
+        "fullName": MessageLookupByLibrary.simpleMessage("full name"),
         "invalidphonenumber":
             MessageLookupByLibrary.simpleMessage("invalidPhoneNumber"),
         "logIn": MessageLookupByLibrary.simpleMessage("log in"),
+        "makeSureToEnterInformationAccuratly": MessageLookupByLibrary.simpleMessage(
+            "Make sure to enter the information accurately to complete the account creation process."),
+        "next": MessageLookupByLibrary.simpleMessage("Next"),
         "no": MessageLookupByLibrary.simpleMessage("No"),
         "noInternetConnection":
             MessageLookupByLibrary.simpleMessage("No internet connection"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone number"),
+        "placeOfResidence":
+            MessageLookupByLibrary.simpleMessage("Place of residence"),
+        "resendCode": MessageLookupByLibrary.simpleMessage("Resend code"),
+        "resetPassword": MessageLookupByLibrary.simpleMessage("Reset Password"),
         "retry": MessageLookupByLibrary.simpleMessage("Retry"),
+        "send": MessageLookupByLibrary.simpleMessage("Send"),
         "signup": MessageLookupByLibrary.simpleMessage("Signup"),
         "sorryThereAreNoEntityYet": m0,
+        "verificationCode":
+            MessageLookupByLibrary.simpleMessage("Verification code"),
         "welcomeToLweenApp":
-            MessageLookupByLibrary.simpleMessage("أهلاً بك في تطبيق لوين"),
+            MessageLookupByLibrary.simpleMessage("Welcome to Lween app"),
         "yes": MessageLookupByLibrary.simpleMessage("Yes")
       };
 }

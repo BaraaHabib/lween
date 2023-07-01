@@ -7,7 +7,6 @@ import 'package:lween/core/extended/get_utils/get_utils.dart';
 import 'package:lween/core/extended/numbers_ext.dart';
 import 'package:lween/core/widgets/animated/animated_toggle.dart';
 
-import '../../../main.dart';
 
 enum AppTextFieldType {
   text,
@@ -92,7 +91,6 @@ class AppTextField extends HookWidget {
   Widget build(BuildContext context) {
     ///
     final obscureTextState = useState(type == AppTextFieldType.password);
-    final errorText = useState<String?>(null);
     useEffect(() {
       obscureTextState.value = type == AppTextFieldType.password;
       return;
@@ -113,8 +111,8 @@ class AppTextField extends HookWidget {
               child: Row(
                 children: [
                   if(prefixIcon != null)
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    SizedBox(
+                      width: 46.wx,
                       child: prefixIcon!,
                     ),
                   Expanded(
@@ -128,7 +126,7 @@ class AppTextField extends HookWidget {
                         ],
                         name: name,
                         style: fontSize != null || inputFontColor != null
-                            ? Lween.theme.textTheme.titleMedium?.copyWith(
+                            ? Theme.of(context).textTheme.titleMedium?.copyWith(
                           fontSize: fontSize,
                           color: inputFontColor,
                         )
@@ -151,11 +149,12 @@ class AppTextField extends HookWidget {
                             focusedBorder: focusedBorder,
                             errorBorder: errorBorder,
                             contentPadding: contentPadding ??
-                                EdgeInsets.all(0
+                                const EdgeInsetsDirectional.only(start: 5
                                     // top: 0.wx,
                                     // bottom: 0.wx,
                                 ),
                             disabledBorder: disabledBorder,
+                            alignLabelWithHint: true,
                             suffixIcon: _suffixIcon(obscureTextState),
                             suffixIconConstraints: BoxConstraints(
                               minWidth: 20.wx,
@@ -167,7 +166,7 @@ class AppTextField extends HookWidget {
                             //   minWidth: 46.wx,
                             //   maxWidth: 100.wx,
                             // ),
-                            hintStyle: Lween.theme.inputDecorationTheme.hintStyle?.copyWith(
+                            hintStyle: Theme.of(context).inputDecorationTheme.hintStyle?.copyWith(
                               color: hintFontColor,
                             ),
                             errorText: null,
@@ -200,7 +199,7 @@ class AppTextField extends HookWidget {
         // if(errorText.value != null)
         //   Row(
         //     children: [
-        //       Text(errorText.value!,style: Lween.theme.inputDecorationTheme.errorStyle,),
+        //       Text(errorText.value!,style: Theme.of(context).inputDecorationTheme.errorStyle,),
         //     ],
         //   )
       ],
@@ -224,7 +223,7 @@ class AppTextField extends HookWidget {
                 Icons.remove_red_eye_rounded,
                 color: obscureText.value
                     ? Styles.colorSecondary2
-                    : Lween.theme.primaryColor,
+                    : Theme.of(useContext()).primaryColor,
               ),
             ),
           ),

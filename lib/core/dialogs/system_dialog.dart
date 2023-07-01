@@ -26,7 +26,7 @@ class SystemDialog extends StatelessWidget {
         ),
         width: 0.7.sw,
         decoration: BoxDecoration(
-          color: Lween.theme.scaffoldBackgroundColor,
+          color: Theme.of(context).scaffoldBackgroundColor,
           borderRadius: Styles.borderRadius30px,
         ),
         child: Column(
@@ -35,7 +35,7 @@ class SystemDialog extends StatelessWidget {
           children: [
             Text(
               title,
-              style: Lween.theme.textTheme.titleMedium,
+              style: Theme.of(context).textTheme.titleMedium,
             ),
             20.vSpace,
             content,

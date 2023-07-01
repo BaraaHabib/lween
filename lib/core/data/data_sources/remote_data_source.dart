@@ -155,7 +155,6 @@ class RemoteDataSource  {
       options: Options(headers: headers, responseType: ResponseType.plain),
     );
 
-    if (response == null) throw FetchDataException();
     responseJson = _returnResponse(response);
 
     AppLogger.log('post request url :${url + model.url.toString()}');
@@ -178,7 +177,6 @@ class RemoteDataSource  {
       options: Options(headers: headers, responseType: ResponseType.plain),
     );
 
-    if (response == null) throw FetchDataException();
     responseJson = _returnResponse(response);
 
     AppLogger.log('delete request url :${url + model.url.toString()}');

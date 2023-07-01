@@ -20,24 +20,46 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ar';
 
-  static String m0(entity) => "Sorry, there are no ${entity} yet";
+  static String m0(entity) => "عذراً لايوجد ${entity} بعد";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "country": MessageLookupByLibrary.simpleMessage("Country"),
+        "city": MessageLookupByLibrary.simpleMessage("المدينة"),
+        "confirmAccount": MessageLookupByLibrary.simpleMessage("تأكيد الحساب"),
+        "confirmPassword":
+            MessageLookupByLibrary.simpleMessage("تأكيد كلمة المرور"),
+        "country": MessageLookupByLibrary.simpleMessage("البلد"),
+        "enter": MessageLookupByLibrary.simpleMessage("دخول"),
+        "enterPhoneToSendCode": MessageLookupByLibrary.simpleMessage(
+            "أدخل البريد الالكتروني أو رقم الهاتف الذي استخدمته لإنشاء الحساب. سنقوم بإرسال رمز تحقق لك لإعادة ضبط كلمة المرور الخاصة بك"),
+        "enterVerificationCode":
+            MessageLookupByLibrary.simpleMessage("أدخل رمز التحقق"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("نسيت كلمة المرور؟"),
+        "fullName": MessageLookupByLibrary.simpleMessage("الاسم الثلاثي"),
         "invalidphonenumber":
             MessageLookupByLibrary.simpleMessage("خطأ في رقم الهاتف"),
         "logIn": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
+        "makeSureToEnterInformationAccuratly":
+            MessageLookupByLibrary.simpleMessage(
+                "تأكد من إدخال المعلومات بدقة لإتمام عملية إنشاء الحساب."),
+        "next": MessageLookupByLibrary.simpleMessage("التالي"),
         "no": MessageLookupByLibrary.simpleMessage("لا"),
         "noInternetConnection":
-            MessageLookupByLibrary.simpleMessage("No internet connection"),
+            MessageLookupByLibrary.simpleMessage("تأكد من الاتصال بالانترنت"),
         "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
-        "retry": MessageLookupByLibrary.simpleMessage("Retry"),
+        "placeOfResidence":
+            MessageLookupByLibrary.simpleMessage("مكان الإقامة"),
+        "resendCode":
+            MessageLookupByLibrary.simpleMessage("إعادة إرسال رمز التحقق"),
+        "resetPassword":
+            MessageLookupByLibrary.simpleMessage("استعادة كلمة المرور"),
+        "retry": MessageLookupByLibrary.simpleMessage("إعادة المحاولة"),
+        "send": MessageLookupByLibrary.simpleMessage("إرسال"),
         "signup": MessageLookupByLibrary.simpleMessage("إنشاء حساب"),
         "sorryThereAreNoEntityYet": m0,
+        "verificationCode": MessageLookupByLibrary.simpleMessage("رمز التحقق"),
         "welcomeToLweenApp":
             MessageLookupByLibrary.simpleMessage("أهلاً بك في تطبيق لوين"),
         "yes": MessageLookupByLibrary.simpleMessage("نغم")

@@ -15,17 +15,17 @@ import 'package:lween/core/widgets/app_text_button.dart';
 import 'package:lween/core/widgets/text_field.dart';
 import 'package:lween/features/auth/screens/login_controller.dart';
 import 'package:lween/generated/l10n.dart';
-import 'package:lween/main.dart';
 
 @RoutePage()
-class SignInScreen extends HookWidget {
-  const SignInScreen({Key? key}) : super(key: key);
+class LogInScreen extends HookWidget {
+  const LogInScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final controller = Controller.get(instance: LoginController());
     return AppScaffold(
       title: S.of(context).welcomeToLweenApp,
+      withBackButton: false,
       child: ListView(
         children: [
           37.vSpace,
@@ -35,77 +35,69 @@ class SignInScreen extends HookWidget {
             height: 164.hx,
           ),
           56.vSpace,
-          Padding(
-            padding: EdgeInsetsDirectional.only(
-                start: 24.wx,
-                end: 28.wx
-            ),
-            child: FormBuilder(
-              key: controller.formKey,
-              // autovalidateMode: AutovalidateMode.onUserInteraction,
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      8.hSpace,
-                      Text(
-                        S.current.logIn,
-                        style: Lween.theme.textTheme.titleMedium,
-                      ),
-                    ],
-                  ),
-                  15.vSpace,
-                  AppTextField(
-                    name: 'phone',
-                    prefixIcon: SvgPicture.asset(Assets.profileIcon,),
-                    label: S.current.phoneNumber,
-                    validator: FormBuilderValidators.compose([
-                      FormBuilderValidators.required(),
-                      FormBuilderValidators.equalLength(10),
-                    ]),
-                    keyboardType: TextInputType.number,
-                    hint: '09********',
-                  ),
-                  8.vSpace,
-                  AppTextField(
-                    name: 'password',
-                    prefixIcon: SvgPicture.asset(Assets.lockIcon,),
-                    type: AppTextFieldType.password,
-                    label: S.current.password,
-                    validator: FormBuilderValidators.required(),
-                  ),
-                  28.vSpace,
-                  Row(
-                    children: [
-                      AppTextButton(
-                        onPressed: () {
-                        },
-                        child: Text(
-                          S.current.forgotPassword,
-                          style: Lween
-                              .theme
-                              .textTheme
-                              .bodyMedium
-                              ?.copyWith(
-                            color: Styles.textButtonColor
-                          ),
+          FormBuilder(
+            key: controller.formKey,
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    8.hSpace,
+                    Text(
+                      S.current.logIn,
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                  ],
+                ),
+                15.vSpace,
+                AppTextField(
+                  name: 'phone',
+                  prefixIcon: SvgPicture.asset(Assets.profileIcon,),
+                  label: S.current.phoneNumber,
+                  validator: FormBuilderValidators.compose([
+                    FormBuilderValidators.required(),
+                    FormBuilderValidators.equalLength(10),
+                  ]),
+                  keyboardType: TextInputType.number,
+                  hint: '09********',
+                ),
+                8.vSpace,
+                AppTextField(
+                  name: 'password',
+                  prefixIcon: SvgPicture.asset(Assets.lockIcon,),
+                  type: AppTextFieldType.password,
+                  label: S.current.password,
+                  validator: FormBuilderValidators.required(),
+                ),
+                28.vSpace,
+                Row(
+                  children: [
+                    AppTextButton(
+                      onPressed: () {
+                      },
+                      child: Text(
+                        S.current.forgotPassword,
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyMedium
+                            ?.copyWith(
+                          color: Styles.textButtonColor
                         ),
                       ),
-                    ],
-                  ),
-                  62.vSpace,
-                  AppGradientTextButton(
-                    onTap: controller.logIn,
-                    content: S.current.logIn,
-                  ),
-                  14.vSpace,
-                  AppGradientTextButton(
-                    onTap: () => controller.signup(context,),
-                    gradientType: AppTextButtonGradientType.secondary,
-                    content: S.current.signup,
-                  ),
-                ],
-              ),
+                    ),
+                  ],
+                ),
+                62.vSpace,
+                AppGradientTextButton(
+                  onTap: controller.logIn,
+                  content: S.current.logIn,
+                ),
+                14.vSpace,
+                AppGradientTextButton(
+                  onTap: () => controller.signup(context,),
+                  gradientType: AppTextButtonGradientType.secondary,
+                  content: S.current.signup,
+                ),
+              ],
             ),
           ),
         ],

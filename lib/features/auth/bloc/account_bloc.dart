@@ -68,7 +68,7 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
       });
       if (kDebugMode) {
         AppLogger.log(
-            'refresh token body :${json.encode(model.body.toJson() ?? '')}');
+            'refresh token body :${json.encode(model.body.toJson())}');
       }
       // var formData = FormData.fromMap(model.body?.toJson() ?? {} );
       final url = model.baseUrl ?? AppConfigurations.env.baseUrl;

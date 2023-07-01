@@ -23,7 +23,7 @@ class ChangePasswordParams extends ParamsModel<ChangePasswordParamsBody> {
   String? get url => 'UserAccount/UpdateUserPassword';
 
   @override
-  Map<String, dynamic> get urlParams => body!.toJson();
+  Map<String, dynamic> get urlParams => body.toJson();
 }
 
 class ChangePasswordParamsBody extends BaseBodyModel {

@@ -1,9 +1,10 @@
-import 'dart:io';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:lween/core/loaders/loading_overlay.dart';
 import 'package:lween/features/auth/screens/login.dart';
+import 'package:lween/features/auth/screens/reset_password.dart';
 import 'package:lween/features/auth/screens/signup.dart';
+import 'package:lween/features/auth/screens/verify_code.dart';
 import 'package:lween/features/onboarding/screens/splash.dart';
 import 'package:lween/main.dart';
 
@@ -35,9 +36,13 @@ class AppRouter extends _$AppRouter {
   final List<AutoRoute> routes = [
     AutoRoute(page: SplashScreenRoute.page, path: '/'),
     CustomRoute(
-        page: SignInScreenRoute.page,
+        page: LogInScreenRoute.page,
         transitionsBuilder: TransitionsBuilders.fadeIn),
     CustomRoute(page: RegisterScreenRoute.page,
+        transitionsBuilder: TransitionsBuilders.fadeIn),
+    CustomRoute(page: VerifyCodeScreenRoute.page,
+        transitionsBuilder: TransitionsBuilders.fadeIn),
+    CustomRoute(page: ResetPasswordScreenRoute.page,
         transitionsBuilder: TransitionsBuilders.fadeIn),
   ];
 }

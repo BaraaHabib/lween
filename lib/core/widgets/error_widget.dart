@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:lween/core/configurations/assets.dart';
-import 'package:lween/core/configurations/styles/styles.dart';
 import 'package:lween/core/extended/numbers_ext.dart';
 import 'package:lween/core/widgets/app_button.dart';
 import 'package:lween/generated/l10n.dart';
-import 'package:lween/main.dart';
 
 
 class AppErrorWidget extends StatelessWidget {
@@ -38,7 +35,7 @@ class AppErrorWidget extends StatelessWidget {
           Text(
             S.of(context).sorryThereAreNoEntityYet(entity ?? ''),
             textAlign: TextAlign.center,
-            style: Lween.theme.textTheme.displayMedium,
+            style: Theme.of(context).textTheme.displayMedium,
           ),
           35.vSpace,
           if (onAction != null)

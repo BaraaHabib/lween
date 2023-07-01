@@ -7,9 +7,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:form_validator/form_validator.dart';
 import 'package:lween/core/configurations/styles/styles.dart';
 import 'package:lween/core/extended/numbers_ext.dart';
-import 'package:lween/core/widgets/common_widgets.dart';
 import 'package:lween/core/widgets/text_field.dart';
-import 'package:lween/main.dart';
 
 import '../../../generated/l10n.dart';
 
@@ -165,7 +163,7 @@ class _PhoneNumberFieldState extends State<PhoneNumberField> {
                     ),
                     Text(
                       st.errorText!,
-                      style: Lween.theme.inputDecorationTheme.errorStyle,
+                      style: Theme.of(context).inputDecorationTheme.errorStyle,
                     ),
                   ],
                 ),

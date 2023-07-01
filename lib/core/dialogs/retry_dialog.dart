@@ -26,7 +26,7 @@ class RetryDialog extends StatelessWidget {
         ),
         width: 0.7.sw,
         decoration: BoxDecoration(
-          color: Lween.theme.scaffoldBackgroundColor,
+          color: Theme.of(context).scaffoldBackgroundColor,
           borderRadius: Styles.borderRadius30px,
         ),
         child: Column(
@@ -35,12 +35,12 @@ class RetryDialog extends StatelessWidget {
           children: [
             Text(
               title,
-              style: Lween.theme.textTheme.titleMedium,
+              style: Theme.of(context).textTheme.titleMedium,
             ),
             20.vSpace,
             Text(
               message,
-              style: Lween.theme.textTheme.bodyMedium,
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
             20.vSpace,
             AppButton(

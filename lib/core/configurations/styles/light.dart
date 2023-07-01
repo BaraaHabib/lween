@@ -26,5 +26,30 @@ final lightTheme = ThemeData(
     ),
   ),
   scaffoldBackgroundColor: Styles.scaffoldBackgroundColor,
+  textTheme: TextTheme(
+    titleLarge: TextStyle(
+      fontWeight: FontWeight.w500,
+      fontSize: 18.spx,
+    ),
+    titleMedium: TextStyle(
+      fontWeight: FontWeight.w500,
+      fontSize: 14.spx,
+    ),
+    titleSmall: TextStyle(
+      fontWeight: FontWeight.w500,
+      fontSize: 11.spx,
+    ),
+    headlineLarge: TextStyle(
+      fontSize: 14.spx,
+      color: Styles.headLineFontColor,
+    ),
+    headlineMedium: TextStyle(
+      fontSize: 12.spx,
+      color: Styles.headLineFontColor,
+    ),
+  ).apply(
+    bodyColor: Styles.lightFontColor,
+    displayColor: Styles.headLineFontColor,
+  ),
 );
 

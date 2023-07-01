@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:lween/core/app_state/appstate.dart';
-import 'package:lween/core/exceptions/app_exceptions.dart';
 import 'package:lween/core/locale/locale_provider.dart';
 import 'package:lween/core/services/files/file_manager.dart';
 import 'package:lween/injection_container.dart';
