@@ -16,6 +16,15 @@ class Assets {
   static const previousIcon = 'assets/previous.svg';
   static const locationIcon = 'assets/auth/SVG/ic_place_24px.svg';
   static const refreshIcon = 'assets/auth/SVG/ic_sync_24px.svg';
+  static const arabicIcon = 'assets/auth/arabic.png';
+  static const englishIcon = 'assets/auth/english.png';
+
+  /// navigation
+  static const homeNavIcon = 'assets/nav/SVG/Home.svg';
+  static const notificationsNavIcon = 'assets/nav/SVG/notifications.svg';
+  static const bookNavIcon = 'assets/nav/SVG/seo.svg';
+  static const myTicketsNavIcon = 'assets/nav/SVG/ticket.svg';
+  static const myProfileNavIcon = 'assets/nav/SVG/user.svg';
 
   static String backgroundImage(BuildContext context){
     var isLightTheme = Provider.of<AppStateModel>(context,listen: false).isLightTheme;

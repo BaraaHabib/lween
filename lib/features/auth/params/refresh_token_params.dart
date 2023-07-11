@@ -5,7 +5,7 @@ import '../../../../../../core/configurations/app_configuration.dart';
 
 class RefreshTokenParams extends ParamsModel<RefreshTokenParamsBody> {
   RefreshTokenParams({required RefreshTokenParamsBody body})
-      : super(body: body, baseUrl: AppConfigurations.BaseIdentityUrl);
+      : super(body: body,);
   @override
   Map<String, String> get additionalHeaders => {};
 

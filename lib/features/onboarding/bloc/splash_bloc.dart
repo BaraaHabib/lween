@@ -5,6 +5,9 @@ import 'dart:async';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lween/core/exceptions/app_exceptions.dart';
+import 'package:lween/features/auth/params/init_app_params.dart';
+import 'package:lween/features/auth/repo/account_repository.dart';
 import 'package:provider/provider.dart';
 import 'package:lween/core/app_state/appstate.dart';
 import 'package:lween/core/locale/locale_provider.dart';
@@ -23,11 +26,20 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
     final appState = sl<AppStateModel>();
     try {
       await appState.init();
-      if (true){//(!appState.authenticated) {
-        await Future.delayed(const Duration(seconds: 3));
+
+      /// get app data
+      final res = await sl<AccountRepository>().initApp(InitAppParams(
+          deviceType: 1,
+          deviceVersion: appState.deviceVersion,
+        ),
+      );
+      res.fold((l) => throw AppException(l.errorMessage ?? ''), (r) => appState.initAppEntity = r);
+
+      if (!appState.authenticated) {
+        // await Future.delayed(const Duration(seconds: 3));
         emit(
           SplashLoaded(
-            InitResult(
+            SplashInitResult(
               isAuthenticated: appState.authenticated,
               isStayLoggedIn: appState.stayLoggedIn,
             ),
@@ -38,7 +50,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
         await initApp(event.context);
         emit(
           SplashLoaded(
-            InitResult(
+            SplashInitResult(
               isAuthenticated: appState.authenticated,
               isStayLoggedIn: appState.stayLoggedIn,
             ),
@@ -71,8 +83,8 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
   }
 }
 
-class InitResult {
-  InitResult({
+class SplashInitResult {
+  SplashInitResult({
     required this.isAuthenticated,
     required this.isStayLoggedIn,
   });

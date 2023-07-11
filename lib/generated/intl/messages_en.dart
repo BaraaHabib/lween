@@ -25,6 +25,8 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "city": MessageLookupByLibrary.simpleMessage("City"),
+        "codeWasResentToYourNumber": MessageLookupByLibrary.simpleMessage(
+            "Code was resent to your number"),
         "confirmAccount":
             MessageLookupByLibrary.simpleMessage("Confirm Account"),
         "confirmPassword":
@@ -40,25 +42,39 @@ class MessageLookup extends MessageLookupByLibrary {
         "fullName": MessageLookupByLibrary.simpleMessage("full name"),
         "invalidphonenumber":
             MessageLookupByLibrary.simpleMessage("invalidPhoneNumber"),
-        "logIn": MessageLookupByLibrary.simpleMessage("log in"),
+        "logIn": MessageLookupByLibrary.simpleMessage("Log in"),
         "makeSureToEnterInformationAccuratly": MessageLookupByLibrary.simpleMessage(
             "Make sure to enter the information accurately to complete the account creation process."),
         "next": MessageLookupByLibrary.simpleMessage("Next"),
         "no": MessageLookupByLibrary.simpleMessage("No"),
         "noInternetConnection":
             MessageLookupByLibrary.simpleMessage("No internet connection"),
+        "ok": MessageLookupByLibrary.simpleMessage("Ok"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
+        "passwordUpdatedSuccessfully": MessageLookupByLibrary.simpleMessage(
+            "Password updated successfully"),
+        "passwordsDoesNotMatch":
+            MessageLookupByLibrary.simpleMessage("Passwords does not match"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone number"),
+        "phoneShouldStartWith09":
+            MessageLookupByLibrary.simpleMessage("Phone should start with 09"),
         "placeOfResidence":
             MessageLookupByLibrary.simpleMessage("Place of residence"),
+        "pleaseSelectCity":
+            MessageLookupByLibrary.simpleMessage("Please select city"),
+        "pleaseSelectCountry":
+            MessageLookupByLibrary.simpleMessage("Please select country"),
         "resendCode": MessageLookupByLibrary.simpleMessage("Resend code"),
         "resetPassword": MessageLookupByLibrary.simpleMessage("Reset Password"),
         "retry": MessageLookupByLibrary.simpleMessage("Retry"),
+        "selectPreferredLanguage":
+            MessageLookupByLibrary.simpleMessage("Select preferred language"),
         "send": MessageLookupByLibrary.simpleMessage("Send"),
         "signup": MessageLookupByLibrary.simpleMessage("Signup"),
         "sorryThereAreNoEntityYet": m0,
         "verificationCode":
             MessageLookupByLibrary.simpleMessage("Verification code"),
+        "verify": MessageLookupByLibrary.simpleMessage("Verify"),
         "welcomeToLweenApp":
             MessageLookupByLibrary.simpleMessage("Welcome to Lween app"),
         "yes": MessageLookupByLibrary.simpleMessage("Yes")

@@ -26,6 +26,7 @@ Future<void> main() async {
   // ));
   initInjection();
   await sl<LocaleProvider>().fetchLocale();
+  Environment().initConfig();
   runApp(const Lween());
 }
 
@@ -58,10 +59,11 @@ class Lween extends HookWidget {
         ),
       ],
       child: ScreenUtilInit(
-        designSize: const Size(360, 720),
+        designSize: const Size(360, 750),
+        // scaleByHeight: true,
         useInheritedMediaQuery: true,
-        builder:(ctx,child) => Consumer<AppStateModel>(
-          builder: (context, appState ,child) {
+        builder:(ctx,child) => Consumer2<AppStateModel, LocaleProvider>(
+          builder: (context, appState, local, child) {
             return MaterialApp.router(
               title: AppConfigurations.ApplicationName,
               // routerConfig: appRouter.config(),
@@ -82,7 +84,7 @@ class Lween extends HookWidget {
                 OverrideFormBuilderLocalizationsAr.delegate,
               ],
               supportedLocales: S.delegate.supportedLocales,
-              locale: sl<LocaleProvider>().locale,
+              locale: local.locale,
             );
           }
         ),

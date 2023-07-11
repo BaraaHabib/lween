@@ -17,6 +17,7 @@ final darkTheme = ThemeData(
     errorBorder: textDarkFieldBorder,
     focusedBorder: textDarkFieldBorder,
     focusedErrorBorder: textDarkFieldBorder,
+    disabledBorder: textDarkFieldBorder,
     labelStyle: const TextStyle(
       color: Styles.textFieldLabelColor,
     ),
@@ -25,7 +26,13 @@ final darkTheme = ThemeData(
       color: Styles.textFieldLabelColor,
     ),
   ),
+    radioTheme: RadioThemeData(
+      fillColor: MaterialStateProperty.all(Styles.radioButtonColor),
+    ),
   scaffoldBackgroundColor: Styles.scaffoldBackgroundColor,
+  cardTheme: CardTheme(
+
+  ),
   textTheme: TextTheme(
     titleLarge: TextStyle(
       fontWeight: FontWeight.w500,

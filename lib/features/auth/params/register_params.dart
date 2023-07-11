@@ -1,11 +1,12 @@
 import 'package:lween/core/features/params/params_model.dart';
+import 'package:lween/core/resources/api_consts.dart';
 import 'package:lween/core/resources/constants.dart';
 
 import '../../../../../../core/configurations/app_configuration.dart';
 
 class RegisterParams extends ParamsModel<RegisterParamsBody> {
   RegisterParams({required RegisterParamsBody body})
-      : super(body: body, baseUrl: AppConfigurations.BaseIdentityUrl);
+      : super(body: body,);
   @override
   Map<String, String> get additionalHeaders => {};
 
@@ -13,7 +14,7 @@ class RegisterParams extends ParamsModel<RegisterParamsBody> {
   RequestType? get requestType => RequestType.POST;
 
   @override
-  String? get url => 'Patient/Register';
+  String? get url => ApiConstants.register;
 
   @override
   Map<String, String> get urlParams => {};
@@ -24,66 +25,42 @@ class RegisterParams extends ParamsModel<RegisterParamsBody> {
 
 class RegisterParamsBody extends BaseBodyModel {
   RegisterParamsBody({
-    required this.firstName,
-    required this.lastName,
+    required this.name,
+    this.gender,
+    required this.cityId,
     required this.phoneNumber,
-    required this.phoneCountryCode,
+    this.emailAddress,
     required this.password,
-    required this.countryName,
-    required this.city,
-    required this.street,
-    required this.building,
-    required this.postalCode,
-    required this.enCity,
-    required this.enCountryName,
-    required this.deviceToken,
+    required this.confirmPassword,
   });
-  late final String firstName;
-  late final String lastName;
+  late final String name;
+  late final int? gender;
+  late final int cityId;
   late final String phoneNumber;
-  late final String phoneCountryCode;
+  late final String? emailAddress;
   late final String password;
-  late final String countryName;
-  late final String city;
-  late final String street;
-  late final String building;
-  late final String postalCode;
-  late final String enCity;
-  late final String enCountryName;
-  late final String deviceToken;
+  late final String confirmPassword;
 
-  RegisterParamsBody.fromJson(Map<String, dynamic> json) {
-    firstName = json['firstName'];
-    lastName = json['lastName'];
+  RegisterParamsBody.fromJson(Map<String, dynamic> json){
+    name = json['name'];
+    gender = json['gender'];
+    cityId = json['cityId'];
     phoneNumber = json['phoneNumber'];
-    phoneCountryCode = json['phoneCountryCode'];
+    emailAddress = json['emailAddress'];
     password = json['password'];
-    countryName = json['countryName'];
-    city = json['city'];
-    street = json['street'];
-    building = json['building'];
-    postalCode = json['postalCode'];
-    enCountryName = json['enCountryName'];
-    enCity = json['enCity'];
-    deviceToken = json['deviceToken'] ?? '';
+    confirmPassword = json['confirmPassword'];
   }
 
   @override
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
-    data['firstName'] = firstName;
-    data['lastName'] = lastName;
+    data['name'] = name;
+    data['gender'] = gender;
+    data['cityId'] = cityId;
     data['phoneNumber'] = phoneNumber;
-    data['phoneCountryCode'] = phoneCountryCode;
+    data['emailAddress'] = emailAddress;
     data['password'] = password;
-    data['countryName'] = countryName;
-    data['city'] = city;
-    data['street'] = street;
-    data['building'] = building;
-    data['postalCode'] = postalCode;
-    data['enCountryName'] = enCountryName;
-    data['enCity'] = enCity;
-    data['deviceToken'] = deviceToken;
+    data['confirmPassword'] = confirmPassword;
     return data;
   }
 }

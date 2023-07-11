@@ -22,4 +22,5 @@ class SharedPreferencesKeys {
   static const LanguageIndex = 'User_Language_Index';
   static const ExpiresAt = 'ExpiresAt';
   static const KEY_FIRST_START = 'KEY_FIRST_START';
+  static const LANGUAGE_SELECTED = 'LANGUAGE_SELECTED';
 }

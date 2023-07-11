@@ -2,6 +2,11 @@ part of 'appstate.dart';
 
 mixin _DeviceInfoMixin {
 
+  PackageInfo? _packageInfo;
+  String get deviceVersion{
+    return _packageInfo!.version;
+  }
+
   //#region device info
   AndroidDeviceInfo? _androidInfo;
 
@@ -30,14 +35,23 @@ mixin _DeviceInfoMixin {
     } else if (Platform.isIOS) {
       _iosInfo = await deviceInfo.iosInfo;
     }
-    // final webBrowserInfo = await deviceInfo.webBrowserInfo;
+    _packageInfo = await PackageInfo.fromPlatform();
   }
 
+  int get deviceType {
+    if(Platform.isAndroid){
+      return 1;
+    }
+    if(Platform.isIOS){
+      return 2;
+    }
+    return 1;
+  }
   String? get deviceId {
     if (Platform.isAndroid) {
-      return androidInfo.id;
+      return '${androidInfo.model}/${androidInfo.id}';
     } else if (Platform.isIOS) {
-      return iosInfo.identifierForVendor;
+      return '${iosInfo.utsname.machine}/${iosInfo.identifierForVendor}';
     }
     return null;
   }

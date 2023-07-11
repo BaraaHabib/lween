@@ -56,7 +56,7 @@ abstract class AppDialogs {
   static Future showGeneralDialog({
     required BuildContext context,
     required Widget content,
-    required DialogType type,
+    DialogType? type,
     Color? color,
     Widget? icon,
     String title = '',

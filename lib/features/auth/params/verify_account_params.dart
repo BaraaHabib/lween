@@ -1,19 +1,24 @@
+import 'package:lween/core/app_state/appstate.dart';
 import 'package:lween/core/features/params/params_model.dart';
+import 'package:lween/core/resources/api_consts.dart';
 import 'package:lween/core/resources/constants.dart';
+import 'package:lween/injection_container.dart';
 
 import '../../../../../../core/configurations/app_configuration.dart';
 
 class VerifyAccountParams extends ParamsModel<VerifyAccountParamsBody> {
   VerifyAccountParams({required VerifyAccountParamsBody body})
-      : super(body: body, baseUrl: AppConfigurations.BaseIdentityUrl);
+      : super(body: body,);
   @override
-  Map<String, String> get additionalHeaders => {};
+  Map<String, String> get additionalHeaders => {
+    'deviceType': sl<AppStateModel>().deviceType.toString()
+  };
 
   @override
   RequestType? get requestType => RequestType.POST;
 
   @override
-  String? get url => 'Patient/VerifyCode';
+  String? get url => ApiConstants.verifyAccount;
 
   @override
   Map<String, String> get urlParams => {};
@@ -24,26 +29,23 @@ class VerifyAccountParams extends ParamsModel<VerifyAccountParamsBody> {
 
 class VerifyAccountParamsBody extends BaseBodyModel {
   VerifyAccountParamsBody({
-    required this.patientId,
-    required this.verificationCode,
-    required this.password,
+    required this.accountId,
+    required this.confirmationCode,
   });
-  late final int patientId;
-  late final String verificationCode;
-  late final String password;
+  late final int accountId;
+  late final String confirmationCode;
 
   VerifyAccountParamsBody.fromJson(Map<String, dynamic> json) {
-    patientId = json['patientId'];
-    verificationCode = json['verificationCode'];
-    password = json['password'];
+    accountId = json['accountId'];
+    confirmationCode = json['confirmationCode'];
   }
 
   @override
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
-    data['patientId'] = patientId;
-    data['verificationCode'] = verificationCode;
-    data['password'] = password;
+    data['userId'] = accountId;
+    data['confirmationCode'] = confirmationCode;
+    data['deviceType'] = sl<AppStateModel>().deviceType.toString();
     return data;
   }
 }

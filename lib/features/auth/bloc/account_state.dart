@@ -26,15 +26,18 @@ class LogInLoading extends LogInState {
 }
 
 class LogInLoaded extends LogInState {
-  const LogInLoaded({this.logInEntity});
-  final LogInEntity? logInEntity;
+  const LogInLoaded({required this.logInEntity});
+  final AuthenticateEntity logInEntity;
 
   @override
   List<Object> get props => [logInEntity!];
 }
 
 class LogInError extends LogInState {
-  const LogInError(String message) : super(message: message);
+  final int? code;
+  final int? accountId;
+
+  const LogInError(String message, this.code,this.accountId,) : super(message: message);
 
   @override
   List<Object?> get props => [message];
@@ -79,7 +82,7 @@ class VerifyAccountLoading extends VerifyAccountState {
 }
 
 class VerifyAccountLoaded extends VerifyAccountState {
-  final VerifyAccountEntity verifyAccountEntity;
+  final AuthenticateEntity verifyAccountEntity;
 
   const VerifyAccountLoaded(this.verifyAccountEntity);
 
@@ -112,7 +115,65 @@ class ResendCodeError extends ResendCodeState {
   @override
   List<Object?> get props => [message];
 }
+
+class ResendCodeLoaded extends ResendCodeState {
+  const ResendCodeLoaded();
+
+  @override
+  List<Object> get props => [];
+}
 //#endregion
+
+//#region CheckCode
+abstract class CheckCodeState extends AccountState {
+  const CheckCodeState({String? message}) : super(message: message);
+}
+
+class CheckCodeLoading extends CheckCodeState {
+  @override
+  List<Object?> get props => [];
+}
+
+class CheckCodeLoaded extends CheckCodeState {
+  const CheckCodeLoaded();
+
+  @override
+  List<Object> get props => [];
+}
+
+class CheckCodeError extends CheckCodeState {
+  const CheckCodeError(String message) : super(message: message);
+
+  @override
+  List<Object?> get props => [message];
+}
+//#endregion
+
+//#region enter forgot password
+abstract class EnterForgotPasswordState extends AccountState {
+  const EnterForgotPasswordState({String? message}) : super(message: message);
+}
+
+class EnterForgotPasswordLoading extends EnterForgotPasswordState {
+  @override
+  List<Object?> get props => [];
+}
+
+class EnterForgotPasswordLoaded extends EnterForgotPasswordState {
+  const EnterForgotPasswordLoaded();
+
+  @override
+  List<Object> get props => [];
+}
+
+class EnterForgotPasswordError extends EnterForgotPasswordState {
+  const EnterForgotPasswordError(String message) : super(message: message);
+
+  @override
+  List<Object?> get props => [message];
+}
+//#endregion
+
 
 class AccountError extends AccountState {
   const AccountError(String message) : super(message: message);
@@ -134,20 +195,26 @@ class PasswordChangeError extends AccountState {
   List<Object?> get props => [errorMessage];
 }
 
-class ForgetPasswordLoading extends AccountState {
+abstract class ForgetPasswordState extends AccountState {
+  const ForgetPasswordState({String? message}) : super(message: message);
+}
+
+class ForgetPasswordLoading extends ForgetPasswordState {
   @override
   List<Object?> get props => [];
 }
 
-class ForgetPasswordLoaded extends AccountState {
-  const ForgetPasswordLoaded({this.forgetPasswordEntity});
-  final ForgetPasswordEntity? forgetPasswordEntity;
+class ForgetPasswordLoaded extends ForgetPasswordState {
+  const ForgetPasswordLoaded(
+      // {this.forgetPasswordEntity}
+      );
+  // final ForgetPasswordEntity? forgetPasswordEntity;
 
   @override
-  List<Object> get props => [forgetPasswordEntity!];
+  List<Object> get props => [];
 }
 
-class ForgetPasswordError extends AccountState {
+class ForgetPasswordError extends ForgetPasswordState {
   const ForgetPasswordError(String message) : super(message: message);
 
   @override

@@ -5,7 +5,7 @@ class GeneralDialog extends StatelessWidget {
   const GeneralDialog({
     super.key,
     required this.content,
-    required this.type,
+    this.type,
     this.retry,
     this.icon,
     this.title = 'Error',
@@ -13,7 +13,7 @@ class GeneralDialog extends StatelessWidget {
     this.titleStyle
   });
 
-  final DialogType type;
+  final DialogType? type;
   final Function? retry;
   final Widget content;
   final String title;
@@ -24,7 +24,7 @@ class GeneralDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final padding = EdgeInsets.symmetric(
-      vertical: 25.hx,
+      vertical: 10.hx,
       horizontal: 18.wx,
     );
     return Dialog(
@@ -60,7 +60,7 @@ class GeneralDialog extends StatelessWidget {
                   ),
                   8.vSpace,
                   content,
-                  34.vSpace,
+                  15.vSpace,
                   if(actions != null && actions!.length > 1)...[
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -91,7 +91,7 @@ class GeneralDialog extends StatelessWidget {
                       padding: EdgeInsetsDirectional.symmetric(horizontal: 50.wx,),
                       child: AppGradientTextButton(
                         onTap: () async {
-                          // await NavigationService.of(context).pop();
+                          await NavigationService.of(context).pop();
                           actions![0].callback.call();
                         },
                         borderColor: actions![0].borderColor,
@@ -99,8 +99,9 @@ class GeneralDialog extends StatelessWidget {
                         content: actions![0].text,
                       ),
                     )
-                  ]
-                  // CommonSizes.v10,
+                  ],
+                  if(actions != null)
+                    20.vSpace,
                 ],
               ),
             ),

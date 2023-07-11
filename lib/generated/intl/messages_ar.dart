@@ -25,13 +25,15 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "city": MessageLookupByLibrary.simpleMessage("المدينة"),
+        "codeWasResentToYourNumber": MessageLookupByLibrary.simpleMessage(
+            "تم إعادة إرسال رمز التحقق إلى رقمك"),
         "confirmAccount": MessageLookupByLibrary.simpleMessage("تأكيد الحساب"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("تأكيد كلمة المرور"),
         "country": MessageLookupByLibrary.simpleMessage("البلد"),
         "enter": MessageLookupByLibrary.simpleMessage("دخول"),
         "enterPhoneToSendCode": MessageLookupByLibrary.simpleMessage(
-            "أدخل البريد الالكتروني أو رقم الهاتف الذي استخدمته لإنشاء الحساب. سنقوم بإرسال رمز تحقق لك لإعادة ضبط كلمة المرور الخاصة بك"),
+            "أدخل رقم الهاتف الذي استخدمته لإنشاء الحساب. سنقوم بإرسال رمز تحقق لك لإعادة ضبط كلمة المرور الخاصة بك"),
         "enterVerificationCode":
             MessageLookupByLibrary.simpleMessage("أدخل رمز التحقق"),
         "forgotPassword":
@@ -47,19 +49,33 @@ class MessageLookup extends MessageLookupByLibrary {
         "no": MessageLookupByLibrary.simpleMessage("لا"),
         "noInternetConnection":
             MessageLookupByLibrary.simpleMessage("تأكد من الاتصال بالانترنت"),
+        "ok": MessageLookupByLibrary.simpleMessage("موافق"),
         "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
+        "passwordUpdatedSuccessfully":
+            MessageLookupByLibrary.simpleMessage("تم تغيير كلمة المرور بنجاح"),
+        "passwordsDoesNotMatch":
+            MessageLookupByLibrary.simpleMessage("كلمة المرور غير مطابقة"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
+        "phoneShouldStartWith09":
+            MessageLookupByLibrary.simpleMessage("يجب أن يبدأ رقم الهاتف ب 09"),
         "placeOfResidence":
             MessageLookupByLibrary.simpleMessage("مكان الإقامة"),
+        "pleaseSelectCity":
+            MessageLookupByLibrary.simpleMessage("يرجى اختيار المدينة"),
+        "pleaseSelectCountry":
+            MessageLookupByLibrary.simpleMessage("يرجى اختيار البلد"),
         "resendCode":
             MessageLookupByLibrary.simpleMessage("إعادة إرسال رمز التحقق"),
         "resetPassword":
             MessageLookupByLibrary.simpleMessage("استعادة كلمة المرور"),
         "retry": MessageLookupByLibrary.simpleMessage("إعادة المحاولة"),
+        "selectPreferredLanguage":
+            MessageLookupByLibrary.simpleMessage("اختر اللغة المفضلة"),
         "send": MessageLookupByLibrary.simpleMessage("إرسال"),
         "signup": MessageLookupByLibrary.simpleMessage("إنشاء حساب"),
         "sorryThereAreNoEntityYet": m0,
         "verificationCode": MessageLookupByLibrary.simpleMessage("رمز التحقق"),
+        "verify": MessageLookupByLibrary.simpleMessage("تأكيد"),
         "welcomeToLweenApp":
             MessageLookupByLibrary.simpleMessage("أهلاً بك في تطبيق لوين"),
         "yes": MessageLookupByLibrary.simpleMessage("نغم")

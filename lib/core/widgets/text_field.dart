@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+// import 'package:intl/intl.dart';
+import 'package:intl/message_format.dart';
 import 'package:lween/core/configurations/styles/styles.dart';
 import 'package:lween/core/extended/get_utils/get_utils.dart';
 import 'package:lween/core/extended/numbers_ext.dart';
+import 'package:lween/core/locale/locale_provider.dart';
 import 'package:lween/core/widgets/animated/animated_toggle.dart';
+import 'package:provider/provider.dart';
 
 
 enum AppTextFieldType {
@@ -144,6 +148,7 @@ class AppTextField extends HookWidget {
                         decoration: InputDecoration(
                             fillColor: fillColor ?? Colors.white,
                             hintText: hint,
+                            hintTextDirection: hint.preferredDirection,
                             constraints: constraints,
                             enabledBorder: enabledBorder,
                             focusedBorder: focusedBorder,
@@ -182,7 +187,7 @@ class AppTextField extends HookWidget {
                                 ?.validate();
                           }
                           onChanged?.call(value);
-                          this.focusNode?.requestFocus();
+                          // focusNode?.requestFocus();
                         },
                         onSubmitted: onSubmitted,
                         readOnly:readOnly ?? false,

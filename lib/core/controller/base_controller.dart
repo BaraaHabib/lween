@@ -3,7 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:lween/core/navigation/logger.dart';
 import 'package:lween/injection_container.dart';
 
-class Controller {
+abstract class Controller {
   bool isPermanent;
   bool initialized = false;
 

@@ -12,20 +12,17 @@ class AppConfigurations {
   static const String ApplicationName = 'Lween';
 
   static String BaseUrl = env.baseUrl;
-  static String YoloBaseUrl = env.yoloBaseUrl;
-  static double MaxProfileSize = env.maxProfileSizeMB;
-
-  static String BaseIdentityUrl = env.baseIdentityUrl;
 
   static get stagingOrDevelopment =>
       kDebugMode || AppConfigurations.env is DevConfig;
 
-  static const String privacyPolicyUrl =
-      'https://cert-leela-api.azurewebsites.net/privacypolicy.html';
+
+  static const apiVersion = '1.0';
 
   static const Map<String, String> BaseHeaders = {
     'accept': 'text/plain',
     'Content-Type': 'application/json',
+    'X-API-Version' : apiVersion,
   };
 
 

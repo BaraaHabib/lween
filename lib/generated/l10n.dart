@@ -100,10 +100,10 @@ class S {
     );
   }
 
-  /// `log in`
+  /// `Log in`
   String get logIn {
     return Intl.message(
-      'log in',
+      'Log in',
       name: 'logIn',
       desc: '',
       args: [],
@@ -315,6 +315,96 @@ class S {
     return Intl.message(
       'Verification code',
       name: 'verificationCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select preferred language`
+  String get selectPreferredLanguage {
+    return Intl.message(
+      'Select preferred language',
+      name: 'selectPreferredLanguage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ok`
+  String get ok {
+    return Intl.message(
+      'Ok',
+      name: 'ok',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Phone should start with 09`
+  String get phoneShouldStartWith09 {
+    return Intl.message(
+      'Phone should start with 09',
+      name: 'phoneShouldStartWith09',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please select country`
+  String get pleaseSelectCountry {
+    return Intl.message(
+      'Please select country',
+      name: 'pleaseSelectCountry',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please select city`
+  String get pleaseSelectCity {
+    return Intl.message(
+      'Please select city',
+      name: 'pleaseSelectCity',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Passwords does not match`
+  String get passwordsDoesNotMatch {
+    return Intl.message(
+      'Passwords does not match',
+      name: 'passwordsDoesNotMatch',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Verify`
+  String get verify {
+    return Intl.message(
+      'Verify',
+      name: 'verify',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password updated successfully`
+  String get passwordUpdatedSuccessfully {
+    return Intl.message(
+      'Password updated successfully',
+      name: 'passwordUpdatedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Code was resent to your number`
+  String get codeWasResentToYourNumber {
+    return Intl.message(
+      'Code was resent to your number',
+      name: 'codeWasResentToYourNumber',
       desc: '',
       args: [],
     );

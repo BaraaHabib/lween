@@ -6,30 +6,33 @@ abstract class AccountEvent extends Equatable {
 
 class LogInEvent extends AccountEvent {
   const LogInEvent({
-    required this.input,
-    required this.password,
+    required this.params,
   });
 
-  final String? input;
-  final String? password;
+  final LogInParams params;
 
   @override
-  List<Object?> get props => [input, password];
+  List<Object?> get props => [params,];
 }
 
 class VerifyAccountEvent extends AccountEvent {
   const VerifyAccountEvent({
-    required this.patientId,
-    required this.verificationCode,
-    required this.password,
+    required this.params,
   });
 
-  final int patientId;
-  final String verificationCode;
-  final String password;
-
+  final VerifyAccountParams params;
   @override
-  List<Object?> get props => [patientId, verificationCode, password];
+  List<Object?> get props => [params,];
+}
+
+class CheckCodeEvent extends AccountEvent {
+  const CheckCodeEvent({
+    required this.params,
+  });
+
+  final CheckCodeParams params;
+  @override
+  List<Object?> get props => [params,];
 }
 
 class RegisterEvent extends AccountEvent {
@@ -45,13 +48,13 @@ class RegisterEvent extends AccountEvent {
 
 class ResendCodeEvent extends AccountEvent {
   const ResendCodeEvent({
-    required this.phoneNumber,
+    required this.params,
   });
 
-  final String phoneNumber;
+  final ResendCodeParams params;
 
   @override
-  List<Object?> get props => [phoneNumber];
+  List<Object?> get props => [params];
 }
 
 class InitAppEvent extends AccountEvent {
@@ -62,11 +65,18 @@ class InitAppEvent extends AccountEvent {
 }
 
 class ForgetPasswordEvent extends AccountEvent {
-  const ForgetPasswordEvent({this.forgetPasswordParams});
-  final ForgetPasswordParams? forgetPasswordParams;
+  const ForgetPasswordEvent({required this.params});
+  final ForgetPasswordParams params;
 
   @override
-  List<Object?> get props => [forgetPasswordParams];
+  List<Object?> get props => [params];
+}
+class EnterForgotPasswordEvent extends AccountEvent {
+  const EnterForgotPasswordEvent({required this.params});
+  final EnterForgotPasswordParams params;
+
+  @override
+  List<Object?> get props => [params];
 }
 
 class ChangePasswordEvent extends AccountEvent {

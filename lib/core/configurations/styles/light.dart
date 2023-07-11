@@ -17,6 +17,7 @@ final lightTheme = ThemeData(
     errorBorder: textFieldBorder,
     focusedBorder: textFieldBorder,
     focusedErrorBorder: textFieldBorder,
+    disabledBorder: textFieldBorder,
     labelStyle: const TextStyle(
       color: Styles.textFieldLabelColor,
     ),
@@ -24,6 +25,9 @@ final lightTheme = ThemeData(
     floatingLabelStyle: const TextStyle(
       color: Styles.textFieldLabelColor,
     ),
+  ),
+  radioTheme: RadioThemeData(
+    fillColor: MaterialStateProperty.all(Styles.radioButtonColor),
   ),
   scaffoldBackgroundColor: Styles.scaffoldBackgroundColor,
   textTheme: TextTheme(

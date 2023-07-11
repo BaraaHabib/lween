@@ -24,6 +24,15 @@
   "enter": "دخول",
   "send": "إرسال",
   "resetPassword": "استعادة كلمة المرور",
-  "enterPhoneToSendCode": "أدخل البريد الالكتروني أو رقم الهاتف الذي استخدمته لإنشاء الحساب. سنقوم بإرسال رمز تحقق لك لإعادة ضبط كلمة المرور الخاصة بك",
-  "verificationCode": "رمز التحقق"
+  "enterPhoneToSendCode": "أدخل رقم الهاتف الذي استخدمته لإنشاء الحساب. سنقوم بإرسال رمز تحقق لك لإعادة ضبط كلمة المرور الخاصة بك",
+  "verificationCode": "رمز التحقق",
+  "selectPreferredLanguage": "اختر اللغة المفضلة",
+  "ok": "موافق",
+  "phoneShouldStartWith09": "يجب أن يبدأ رقم الهاتف ب 09",
+  "pleaseSelectCountry": "يرجى اختيار البلد",
+  "pleaseSelectCity": "يرجى اختيار المدينة",
+  "passwordsDoesNotMatch": "كلمة المرور غير مطابقة",
+  "verify": "تأكيد",
+  "passwordUpdatedSuccessfully": "تم تغيير كلمة المرور بنجاح",
+  "codeWasResentToYourNumber": "تم إعادة إرسال رمز التحقق إلى رقمك"
 }

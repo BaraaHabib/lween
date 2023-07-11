@@ -4,7 +4,7 @@
   "noInternetConnection": "No internet connection",
   "yes": "Yes",
   "no": "No",
-  "logIn": "log in",
+  "logIn": "Log in",
   "invalidphonenumber": "invalidPhoneNumber",
   "country": "Country",
   "phoneNumber": "Phone number",
@@ -25,5 +25,14 @@
   "send": "Send",
   "resetPassword": "Reset Password",
   "enterPhoneToSendCode": "Enter the phone number you used to create the account. We will send you a verification code to reset your password",
-  "verificationCode": "Verification code"
+  "verificationCode": "Verification code",
+  "selectPreferredLanguage": "Select preferred language",
+  "ok": "Ok",
+  "phoneShouldStartWith09": "Phone should start with 09",
+  "pleaseSelectCountry": "Please select country",
+  "pleaseSelectCity": "Please select city",
+  "passwordsDoesNotMatch": "Passwords does not match",
+  "verify": "Verify",
+  "passwordUpdatedSuccessfully": "Password updated successfully",
+  "codeWasResentToYourNumber": "Code was resent to your number"
 }

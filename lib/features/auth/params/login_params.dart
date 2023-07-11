@@ -1,11 +1,12 @@
 import 'package:lween/core/features/params/params_model.dart';
+import 'package:lween/core/resources/api_consts.dart';
 import 'package:lween/core/resources/constants.dart';
 
 import '../../../../../../core/configurations/app_configuration.dart';
 
 class LogInParams extends ParamsModel<LogInParamsBody> {
   LogInParams({required LogInParamsBody body})
-      : super(body: body, baseUrl: AppConfigurations.BaseIdentityUrl);
+      : super(body: body,);
   @override
   Map<String, String> get additionalHeaders => {};
 
@@ -13,7 +14,7 @@ class LogInParams extends ParamsModel<LogInParamsBody> {
   RequestType? get requestType => RequestType.POST;
 
   @override
-  String? get url => 'Patient/login';
+  String? get url => ApiConstants.login;
 
   @override
   Map<String, String> get urlParams => {};
@@ -24,18 +25,26 @@ class LogInParams extends ParamsModel<LogInParamsBody> {
 
 class LogInParamsBody extends BaseBodyModel {
   LogInParamsBody({
-    this.input,
-    this.password,
-    this.deviceToken,
+    required this.userName,
+    required this.password,
+    required this.rememberClient,
   });
-  final String? input;
-  final String? password;
-  final String? deviceToken;
+  late final String userName;
+  late final String password;
+  late final bool rememberClient;
+
+  LogInParamsBody.fromJson(Map<String, dynamic> json){
+    userName = json['userName'];
+    password = json['password'];
+    rememberClient = json['rememberClient'];
+  }
 
   @override
-  Map<String, dynamic> toJson() => {
-        'input': input,
-        'password': password,
-        'deviceToken': deviceToken,
-      };
+  Map<String, dynamic> toJson() {
+    final data = <String, dynamic>{};
+    data['userName'] = userName;
+    data['password'] = password;
+    data['rememberClient'] = rememberClient;
+    return data;
+  }
 }

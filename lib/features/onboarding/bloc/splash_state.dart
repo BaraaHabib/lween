@@ -26,7 +26,7 @@ class SplashError extends SplashState {
 class SplashLoaded extends SplashState {
   const SplashLoaded(this.initResult);
 
-  final InitResult initResult;
+  final SplashInitResult initResult;
   @override
   List<Object?> get props => [];
 }

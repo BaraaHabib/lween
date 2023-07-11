@@ -70,7 +70,7 @@ class SplashScreen extends HookWidget {
         //   const InboxScreenRoute(),
         // );
         NavigationService.of(context).clearAllAndPushNamed(
-          const LogInScreenRoute(),
+          const MainScreenRoute(),
         );
         return;
       }

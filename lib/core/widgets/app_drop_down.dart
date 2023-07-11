@@ -22,11 +22,12 @@ import 'package:lween/core/extended/numbers_ext.dart';
    @override
    Widget build(BuildContext context) {
      var selectedValue = useState<DropdownItemDataModel?>(initValue);
+     DropdownItemDataModel? mInitValue;
      useEffect(() {
        if (initValue != null) {
          for (var element in data) {
            if (element.name == initValue?.name) {
-             selectedValue.value = element;
+             mInitValue = element;
            }
          }
        }
@@ -35,35 +36,46 @@ import 'package:lween/core/extended/numbers_ext.dart';
      return FormBuilderDropdown<DropdownItemDataModel>(
        name: name,
        borderRadius: BorderRadius.circular(28.0.rx),
+       alignment: AlignmentDirectional.center,
        items: data.map((DropdownItemDataModel value) {
          return DropdownMenuItem<DropdownItemDataModel>(
            value: value,
-           child: Row(
-             children: [
-               10.hSpace,
-               Expanded(
-                 child: Text(
-                   value.name,
-                   style: Theme
-                       .of(context)
-                       .textTheme
-                       .headlineMedium,
-                 ),
+           alignment: AlignmentDirectional.center,
+           child: FittedBox(
+             fit: BoxFit.scaleDown,
+             child: Text(
+               value.name,
+               maxLines: 2,
+               style: Theme
+                   .of(context)
+                   .textTheme
+                   .headlineMedium?.copyWith(
+                   fontSize: 14.spx,
                ),
-             ],
+             ),
            ),
          );
        }).toList(),
-       onChanged: (newS) {},
+       onChanged: (newS) {
+         // selectedValue.value = newS;
+       },
        isExpanded: true,
        validator: validator,
-       selectedItemBuilder:  selectedValue.value == null ? null :
-           (c) => [
-             Text(
-             selectedValue.value!.name ?? '',
-            style: Theme.of(context).textTheme.titleSmall,
-         ),
-       ],
+       // selectedItemBuilder:  selectedValue.value == null ? null :
+       //     (c) => [
+       //       Container(
+       //         color: Colors.red,
+       //         child: Text(
+       //         selectedValue.value!.name ?? '',
+       //      textAlign: TextAlign.center,
+       //      style: Theme.of(context).textTheme.titleSmall
+       //            ?.copyWith(
+       //            color: Colors.red,
+       //            fontSize: 8.spx,
+       //      ),
+       //   ),
+       //       ),
+       // ],
        icon: Padding(
          padding: EdgeInsetsDirectional.only(end: 5.wx),
          child: const Icon(
@@ -72,9 +84,10 @@ import 'package:lween/core/extended/numbers_ext.dart';
          ),
        ),
        enableFeedback: true,
+       initialValue: mInitValue,
        decoration: InputDecoration(
            filled: true,
-           contentPadding: EdgeInsetsDirectional.only(start: 50.wx,end: 0,top: 25,),
+           // contentPadding: EdgeInsetsDirectional.only(start: 0.wx,end: 0,top: 0,),
            hintText: hintText,
        ),
        onSaved: (newValue) {
@@ -88,15 +101,15 @@ import 'package:lween/core/extended/numbers_ext.dart';
 class DropdownItemDataModel extends Equatable {
   const DropdownItemDataModel({
     required this.name,
-    required this.code,
+    required this.id,
   });
 
   final String name;
-  final String code;
+  final int id;
 
   @override
   List<Object?> get props =>
       [
-        code,
+        id,
       ];
  }

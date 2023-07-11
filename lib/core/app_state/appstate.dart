@@ -2,9 +2,14 @@
 
 import 'dart:io';
 
+import 'package:collection/collection.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:lween/core/configurations/styles/themes.dart';
+import 'package:lween/core/features/entities/shared/city.dart';
+import 'package:lween/core/features/entities/shared/country.dart';
+import 'package:lween/core/navigation/navigation_service.dart';
+import 'package:lween/features/auth/models/init_app_entity.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:lween/core/navigation/logger.dart';
 import 'package:lween/core/services/files/file_manager.dart';
@@ -13,14 +18,16 @@ import 'package:lween/features/auth/bloc/account_bloc.dart';
 import 'package:lween/features/auth/params/refresh_token_params.dart';
 import 'package:lween/main.dart';
 import '../../../injection_container.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 part 'device_info_mixin.dart';
 part 'theme_manager.dart';
+part 'app_data.dart';
 
 abstract class AppStateComponent extends ChangeNotifier{
 
 }
 
-class AppStateModel extends AppStateComponent with _DeviceInfoMixin, ThemeManager {
+class AppStateModel extends AppStateComponent with _DeviceInfoMixin, ThemeManager, AppData {
   bool _authenticated = false;
   bool _rememberMe = false;
   String? _userToken;
@@ -111,6 +118,7 @@ class AppStateModel extends AppStateComponent with _DeviceInfoMixin, ThemeManage
     // await lween.storage.reset();
     await resetInjection();
     await Lween.storage.init();
+    NavigationService.of(Lween.navigatorKey.currentContext!,).restart();
     //
   }
 

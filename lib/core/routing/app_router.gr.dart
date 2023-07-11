@@ -15,6 +15,12 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
+    ResetPasswordScreenRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ResetPasswordScreen(),
+      );
+    },
     LogInScreenRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -22,9 +28,14 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     VerifyCodeScreenRoute.name: (routeData) {
+      final args = routeData.argsAs<VerifyCodeScreenRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const VerifyCodeScreen(),
+        child: VerifyCodeScreen(
+          accountId: args.accountId,
+          phoneNumber: args.phoneNumber,
+          key: args.key,
+        ),
       );
     },
     RegisterScreenRoute.name: (routeData) {
@@ -57,13 +68,27 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
-    ResetPasswordScreenRoute.name: (routeData) {
+    MainScreenRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const ResetPasswordScreen(),
+        child: const MainScreen(),
       );
     },
   };
+}
+
+/// generated route for
+/// [ResetPasswordScreen]
+class ResetPasswordScreenRoute extends PageRouteInfo<void> {
+  const ResetPasswordScreenRoute({List<PageRouteInfo>? children})
+      : super(
+          ResetPasswordScreenRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ResetPasswordScreenRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -82,16 +107,44 @@ class LogInScreenRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [VerifyCodeScreen]
-class VerifyCodeScreenRoute extends PageRouteInfo<void> {
-  const VerifyCodeScreenRoute({List<PageRouteInfo>? children})
-      : super(
+class VerifyCodeScreenRoute extends PageRouteInfo<VerifyCodeScreenRouteArgs> {
+  VerifyCodeScreenRoute({
+    required int accountId,
+    required String phoneNumber,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
           VerifyCodeScreenRoute.name,
+          args: VerifyCodeScreenRouteArgs(
+            accountId: accountId,
+            phoneNumber: phoneNumber,
+            key: key,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'VerifyCodeScreenRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<VerifyCodeScreenRouteArgs> page =
+      PageInfo<VerifyCodeScreenRouteArgs>(name);
+}
+
+class VerifyCodeScreenRouteArgs {
+  const VerifyCodeScreenRouteArgs({
+    required this.accountId,
+    required this.phoneNumber,
+    this.key,
+  });
+
+  final int accountId;
+  final String phoneNumber;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'VerifyCodeScreenRouteArgs{accountId: $accountId, key: $key}';
+  }
 }
 
 /// generated route for
@@ -190,15 +243,15 @@ class MyHomePageRouteArgs {
 }
 
 /// generated route for
-/// [ResetPasswordScreen]
-class ResetPasswordScreenRoute extends PageRouteInfo<void> {
-  const ResetPasswordScreenRoute({List<PageRouteInfo>? children})
+/// [MainScreen]
+class MainScreenRoute extends PageRouteInfo<void> {
+  const MainScreenRoute({List<PageRouteInfo>? children})
       : super(
-          ResetPasswordScreenRoute.name,
+          MainScreenRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'ResetPasswordScreenRoute';
+  static const String name = 'MainScreenRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

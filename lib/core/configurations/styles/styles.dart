@@ -12,6 +12,7 @@ class Styles {
   static const Color scaffoldBackgroundColor = Colors.transparent;
 
   static const Color textButtonColor = Color(0xFF029BFA);
+  static const Color radioButtonColor = Color(0xFF029BFA);
 
   static const lightFontColor = Color(0xFF110D32);
   static const darkFontColor = Color(0xFFFFFFFF);

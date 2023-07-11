@@ -49,6 +49,7 @@ class NavigationService {
   until(bool Function(Route) predicate) => router.popUntil(predicate);
 
   popUntilRoot() => router.popUntilRoot();
+  popUntilRout(String routeName) => router.popUntilRouteWithName(routeName,);
 
   Future<Object?> replace(PageRouteInfo route) async {
     return await router.replace(route, onFailure: (NavigationFailure f) {

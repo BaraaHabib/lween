@@ -4,7 +4,7 @@ import 'package:lween/core/resources/regex.dart';
 import 'numbers_ext.dart';
 
 extension NullableStrings on String? {
-  bool isEmptyExt() {
+  bool get isNullOrEmpty {
     if (this == null) {
       return true;
     }

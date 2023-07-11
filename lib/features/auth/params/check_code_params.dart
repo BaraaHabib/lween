@@ -1,10 +1,26 @@
 import 'package:lween/core/configurations/app_configuration.dart';
 import 'package:lween/core/features/params/params_model.dart';
+import 'package:lween/core/resources/api_consts.dart';
 import 'package:lween/core/resources/constants.dart';
 
+enum ConfirmationCodeType
+{
+  forgetPassword,
+  confirmAccount,
+  changePhoneNumber,
+  changeEmailAddress;
+
+  int get apiIndex => index + 1;
+}
+
 class CheckCodeParams extends ParamsModel<CheckCodeParamsBody> {
-  CheckCodeParams({required CheckCodeParamsBody body})
-      : super(body: body, baseUrl: AppConfigurations.BaseUrl);
+  CheckCodeParams({required this.userName,required this.code,required this.confirmationCodeType,})
+      : super(body: CheckCodeParamsBody(), baseUrl: AppConfigurations.BaseUrl);
+
+  final String userName;
+  final String code;
+  final ConfirmationCodeType confirmationCodeType;
+
   @override
   Map<String, String> get additionalHeaders => {};
 
@@ -12,29 +28,25 @@ class CheckCodeParams extends ParamsModel<CheckCodeParamsBody> {
   RequestType? get requestType => RequestType.POST;
 
   @override
-  String? get url => 'Patient/CheckCode';
+  String? get url => ApiConstants.checkCode;
 
   @override
   bool get authorized => false;
 
   @override
-  Map<String, String> get urlParams => {};
+  Map<String, String> get urlParams => {
+    'userName' : userName,
+    'type' : confirmationCodeType.apiIndex.toString(),
+    'code' :code,
+  };
 
   @override
   List<Object?> get props => [url, urlParams, requestType, body];
 }
 
 class CheckCodeParamsBody extends BaseBodyModel {
-  CheckCodeParamsBody({
-    this.phoneNumber,
-    this.code
-  });
-  final String? phoneNumber;
-  final String? code;
+  CheckCodeParamsBody();
 
   @override
-  Map<String, dynamic> toJson() => {
-        'phoneNumber': phoneNumber,
-        'code': code,
-      };
+  Map<String, dynamic> toJson() => {};
 }

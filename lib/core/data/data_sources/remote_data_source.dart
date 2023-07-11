@@ -11,6 +11,7 @@ import 'package:lween/core/extended/item_creator.dart';
 import 'package:lween/core/extended/map_ext.dart';
 import 'package:lween/core/features/entities/entity.dart';
 import 'package:lween/core/features/params/params_model.dart';
+import 'package:lween/core/locale/locale_provider.dart';
 import 'package:lween/core/navigation/logger.dart';
 import 'package:lween/core/resources/constants.dart';
 import 'package:lween/injection_container.dart';
@@ -58,7 +59,9 @@ class RemoteDataSource  {
     } else {
       headers.remove('Authorization');  // remove preserved token if present
     }
-    headers.putIfAbsent('deviceId', () => sl<AppStateModel>().deviceId!);
+    headers.putIfAbsent('deviceType', () => sl<AppStateModel>().deviceType.toString());
+    headers.putIfAbsent('DeviceId', () => sl<AppStateModel>().deviceId!);
+    headers.putIfAbsent('Accept-Language', () => sl<LocaleProvider>().selectedLanguageHeader);
     await checkConnectivity();
   }
 
@@ -78,9 +81,9 @@ class RemoteDataSource  {
            response = await delete(model);
            break;
          case RequestType.PUT:
-           throw const NotImplementedException(message: "Request type: PUT");
+           throw NotImplementedException(message: "Request type: PUT");
          default:
-           throw const NotImplementedException();
+           throw NotImplementedException();
        }
        return (response);
      }
@@ -106,22 +109,27 @@ class RemoteDataSource  {
   //   return _localDataSource.getData<T>(model);
   // }
 
-  Future<Entity<T>> getData<T extends ContentModel>(ParamsModel model,ItemCreator<T>? s) async {
-    try {
+  Future<Map<String,dynamic>> getRemoteData(ParamsModel model,) async {
       var result = await performRequest(model) ?? {};
-      Entity<T> data = Entity<T>.fromJson(result,creator:s,success: true );
-      return data;
-    }
-    on NoInternetException catch (e){
-      return Entity<T>(success: false, message: e.toString(),isApiError: false);
-    }
-    on BadRequestException catch ( e) {
-      return Entity<T>(success: false, message: e.toString(),isApiError: true,status: e.code);
-    }
-    on Exception catch ( e) {
-      return Entity<T>(success: false, message: e.toString(),isApiError: false);
-    }
+      return result;
   }
+
+  // Future<Entity<T>> getData<T extends ContentModel>(ParamsModel model,ItemCreator<T>? s) async {
+  //   try {
+  //     var result = await performRequest(model) ?? {};
+  //     Entity<T> data = Entity<T>.fromJson(result,creator:s,);
+  //     return data;
+  //   }
+  //   on NoInternetException catch (e){
+  //     return Entity<T>(success: false, message: e.toString(),isApiError: false);
+  //   }
+  //   on BadRequestException catch ( e) {
+  //     return Entity<T>(success: false, message: e.toString(),isApiError: true,status: e.code);
+  //   }
+  //   on Exception catch ( e) {
+  //     return Entity<T>(success: false, message: e.toString(),isApiError: false);
+  //   }
+  // }
 
 
   Future<Map<String, dynamic>?> get(ParamsModel model) async {
@@ -150,7 +158,7 @@ class RemoteDataSource  {
     final url = model.baseUrl ?? baseUrl;
     response = await dio.post(
       url + model.url.toString(),
-      data: FormData.fromMap( model.body.toJson(),ListFormat.multiCompatible),
+      data: model.body.toJson(),
       queryParameters: model.urlParams,
       options: Options(headers: headers, responseType: ResponseType.plain),
     );
