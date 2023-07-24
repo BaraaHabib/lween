@@ -18,7 +18,7 @@ abstract class AppDialogs {
   static Future showRetryDialog({
     required BuildContext context,
     required String content,
-    String title = 'Error',
+    String? title,
     Function? retryCallBack,
   }) async {
     showCupertinoDialog(
@@ -81,7 +81,7 @@ abstract class AppDialogs {
 }
 
 enum DialogType{
-  info(color: Styles.colorPrimary,),
+  info(color: Color(0xFF13A7C8),),
   warning(color: Styles.colorOrange,),
   custom();
 
@@ -100,7 +100,7 @@ class DialogAction{
   DialogAction({
     required this.text,
     required this.callback,
-    this.color = Styles.colorPrimary,
+    this.color = const Color(0xFF13A7C8),
     this.borderColor = Colors.transparent,
     this.fixedSize,
     this.isOneAction

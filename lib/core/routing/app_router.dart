@@ -1,12 +1,22 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:lween/core/loaders/loading_overlay.dart';
+import 'package:lween/features/auth/screens/account.dart';
 import 'package:lween/features/auth/screens/login.dart';
 import 'package:lween/features/auth/screens/reset_password.dart';
 import 'package:lween/features/auth/screens/register.dart';
 import 'package:lween/features/auth/screens/verify_code.dart';
 import 'package:lween/features/home/main_screen.dart';
+import 'package:lween/features/home/screens/home/home_screen.dart';
+import 'package:lween/features/notifications/screens/notifications.dart';
 import 'package:lween/features/onboarding/screens/splash.dart';
+import 'package:lween/features/orders/screens/my_orders/my_orders_screen.dart';
+import 'package:lween/features/tickets/screens/my_tickets.dart';
+import 'package:lween/features/transportation_entities/models/transportation_entities.dart';
+import 'package:lween/features/transportation_entities/screens/company_profile/company_profile_screen.dart';
+import 'package:lween/features/transportation_entities/screens/company_profile/controller.dart';
+import 'package:lween/features/transportation_entities/screens/companies_screen.dart';
+import 'package:lween/features/webview/webview.dart';
 import 'package:lween/main.dart';
 
 
@@ -45,7 +55,62 @@ class AppRouter extends _$AppRouter {
         transitionsBuilder: TransitionsBuilders.fadeIn),
     CustomRoute(page: ResetPasswordScreenRoute.page,
         transitionsBuilder: TransitionsBuilders.fadeIn),
-    CustomRoute(page: MainScreenRoute.page,
-        transitionsBuilder: TransitionsBuilders.fadeIn),
+    CustomRoute(
+        page: MainScreenRoute.page,
+        path: '/${MainScreenRoute.name}',
+        transitionsBuilder: TransitionsBuilders.fadeIn,
+        children: [
+          CustomRoute(page: HomeScreenRoute.page,
+            transitionsBuilder: TransitionsBuilders.fadeIn,
+          ),
+          CustomRoute(
+            path: CompaniesRoutesScreenRoute.name,
+            page: CompaniesRoutesScreenRoute.page,
+            transitionsBuilder: TransitionsBuilders.fadeIn,
+            children: [
+              CustomRoute(
+                path: '',
+                transitionsBuilder: TransitionsBuilders.fadeIn,
+                page: CompaniesScreenRoute.page,
+              ),
+              CustomRoute(
+                path: CompanyProfileScreenRoute.name,
+                transitionsBuilder: TransitionsBuilders.fadeIn,
+                page: CompanyProfileScreenRoute.page,
+              )
+            ],
+          ),
+
+          CustomRoute(page: NotificationsScreenRoute.page,
+            transitionsBuilder: TransitionsBuilders.fadeIn,
+          ),
+          CustomRoute(page: AccountScreenRoute.page,
+            transitionsBuilder: TransitionsBuilders.fadeIn,
+          ),
+          CustomRoute(page: MyOrdersScreenRoute.page,
+            transitionsBuilder: TransitionsBuilders.fadeIn,
+          ),
+
+         ]
+    ),
+    // CustomRoute(
+    //     page: CompaniesNestedScreenRoute.page,
+    //     path: CompaniesNestedScreenRoute.name,
+    //     transitionsBuilder: TransitionsBuilders.fadeIn,
+    //     children: [
+    //       CustomRoute(
+    //         path:CompaniesScreenRoute.name ,
+    //         page: CompaniesScreenRoute.page,
+    //       ),
+    //       CustomRoute(
+    //         path:CompanyProfileScreenRoute.name ,
+    //         page: CompanyProfileScreenRoute.page,
+    //       ),
+    //     ]
+    // ),
+
+    CustomRoute(page: AppWebViewRoute.page,
+      transitionsBuilder: TransitionsBuilders.fadeIn,),
+
   ];
 }

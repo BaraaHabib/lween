@@ -24,14 +24,21 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "bookATrip": MessageLookupByLibrary.simpleMessage("Book a trip"),
+        "centersCount": MessageLookupByLibrary.simpleMessage("Centers count"),
         "city": MessageLookupByLibrary.simpleMessage("City"),
         "codeWasResentToYourNumber": MessageLookupByLibrary.simpleMessage(
             "Code was resent to your number"),
+        "company": MessageLookupByLibrary.simpleMessage("Company"),
+        "companyInfo":
+            MessageLookupByLibrary.simpleMessage("Company description"),
         "confirmAccount":
             MessageLookupByLibrary.simpleMessage("Confirm Account"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("Confirm password"),
         "country": MessageLookupByLibrary.simpleMessage("Country"),
+        "date": MessageLookupByLibrary.simpleMessage("Date"),
+        "description": MessageLookupByLibrary.simpleMessage("Description"),
         "enter": MessageLookupByLibrary.simpleMessage("Enter"),
         "enterPhoneToSendCode": MessageLookupByLibrary.simpleMessage(
             "Enter the phone number you used to create the account. We will send you a verification code to reset your password"),
@@ -39,16 +46,22 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Enter verification code"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Forgot password"),
+        "from": MessageLookupByLibrary.simpleMessage("from"),
         "fullName": MessageLookupByLibrary.simpleMessage("full name"),
+        "home": MessageLookupByLibrary.simpleMessage("Home"),
         "invalidphonenumber":
             MessageLookupByLibrary.simpleMessage("invalidPhoneNumber"),
         "logIn": MessageLookupByLibrary.simpleMessage("Log in"),
         "makeSureToEnterInformationAccuratly": MessageLookupByLibrary.simpleMessage(
             "Make sure to enter the information accurately to complete the account creation process."),
+        "myAccount": MessageLookupByLibrary.simpleMessage("My account"),
+        "myTickets": MessageLookupByLibrary.simpleMessage("My tickets"),
+        "myTrips": MessageLookupByLibrary.simpleMessage("My tickets"),
         "next": MessageLookupByLibrary.simpleMessage("Next"),
         "no": MessageLookupByLibrary.simpleMessage("No"),
         "noInternetConnection":
             MessageLookupByLibrary.simpleMessage("No internet connection"),
+        "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "passwordUpdatedSuccessfully": MessageLookupByLibrary.simpleMessage(
@@ -64,14 +77,24 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Please select city"),
         "pleaseSelectCountry":
             MessageLookupByLibrary.simpleMessage("Please select country"),
+        "previousTrips": MessageLookupByLibrary.simpleMessage("Previous trips"),
         "resendCode": MessageLookupByLibrary.simpleMessage("Resend code"),
+        "reservations": MessageLookupByLibrary.simpleMessage("Reservations"),
         "resetPassword": MessageLookupByLibrary.simpleMessage("Reset Password"),
         "retry": MessageLookupByLibrary.simpleMessage("Retry"),
+        "seatsCount": MessageLookupByLibrary.simpleMessage("Seats count"),
         "selectPreferredLanguage":
             MessageLookupByLibrary.simpleMessage("Select preferred language"),
         "send": MessageLookupByLibrary.simpleMessage("Send"),
         "signup": MessageLookupByLibrary.simpleMessage("Signup"),
         "sorryThereAreNoEntityYet": m0,
+        "tickets": MessageLookupByLibrary.simpleMessage("Tickets"),
+        "to": MessageLookupByLibrary.simpleMessage("to"),
+        "transportationEntities":
+            MessageLookupByLibrary.simpleMessage("Transportation entities"),
+        "travelDate": MessageLookupByLibrary.simpleMessage("Travel date"),
+        "trips": MessageLookupByLibrary.simpleMessage("Trips"),
+        "tripsCount": MessageLookupByLibrary.simpleMessage("Trips count"),
         "verificationCode":
             MessageLookupByLibrary.simpleMessage("Verification code"),
         "verify": MessageLookupByLibrary.simpleMessage("Verify"),

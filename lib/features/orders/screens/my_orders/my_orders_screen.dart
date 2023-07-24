@@ -1,0 +1,95 @@
+
+
+import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:lween/core/controller/base_controller.dart';
+import 'package:lween/core/extended/numbers_ext.dart';
+import 'package:lween/core/lween/widgets/app_scaffold.dart';
+import 'package:lween/core/resources/constants.dart';
+import 'package:lween/core/widgets/empty_widget.dart';
+import 'package:lween/core/widgets/error_widget.dart';
+import 'package:lween/core/widgets/shimmer_ui.dart';
+import 'package:lween/core/widgets/waiting_widget.dart';
+import 'package:lween/features/orders/bloc/orders_bloc.dart';
+import 'package:lween/features/orders/models/orders.dart';
+import 'package:lween/features/orders/screens/my_orders/controller.dart';
+import 'package:lween/features/orders/screens/my_orders/widgets/order_item.dart';
+import 'package:lween/generated/l10n.dart';
+
+@RoutePage()
+class MyOrdersScreen extends HookWidget {
+  const MyOrdersScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    MyOrdersController controller =
+    Controller.get(
+      instance: MyOrdersController(),);
+    return AppScaffold(
+      title: S.current.myTickets,
+      withBackButton: false,
+      centerTitle: true,
+      navTab: NavTab.bookTrip,
+      child: BlocBuilder<OrdersBloc, OrdersState>(
+          bloc: OrdersBloc.instance,
+          buildWhen: controller.buildWhen,
+          builder: (context, state) {
+            return Builder(
+                builder: (context) {
+                  if (state is MyOrdersLoading) {
+                    return ListView.builder(
+                      shrinkWrap: true,
+                      padding: EdgeInsets.only(top: 15.hx),
+                      itemCount:  6,
+                      itemBuilder: (ctx, index) {return ShimmerUI.widgetLoader(
+                        enabled: true,
+                        child: OrderItem(item: OrderEntity(),
+                        ),
+                      );
+                      },
+                    );
+                    return const WaitingWidget();
+                  } else if (state is MyOrdersError) {
+                    return AppErrorWidget(
+                      message: state.message,
+                      actionTitle: S
+                          .of(context)
+                          .retry,
+                      onAction: controller.refresh,
+                    );
+                  }
+                  else if (state is MyOrdersLoaded) {
+                    if(state.ordersResult.orders?.isEmpty ?? true){
+                      return EmptyWidget(
+                        entity: S.current.tickets,
+                      );
+                    }
+                    return Stack(
+                      children: [
+                        RefreshIndicator(
+                          onRefresh: () async => controller.refresh(),
+                          child: Positioned.fill(
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              padding: EdgeInsets.only(top: 15.hx),
+                              itemCount:  state.ordersResult.orders?.length ?? 0,
+                              itemBuilder: (ctx, index) {
+                                final item = state.ordersResult.orders![index];
+                                return OrderItem(item: item,);
+                              },
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  }
+                  return const EmptyWidget();
+                }
+            );
+          }
+      ),
+    );
+  }
+}

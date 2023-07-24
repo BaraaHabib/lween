@@ -7,6 +7,7 @@ class BorderedContainer extends StatelessWidget {
     this.width,
     this.height,
     this.color,
+    this.borderColor,
     this.radius,
     this.margin,
     this.padding,
@@ -16,6 +17,7 @@ class BorderedContainer extends StatelessWidget {
   final double? width;
   final double? height;
   final Color? color;
+  final Color? borderColor;
   final double? radius;
   final Widget child;
   final EdgeInsetsGeometry? margin;
@@ -32,6 +34,7 @@ class BorderedContainer extends StatelessWidget {
         borderRadius: radius == null
             ? Styles.borderRadius30px
             : BorderRadius.all(Radius.circular(radius!)),
+        border: borderColor == null ? null : Border.all(color: borderColor!,),
         color: color,
       ),
       child: child,

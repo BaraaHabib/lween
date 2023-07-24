@@ -65,7 +65,7 @@ extension DateTimeExten on DateTime {
       removeDate().difference(other.removeDate());
 
   String get apiFormat =>
-      DateFormat('E,d LLL yyyy HH:mm:ss', 'en').format(this);
+      DateFormat('E,d LLL yyyy HH:mm:ss', 'en-us').format(this);
 
   /// Calculates number of weeks for a given year as per https://en.wikipedia.org/wiki/ISO_week_date#Weeks_per_year
   int numOfWeeks(int year) {

@@ -19,7 +19,7 @@ class InitAppEntity extends ContentModel {
         this.phoneNumber2,
         this.countries});
 
-  InitAppEntity.fromJson(Map<String, dynamic> json) {
+  InitAppEntity.fromJson(json) {
     lastVersion = json['lastVersion'];
     lastVersionUrl = json['lastVersionUrl'];
     isUpToDate = json['isUpToDate'];

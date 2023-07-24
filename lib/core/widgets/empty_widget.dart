@@ -11,13 +11,14 @@ class EmptyWidget extends StatelessWidget {
       this.actionTitle,
       this.onAction,
       this.topMargin,
-      required this.imageAssetPath})
+      // required this.imageAssetPath,
+      })
       : super(key: key);
   final String? entity;
   final String? actionTitle;
   final Function()? onAction;
   final double? topMargin;
-  final String imageAssetPath;
+  // final String imageAssetPath;
 
   @override
   Widget build(BuildContext context) {
@@ -28,17 +29,17 @@ class EmptyWidget extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image(
-            image: AssetImage(
-              imageAssetPath,
-            ),
-            width: 270.wx,
-            height: 270.hx,
-          ),
+          // Image(
+          //   image: AssetImage(
+          //     imageAssetPath,
+          //   ),
+          //   width: 270.wx,
+          //   height: 270.hx,
+          // ),
           25.vSpace,
           Text(
             S.of(context).sorryThereAreNoEntityYet(entity ?? ''),
-            style: Theme.of(context).textTheme.displayMedium,
+            style: Theme.of(context).textTheme.headlineSmall,
             textAlign: TextAlign.center,
           ),
           35.vSpace,

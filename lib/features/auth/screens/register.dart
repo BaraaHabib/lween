@@ -40,6 +40,7 @@ class RegisterScreen extends HookWidget {
         return IgnorePointer(
           ignoring: state is RegisterLoading,
           child: AppScaffold(
+            backgroundImage: Assets.logInBackgroundPNG(context),
             title: S
                 .of(context)
                 .signup,
@@ -128,9 +129,7 @@ class RegisterScreen extends HookWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       18.hSpace,
-                      SvgPicture.asset(
-                        Assets.locationIcon,
-                      ),
+                      Assets.locationIconWidget,
                       13.hSpace,
                       Expanded(
                         child: Text(

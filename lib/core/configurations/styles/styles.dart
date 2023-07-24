@@ -1,10 +1,12 @@
 
 import 'package:flutter/material.dart';
+import 'package:lween/core/app_state/appstate.dart';
+import 'package:lween/core/extended/get_utils/get_utils.dart';
 import 'package:lween/core/extended/numbers_ext.dart';
 
 class Styles {
 
-  static const Color colorPrimary = Color(0xFF13A7C8);
+  static Color colorPrimary = Color(0xFF13A7C8);
   static const Color colorSecondary = Color(0xFF2F455C);
 
   static const Color colorSecondary2 = Color(0xFF474747);
@@ -14,9 +16,16 @@ class Styles {
   static const Color textButtonColor = Color(0xFF029BFA);
   static const Color radioButtonColor = Color(0xFF029BFA);
 
+  /// label inside cards (same in both modes)
+  static const labelCardColor = Color(0xFF110D32);
+
+  /// text inside cards (same in both modes)
+  static const displayCardColor = Color(0xFF89A3B4);
+
   static const lightFontColor = Color(0xFF110D32);
   static const darkFontColor = Color(0xFFFFFFFF);
   static const headLineFontColor = Color(0xFF89A3B4);
+  static const headLineDarkFontColor = Color(0xFFFFFFFF);
 
   /// text field styles
   static const textFieldColor = Color(0xFFFFFFFF);
@@ -49,15 +58,12 @@ class Styles {
   static double textFieldBorder = 70.rx;
   static double textFieldBorderWidth = 1.5;
 
-  static const liteGrayColor = Color(0xFF6D7276);
+  static const liteGrayColor = Color(0xFF9EA0A2);
   static const colorGreen = Color(0xFF33CD84);
 
   static const yoloThemeColor = Color(0xFFE3E935);
 
   static const colorOrange = Color(0xFFFF6B3D);
-
-  ///gradient color
-  static const shadowColor = Color.fromARGB(64, 0, 0, 0);
 
   static double buttonBorderRadiusValue = 23.rx;
 
@@ -74,6 +80,32 @@ class Styles {
 
   /// dialogs
   static const dialogBackgroundColor = Color(0xFFF4F9F9);
+
+  /// card
+  static const lightCardColor = Color(0xFFFFFFFF);
+  static const darkCardColor = Color(0xFF213560);
+  static Color cardBackgroundColor(BuildContext context) =>
+      AppStateModel.of(context).isLightTheme ? lightCardColor : darkCardColor;
+
+  static const lightCardShadowColor = Colors.transparent;
+  static const darkCardShadowColor = Colors.transparent;
+
+  static const navbarLightBackgroundColor = Color(0xFFFFFFFF);
+  static const navbarDarkBackgroundColor = Color(0xFF213560);
+  static Color navbarBackgroundColor(BuildContext context) =>
+      AppStateModel.of(context).isLightTheme ?
+      navbarLightBackgroundColor : navbarDarkBackgroundColor;
+  static const selectedNavItemBackgroundColor = Color(0xFF029BFA);
+  static const navActiveColor = Color(0xFF029BFA);
+  static const navTextColor = Color(0xFFFFFFFF);
+  static const navIconActiveColor = Color(0xFFFFFFFF);
+  static const navUnselectedIcon = Color(0xFF9DB2BF);
+
+  static const tripsCountTextColor = Color(0xFF029BFA,);
+  static const followedIconColor = Color(0xFFFF6969,);
+
+  /// shadow color
+  static const shadowColor =  Color.fromARGB(75,157,178,191,);
 }
 
 abstract class CommonSizes {

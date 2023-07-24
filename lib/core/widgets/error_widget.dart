@@ -7,12 +7,12 @@ import 'package:lween/generated/l10n.dart';
 class AppErrorWidget extends StatelessWidget {
   const AppErrorWidget({
     Key? key,
-    this.entity,
+    this.message,
     this.actionTitle,
     this.onAction,
     this.topMargin,
   }) : super(key: key);
-  final String? entity;
+  final String? message;
   final String? actionTitle;
   final Function()? onAction;
   final double? topMargin;
@@ -26,16 +26,10 @@ class AppErrorWidget extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(
-            width: 270.wx,
-            height: 270.hx,
-            child: const Icon(Icons.account_balance),
-          ),
-          25.vSpace,
           Text(
-            S.of(context).sorryThereAreNoEntityYet(entity ?? ''),
+            message ?? '',
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.displayMedium,
+            style: Theme.of(context).textTheme.titleLarge,
           ),
           35.vSpace,
           if (onAction != null)

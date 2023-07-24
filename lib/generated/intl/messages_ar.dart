@@ -24,13 +24,19 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "bookATrip": MessageLookupByLibrary.simpleMessage("حجز رحلة"),
+        "centersCount": MessageLookupByLibrary.simpleMessage("عدد الفروع"),
         "city": MessageLookupByLibrary.simpleMessage("المدينة"),
         "codeWasResentToYourNumber": MessageLookupByLibrary.simpleMessage(
             "تم إعادة إرسال رمز التحقق إلى رقمك"),
+        "company": MessageLookupByLibrary.simpleMessage("شركة النقل"),
+        "companyInfo": MessageLookupByLibrary.simpleMessage("معلومات الشركة"),
         "confirmAccount": MessageLookupByLibrary.simpleMessage("تأكيد الحساب"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("تأكيد كلمة المرور"),
         "country": MessageLookupByLibrary.simpleMessage("البلد"),
+        "date": MessageLookupByLibrary.simpleMessage("تاريخ"),
+        "description": MessageLookupByLibrary.simpleMessage("المعلومات"),
         "enter": MessageLookupByLibrary.simpleMessage("دخول"),
         "enterPhoneToSendCode": MessageLookupByLibrary.simpleMessage(
             "أدخل رقم الهاتف الذي استخدمته لإنشاء الحساب. سنقوم بإرسال رمز تحقق لك لإعادة ضبط كلمة المرور الخاصة بك"),
@@ -38,17 +44,23 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("أدخل رمز التحقق"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("نسيت كلمة المرور؟"),
+        "from": MessageLookupByLibrary.simpleMessage("من"),
         "fullName": MessageLookupByLibrary.simpleMessage("الاسم الثلاثي"),
+        "home": MessageLookupByLibrary.simpleMessage("الرئيسية"),
         "invalidphonenumber":
             MessageLookupByLibrary.simpleMessage("خطأ في رقم الهاتف"),
         "logIn": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
         "makeSureToEnterInformationAccuratly":
             MessageLookupByLibrary.simpleMessage(
                 "تأكد من إدخال المعلومات بدقة لإتمام عملية إنشاء الحساب."),
+        "myAccount": MessageLookupByLibrary.simpleMessage("حسابي"),
+        "myTickets": MessageLookupByLibrary.simpleMessage("تذاكري"),
+        "myTrips": MessageLookupByLibrary.simpleMessage("تذاكري"),
         "next": MessageLookupByLibrary.simpleMessage("التالي"),
         "no": MessageLookupByLibrary.simpleMessage("لا"),
         "noInternetConnection":
             MessageLookupByLibrary.simpleMessage("تأكد من الاتصال بالانترنت"),
+        "notifications": MessageLookupByLibrary.simpleMessage("الاشعارات"),
         "ok": MessageLookupByLibrary.simpleMessage("موافق"),
         "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
         "passwordUpdatedSuccessfully":
@@ -64,16 +76,26 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("يرجى اختيار المدينة"),
         "pleaseSelectCountry":
             MessageLookupByLibrary.simpleMessage("يرجى اختيار البلد"),
+        "previousTrips": MessageLookupByLibrary.simpleMessage("رحلاتك السابقة"),
         "resendCode":
             MessageLookupByLibrary.simpleMessage("إعادة إرسال رمز التحقق"),
+        "reservations": MessageLookupByLibrary.simpleMessage("حجوزات"),
         "resetPassword":
             MessageLookupByLibrary.simpleMessage("استعادة كلمة المرور"),
         "retry": MessageLookupByLibrary.simpleMessage("إعادة المحاولة"),
+        "seatsCount": MessageLookupByLibrary.simpleMessage("عدد المقاعد"),
         "selectPreferredLanguage":
             MessageLookupByLibrary.simpleMessage("اختر اللغة المفضلة"),
         "send": MessageLookupByLibrary.simpleMessage("إرسال"),
         "signup": MessageLookupByLibrary.simpleMessage("إنشاء حساب"),
         "sorryThereAreNoEntityYet": m0,
+        "tickets": MessageLookupByLibrary.simpleMessage("تذاكر"),
+        "to": MessageLookupByLibrary.simpleMessage("إلى"),
+        "transportationEntities":
+            MessageLookupByLibrary.simpleMessage("شركات النقل"),
+        "travelDate": MessageLookupByLibrary.simpleMessage("تاريخ الرحلة"),
+        "trips": MessageLookupByLibrary.simpleMessage("الرحلات"),
+        "tripsCount": MessageLookupByLibrary.simpleMessage("عدد الرحلات"),
         "verificationCode": MessageLookupByLibrary.simpleMessage("رمز التحقق"),
         "verify": MessageLookupByLibrary.simpleMessage("تأكيد"),
         "welcomeToLweenApp":

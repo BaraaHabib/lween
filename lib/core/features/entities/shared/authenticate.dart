@@ -18,7 +18,7 @@ class AuthenticateEntity extends ContentModel {
   late final int userId;
   late final bool isExternalLogin;
 
-  AuthenticateEntity.fromJson(Map<String, dynamic> json){
+  AuthenticateEntity.fromJson(json){
     accessToken = json['accessToken'];
     refreshToken = json['refreshToken'];
     encryptedAccessToken = json['encryptedAccessToken'] ?? '';

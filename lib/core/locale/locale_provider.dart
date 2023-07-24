@@ -2,6 +2,7 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:lween/core/configurations/assets.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:lween/core/storage/shared_preferences/shared_preferences_items.dart';
 import 'package:lween/generated/l10n.dart';
@@ -9,22 +10,27 @@ import 'package:lween/main.dart';
 
 import 'L10n.dart';
 
+const langAr = 'ar';
+const langEN = 'en';
+
 class LocaleProvider extends ChangeNotifier {
-  Locale _locale = const Locale("ar");
+  Locale _locale = const Locale(langAr);
 
   Locale get locale => _locale;
 
   //#region app languages
-  static const langAr = 'ar';
-  static const langEN = 'en';
 
   bool _initLanguageSelected = false;
   bool get initLanguageSelected => _initLanguageSelected;
+
+
   set initLanguageSelected(bool value){
     _initLanguageSelected = value;
     Lween.appState.prefs.setBool(SharedPreferencesKeys.LANGUAGE_SELECTED, value,);
   }
   //#endregion
+
+  factory LocaleProvider.of(BuildContext context) => Provider.of<LocaleProvider>(context,listen: false);
 
   void setLocale(Locale locale) {
     if (!L10n.all.contains(locale)) {
@@ -60,15 +66,15 @@ class LocaleProvider extends ChangeNotifier {
         .setString(SharedPreferencesKeys.LanguageCode, _locale.languageCode);
     setLocale(type);
     // S.load(type);
-    S.load(type);
+    await S.load(type);
+    notifyListeners();
     return true;
-    // notifyListeners();
   }
 
   List<LanguageItem> languages =
   [
-    LanguageItem('عربية', 'ar', Assets.arabicIcon,),
-    LanguageItem('English', 'en', Assets.englishIcon,),
+    LanguageItem('عربية', langAr, Assets.arabicIcon,),
+    LanguageItem('English', langEN, Assets.englishIcon,),
   ];
 
 
@@ -86,16 +92,15 @@ class LocaleProvider extends ChangeNotifier {
   String get selectedLanguageHeader {
     switch (_locale.languageCode) {
       case langEN:
-        return 'en-US';
+        return 'en-us';
       case langAr:
-        return 'ar-SY';
+        return 'ar-sy';
       default:
-        return 'ar-SY';
+        return 'ar-sy';
     }
   }
 
-  Future fetchLocale() async {
-    var prefs = await SharedPreferences.getInstance();
+  Future fetchLocale(SharedPreferences prefs) async {
 
     /// check if language selected
     if (prefs.getBool(SharedPreferencesKeys.LANGUAGE_SELECTED) == null) {
@@ -123,15 +128,16 @@ class LocaleProvider extends ChangeNotifier {
       return Null;
     }
     _locale =
-        Locale(prefs.getString(SharedPreferencesKeys.LanguageCode) ?? 'ar');
+        Locale(prefs.getString(SharedPreferencesKeys.LanguageCode) ?? langAr);
     return Null;
   }
 
-  bool get isLTR => _locale.languageCode != 'ar';
+  bool get isLTR => !_locale.languageCode.contains('ar');
 
   bool get isRTL => !isLTR;
 
   bool get isEN => _locale.languageCode == langEN;
+  bool get isAR => _locale.languageCode == langAr;
 
   ui.TextDirection get textDirection =>
       isLTR ? ui.TextDirection.ltr : ui.TextDirection.rtl;
@@ -142,12 +148,14 @@ class LocaleProvider extends ChangeNotifier {
       SharedPreferencesKeys.LanguageCode,
     )
         ? Lween.appState.prefs.getString(SharedPreferencesKeys.LanguageCode)
-        : 'ar';
+        : langAr;
 
     changeLanguageWithoutRestart(
-      Locale(local ?? 'ar'),
+      Locale(local ?? langAr),
     );
   }
+
+  LocaleProvider();
 }
 
 class LanguageItem{

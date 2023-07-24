@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lween/core/configurations/styles/styles.dart';
 import 'package:shimmer/shimmer.dart';
 
 
@@ -15,18 +16,18 @@ enum AttachmentFileType { none, image, pdf, doc, docx, video }
 
 enum QuestionType { singleChoice, multiChoice, text, paragraph, signature }
 
-const shimmerDuration = Duration(milliseconds: 1000);
+const shimmerDuration = Duration(milliseconds: 1500);
 
 const shimmerGradient = LinearGradient(
   colors: [
-    Color(0xFF26262C),
-    Color(0xFF443737),
-    Color(0xFF303036),
+    Color(0xFFE8EFF1),
+    Color(0xFFB9C8CC),
+    Color(0xFFB9C8CC),
   ],
   stops: [
     0.1,
     0.3,
-    0.4,
+    0.5,
   ],
   begin: Alignment(-1.0, -0.3),
   end: Alignment(1.0, 0.3),
@@ -34,3 +35,14 @@ const shimmerGradient = LinearGradient(
 );
 
 const shimmerDirection = ShimmerDirection.ltr;
+
+
+enum NavTab{
+  notification,
+  account,
+  tickets,
+  bookTrip,
+  home,
+  ;
+
+}

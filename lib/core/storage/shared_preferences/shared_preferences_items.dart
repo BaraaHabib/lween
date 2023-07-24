@@ -23,4 +23,5 @@ class SharedPreferencesKeys {
   static const ExpiresAt = 'ExpiresAt';
   static const KEY_FIRST_START = 'KEY_FIRST_START';
   static const LANGUAGE_SELECTED = 'LANGUAGE_SELECTED';
+  static const THEME = 'THEME';
 }

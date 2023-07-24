@@ -29,7 +29,17 @@ abstract class ParamsModel<T extends BaseBodyModel>
 
   bool get authorized => false;
 
-  ParamsModel({required this.body, this.baseUrl});
+  bool get paginated => false;
+
+  final int page ;
+  final int pageLength;
+
+  ParamsModel({
+    required this.body,
+    this.baseUrl,
+    this.page = 0,
+    this.pageLength = 10,
+  });
 
   bool get hasFile {
     final jsonBody = body.toJson();

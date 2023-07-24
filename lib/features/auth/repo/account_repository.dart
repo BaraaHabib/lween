@@ -29,7 +29,7 @@ class AccountRepository extends IAccountRepository {
   Future<Either<ErrorEntity, AuthenticateEntity>> logIn(LogInParams model) async {
     try {
       var res = await remoteDataSource.getRemoteData(model,);
-      final data = Entity<AuthenticateEntity>.fromJson(res,creator: AuthenticateEntity.fromJson,);
+      final data = Entity<AuthenticateEntity>.fromJson(res,parser: AuthenticateEntity.fromJson,);
       // Entity.fromJson(res);
       return Right(data.content!);
     } on AppException catch (e) {
@@ -41,7 +41,7 @@ class AccountRepository extends IAccountRepository {
   Future<Either<ErrorEntity, InitAppEntity>> initApp(InitAppParams model) async {
     try {
       var res = await remoteDataSource.getRemoteData(model,);
-      final data = Entity.fromJson(res,creator: InitAppEntity.fromJson,);
+      final data = Entity.fromJson(res,parser: InitAppEntity.fromJson,);
       return Right(data.content!);
     } on AppException catch (e) {
       return Left(ErrorEntity.fromAppException(e));
@@ -53,7 +53,7 @@ class AccountRepository extends IAccountRepository {
       RegisterParams model) async {
     try {
       var res = await remoteDataSource.getRemoteData(model,);
-      Entity<RegisterEntity> data = Entity<RegisterEntity>.fromJson(res,creator: RegisterEntity.fromJson,);
+      Entity<RegisterEntity> data = Entity<RegisterEntity>.fromJson(res,parser: RegisterEntity.fromJson,);
       return Right(data.content!);
     } on AppException catch (e) {
       return Left(ErrorEntity.fromAppException(e));
@@ -65,7 +65,7 @@ class AccountRepository extends IAccountRepository {
       VerifyAccountParams model) async {
     try {
       var res = await remoteDataSource.getRemoteData(model,);
-      final data = Entity<AuthenticateEntity>.fromJson(res,creator: AuthenticateEntity.fromJson,);
+      final data = Entity<AuthenticateEntity>.fromJson(res,parser: AuthenticateEntity.fromJson,);
       // Entity.fromJson(res);
       return Right(data.content!);
     } on AppException catch (e) {
@@ -78,7 +78,7 @@ class AccountRepository extends IAccountRepository {
       ForgetPasswordParams model) async {
     try {
       var res = await remoteDataSource.getRemoteData(model,);
-      Entity<EmptyEntity> data = Entity<EmptyEntity>.fromJson(res,creator: EmptyEntity.fromJson,);
+      Entity<EmptyEntity> data = Entity<EmptyEntity>.fromJson(res,parser: EmptyEntity.fromJson,);
       return Right(data.content!);
     } on AppException catch (e) {
       return Left(ErrorEntity.fromAppException(e));
@@ -88,7 +88,7 @@ class AccountRepository extends IAccountRepository {
   Future<Either<ErrorEntity, EmptyEntity>> checkCode(CheckCodeParams model) async {
     try {
       var res = await remoteDataSource.getRemoteData(model,);
-      Entity<EmptyEntity> data = Entity<EmptyEntity>.fromJson(res,creator: EmptyEntity.fromJson,);
+      Entity<EmptyEntity> data = Entity<EmptyEntity>.fromJson(res,parser: EmptyEntity.fromJson,);
       return Right(data.content!);
     } on AppException catch (e) {
       return Left(ErrorEntity.fromAppException(e));
@@ -98,7 +98,7 @@ class AccountRepository extends IAccountRepository {
   Future<Either<ErrorEntity, EmptyEntity>> resendCode(ResendCodeParams model) async {
     try {
       var res = await remoteDataSource.getRemoteData(model,);
-      Entity<EmptyEntity> data = Entity<EmptyEntity>.fromJson(res,creator: EmptyEntity.fromJson,);
+      Entity<EmptyEntity> data = Entity<EmptyEntity>.fromJson(res,parser: EmptyEntity.fromJson,);
       return Right(data.content!);
     } on AppException catch (e) {
       return Left(ErrorEntity.fromAppException(e));
@@ -109,7 +109,7 @@ class AccountRepository extends IAccountRepository {
   Future<Either<ErrorEntity, EmptyEntity>> enterForgotPassword(EnterForgotPasswordParams model) async {
     try {
       var res = await remoteDataSource.getRemoteData(model,);
-      Entity<EmptyEntity> data = Entity<EmptyEntity>.fromJson(res,creator: EmptyEntity.fromJson,);
+      Entity<EmptyEntity> data = Entity<EmptyEntity>.fromJson(res,parser: EmptyEntity.fromJson,);
       return Right(data.content!);
     } on AppException catch (e) {
       return Left(ErrorEntity.fromAppException(e));

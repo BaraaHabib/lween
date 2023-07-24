@@ -9,6 +9,7 @@ final lightTheme = ThemeData(
   useMaterial3: true,
   fontFamily: 'Tajawal',
   primaryColor: Styles.colorPrimary,
+  splashColor: Styles.colorPrimary,
   inputDecorationTheme: InputDecorationTheme(
     fillColor: Styles.textFieldColor,
     filled: true,
@@ -30,18 +31,26 @@ final lightTheme = ThemeData(
     fillColor: MaterialStateProperty.all(Styles.radioButtonColor),
   ),
   scaffoldBackgroundColor: Styles.scaffoldBackgroundColor,
+  cardTheme: const CardTheme(
+    color: Styles.lightCardColor,
+    surfaceTintColor: Colors.transparent,
+    shadowColor: Styles.darkCardShadowColor,
+  ),
   textTheme: TextTheme(
     titleLarge: TextStyle(
       fontWeight: FontWeight.w500,
       fontSize: 18.spx,
+      color: Styles.lightFontColor,
     ),
     titleMedium: TextStyle(
       fontWeight: FontWeight.w500,
       fontSize: 14.spx,
+      color: Styles.lightFontColor,
     ),
     titleSmall: TextStyle(
       fontWeight: FontWeight.w500,
       fontSize: 11.spx,
+      color: Styles.lightFontColor,
     ),
     headlineLarge: TextStyle(
       fontSize: 14.spx,
@@ -51,8 +60,48 @@ final lightTheme = ThemeData(
       fontSize: 12.spx,
       color: Styles.headLineFontColor,
     ),
+    headlineSmall: TextStyle(
+      fontSize: 11.spx,
+      color: Styles.headLineFontColor,
+    ),
+    labelLarge: TextStyle(
+      fontSize: 15.spx,
+      color: Styles.labelCardColor,
+    ),
+    labelMedium: TextStyle(
+      fontSize: 13.spx,
+      color: Styles.labelCardColor,
+    ),
+    labelSmall: TextStyle(
+      fontSize: 11.spx,
+      color: Styles.labelCardColor,
+    ),
+    displayLarge: TextStyle(
+      fontSize: 14.spx,
+      color: Styles.displayCardColor,
+    ),
+    displayMedium: TextStyle(
+      fontSize: 12.spx,
+      color: Styles.displayCardColor,
+    ),
+    displaySmall: TextStyle(
+      fontSize: 11.spx,
+      color: Styles.displayCardColor,
+    ),
+    bodyLarge: TextStyle(
+      fontSize: 14.spx,
+      color: Styles.lightFontColor,
+    ),
+    bodyMedium: TextStyle(
+      fontSize: 11.spx,
+      color: Styles.lightFontColor,
+    ),
+    bodySmall: TextStyle(
+      fontSize: 9.spx,
+      color: Styles.lightFontColor,
+    ),
   ).apply(
-    bodyColor: Styles.lightFontColor,
+    // bodyColor: Styles.lightFontColor,
     displayColor: Styles.headLineFontColor,
   ),
 );

@@ -54,7 +54,9 @@ class AppImage extends StatelessWidget {
           height: height,
           width: width,
           decoration: BoxDecoration(
-              color: Styles.colorPrimary, borderRadius: borderRadius),
+              color: Styles.colorSecondary,
+              borderRadius: borderRadius,
+          ),
           // child: Image.asset(AppAssets.logo,scale: 1.5,),
         ),
       ),

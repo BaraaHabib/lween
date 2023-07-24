@@ -5,11 +5,15 @@ import 'dart:io';
 import 'package:collection/collection.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
+import 'package:lween/core/configurations/styles/styles.dart';
 import 'package:lween/core/configurations/styles/themes.dart';
 import 'package:lween/core/features/entities/shared/city.dart';
 import 'package:lween/core/features/entities/shared/country.dart';
 import 'package:lween/core/navigation/navigation_service.dart';
 import 'package:lween/features/auth/models/init_app_entity.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:lween/core/navigation/logger.dart';
 import 'package:lween/core/services/files/file_manager.dart';
@@ -19,6 +23,7 @@ import 'package:lween/features/auth/params/refresh_token_params.dart';
 import 'package:lween/main.dart';
 import '../../../injection_container.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'dart:ui' as ui;
 part 'device_info_mixin.dart';
 part 'theme_manager.dart';
 part 'app_data.dart';
@@ -71,6 +76,7 @@ class AppStateModel extends AppStateComponent with _DeviceInfoMixin, ThemeManage
   static bool isRestartingApp = false;
 
   bool get stayLoggedIn => _rememberMe;
+
 
   set stayLoggedIn(bool value) {
     _rememberMe = value;
@@ -212,5 +218,7 @@ class AppStateModel extends AppStateComponent with _DeviceInfoMixin, ThemeManage
 
     notifyListeners();
   }
+
+  static AppStateModel of(BuildContext context) => Provider.of<AppStateModel>(context,listen: false,);
 
 }

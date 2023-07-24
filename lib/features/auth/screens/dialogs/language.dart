@@ -23,7 +23,9 @@ class LanguageDialog extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final selectedLanguage = useState(sl<LocaleProvider>().locale.languageCode,);
+    final selectedLanguage = useState(
+      LocaleProvider.of(context).locale.languageCode,
+    );
     final appState = Provider
         .of<AppStateModel>(context, listen: false);
     return  SizedBox(
@@ -49,7 +51,7 @@ class LanguageDialog extends HookWidget {
               ),
             ],
           ),
-          ...sl<LocaleProvider>()
+          ...LocaleProvider.of(context)
               .languages
               .map((e) => _LanguageWidget(e,selectedLanguage),)
               .toList(),
@@ -63,8 +65,10 @@ class LanguageDialog extends HookWidget {
                 if(value){
                   NavigationService.of(context).restart();
                 }
+                else{
+                  NavigationService.of(context).pop();
+                }
               });
-              NavigationService.of(context).pop();
             },
             content: S
                 .of(context)

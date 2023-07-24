@@ -8,7 +8,7 @@ class ShadowedWidget extends StatelessWidget {
   const ShadowedWidget({
     required this.child,
     this.offset,
-    this.color,
+    this.color =  const Color.fromARGB(75,157,178,191,),
     Key? key,
   }) : super(key: key);
 
@@ -26,14 +26,14 @@ class ShadowedWidget extends StatelessWidget {
             imageFilter: ImageFilter.blur(sigmaY: 2, sigmaX: 2),
             child: Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(50)),
+                borderRadius: const BorderRadius.all(Radius.circular(50)),
                 border: Border.all(
                   color: Colors.transparent,
                   width: 0,
                 ),
               ),
               child: Opacity(
-                opacity: 0.5,
+                opacity: 0.9,
                 child: ColorFiltered(
                   colorFilter: ColorFilter.mode(
                       color ?? Styles.colorPrimary, BlendMode.srcATop),
@@ -45,20 +45,6 @@ class ShadowedWidget extends StatelessWidget {
         ),
         child,
       ],
-    );
-    return Container(
-      decoration: BoxDecoration(
-          // color: Colors.red,
-
-          boxShadow: [
-            BoxShadow(
-                offset: const Offset(1, 2),
-                spreadRadius: 1.rx,
-                color: const Color.fromARGB(64, 00, 0, 0),
-                blurRadius: 20,
-                blurStyle: BlurStyle.outer),
-          ]),
-      child: child,
     );
   }
 }

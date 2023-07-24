@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lween/core/extended/get_utils/get_utils.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:lween/core/configurations/styles/styles.dart';
 
@@ -42,8 +43,8 @@ abstract class ShimmerUI {
           ? child
           : Shimmer.fromColors(
               enabled: true,
-              baseColor: Styles.colorPrimary,
-              highlightColor: Styles.colorSecondary,
+        baseColor: Colors.grey.shade300,
+        highlightColor: Colors.grey.shade200,
               loop: 0,
               child: child,
             );

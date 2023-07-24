@@ -61,7 +61,10 @@ class RemoteDataSource  {
     }
     headers.putIfAbsent('deviceType', () => sl<AppStateModel>().deviceType.toString());
     headers.putIfAbsent('DeviceId', () => sl<AppStateModel>().deviceId!);
-    headers.putIfAbsent('Accept-Language', () => sl<LocaleProvider>().selectedLanguageHeader);
+    headers.update(
+        'Accept-Language',
+        (value) => sl<LocaleProvider>().selectedLanguageHeader,
+        ifAbsent:  () => sl<LocaleProvider>().selectedLanguageHeader);
     await checkConnectivity();
   }
 
@@ -136,10 +139,15 @@ class RemoteDataSource  {
     Map<String, dynamic> responseJson;
 
     final url = model.baseUrl ?? baseUrl;
+    var urlParams = model.urlParams;
+    if(model.paginated){
+      urlParams.putIfAbsent('PageLength', () => model.pageLength.toString(),);
+      urlParams.putIfAbsent('Page', () => model.page.toString(),);
+    }
     final Response response = await dio.get(
         url + model.url.toString(),
         // headers: headers,
-        queryParameters: model.urlParams,
+        queryParameters: urlParams,
       options: Options(
           headers: headers,
           responseType: ResponseType.plain,
@@ -242,6 +250,9 @@ class RemoteDataSource  {
     }
     else if (statusCode >= 400) {
       String message = 'BAD_REQUEST';
+      if(responseJson == null){
+        throw BadRequestException(message: message, code: statusCode);
+      }
       if(responseJson['message'] is String){
         message = responseJson['message'];
       }else{

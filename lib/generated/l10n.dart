@@ -409,6 +409,216 @@ class S {
       args: [],
     );
   }
+
+  /// `Transportation entities`
+  String get transportationEntities {
+    return Intl.message(
+      'Transportation entities',
+      name: 'transportationEntities',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reservations`
+  String get reservations {
+    return Intl.message(
+      'Reservations',
+      name: 'reservations',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Previous trips`
+  String get previousTrips {
+    return Intl.message(
+      'Previous trips',
+      name: 'previousTrips',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Book a trip`
+  String get bookATrip {
+    return Intl.message(
+      'Book a trip',
+      name: 'bookATrip',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Home`
+  String get home {
+    return Intl.message(
+      'Home',
+      name: 'home',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `My tickets`
+  String get myTrips {
+    return Intl.message(
+      'My tickets',
+      name: 'myTrips',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `My account`
+  String get myAccount {
+    return Intl.message(
+      'My account',
+      name: 'myAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Notifications`
+  String get notifications {
+    return Intl.message(
+      'Notifications',
+      name: 'notifications',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Trips count`
+  String get tripsCount {
+    return Intl.message(
+      'Trips count',
+      name: 'tripsCount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `My tickets`
+  String get myTickets {
+    return Intl.message(
+      'My tickets',
+      name: 'myTickets',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tickets`
+  String get tickets {
+    return Intl.message(
+      'Tickets',
+      name: 'tickets',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Company`
+  String get company {
+    return Intl.message(
+      'Company',
+      name: 'company',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `from`
+  String get from {
+    return Intl.message(
+      'from',
+      name: 'from',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Seats count`
+  String get seatsCount {
+    return Intl.message(
+      'Seats count',
+      name: 'seatsCount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `to`
+  String get to {
+    return Intl.message(
+      'to',
+      name: 'to',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Date`
+  String get date {
+    return Intl.message(
+      'Date',
+      name: 'date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Travel date`
+  String get travelDate {
+    return Intl.message(
+      'Travel date',
+      name: 'travelDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Description`
+  String get description {
+    return Intl.message(
+      'Description',
+      name: 'description',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Trips`
+  String get trips {
+    return Intl.message(
+      'Trips',
+      name: 'trips',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Centers count`
+  String get centersCount {
+    return Intl.message(
+      'Centers count',
+      name: 'centersCount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Company description`
+  String get companyInfo {
+    return Intl.message(
+      'Company description',
+      name: 'companyInfo',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

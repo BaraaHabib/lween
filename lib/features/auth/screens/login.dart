@@ -37,6 +37,7 @@ class LogInScreen extends HookWidget {
         child: AppScaffold(
           title: S.of(context).welcomeToLweenApp,
           withBackButton: false,
+          backgroundImage: Assets.logInBackgroundPNG(context),
           child: ListView(
             children: [
               37.vSpace,

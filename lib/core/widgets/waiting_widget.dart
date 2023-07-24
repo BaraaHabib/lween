@@ -1,24 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:lween/core/extended/get_utils/get_utils.dart';
 
-class WaitingWidget extends StatefulWidget {
-  const WaitingWidget({Key? key}) : super(key: key);
-
-  @override
-  State<WaitingWidget> createState() => _WaitingWidgetState();
+enum WaitingWidgetType{
+  normal,
+  pulse,
 }
 
-class _WaitingWidgetState extends State<WaitingWidget> {
+class WaitingWidget extends StatelessWidget {
+  const WaitingWidget({
+    this.type = WaitingWidgetType.normal,
+    this.scale = 1,
+    Key? key,
+  }) : super(key: key);
+
+  final WaitingWidgetType type;
+  final double scale;
 
   @override
-  void dispose() {
-    super.dispose();
+  Widget build(BuildContext context) {
+    return Transform.scale(
+      scale: scale,
+      child: Builder(builder: (ctx) {
+        switch (type) {
+          case WaitingWidgetType.pulse:
+            return SpinKitPulse(
+              color: context.theme.primaryColor,
+              size: 50.0,
+            );
+          default:
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+        }
+      }),
+    );
   }
-
-  @override
-  Widget build(BuildContext context) =>
-      const Center(
-        child: CircularProgressIndicator(),
-      );
-
-
 }

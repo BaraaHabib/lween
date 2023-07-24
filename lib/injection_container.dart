@@ -5,7 +5,13 @@ import 'package:lween/core/locale/locale_provider.dart';
 import 'package:lween/core/services/files/file_manager.dart';
 import 'package:lween/features/auth/bloc/account_bloc.dart';
 import 'package:lween/features/auth/repo/account_repository.dart';
+import 'package:lween/features/home/bloc/home_bloc.dart';
+import 'package:lween/features/home/repo/account_repository.dart';
 import 'package:lween/features/onboarding/bloc/splash_bloc.dart';
+import 'package:lween/features/orders/bloc/orders_bloc.dart';
+import 'package:lween/features/orders/repo/orders_repository.dart';
+import 'package:lween/features/transportation_entities/bloc/transportation_entities_bloc.dart';
+import 'package:lween/features/transportation_entities/repo/transportation_entities_repository.dart';
 
 import 'core/storage/hive/app_storage.dart';
 
@@ -22,10 +28,18 @@ void initInjection() {
   //Bloc
   sl.registerLazySingleton(() => AccountBloc());
   sl.registerLazySingleton(() => SplashBloc());
+  sl.registerLazySingleton(() => HomeBloc());
+  sl.registerLazySingleton(() => OrdersBloc());
+  sl.registerLazySingleton(() => CompanyBloc());
+
+
   sl.registerLazySingleton(() => AppStateModel());
 
   //! repos
   sl.registerLazySingleton(() => AccountRepository(sl()));
+  sl.registerLazySingleton(() => HomeRepository(sl()));
+  sl.registerLazySingleton(() => OrdersRepository(sl()));
+  sl.registerLazySingleton(() => CompaniesRepository(sl()));
 
   //! data sources
   sl.registerLazySingleton(() => RemoteDataSource());

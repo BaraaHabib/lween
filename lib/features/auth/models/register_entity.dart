@@ -8,7 +8,7 @@ class RegisterEntity extends ContentModel {
   late final int id;
   late final String text;
 
-  RegisterEntity.fromJson(Map<String, dynamic> json){
+  RegisterEntity.fromJson(json){
     id = json['id'];
     text = json['text'];
   }

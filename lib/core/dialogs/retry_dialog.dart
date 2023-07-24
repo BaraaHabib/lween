@@ -5,12 +5,12 @@ class RetryDialog extends StatelessWidget {
     super.key,
     this.retry,
     required this.message,
-    this.title = 'Error',
+    this.title,
   });
 
   final Function? retry;
   final String message;
-  final String title;
+  final String? title;
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -34,7 +34,7 @@ class RetryDialog extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              title,
+              title ?? S.current.retry,
               style: Theme.of(context).textTheme.titleMedium,
             ),
             20.vSpace,

@@ -1,10 +1,15 @@
 import 'dart:io';
 
+import 'package:appinio_video_player/appinio_video_player.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lween/core/extended/get_utils/src/extensions/export.dart';
-import 'package:video_player/video_player.dart';
+// import 'package:video_player/video_player.dart';
 import 'package:lween/core/configurations/styles/styles.dart';
 import 'package:lween/core/extended/numbers_ext.dart';
+import 'package:lween/core/extended/string_ext.dart';
+import 'package:lween/core/navigation/logger.dart';
+import 'package:lween/core/widgets/waiting_widget.dart';
 
 class AppVideo extends StatefulWidget {
   final String path;
@@ -12,96 +17,97 @@ class AppVideo extends StatefulWidget {
   final BoxFit fit;
   final Widget? errorWidget;
   final Widget? loadingWidget;
-  final BorderRadius borderRadius;
-  final Border? border;
   final double? height;
   final double? width;
-  final Color? backgroundColor;
   final EdgeInsets? margin;
-  final String? errorImage;
-
+  final bool looping;
   const AppVideo({
     super.key,
     required this.path,
     // required this.type,
     this.fit = BoxFit.cover,
+    this.looping = true,
     this.errorWidget,
-    this.borderRadius = BorderRadius.zero,
     this.loadingWidget,
     this.height,
     this.width,
-    this.backgroundColor,
     this.margin,
-    this.border,
-    this.errorImage,
   });
   @override
   AppVideoState createState() => AppVideoState();
 }
 
-class AppVideoState extends State<AppVideo> {
-  late VideoPlayerController controller;
+class AppVideoState extends State<AppVideo> with AutomaticKeepAliveClientMixin{
+  late VideoPlayerController videoPlayerController;
+  late CustomVideoPlayerController _customVideoPlayerController;
+  bool isVideoFinished = false;
 
   @override
   void initState() {
     super.initState();
-    if (widget.path.isURL) {
-      controller = VideoPlayerController.network(
-        widget.path,
-      );
-    } else if (widget.path.isVideoFileName) {
-      controller = VideoPlayerController.file(
-        File(widget.path),
-      );
-    } else
-    // if (path.isAssets)
-    {
-      controller = VideoPlayerController.asset(
-        widget.path,
-      );
+    if (widget.path.isAssets) {
+      videoPlayerController =
+          VideoPlayerController.asset((widget.path),);
     }
+    else {
+      videoPlayerController =
+          VideoPlayerController.networkUrl(Uri.parse(widget.path));
+    }
+    videoPlayerController
+        .initialize()
+        .then((value) {
 
-    controller.addListener(() {
+      _customVideoPlayerController.videoPlayerController
+        ..setLooping(widget.looping)
+        ..setVolume(0);
+      _customVideoPlayerController.videoPlayerController.play();
       setState(() {});
+
     });
-    // _controller.setLooping(true);
-    controller.initialize().then((_) => setState(() {}));
+    _customVideoPlayerController = CustomVideoPlayerController(
+        context: context,
+        videoPlayerController: videoPlayerController,
+        customVideoPlayerSettings: const CustomVideoPlayerSettings(
+          showDurationPlayed: false,
+          showDurationRemaining: false,
+          showPlayButton: false,
+          alwaysShowThumbnailOnVideoPaused: false,
+          playbackSpeedButtonAvailable: false,
+          controlBarAvailable: false,
+          settingsButtonAvailable: false,
+          showFullscreenButton: false,
+          controlsPadding: EdgeInsets.zero,
+          controlBarPadding: EdgeInsets.zero,
+        )
+    );
   }
 
   @override
   void dispose() {
-    controller.dispose();
+    // videoPlayerController.dispose();
+    _customVideoPlayerController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Container(
-        padding: const EdgeInsets.all(20),
-        child: AspectRatio(
-          aspectRatio: controller.value.aspectRatio,
-          child: Stack(
-            alignment: Alignment.bottomCenter,
-            children: <Widget>[
-              VideoPlayer(controller),
-              ControlsOverlay(controller: controller),
-              SizedBox(
-                height: 15.hx,
-                child: VideoProgressIndicator(
-                  controller,
-                  allowScrubbing: true,
-                  colors: const VideoProgressColors(
-                    playedColor: Styles.colorPrimary,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
+    super.build(context);
+    return IgnorePointer(
+      ignoring: true,
+      child: SizedBox(
+          width: widget.width,
+          height: widget.height,
+          child: videoPlayerController.value.isInitialized ?
+          CustomVideoPlayer(
+            customVideoPlayerController: _customVideoPlayerController,
+          ) : widget.loadingWidget ??
+              const WaitingWidget(type: WaitingWidgetType.pulse,)
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
 
 

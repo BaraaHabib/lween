@@ -8,6 +8,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lween/core/exceptions/app_exceptions.dart';
 import 'package:lween/features/auth/params/init_app_params.dart';
 import 'package:lween/features/auth/repo/account_repository.dart';
+import 'package:lween/features/home/bloc/home_bloc.dart';
+import 'package:lween/features/home/repo/account_repository.dart';
+import 'package:lween/features/home/screens/home/home_screen_controller.dart';
 import 'package:provider/provider.dart';
 import 'package:lween/core/app_state/appstate.dart';
 import 'package:lween/core/locale/locale_provider.dart';
@@ -36,7 +39,6 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
       res.fold((l) => throw AppException(l.errorMessage ?? ''), (r) => appState.initAppEntity = r);
 
       if (!appState.authenticated) {
-        // await Future.delayed(const Duration(seconds: 3));
         emit(
           SplashLoaded(
             SplashInitResult(
@@ -71,6 +73,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
   static Future initApp(
     context,
   ) async {
+    HomeScreenController.intiHomeScreen();
     final storage = Lween.storage; // sl<AppStorage>();
     final locale = Provider.of<LocaleProvider>(
       context,
@@ -82,6 +85,11 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
 
   }
 }
+
+// setUpHomeTab() async {
+//   await sl<HomeRepository>().getHomeData();
+//
+// }
 
 class SplashInitResult {
   SplashInitResult({

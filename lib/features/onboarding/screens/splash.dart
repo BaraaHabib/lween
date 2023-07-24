@@ -4,8 +4,11 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lween/core/dialogs/app_dialogs.dart';
+import 'package:lween/core/navigation/logger.dart';
 import 'package:lween/core/routing/app_router.dart';
+import 'package:lween/core/widgets/app_video.dart';
 
 import '../../../../../../core/configurations/assets.dart';
 import '../../../../../../core/navigation/navigation_service.dart';
@@ -26,7 +29,6 @@ class SplashScreen extends HookWidget {
   Widget build(BuildContext context) {
     // sl<SplashBloc>().add(SplashInitEvent());
     useEffect(() {
-
       sl<SplashBloc>().add(SplashInitEvent(
         context,
       ));
@@ -48,9 +50,12 @@ class SplashScreen extends HookWidget {
               _handleError(context, state);
             }
           },
-          child:  Image.asset(
-            Assets.splashScreen,
+          child: AppVideo(
+            path: Assets.splashScreen,
+            looping: true,
             fit: BoxFit.fill,
+            height: 1.sh,
+            width: 1.sw,
           ),
         ),
       ),
@@ -81,6 +86,7 @@ class SplashScreen extends HookWidget {
   }
 
   void _handleError(BuildContext context, SplashError state) {
+    
     AppDialogs.showRetryDialog(
       context: context,
       content: state.message,

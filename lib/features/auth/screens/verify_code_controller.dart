@@ -11,6 +11,7 @@ import 'package:lween/features/auth/bloc/account_bloc.dart';
 import 'package:lween/features/auth/params/check_code_params.dart';
 import 'package:lween/features/auth/params/resend_code_params.dart';
 import 'package:lween/features/auth/params/verify_account_params.dart';
+import 'package:lween/features/onboarding/bloc/splash_bloc.dart';
 import 'package:lween/injection_container.dart';
 
 class VerifyCodeController extends Controller{
@@ -46,7 +47,8 @@ class VerifyCodeController extends Controller{
         expires: state.verifyAccountEntity.expireInSeconds,
         refreshToken: state.verifyAccountEntity.refreshToken,
       ).then((value) {
-        NavigationService.of(context).replace(const MainScreenRoute());
+        SplashBloc.initApp(context);
+        NavigationService.of(context).clearAllAndPushNamed(const MainScreenRoute());
       });
     }
   }

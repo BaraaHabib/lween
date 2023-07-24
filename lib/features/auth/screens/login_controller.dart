@@ -14,6 +14,7 @@ import 'package:lween/core/routing/app_router.dart';
 import 'package:lween/features/auth/bloc/account_bloc.dart';
 import 'package:lween/features/auth/params/login_params.dart';
 import 'package:lween/features/auth/screens/dialogs/language.dart';
+import 'package:lween/features/onboarding/bloc/splash_bloc.dart';
 import 'package:lween/generated/l10n.dart';
 import 'package:lween/injection_container.dart';
 import 'package:lween/main.dart';
@@ -29,7 +30,9 @@ class LoginController extends Controller {
   void init() {
     super.init();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      if (!Lween.locale.initLanguageSelected){
+      if ( true
+      // !Lween.locale.initLanguageSelected
+      ){
         AppDialogs.showGeneralDialog(
           context: Lween.navigatorKey.currentContext!,
           content: const LanguageDialog(),
@@ -66,7 +69,7 @@ class LoginController extends Controller {
         expires: state.logInEntity.expireInSeconds,
         refreshToken: state.logInEntity.refreshToken,
       ).then((value) {
-        NavigationService.of(context).replace(const MainScreenRoute());
+        SplashBloc.initApp(context).then((value) => NavigationService.of(context).clearAllAndPushNamed(const MainScreenRoute()));
       });
     }
     else if(state is LogInError){

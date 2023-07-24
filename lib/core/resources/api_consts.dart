@@ -10,5 +10,11 @@ abstract class ApiConstants{
   static const checkCode = 'Client/Account/CheckCode';
   static const resendCode = 'Client/Account/ResendCode';
   static const enterNewPassword = 'Client/Account/EnterForgetPasswordCode';
+  static const home = 'Client/Home/HomePage';
+  static const listOrders = 'Client/Order/List';
+  static const transportationEntities = 'Client/transportationEntity/List';
+  static const followCompany = 'Client/UserFollowedTransportationEntity/Follow';
+  static const unfollowCompany = 'Client/UserFollowedTransportationEntity/Unfollow';
+  static const dailyTravels = 'Client/DailyTravel/List';
 
 }

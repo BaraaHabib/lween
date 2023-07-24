@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:lween/core/locale/locale_provider.dart';
 
 extension TimeOfDayExt on TimeOfDay {
   TimeOfDay add({int hour = 0, int minutes = 0}) {
@@ -55,8 +56,8 @@ extension DateExt on DateTime {
     );
   }
 
-  String get apiFormat => DateFormat('yyyy-MM-dd', 'en').format(this);
+  String get apiFormat => DateFormat('yyyy-MM-dd', langEN).format(this);
 
-  String get apiTimeFormat => DateFormat('HH:mm', 'en').format(this);
+  String get apiTimeFormat => DateFormat('HH:mm', langEN).format(this);
 }
 
