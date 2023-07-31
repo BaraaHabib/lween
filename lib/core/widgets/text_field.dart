@@ -30,7 +30,7 @@ class AppTextField extends HookWidget {
       this.type = AppTextFieldType.text,
       this.suffixIcon,
       this.hintFontColor,
-      this.inputFontColor,
+      this.inputFontColor ,
       this.fontSize,
       this.onChanged,
       this.validator,
@@ -50,6 +50,7 @@ class AppTextField extends HookWidget {
       this.focusedBorder,
       this.errorBorder,
       this.contentPadding,
+      this.padding,
       this.formatters = const [],
       this.autofocus,
       this.label,
@@ -86,6 +87,7 @@ class AppTextField extends HookWidget {
   final InputBorder? errorBorder;
   final Key? validationKey;
   final EdgeInsetsGeometry? contentPadding;
+  final EdgeInsetsGeometry? padding;
   final FocusNode? focusNode;
   final bool? autofocus;
   final bool? readOnly;
@@ -109,8 +111,8 @@ class AppTextField extends HookWidget {
             duration: 300.milliseconds,
             child: Container(
               decoration:  BoxDecoration(
-                color: Styles.textFieldColor,
-                border: Border.all(color: Styles.textFieldColor,)
+                color:  Styles.textFieldColor(context),
+                border: Border.all(color: Styles.textFieldColor(context),)
               ),
               child: Row(
                 children: [
@@ -121,7 +123,7 @@ class AppTextField extends HookWidget {
                     ),
                   Expanded(
                     child: Container(
-                      padding: const EdgeInsets.only(top: 10,bottom: 2),
+                      padding: padding ?? const EdgeInsets.only(top: 10,bottom: 2),
                       child: FormBuilderTextField(
                         key: validationKey,
                         inputFormatters: [
@@ -146,7 +148,7 @@ class AppTextField extends HookWidget {
                         keyboardType: keyboardType,
                         validator: validator,
                         decoration: InputDecoration(
-                            fillColor: fillColor ?? Colors.white,
+                            fillColor: fillColor ?? Styles.textFieldColor(context),
                             hintText: hint,
                             hintTextDirection: hint.preferredDirection,
                             constraints: constraints,

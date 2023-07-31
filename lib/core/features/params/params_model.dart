@@ -31,8 +31,8 @@ abstract class ParamsModel<T extends BaseBodyModel>
 
   bool get paginated => false;
 
-  final int page ;
-  final int pageLength;
+  final int? page ;
+  final int? pageLength;
 
   ParamsModel({
     required this.body,

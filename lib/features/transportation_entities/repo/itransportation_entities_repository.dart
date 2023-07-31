@@ -9,7 +9,7 @@ import 'package:lween/features/transportation_entities/params/follow_entity_para
 import 'package:lween/features/transportation_entities/params/transportation_entities_params.dart';
 
 abstract class ICompaniesRepository extends IRepository {
-  Future<Either<ErrorEntity, CompaniesEntity>> getEntities(GetCompaniesParams model);
+  Future<Either<ErrorEntity, CompaniesEntity>> getCompanies(GetCompaniesParams model);
   Future<Either<ErrorEntity, EmptyEntity>> toggleFollowCompany(ToggleFollowCompanyParams model);
 
 }

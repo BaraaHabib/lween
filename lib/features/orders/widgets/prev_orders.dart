@@ -49,24 +49,25 @@ class MyPreviousOrders extends HookWidget {
           }
           return Padding(
             padding: EdgeInsets.only(left: 18.wx,right: 18.wx,top: 20.hx,),
-            child: SingleChildScrollView(
-              child: Column(
-                // shrinkWrap: true,
-                // physics: const NeverScrollableScrollPhysics(),
-                children: [
-                  Row(
-                    children: [
-                      AppTextWidget(
-                        S.of(context).previousTrips
-                        ,style: context.theme.textTheme.headlineLarge,
-                      ),
-                    ],
-                  ),
-                  12.vSpace,
-                  ListView.separated(
+            child: Column(
+              // shrinkWrap: true,
+              // physics: const NeverScrollableScrollPhysics(),
+              children: [
+                Row(
+                  children: [
+                    AppTextWidget(
+                      S.of(context).previousTrips
+                      ,style: context.theme.textTheme.headlineLarge,
+                    ),
+                  ],
+                ),
+                12.vSpace,
+                SizedBox(
+                  height: 190.hx,
+                  child: ListView.separated(
                     itemCount: orders.length ,
                     shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
+                    // physics: const NeverScrollableScrollPhysics(),
                     separatorBuilder: (ctx,index) => 12.hSpace,
                     itemBuilder: (ctx,index) {
                       final item = orders[index];
@@ -75,12 +76,12 @@ class MyPreviousOrders extends HookWidget {
                         date: item.formattedTravelTimeDate,
                         from: item.fromCity?.text ?? '',
                         to: item.toCity?.text ?? '',
-                        imageUrl: item.transportationCompany?.imageUrl,
+                        imageUrl: Assets.tripOrderIcon(context,),
                       );
                     },
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           );
         }

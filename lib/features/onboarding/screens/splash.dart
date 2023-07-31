@@ -34,22 +34,24 @@ class SplashScreen extends HookWidget {
       ));
       return null;
     }, const []);
-    return SafeArea(
-      child: WillPopScope(
-        onWillPop: () => Future.value(false),
-        child: BlocListener<SplashBloc, SplashState>(
-          bloc: bloc,
-          listener: (context, state) {
-            if (state is SplashLoaded) {
-              completedSteps.add(state);
-              _handleLoaded(
-                context,
-                state: state,
-              );
-            } else if (state is SplashError) {
-              _handleError(context, state);
-            }
-          },
+    return WillPopScope(
+      onWillPop: () => Future.value(false),
+      child: BlocListener<SplashBloc, SplashState>(
+        bloc: bloc,
+        listener: (context, state) {
+          if (state is SplashLoaded) {
+            completedSteps.add(state);
+            _handleLoaded(
+              context,
+              state: state,
+            );
+          } else if (state is SplashError) {
+            _handleError(context, state);
+          }
+        },
+        child: SizedBox(
+          height: 1.sh,
+          width: 1.sw,
           child: AppVideo(
             path: Assets.splashScreen,
             looping: true,
@@ -66,6 +68,16 @@ class SplashScreen extends HookWidget {
     BuildContext context, {
     SplashState? state,
   }) {
+    // AppDialogs.showRetryDialog(
+    //   context: context,
+    //   content: 'state.message',
+    //   retryCallBack: () {
+    //     sl<SplashBloc>().add(SplashInitEvent(
+    //       context,
+    //     ));
+    //   },
+    // );
+    // return;
     if (completedSteps.length >= 1) {
       var splashLoaded =
           completedSteps.firstWhereOrNull((element) => element is SplashLoaded);

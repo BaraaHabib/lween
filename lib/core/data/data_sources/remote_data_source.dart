@@ -140,9 +140,13 @@ class RemoteDataSource  {
 
     final url = model.baseUrl ?? baseUrl;
     var urlParams = model.urlParams;
-    if(model.paginated){
-      urlParams.putIfAbsent('PageLength', () => model.pageLength.toString(),);
-      urlParams.putIfAbsent('Page', () => model.page.toString(),);
+    if(model.paginated) {
+      if (model.pageLength != null) {
+        urlParams.putIfAbsent('PageLength', () => model.pageLength.toString(),);
+      }
+      if (model.page != null) {
+        urlParams.putIfAbsent('Page', () => model.page.toString(),);
+      }
     }
     final Response response = await dio.get(
         url + model.url.toString(),

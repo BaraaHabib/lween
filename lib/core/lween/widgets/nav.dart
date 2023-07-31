@@ -2,7 +2,7 @@
 part of 'app_scaffold.dart';
 
 class AppNavWidget extends HookWidget{
-  const AppNavWidget({
+  AppNavWidget({
     required this.index,
     required this.setActiveIndex,
     required this.tabsRouter,
@@ -15,14 +15,14 @@ class AppNavWidget extends HookWidget{
 
   @override
   Widget build(BuildContext context) {
-    final controller = Controller.get(instance: NavController(),permanent: true,);
+    final controller = Controller.get(instance: NavController(),);
     return GNav(
         backgroundColor: Styles.navbarBackgroundColor(context,),
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         hoverColor: Styles.selectedNavItemBackgroundColor, // tab button hover color
         haptic: true, // haptic feedback
         tabBorderRadius: 20.rx,
-        tabActiveBorder: Border.all(color: Colors.black, width: 1), // tab button border
+        tabActiveBorder: Border.all(color: Colors.transparent, width: 1), // tab button border
         tabBorder: Border.all(color: Colors.transparent,), // tab button border
         // tabShadow: [BoxShadow(color: Colors.grey.withOpacity(0.5), blurRadius: 8)], // tab button shadow
         curve: Curves.easeIn, // tab animation curves

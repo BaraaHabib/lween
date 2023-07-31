@@ -16,8 +16,9 @@ class Styles {
   static const Color textButtonColor = Color(0xFF029BFA);
   static const Color radioButtonColor = Color(0xFF029BFA);
 
-  /// label inside cards (same in both modes)
-  static const labelCardColor = Color(0xFF110D32);
+  /// label inside cards
+  static const labelLightCardColor = Color(0xFF110D32);
+  static const labelDarkCardColor = Color(0xFFFFFFFF);
 
   /// text inside cards (same in both modes)
   static const displayCardColor = Color(0xFF89A3B4);
@@ -28,8 +29,15 @@ class Styles {
   static const headLineDarkFontColor = Color(0xFFFFFFFF);
 
   /// text field styles
-  static const textFieldColor = Color(0xFFFFFFFF);
+  static const textFieldLightColor = Color(0xFFFFFFFF);
+  static const textFieldDarkColor = Color(0xFF213560);
+
+  static const hintDarkColor = Color(0xFFFFFFFF);
+
+  static Color textFieldColor(BuildContext context) =>
+      AppStateModel.of(context).isLightTheme ? textFieldLightColor : textFieldDarkColor;
   static const textFieldLabelColor = Color(0xFF89A3B4);
+  static const textFieldFontColor = Color(0xFF110D32);
 
   static BorderRadius textFieldBorderRadius =
   BorderRadius.all(Radius.circular(textFieldBorderRadiusValue));
@@ -79,7 +87,11 @@ class Styles {
   static const buttonSecondaryColor2 = Color(0xFF0A7ADB);
 
   /// dialogs
-  static const dialogBackgroundColor = Color(0xFFF4F9F9);
+  static const dialogLightBackgroundColor = Color(0xFFF4F9F9);
+  static const dialogDarkBackgroundColor = Color(0xFF213560);
+
+  static Color dialogBackgroundColor(BuildContext context) =>
+   AppStateModel.of(context).isLightTheme ? dialogLightBackgroundColor : dialogDarkBackgroundColor;
 
   /// card
   static const lightCardColor = Color(0xFFFFFFFF);
@@ -106,6 +118,17 @@ class Styles {
 
   /// shadow color
   static const shadowColor =  Color.fromARGB(75,157,178,191,);
+
+
+  static const reservedSeatColor = Color(0xFFFF6969,);
+  static const availableSeatColor = Color(0xFF9DB2BF);
+  static const selectedSeatColor = Color(0xFF029BFA);
+
+
+  static const warningColor = Color(0xFFFCF2C3);
+
+
+
 }
 
 abstract class CommonSizes {

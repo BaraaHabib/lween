@@ -10,23 +10,31 @@ import 'package:lween/core/extended/numbers_ext.dart';
    final String? Function(DropdownItemDataModel? value)? validator;
    final String hintText;
    final String name;
+   final EdgeInsets? contentPadding;
+   final GlobalKey<FormBuilderFieldState>? dropDownKey;
 
    const AppDropDownField({Key? key,
+     this.dropDownKey,
      this.initValue,
      required this.onChange,
      required this.name,
-     required this.validator,
+     this.validator,
      required this.hintText,
-     required this.data}) : super(key: key);
+     this.contentPadding,
+     required this.data,
+   }) : super(key: key);
 
    @override
    Widget build(BuildContext context) {
      var selectedValue = useState<DropdownItemDataModel?>(initValue);
      DropdownItemDataModel? mInitValue;
+     // if(hintText.isNotEmpty && initValue == null && selectedValue.value == null){
+     //   mInitValue  = DropdownItemDataModel(name: hintText, id: -1);
+     // }
      useEffect(() {
        if (initValue != null) {
          for (var element in data) {
-           if (element.name == initValue?.name) {
+           if (element.id == initValue?.id) {
              mInitValue = element;
            }
          }
@@ -37,6 +45,7 @@ import 'package:lween/core/extended/numbers_ext.dart';
        name: name,
        borderRadius: BorderRadius.circular(28.0.rx),
        alignment: AlignmentDirectional.center,
+      key: dropDownKey,
        items: data.map((DropdownItemDataModel value) {
          return DropdownMenuItem<DropdownItemDataModel>(
            value: value,
@@ -49,7 +58,7 @@ import 'package:lween/core/extended/numbers_ext.dart';
                style: Theme
                    .of(context)
                    .textTheme
-                   .headlineMedium?.copyWith(
+                   .titleMedium?.copyWith(
                    fontSize: 14.spx,
                ),
              ),
@@ -57,25 +66,11 @@ import 'package:lween/core/extended/numbers_ext.dart';
          );
        }).toList(),
        onChanged: (newS) {
+         onChange(newS);
          // selectedValue.value = newS;
        },
        isExpanded: true,
        validator: validator,
-       // selectedItemBuilder:  selectedValue.value == null ? null :
-       //     (c) => [
-       //       Container(
-       //         color: Colors.red,
-       //         child: Text(
-       //         selectedValue.value!.name ?? '',
-       //      textAlign: TextAlign.center,
-       //      style: Theme.of(context).textTheme.titleSmall
-       //            ?.copyWith(
-       //            color: Colors.red,
-       //            fontSize: 8.spx,
-       //      ),
-       //   ),
-       //       ),
-       // ],
        icon: Padding(
          padding: EdgeInsetsDirectional.only(end: 5.wx),
          child: const Icon(
@@ -87,8 +82,8 @@ import 'package:lween/core/extended/numbers_ext.dart';
        initialValue: mInitValue,
        decoration: InputDecoration(
            filled: true,
-           // contentPadding: EdgeInsetsDirectional.only(start: 0.wx,end: 0,top: 0,),
-           hintText: hintText,
+           contentPadding: contentPadding,
+           // hintText: hintText,
        ),
        onSaved: (newValue) {
          selectedValue.value = newValue;

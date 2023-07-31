@@ -13,6 +13,8 @@ import 'package:lween/core/extended/numbers_ext.dart';
 import 'package:lween/core/lween/widgets/app_scaffold.dart';
 import 'package:lween/core/lween/widgets/followed_widget.dart';
 import 'package:lween/core/lween/widgets/trip_card_widget.dart';
+import 'package:lween/core/navigation/navigation_service.dart';
+import 'package:lween/core/routing/app_router.dart';
 import 'package:lween/core/widgets/app_image.dart';
 import 'package:lween/core/widgets/app_text_widget.dart';
 import 'package:lween/core/widgets/error_widget.dart';
@@ -36,13 +38,13 @@ class CompanyProfileScreen extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final tabsController = useTabController(initialLength: 2,initialIndex: 1);
+    final tabsController = useTabController(initialLength: 2,initialIndex: 0);
     final CompanyProfileScreenController controller =
     Controller.get(instance: CompanyProfileScreenController(companyEntity, tabsController),);
     final CompanyItemController companyController = Controller.get(key: controller.companyEntity.id.toString(),);
     return DefaultTabController(
       length: 2,
-      initialIndex: 1,
+      initialIndex: 0,
       child: AppScaffold(
         title: companyEntity.name ?? '',
         child: ListView(
@@ -61,8 +63,14 @@ class CompanyProfileScreen extends HookWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  TabItem(index: 0, text: S.current.trips,),
-                  TabItem(index: 1, text: S.current.description,),
+                  Expanded(
+                      flex:1,
+                      child: TabItem(index: 0, text: S.current.trips,),
+                  ),
+                  Expanded(
+                      flex:1,
+                      child: TabItem(index: 1, text: S.current.description,),
+                  ),
                 ],
               ),
             ),
@@ -143,8 +151,8 @@ class TabItem extends StatelessWidget {
           return GestureDetector(
           onTap: () => controller.changeTab(index),
           child: Container(
-            width: 100.wx,
-            padding: const EdgeInsets.symmetric(vertical: 8,horizontal: 15),
+            // width: 0.4.sw,
+            padding: const EdgeInsets.symmetric(vertical: 8,),
             decoration: BoxDecoration(
                 border: Border(
                     bottom: BorderSide(

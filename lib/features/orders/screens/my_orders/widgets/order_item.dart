@@ -30,15 +30,24 @@ class OrderItem extends HookWidget {
               children: [
                 SvgPicture.asset(Assets.ticketIconSVG),
                 3.hSpace,
+                AppTextWidget('#',
+                  style: context
+                      .textTheme
+                      .headlineLarge?.copyWith(
+                    color: Styles.tripsCountTextColor,
+                    height: 0.5,
+                  ),
+                ),
                 AppTextWidget(
-                  '${item.orderNumber ?? ' '}#',
+                  item.orderNumber ?? ' ',
                   style: context
                       .textTheme
                       .headlineLarge?.copyWith(
                       color: Styles.tripsCountTextColor,
-                      height: 0.5
+                      height: 0.5,
                   ),
                 ),
+
               ],
             ),
             10.vSpace,

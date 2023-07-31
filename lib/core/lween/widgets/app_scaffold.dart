@@ -17,6 +17,7 @@ import 'package:lween/core/extended/numbers_ext.dart';
 import 'package:lween/core/navigation/navigation_service.dart';
 import 'package:lween/core/resources/constants.dart';
 import 'package:lween/core/routing/app_router.dart';
+import 'package:lween/core/widgets/app_text_widget.dart';
 import 'package:lween/features/home/main_screen.dart';
 import 'package:lween/generated/l10n.dart';
 import 'package:provider/provider.dart';
@@ -34,10 +35,12 @@ class AppScaffold extends StatelessWidget {
     this.backgroundImage,
     this.onBackPressed,
     this.navTab = NavTab.home,
+    this.icon,
   }) : super(key: key);
 
   final String title;
   final String? backgroundImage;
+  final Widget? icon;
   final Widget child;
   final bool withBackButton;
   final bool centerTitle;
@@ -70,14 +73,30 @@ class AppScaffold extends StatelessWidget {
                     mainAxisAlignment: centerTitle
                         ? MainAxisAlignment.center
                         : MainAxisAlignment.start,
+
                     children: [
-                      Text(
-                        title,
-                        style: Theme
-                            .of(context)
-                            .textTheme
-                            .titleLarge,
+                      Directionality(
+                        textDirection: TextDirection.ltr,
+                        child: Row(
+                          // textDirection: TextDirection.ltr,
+                          children: [
+                            if(icon != null)
+                              Padding(
+                                padding: const EdgeInsetsDirectional.only(end: 5,bottom: 5),
+                                child: icon!,
+                              ),
+                            AppTextWidget(
+                              title,
+                              style: Theme
+                                  .of(context)
+                                  .textTheme
+                                  .titleLarge,
+                            ),
+
+                          ],
+                        ),
                       ),
+
                       if(withBackButton)
                         ...[
                           const Spacer(),

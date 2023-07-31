@@ -19,7 +19,7 @@ class CompanyBloc extends Bloc<CompanyEvent, CompanyState> {
       CompaniesRepository>();
 
   CompanyBloc() : super(CompanyInitial()) {
-    on<GetCompanyEvent>(_transportationCompanyEventCallback);
+    on<GetCompaniesEvent>(_transportationCompanyEventCallback);
     on<ToggleFollowEvent>(_toggleFollowEventCallback);
   }
 
@@ -27,10 +27,10 @@ class CompanyBloc extends Bloc<CompanyEvent, CompanyState> {
       sl<CompanyBloc>();
 
   Future<FutureOr<void>> _transportationCompanyEventCallback(
-      GetCompanyEvent event,
+      GetCompaniesEvent event,
       Emitter<CompanyState> emit) async {
     emit(CompaniesLoading());
-    var res = await repo.getEntities(event.params,);
+    var res = await repo.getCompanies(event.params,);
     emit(res.fold(
           (l) => CompaniesError(l.errorMessage,),
           (r) => CompaniesLoaded(items: r,),

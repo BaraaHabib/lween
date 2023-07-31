@@ -29,7 +29,7 @@ class OrderEntity extends ContentModel {
   String? orderPaymentMethodText;
   int? paymentProvider;
   String? paymentProviderText;
-  List<Seats>? seats;
+  List<ReservedSeatEntity>? seats;
   int? seatsCount;
   int? status;
   LiteCompany? transportationCompany;
@@ -58,7 +58,7 @@ class OrderEntity extends ContentModel {
         this.toCity,
       });
 
-  OrderEntity.fromJson(Map<String?, dynamic> json) {
+  OrderEntity.fromJson(json) {
     id = json['id'];
     orderNumber = json['orderNumber'];
     price = json['price'];
@@ -67,9 +67,9 @@ class OrderEntity extends ContentModel {
     paymentProvider = json['paymentProvider'];
     paymentProviderText = json['paymentProviderText'];
     if (json['seats'] != null) {
-      seats = <Seats>[];
+      seats = <ReservedSeatEntity>[];
       json['seats'].forEach((v) {
-        seats?.add(Seats.fromJson(v));
+        seats?.add(ReservedSeatEntity.fromJson(v));
       });
     }
     seatsCount = json['seatsCount'];
@@ -114,32 +114,62 @@ class OrderEntity extends ContentModel {
   List<Object?> get props => [id,];
 }
 
-class Seats extends ContentModel {
-  String? personName;
-  int? seatNumber;
+class SeatEntity extends ContentModel {
+  bool? isAvailable;
+  int? number;
   bool isDivider = false;
-  Seats({this.personName, this.seatNumber,this.isDivider = false,});
+  SeatEntity({this.number,this.isDivider = false,});
 
-  Seats.fromJson(Map<String?, dynamic>? json) {
+  SeatEntity.fromJson(Map<String?, dynamic>? json) {
     if(json == null){
       isDivider = true;
     }else{
-      personName = json['personName'];
-      seatNumber = json['seatNumber'];
+      number = json['number'];
+      isAvailable = json['isAvailable'] ?? false;
     }
 
   }
 
   Map<String?, dynamic> toJson() {
     final Map<String?, dynamic> data = <String?, dynamic>{};
-    data['personName'] = personName;
-    data['seatNumber'] = seatNumber;
+    data['number'] = number;
+    data['isAvailable'] = isAvailable;
     return data;
   }
 
   @override
-  fromJson(json) => Seats.fromJson(json);
+  fromJson(json) => SeatEntity.fromJson(json);
 
   @override
-  List<Object?> get props => [personName,seatNumber,];
+  List<Object?> get props => [number,isAvailable,];
+}
+
+class ReservedSeatEntity extends ContentModel {
+  String? personName;
+  int? seatNumber;
+
+  ReservedSeatEntity({this.seatNumber,});
+
+  ReservedSeatEntity.fromJson(Map<String?, dynamic>? json) {
+    if(json == null){
+      // isDivider = true;
+    }else{
+      seatNumber = json['seatNumber'];
+      personName = json['personName'];
+    }
+
+  }
+
+  Map<String?, dynamic> toJson() {
+    final Map<String?, dynamic> data = <String?, dynamic>{};
+    data['seatNumber'] = seatNumber;
+    data['personName'] = personName;
+    return data;
+  }
+
+  @override
+  fromJson(json) => SeatEntity.fromJson(json);
+
+  @override
+  List<Object?> get props => [seatNumber,seatNumber,];
 }

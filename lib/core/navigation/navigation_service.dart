@@ -46,6 +46,12 @@ class NavigationService {
     });
   }
 
+  // Future<dynamic> navigateToWithoutNav(PageRouteInfo route) async {
+  //   return await router.push(route, onFailure: (NavigationFailure f) {
+  //     AppLogger.log('${f.runtimeType} --- $f', LoggingType.error);
+  //   });
+  // }
+
   until(bool Function(Route) predicate) => router.popUntil(predicate);
 
   popUntilRoot() => router.popUntilRoot();

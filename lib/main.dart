@@ -33,6 +33,10 @@ Future<void> main() async {
   //   statusBarColor: appTheme == ThemeType.light  ? Styles.navbarLightBackgroundColor : Styles.navbarDarkBackgroundColor,
   //   statusBarIconBrightness: appTheme == ThemeType.light ? Brightness.dark :  Brightness.light ,
   // ));
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    // statusBarColor: isLightTheme  ? Styles.navbarLightBackgroundColor : Styles.navbarDarkBackgroundColor,
+    statusBarIconBrightness: appTheme == ThemeType.light ? Brightness.dark :  Brightness.light ,
+  ));
   await sl<LocaleProvider>().fetchLocale(prefs);
   Environment().initConfig();
   runApp(const Lween());

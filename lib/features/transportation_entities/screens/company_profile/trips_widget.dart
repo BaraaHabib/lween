@@ -39,14 +39,22 @@ class TripsWidgets extends StatelessWidget {
                   separatorBuilder: (ctx,index) => 12.hSpace,
                   itemBuilder: (ctx,index) {
                     final item = orders[index];
-                    return TripCard(
-                      type: TripCardType.future,
-                      subtitle: item.availableDaysText ?? '',
-                      date: item.travelTime ?? '',
-                      from: item.fromCity?.text ?? '',
-                      to: item.toCity?.text ?? '',
-                      imageUrl: Assets.tripOrderIcon,
-                      // imageUrl: item.?.imageUrl,
+                    return GestureDetector(
+                      onTap: (){
+                        NavigationService.of(context).navigateTo(OrderFromToScreenRoute(
+                          travelEntity: item,
+                          companyEntity: controller.companyEntity,
+                        ));
+                      },
+                      child: TripCard(
+                        type: TripCardType.future,
+                        subtitle: item.availableDaysText ?? '',
+                        date: item.travelTime ?? '',
+                        from: item.fromCity?.text ?? '',
+                        to: item.toCity?.text ?? '',
+                        imageUrl: Assets.tripOrderIcon(context,),
+                        // imageUrl: item.?.imageUrl,
+                      ),
                     );
                   },
                 ),

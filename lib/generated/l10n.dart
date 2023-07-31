@@ -619,6 +619,226 @@ class S {
       args: [],
     );
   }
+
+  /// `From`
+  String get source {
+    return Intl.message(
+      'From',
+      name: 'source',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `To`
+  String get destination {
+    return Intl.message(
+      'To',
+      name: 'destination',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Company name`
+  String get companyName {
+    return Intl.message(
+      'Company name',
+      name: 'companyName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No trips available for this date`
+  String get noTripsAvailableForThisDate {
+    return Intl.message(
+      'No trips available for this date',
+      name: 'noTripsAvailableForThisDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Choose seats`
+  String get chooseSeats {
+    return Intl.message(
+      'Choose seats',
+      name: 'chooseSeats',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You can view the vehicle, or reserve seats directly`
+  String get YouCanViewOrReserveSeats {
+    return Intl.message(
+      'You can view the vehicle, or reserve seats directly',
+      name: 'YouCanViewOrReserveSeats',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Preview vehicle`
+  String get previewVehicle {
+    return Intl.message(
+      'Preview vehicle',
+      name: 'previewVehicle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Selected seats`
+  String get selectedSeats {
+    return Intl.message(
+      'Selected seats',
+      name: 'selectedSeats',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `S.P`
+  String get currency {
+    return Intl.message(
+      'S.P',
+      name: 'currency',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Passengers details`
+  String get passsengersInfo {
+    return Intl.message(
+      'Passengers details',
+      name: 'passsengersInfo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter full names of the passengers in the reserved seats`
+  String get enterFullNameForSeats {
+    return Intl.message(
+      'Enter full names of the passengers in the reserved seats',
+      name: 'enterFullNameForSeats',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Voucher code`
+  String get voucherCode {
+    return Intl.message(
+      'Voucher code',
+      name: 'voucherCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `If you have a discount code, enter it to get a discount on the ticket price`
+  String get enterVoucherCode {
+    return Intl.message(
+      'If you have a discount code, enter it to get a discount on the ticket price',
+      name: 'enterVoucherCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Syriatel cash`
+  String get syriatelCash {
+    return Intl.message(
+      'Syriatel cash',
+      name: 'syriatelCash',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `If you choose online payment method, the payment process must be completed within 10 minutes at most.`
+  String get orderDeletionWarning {
+    return Intl.message(
+      'If you choose online payment method, the payment process must be completed within 10 minutes at most.',
+      name: 'orderDeletionWarning',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `MTN Cash`
+  String get cashMtn {
+    return Intl.message(
+      'MTN Cash',
+      name: 'cashMtn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bemo Bank`
+  String get bemoBank {
+    return Intl.message(
+      'Bemo Bank',
+      name: 'bemoBank',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fatora`
+  String get fatora {
+    return Intl.message(
+      'Fatora',
+      name: 'fatora',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pay at center`
+  String get payAtCenter {
+    return Intl.message(
+      'Pay at center',
+      name: 'payAtCenter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Choose payment method`
+  String get choosePaymentMethod {
+    return Intl.message(
+      'Choose payment method',
+      name: 'choosePaymentMethod',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `E-Cash`
+  String get eCash {
+    return Intl.message(
+      'E-Cash',
+      name: 'eCash',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

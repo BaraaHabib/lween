@@ -4,8 +4,8 @@ abstract class CompanyEvent extends Equatable {
   const CompanyEvent();
 }
 
-class GetCompanyEvent extends CompanyEvent {
-  const GetCompanyEvent({
+class GetCompaniesEvent extends CompanyEvent {
+  const GetCompaniesEvent({
     required this.params,
   });
 

@@ -38,7 +38,6 @@ class CompaniesScreen extends HookWidget {
           builder: (context, state) {
             return Builder(
                 builder: (context) {
-
                   if (state is CompaniesLoading) {
                     return  GridView.builder(
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -69,7 +68,7 @@ class CompaniesScreen extends HookWidget {
                               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 2,
                                 // childAspectRatio: 0.7.rx,
-                                mainAxisExtent: 205.hx,
+                                mainAxisExtent: 210.hx,
                               ),
                               padding: EdgeInsets.only(top: 15.hx),
                               itemCount:  state.items.items?.length ?? 0,

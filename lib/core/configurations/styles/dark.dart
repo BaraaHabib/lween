@@ -11,7 +11,7 @@ final darkTheme = ThemeData(
   primaryColor: Styles.colorPrimary,
   splashColor: Styles.colorPrimary,
   inputDecorationTheme: InputDecorationTheme(
-    fillColor: Styles.textFieldColor,
+    fillColor: Styles.textFieldDarkColor,
     filled: true,
     border: textDarkFieldBorder,
     enabledBorder: textDarkFieldBorder,
@@ -26,6 +26,7 @@ final darkTheme = ThemeData(
     floatingLabelStyle: const TextStyle(
       color: Styles.textFieldLabelColor,
     ),
+      hintStyle: const TextStyle(color: Styles.hintDarkColor)
   ),
     radioTheme: RadioThemeData(
       fillColor: MaterialStateProperty.all(Styles.radioButtonColor),
@@ -66,15 +67,15 @@ final darkTheme = ThemeData(
     ),
     labelLarge: TextStyle(
       fontSize: 15.spx,
-      color: Styles.labelCardColor,
+      color: Styles.labelDarkCardColor,
     ),
     labelMedium: TextStyle(
       fontSize: 13.spx,
-      color: Styles.labelCardColor,
+      color: Styles.labelDarkCardColor,
     ),
     labelSmall: TextStyle(
       fontSize: 11.spx,
-      color: Styles.labelCardColor,
+      color: Styles.labelDarkCardColor,
     ),
     displayLarge: TextStyle(
       fontSize: 14.spx,

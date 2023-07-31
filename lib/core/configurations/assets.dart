@@ -50,7 +50,10 @@ class Assets {
   static const myProfileNavIcon = 'assets/nav/SVG/user.svg';
 
   /// orders
-  static const tripOrderIcon = 'assets/orders/SVG/trip.svg';
+  static String tripOrderIcon(BuildContext context)
+  => AppStateModel.of(context).isLightTheme ? tripOrderIconLight : tripOrderDarkIcon;
+  static const tripOrderIconLight = 'assets/orders/SVG/trip.svg';
+  static const tripOrderDarkIcon = 'assets/orders/PNG/trip-dark.png';
   static const orderDateIcon = 'assets/orders/SVG/date.svg';
 
   static Widget get orderDateIconWidget => SvgPicture.asset(orderDateIcon);
@@ -69,9 +72,9 @@ class Assets {
       AppStateModel.of(context).isLightTheme ? logInLightBackgroundPNG : logInDarkBackgroundPNG;
 
   static const logInLightBackgroundPNG = 'assets/onboarding/login_background.jpg';
-  static const logInDarkBackgroundPNG = 'assets/onboarding/login_dark_background.png';
+  static const logInDarkBackgroundPNG = 'assets/dark_background.png';
   static const backgroundPNG = 'assets/background.png';
-  static const darkBackgroundPNG = 'assets/onboarding/login_dark_background.png';
+  static const darkBackgroundPNG = 'assets/dark_background.png';
 
   static const arrowBack = 'assets/icons/SVG/ic_back.svg';
 
@@ -97,6 +100,34 @@ class Assets {
 
 
   /// Orders
-  static const bookMapLocation = 'assets/orders/PNG/map-location.png';
+  static String bookMapLocation(BuildContext context) => AppStateModel.of(context).isLightTheme ?
+  bookMapLocationLight : bookMapLocationDark;
+  static const bookMapLocationDark = 'assets/orders/PNG/map-location-dark.jpg';
+  static const bookMapLocationLight = 'assets/orders/PNG/map-location.png';
+  static const seatSVG = 'assets/orders/SVG/seat.svg';
+  static String bookedSeat(BuildContext context) =>
+      AppStateModel.of(context).isLightTheme ?
+      bookedSeatDarkSVG :  bookedSeatLightPng;
+  static const bookedSeatDarkSVG = 'assets/orders/SVG/seat-booked.svg';
+  static const bookedSeatLightPng = 'assets/orders/PNG/seat-booked-dark.png';
+  static const eyeSVG = 'assets/icons/SVG/ic_eye.svg';
+  static const priceTagSVG = 'assets/orders/SVG/price-tag.svg';
+  static const reservedSeatPNG = 'assets/orders/PNG/ic_reserved_seat.png';
+
+  /// payment
+  static const mtnPNG = 'assets/payment/mtn.png';
+  static const syriatelPNG = 'assets/payment/syriatel.png';
+  static const bemoPNG = 'assets/payment/bemo.png';
+  static const cashPNG = 'assets/payment/cash.png';
+  static const fatoraPNG = 'assets/payment/fatora_logo.png';
+  static const fatoraDarkPNG = 'assets/payment/fatora_logo_dark.png';
+  static String eCashPNG(BuildContext context) => AppStateModel.of(context).isLightTheme ?
+  eCashLightPNG : eCashDarkPNG;
+  static const eCashDarkPNG = 'assets/payment/e_cash_logo_dark.png';
+  static const eCashLightPNG = 'assets/payment/e_cash_logo_light.png';
+  static String fatoraLogoPNG(BuildContext context) =>
+      AppStateModel.of(context).isLightTheme ? fatoraPNG : fatoraDarkPNG;
+  static const warningPNG = 'assets/payment/warning.png';
+
 
 }

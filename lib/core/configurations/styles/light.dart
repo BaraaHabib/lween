@@ -11,7 +11,7 @@ final lightTheme = ThemeData(
   primaryColor: Styles.colorPrimary,
   splashColor: Styles.colorPrimary,
   inputDecorationTheme: InputDecorationTheme(
-    fillColor: Styles.textFieldColor,
+    fillColor: Styles.textFieldLightColor,
     filled: true,
     border: textFieldBorder,
     enabledBorder: textFieldBorder,
@@ -26,6 +26,7 @@ final lightTheme = ThemeData(
     floatingLabelStyle: const TextStyle(
       color: Styles.textFieldLabelColor,
     ),
+    hintStyle: TextStyle()
   ),
   radioTheme: RadioThemeData(
     fillColor: MaterialStateProperty.all(Styles.radioButtonColor),
@@ -66,15 +67,15 @@ final lightTheme = ThemeData(
     ),
     labelLarge: TextStyle(
       fontSize: 15.spx,
-      color: Styles.labelCardColor,
+      color: Styles.labelLightCardColor,
     ),
     labelMedium: TextStyle(
       fontSize: 13.spx,
-      color: Styles.labelCardColor,
+      color: Styles.labelLightCardColor,
     ),
     labelSmall: TextStyle(
       fontSize: 11.spx,
-      color: Styles.labelCardColor,
+      color: Styles.labelLightCardColor,
     ),
     displayLarge: TextStyle(
       fontSize: 14.spx,

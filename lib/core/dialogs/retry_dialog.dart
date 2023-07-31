@@ -15,6 +15,7 @@ class RetryDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       surfaceTintColor: Colors.transparent,
+      backgroundColor: Styles.dialogBackgroundColor(context),
       child: Container(
         padding: EdgeInsets.symmetric(
           vertical: 15.hx,

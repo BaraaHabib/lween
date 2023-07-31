@@ -11,6 +11,8 @@ import 'package:lween/features/auth/repo/account_repository.dart';
 import 'package:lween/features/home/bloc/home_bloc.dart';
 import 'package:lween/features/home/repo/account_repository.dart';
 import 'package:lween/features/home/screens/home/home_screen_controller.dart';
+import 'package:lween/features/transportation_entities/bloc/transportation_entities_bloc.dart';
+import 'package:lween/features/transportation_entities/params/transportation_entities_params.dart';
 import 'package:provider/provider.dart';
 import 'package:lween/core/app_state/appstate.dart';
 import 'package:lween/core/locale/locale_provider.dart';
@@ -74,6 +76,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
     context,
   ) async {
     HomeScreenController.intiHomeScreen();
+    CompanyBloc.instance.add(GetCompaniesEvent(params: GetCompaniesParams()));
     final storage = Lween.storage; // sl<AppStorage>();
     final locale = Provider.of<LocaleProvider>(
       context,

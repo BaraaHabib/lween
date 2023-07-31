@@ -21,7 +21,7 @@ class CompaniesController extends Controller{
 
   getCompanies([int page = 0]){
     CompanyBloc.instance.add(
-        GetCompanyEvent(
+        GetCompaniesEvent(
             params: GetCompaniesParams(
               page: page,
             ),

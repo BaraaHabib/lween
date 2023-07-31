@@ -25,6 +25,34 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    CompaniesScreenRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const CompaniesScreen(),
+      );
+    },
+    CompaniesRoutesScreenRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const CompaniesRoutesScreen(),
+      );
+    },
+    CompanyProfileScreenRoute.name: (routeData) {
+      final args = routeData.argsAs<CompanyProfileScreenRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: CompanyProfileScreen(
+          companyEntity: args.companyEntity,
+          key: args.key,
+        ),
+      );
+    },
+    HomeScreenRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const HomeScreen(),
+      );
+    },
     MainScreenRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -60,12 +88,54 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const RegisterScreen(),
       );
     },
+    AccountScreenRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const AccountScreen(),
+      );
+    },
+    MyTicketsScreenRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const MyTicketsScreen(),
+      );
+    },
+    NotificationsScreenRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const NotificationsScreen(),
+      );
+    },
     SplashScreenRoute.name: (routeData) {
       final args = routeData.argsAs<SplashScreenRouteArgs>(
           orElse: () => const SplashScreenRouteArgs());
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: SplashScreen(key: args.key),
+      );
+    },
+    MyOrdersScreenRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const MyOrdersScreen(),
+      );
+    },
+    OrderSeatsScreenRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const OrderSeatsScreen(),
+      );
+    },
+    OrderFromToScreenRoute.name: (routeData) {
+      final args = routeData.argsAs<OrderFromToScreenRouteArgs>(
+          orElse: () => const OrderFromToScreenRouteArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: OrderFromToScreen(
+          travelEntity: args.travelEntity,
+          companyEntity: args.companyEntity ,
+          key: args.key,
+        ),
       );
     },
     FullScreenLoaderRoute.name: (routeData) {
@@ -84,56 +154,16 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
-    HomeScreenRoute.name: (routeData) {
+    OrderPersonInfoScreenRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const HomeScreen(),
+        child: const OrderPersonInfoScreen(),
       );
     },
-    MyTicketsScreenRoute.name: (routeData) {
+    OrderPaymentMethodScreenRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const MyTicketsScreen(),
-      );
-    },
-    AccountScreenRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const AccountScreen(),
-      );
-    },
-    NotificationsScreenRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const NotificationsScreen(),
-      );
-    },
-    MyOrdersScreenRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const MyOrdersScreen(),
-      );
-    },
-    CompanyProfileScreenRoute.name: (routeData) {
-      final args = routeData.argsAs<CompanyProfileScreenRouteArgs>();
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: CompanyProfileScreen(
-          companyEntity: args.companyEntity,
-          key: args.key,
-        ),
-      );
-    },
-    CompaniesScreenRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const CompaniesScreen(),
-      );
-    },
-    CompaniesRoutesScreenRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const CompaniesRoutesScreen(),
+        child: const OrderPaymentMethodScreen(),
       );
     },
   };
@@ -175,6 +205,87 @@ class AppWebViewRouteArgs {
   String toString() {
     return 'AppWebViewRouteArgs{key: $key, url: $url}';
   }
+}
+
+/// generated route for
+/// [CompaniesScreen]
+class CompaniesScreenRoute extends PageRouteInfo<void> {
+  const CompaniesScreenRoute({List<PageRouteInfo>? children})
+      : super(
+          CompaniesScreenRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'CompaniesScreenRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [CompaniesRoutesScreen]
+class CompaniesRoutesScreenRoute extends PageRouteInfo<void> {
+  const CompaniesRoutesScreenRoute({List<PageRouteInfo>? children})
+      : super(
+          CompaniesRoutesScreenRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'CompaniesRoutesScreenRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [CompanyProfileScreen]
+class CompanyProfileScreenRoute
+    extends PageRouteInfo<CompanyProfileScreenRouteArgs> {
+  CompanyProfileScreenRoute({
+    required CompanyEntity companyEntity,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          CompanyProfileScreenRoute.name,
+          args: CompanyProfileScreenRouteArgs(
+            companyEntity: companyEntity,
+            key: key,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'CompanyProfileScreenRoute';
+
+  static const PageInfo<CompanyProfileScreenRouteArgs> page =
+      PageInfo<CompanyProfileScreenRouteArgs>(name);
+}
+
+class CompanyProfileScreenRouteArgs {
+  const CompanyProfileScreenRouteArgs({
+    required this.companyEntity,
+    this.key,
+  });
+
+  final CompanyEntity companyEntity;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'CompanyProfileScreenRouteArgs{companyEntity: $companyEntity, key: $key}';
+  }
+}
+
+/// generated route for
+/// [HomeScreen]
+class HomeScreenRoute extends PageRouteInfo<void> {
+  const HomeScreenRoute({List<PageRouteInfo>? children})
+      : super(
+          HomeScreenRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'HomeScreenRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -277,6 +388,48 @@ class RegisterScreenRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [AccountScreen]
+class AccountScreenRoute extends PageRouteInfo<void> {
+  const AccountScreenRoute({List<PageRouteInfo>? children})
+      : super(
+          AccountScreenRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'AccountScreenRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [MyTicketsScreen]
+class MyTicketsScreenRoute extends PageRouteInfo<void> {
+  const MyTicketsScreenRoute({List<PageRouteInfo>? children})
+      : super(
+          MyTicketsScreenRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'MyTicketsScreenRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [NotificationsScreen]
+class NotificationsScreenRoute extends PageRouteInfo<void> {
+  const NotificationsScreenRoute({List<PageRouteInfo>? children})
+      : super(
+          NotificationsScreenRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'NotificationsScreenRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [SplashScreen]
 class SplashScreenRoute extends PageRouteInfo<SplashScreenRouteArgs> {
   SplashScreenRoute({
@@ -302,6 +455,77 @@ class SplashScreenRouteArgs {
   @override
   String toString() {
     return 'SplashScreenRouteArgs{key: $key}';
+  }
+}
+
+/// generated route for
+/// [MyOrdersScreen]
+class MyOrdersScreenRoute extends PageRouteInfo<void> {
+  const MyOrdersScreenRoute({List<PageRouteInfo>? children})
+      : super(
+          MyOrdersScreenRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'MyOrdersScreenRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [OrderSeatsScreen]
+class OrderSeatsScreenRoute extends PageRouteInfo<void> {
+  const OrderSeatsScreenRoute({List<PageRouteInfo>? children})
+      : super(
+          OrderSeatsScreenRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'OrderSeatsScreenRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [OrderFromToScreen]
+class OrderFromToScreenRoute extends PageRouteInfo<OrderFromToScreenRouteArgs> {
+  OrderFromToScreenRoute({
+    TravelEntity? travelEntity,
+    CompanyEntity? companyEntity,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          OrderFromToScreenRoute.name,
+          args: OrderFromToScreenRouteArgs(
+            travelEntity: travelEntity,
+            companyEntity: companyEntity,
+            key: key,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'OrderFromToScreenRoute';
+
+  static const PageInfo<OrderFromToScreenRouteArgs> page =
+      PageInfo<OrderFromToScreenRouteArgs>(name);
+}
+
+class OrderFromToScreenRouteArgs {
+  const OrderFromToScreenRouteArgs({
+    this.travelEntity,
+    this.companyEntity,
+    this.key,
+  });
+
+  final TravelEntity? travelEntity;
+
+  final CompanyEntity? companyEntity;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'OrderFromToScreenRouteArgs{travelEntity: $travelEntity, companyEntity: $companyEntity, key: $key}';
   }
 }
 
@@ -358,138 +582,29 @@ class MyHomePageRouteArgs {
 }
 
 /// generated route for
-/// [HomeScreen]
-class HomeScreenRoute extends PageRouteInfo<void> {
-  const HomeScreenRoute({List<PageRouteInfo>? children})
+/// [OrderPersonInfoScreen]
+class OrderPersonInfoScreenRoute extends PageRouteInfo<void> {
+  const OrderPersonInfoScreenRoute({List<PageRouteInfo>? children})
       : super(
-          HomeScreenRoute.name,
+          OrderPersonInfoScreenRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'HomeScreenRoute';
+  static const String name = 'OrderPersonInfoScreenRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
-/// [MyTicketsScreen]
-class MyTicketsScreenRoute extends PageRouteInfo<void> {
-  const MyTicketsScreenRoute({List<PageRouteInfo>? children})
+/// [OrderPaymentMethodScreen]
+class OrderPaymentMethodScreenRoute extends PageRouteInfo<void> {
+  const OrderPaymentMethodScreenRoute({List<PageRouteInfo>? children})
       : super(
-          MyTicketsScreenRoute.name,
+          OrderPaymentMethodScreenRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'MyTicketsScreenRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [AccountScreen]
-class AccountScreenRoute extends PageRouteInfo<void> {
-  const AccountScreenRoute({List<PageRouteInfo>? children})
-      : super(
-          AccountScreenRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'AccountScreenRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [NotificationsScreen]
-class NotificationsScreenRoute extends PageRouteInfo<void> {
-  const NotificationsScreenRoute({List<PageRouteInfo>? children})
-      : super(
-          NotificationsScreenRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'NotificationsScreenRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [MyOrdersScreen]
-class MyOrdersScreenRoute extends PageRouteInfo<void> {
-  const MyOrdersScreenRoute({List<PageRouteInfo>? children})
-      : super(
-          MyOrdersScreenRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'MyOrdersScreenRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [CompanyProfileScreen]
-class CompanyProfileScreenRoute
-    extends PageRouteInfo<CompanyProfileScreenRouteArgs> {
-  CompanyProfileScreenRoute({
-    required CompanyEntity companyEntity,
-    Key? key,
-    List<PageRouteInfo>? children,
-  }) : super(
-          CompanyProfileScreenRoute.name,
-          args: CompanyProfileScreenRouteArgs(
-            companyEntity: companyEntity,
-            key: key,
-          ),
-          initialChildren: children,
-        );
-
-  static const String name = 'CompanyProfileScreenRoute';
-
-  static const PageInfo<CompanyProfileScreenRouteArgs> page =
-      PageInfo<CompanyProfileScreenRouteArgs>(name);
-}
-
-class CompanyProfileScreenRouteArgs {
-  const CompanyProfileScreenRouteArgs({
-    required this.companyEntity,
-    this.key,
-  });
-
-  final CompanyEntity companyEntity;
-
-  final Key? key;
-
-  @override
-  String toString() {
-    return 'CompanyProfileScreenRouteArgs{companyEntity: $companyEntity, key: $key}';
-  }
-}
-
-/// generated route for
-/// [CompaniesScreen]
-class CompaniesScreenRoute extends PageRouteInfo<void> {
-  const CompaniesScreenRoute({List<PageRouteInfo>? children})
-      : super(
-          CompaniesScreenRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'CompaniesScreenRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [CompaniesRoutesScreen]
-class CompaniesRoutesScreenRoute extends PageRouteInfo<void> {
-  const CompaniesRoutesScreenRoute({List<PageRouteInfo>? children})
-      : super(
-          CompaniesRoutesScreenRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'CompaniesRoutesScreenRoute';
+  static const String name = 'OrderPaymentMethodScreenRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

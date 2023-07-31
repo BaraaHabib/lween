@@ -4,6 +4,9 @@ import 'package:lween/core/features/entities/entity.dart';
 import 'package:lween/core/features/entities/error_entity.dart';
 import 'package:lween/features/orders/models/daily_travels.dart';
 import 'package:lween/features/orders/models/orders.dart';
+import 'package:lween/features/orders/models/voucher.dart';
+import 'package:lween/features/orders/params/check_voucher_params.dart';
+import 'package:lween/features/orders/params/create_order_params.dart';
 import 'package:lween/features/orders/params/daily_travel_params.dart';
 import 'package:lween/features/orders/params/my_orders_params.dart';
 import 'package:lween/features/orders/repo/iorders_repository.dart';
@@ -15,24 +18,54 @@ class OrdersRepository extends IOrdersRepository {
   OrdersRepository(this.remoteDataSource);
 
   @override
-  Future<Either<ErrorEntity, OrdersEntity>> getMyOrders([MyOrdersParams? model]) async {
+  Future<Either<ErrorEntity, OrdersEntity>> getMyOrders(
+      [MyOrdersParams? model]) async {
     try {
-      var res = await remoteDataSource.getRemoteData(model ?? MyOrdersParams(),);
-      final data = Entity<OrdersEntity>.fromJson(res,parser: OrdersEntity.fromJson,);
-      return Right(data.content!);
-    } on AppException catch (e) {
-      return Left(ErrorEntity.fromAppException(e));
-    }
-  }
-  @override
-  Future<Either<ErrorEntity, TravelsEntity>> getTravels([TravelParams? model]) async {
-    try {
-      var res = await remoteDataSource.getRemoteData(model ?? TravelParams(),);
-      final data = Entity<TravelsEntity>.fromJson(res,parser: TravelsEntity.fromJson,);
+      var res = await remoteDataSource.getRemoteData(
+        model ?? MyOrdersParams(),);
+      final data = Entity<OrdersEntity>.fromJson(
+        res, parser: OrdersEntity.fromJson,);
       return Right(data.content!);
     } on AppException catch (e) {
       return Left(ErrorEntity.fromAppException(e));
     }
   }
 
+  @override
+  Future<Either<ErrorEntity, TravelsEntity>> getTravels(
+      [TravelParams? model]) async {
+    try {
+      var res = await remoteDataSource.getRemoteData(model ?? TravelParams(),);
+      final data = Entity<TravelsEntity>.fromJson(
+        res, parser: TravelsEntity.fromJson,);
+      return Right(data.content!);
+    } on AppException catch (e) {
+      return Left(ErrorEntity.fromAppException(e));
+    }
+  }
+
+  @override
+  Future<Either<ErrorEntity, OrderEntity>> createOrder(
+      CreateOrderParams model) async {
+    try {
+      var res = await remoteDataSource.getRemoteData(model,);
+      final data = Entity<OrderEntity>.fromJson(
+        res, parser: OrderEntity.fromJson,);
+      return Right(data.content!);
+    } on AppException catch (e) {
+      return Left(ErrorEntity.fromAppException(e));
+    }
+  }
+  @override
+  Future<Either<ErrorEntity, VoucherEntity>> checkVoucher(
+      CheckVoucherParams model) async {
+    try {
+      var res = await remoteDataSource.getRemoteData(model,);
+      final data = Entity<VoucherEntity>.fromJson(
+        res, parser: VoucherEntity.fromJson,);
+      return Right(data.content!);
+    } on AppException catch (e) {
+      return Left(ErrorEntity.fromAppException(e));
+    }
+  }
 }

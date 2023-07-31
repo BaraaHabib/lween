@@ -24,26 +24,43 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "YouCanViewOrReserveSeats": MessageLookupByLibrary.simpleMessage(
+            "You can view the vehicle, or reserve seats directly"),
+        "bemoBank": MessageLookupByLibrary.simpleMessage("Bemo Bank"),
         "bookATrip": MessageLookupByLibrary.simpleMessage("Book a trip"),
+        "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+        "cashMtn": MessageLookupByLibrary.simpleMessage("MTN Cash"),
         "centersCount": MessageLookupByLibrary.simpleMessage("Centers count"),
+        "choosePaymentMethod":
+            MessageLookupByLibrary.simpleMessage("Choose payment method"),
+        "chooseSeats": MessageLookupByLibrary.simpleMessage("Choose seats"),
         "city": MessageLookupByLibrary.simpleMessage("City"),
         "codeWasResentToYourNumber": MessageLookupByLibrary.simpleMessage(
             "Code was resent to your number"),
         "company": MessageLookupByLibrary.simpleMessage("Company"),
         "companyInfo":
             MessageLookupByLibrary.simpleMessage("Company description"),
+        "companyName": MessageLookupByLibrary.simpleMessage("Company name"),
         "confirmAccount":
             MessageLookupByLibrary.simpleMessage("Confirm Account"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("Confirm password"),
         "country": MessageLookupByLibrary.simpleMessage("Country"),
+        "currency": MessageLookupByLibrary.simpleMessage("S.P"),
         "date": MessageLookupByLibrary.simpleMessage("Date"),
         "description": MessageLookupByLibrary.simpleMessage("Description"),
+        "destination": MessageLookupByLibrary.simpleMessage("To"),
+        "eCash": MessageLookupByLibrary.simpleMessage("E-Cash"),
         "enter": MessageLookupByLibrary.simpleMessage("Enter"),
+        "enterFullNameForSeats": MessageLookupByLibrary.simpleMessage(
+            "Enter full names of the passengers in the reserved seats"),
         "enterPhoneToSendCode": MessageLookupByLibrary.simpleMessage(
             "Enter the phone number you used to create the account. We will send you a verification code to reset your password"),
         "enterVerificationCode":
             MessageLookupByLibrary.simpleMessage("Enter verification code"),
+        "enterVoucherCode": MessageLookupByLibrary.simpleMessage(
+            "If you have a discount code, enter it to get a discount on the ticket price"),
+        "fatora": MessageLookupByLibrary.simpleMessage("Fatora"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Forgot password"),
         "from": MessageLookupByLibrary.simpleMessage("from"),
@@ -61,13 +78,20 @@ class MessageLookup extends MessageLookupByLibrary {
         "no": MessageLookupByLibrary.simpleMessage("No"),
         "noInternetConnection":
             MessageLookupByLibrary.simpleMessage("No internet connection"),
+        "noTripsAvailableForThisDate": MessageLookupByLibrary.simpleMessage(
+            "No trips available for this date"),
         "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),
+        "orderDeletionWarning": MessageLookupByLibrary.simpleMessage(
+            "If you choose online payment method, the payment process must be completed within 10 minutes at most."),
+        "passsengersInfo":
+            MessageLookupByLibrary.simpleMessage("Passengers details"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "passwordUpdatedSuccessfully": MessageLookupByLibrary.simpleMessage(
             "Password updated successfully"),
         "passwordsDoesNotMatch":
             MessageLookupByLibrary.simpleMessage("Passwords does not match"),
+        "payAtCenter": MessageLookupByLibrary.simpleMessage("Pay at center"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone number"),
         "phoneShouldStartWith09":
             MessageLookupByLibrary.simpleMessage("Phone should start with 09"),
@@ -77,6 +101,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Please select city"),
         "pleaseSelectCountry":
             MessageLookupByLibrary.simpleMessage("Please select country"),
+        "previewVehicle":
+            MessageLookupByLibrary.simpleMessage("Preview vehicle"),
         "previousTrips": MessageLookupByLibrary.simpleMessage("Previous trips"),
         "resendCode": MessageLookupByLibrary.simpleMessage("Resend code"),
         "reservations": MessageLookupByLibrary.simpleMessage("Reservations"),
@@ -85,9 +111,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "seatsCount": MessageLookupByLibrary.simpleMessage("Seats count"),
         "selectPreferredLanguage":
             MessageLookupByLibrary.simpleMessage("Select preferred language"),
+        "selectedSeats": MessageLookupByLibrary.simpleMessage("Selected seats"),
         "send": MessageLookupByLibrary.simpleMessage("Send"),
         "signup": MessageLookupByLibrary.simpleMessage("Signup"),
         "sorryThereAreNoEntityYet": m0,
+        "source": MessageLookupByLibrary.simpleMessage("From"),
+        "syriatelCash": MessageLookupByLibrary.simpleMessage("Syriatel cash"),
         "tickets": MessageLookupByLibrary.simpleMessage("Tickets"),
         "to": MessageLookupByLibrary.simpleMessage("to"),
         "transportationEntities":
@@ -98,6 +127,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "verificationCode":
             MessageLookupByLibrary.simpleMessage("Verification code"),
         "verify": MessageLookupByLibrary.simpleMessage("Verify"),
+        "voucherCode": MessageLookupByLibrary.simpleMessage("Voucher code"),
         "welcomeToLweenApp":
             MessageLookupByLibrary.simpleMessage("Welcome to Lween app"),
         "yes": MessageLookupByLibrary.simpleMessage("Yes")

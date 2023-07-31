@@ -30,7 +30,7 @@ class GeneralDialog extends StatelessWidget {
     return Dialog(
       surfaceTintColor: Colors.transparent,
       insetPadding: padding,
-      backgroundColor: Styles.dialogBackgroundColor,
+      backgroundColor: Styles.dialogBackgroundColor(context),
       child: IntrinsicHeight(
         child: Stack(
           children: [
@@ -54,9 +54,6 @@ class GeneralDialog extends StatelessWidget {
                     style:titleStyle?? Theme.of(context)
                         .textTheme
                         .titleLarge
-                        ?.copyWith(
-                      color: Styles.lightFontColor,
-                    )
                   ),
                   8.vSpace,
                   content,

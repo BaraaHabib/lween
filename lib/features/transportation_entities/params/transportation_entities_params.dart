@@ -6,8 +6,11 @@ import '../../../../../../core/configurations/app_configuration.dart';
 
 class GetCompaniesParams extends ParamsModel<GetCompaniesBody> {
   GetCompaniesParams(
-      {int page = 0,})
+      {
+        int page = 0,
+      })
       : super(body: GetCompaniesBody(),page: page,);
+
 
   @override
   Map<String, String> get additionalHeaders => {};
@@ -19,7 +22,8 @@ class GetCompaniesParams extends ParamsModel<GetCompaniesBody> {
   String? get url => ApiConstants.transportationEntities;
 
   @override
-  Map<String, String> get urlParams => {};
+  Map<String, String> get urlParams => {
+  };
 
   @override
   List<Object?> get props => [url, urlParams, requestType, body];

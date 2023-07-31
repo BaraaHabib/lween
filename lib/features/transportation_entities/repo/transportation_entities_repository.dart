@@ -14,11 +14,16 @@ class CompaniesRepository extends ICompaniesRepository {
 
   CompaniesRepository(this.remoteDataSource);
 
+  
+  /// saved companies
+  static List<CompanyEntity> companies = <CompanyEntity>[];
+  
   @override
-  Future<Either<ErrorEntity, CompaniesEntity>> getEntities(GetCompaniesParams model) async {
+  Future<Either<ErrorEntity, CompaniesEntity>> getCompanies(GetCompaniesParams model) async {
     try {
       var res = await remoteDataSource.getRemoteData(model,);
       final data = Entity<CompaniesEntity>.fromJson(res,parser: CompaniesEntity.fromJson,);
+      companies = data.content?.items ?? [];
       return Right(data.content!);
     } on AppException catch (e) {
       return Left(ErrorEntity.fromAppException(e));

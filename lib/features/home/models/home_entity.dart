@@ -1,4 +1,5 @@
 import 'package:lween/core/features/entities/entity.dart';
+import 'package:lween/features/transportation_entities/models/transportation_entities.dart';
 
 class HomeEntity extends ContentModel {
   HomeEntity({
@@ -6,11 +7,11 @@ class HomeEntity extends ContentModel {
     required this.topCompanies,
   });
   late final List<AdvertisementEntity> advertisements;
-  late final List<LiteCompany> topCompanies;
+  late final List<CompanyEntity> topCompanies;
 
   HomeEntity.fromJson(json){
     advertisements = List.from(json['advertisements']).map((e)=>AdvertisementEntity.fromJson(e)).toList();
-    topCompanies = List.from(json['topTransportationEntities']).map((e)=>LiteCompany.fromJson(e)).toList();
+    topCompanies = List.from(json['topTransportationEntities']).map((e)=>CompanyEntity.fromJson(e)).toList();
   }
 
   Map<String, dynamic> toJson() {

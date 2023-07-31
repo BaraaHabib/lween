@@ -27,7 +27,7 @@ class TravelEntity extends ContentModel {
   String? id;
   bool? isVip;
   int? seatsCount;
-  List<List<Seats>>? seats;
+  List<List<SeatEntity>>? seats;
   num? price;
   String? priceText;
   String? travelDuration;
@@ -40,7 +40,7 @@ class TravelEntity extends ContentModel {
   String? travelMethodText;
   String? travelTime;
   String? availableDaysText;
-  CompanyEntity? transportationEntity;
+  LiteCompanyEntity? transportationEntity;
   List<String>? images;
 
 
@@ -73,8 +73,8 @@ class TravelEntity extends ContentModel {
       availableDaysText: json['availableDaysText'],
       isVip: json['isVip'],
       seatsCount: json['seatsCount'],
-      seats: List<List<Seats>>.from(json['seats'].map((x) =>
-      List<Seats>.from(x.map((x) => Seats.fromJson(x))))),
+      seats: List<List<SeatEntity>>.from(json['seats'].map((x) =>
+      List<SeatEntity>.from(x.map((x) => SeatEntity.fromJson(x))))),
       price: json['price'],
       priceText: json['priceText'],
       travelDuration: json['travelDuration'],
@@ -87,7 +87,7 @@ class TravelEntity extends ContentModel {
       travelMethod: json['travelMethod'],
       travelMethodText: json['travelMethodText'],
       transportationEntity:
-      CompanyEntity.fromJson(json['transportationEntity']),
+      LiteCompanyEntity.fromJson(json['transportationEntity']),
       images: List<String>.from(json['images'].map((x) => x)),
 
     );

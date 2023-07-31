@@ -107,3 +107,125 @@ class CompanyTravelsError extends CompanyTravelsState {
   List<Object?> get props => [message];
 }
 //#endregion company travels
+
+//#region filtered travels
+abstract class CompanyFilteredTravelsState extends OrdersState {
+  const CompanyFilteredTravelsState({
+    String? message,
+    this.date,
+    this.toCity,
+    this.fromCity,
+    this.companyEntity,
+  }) : super(message: message);
+
+  final int? fromCity;
+  final int? toCity;
+  final int? companyEntity;
+  final DateTime? date;
+
+  @override
+  List<Object?> get props =>
+      [
+        if(date != null)
+          date,
+        if(toCity != null)
+          toCity,
+        if(fromCity != null)
+          fromCity,
+        if(companyEntity != null)
+          companyEntity,
+      ];
+}
+
+class CompanyFilteredTravelsLoading extends CompanyFilteredTravelsState {
+  const CompanyFilteredTravelsLoading(
+      {required super.fromCity, required super.toCity, required super.date,});
+
+}
+
+class CompanyFilteredTravelsLoaded extends CompanyFilteredTravelsState {
+  const CompanyFilteredTravelsLoaded(
+      {required this.travelsResult, required super.fromCity, required super.toCity, required super.date,});
+
+  final TravelsEntity travelsResult;
+
+}
+
+class CompanyFilteredTravelsError extends CompanyFilteredTravelsState {
+
+
+  const CompanyFilteredTravelsError(
+      {required super.fromCity, required super.toCity, required super.date,required super.message});
+
+}
+//#endregion filtered travels
+
+//#region create order
+abstract class CreateOrderState extends OrdersState {
+  const CreateOrderState({
+    String? message,
+  }) : super(message: message);
+
+}
+
+class CreateOrderLoading extends CreateOrderState {
+  const CreateOrderLoading();
+
+  @override
+  List<Object> get props => [];
+}
+
+class CreateOrderLoaded extends CreateOrderState {
+  const CreateOrderLoaded({
+    required this.order,
+  });
+
+  final OrderEntity order;
+
+  @override
+  List<Object> get props => [];
+}
+
+class CreateOrderError extends CreateOrderState {
+
+  const CreateOrderError(String? message): super(message: message);
+
+  @override
+  List<Object> get props => [];
+}
+//#endregion filtered travels
+
+//#region check voucher
+abstract class CheckVoucherState extends OrdersState {
+  const CheckVoucherState({
+    String? message,
+  }) : super(message: message);
+
+}
+
+class CheckVoucherLoading extends CheckVoucherState {
+  const CheckVoucherLoading();
+
+  @override
+  List<Object> get props => [];
+}
+
+class CheckVoucherLoaded extends CheckVoucherState {
+  const CheckVoucherLoaded({
+    required this.voucher,
+  });
+
+  final VoucherEntity voucher;
+
+  @override
+  List<Object> get props => [];
+}
+
+class CheckVoucherError extends CheckVoucherState {
+
+  const CheckVoucherError(String? message): super(message: message);
+
+  @override
+  List<Object> get props => [];
+}
+//#endregion check voucher

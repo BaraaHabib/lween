@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lween/core/configurations/app_configuration.dart';
+import 'package:lween/core/configurations/assets.dart';
 import 'package:lween/core/controller/base_controller.dart';
 import 'package:lween/core/extended/numbers_ext.dart';
 import 'package:lween/core/lween/widgets/app_scaffold.dart';
@@ -40,7 +41,8 @@ class HomeScreen extends HookWidget {
             centerTitle: true,
             withBackButton: false,
             padding:EdgeInsets.zero,
-            title: AppConfigurations.ApplicationName.toUpperCase(),
+            title: AppConfigurations.ApplicationName,
+            icon:Image.asset(Assets.logoPNG,width: 26.rx,height: 26.rx,),
             child: Builder(
               builder: (context) {
                 if (state is GetHomeDataLoading) {
@@ -61,22 +63,26 @@ class HomeScreen extends HookWidget {
                         onRefresh: () async => HomeScreenController.intiHomeScreen(),
                         child: Positioned.fill(
                           child: ListView(
-                            // physics: AlwaysScrollableScrollPhysics(),
-                            // addAutomaticKeepAlives: true,
-                            // shrinkWrap: true,
                             children: [
-                              10.vSpace,
+                              // 5.vSpace,
                               if(state.homeEntity.advertisements.isNotEmpty)
                                 SizedBox(
                                   width:1.sw,
                                   child: HomeSlider(state.homeEntity.advertisements,),
                                 ),
-                              15.vSpace,
+                              5.vSpace,
                               if(state.homeEntity.topCompanies
                                   .isNotEmpty)
                                 TopCompaniesList(
                                   state.homeEntity.topCompanies,),
                               const MyPreviousOrders(),
+                              // Padding(
+                              //   padding: EdgeInsets.symmetric(horizontal: 24.wx,),
+                              //   child: AppGradientTextButton(
+                              //     gradientType: AppTextButtonGradientType.secondary,
+                              //     content: S.of(context).bookATrip,
+                              //   ),
+                              // ),
                               50.vSpace,
                             ],
                           ),

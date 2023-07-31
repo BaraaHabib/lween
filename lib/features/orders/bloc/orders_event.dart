@@ -19,11 +19,48 @@ class GetOrdersEvent extends OrdersEvent {
 }
 
 class GetTravelsEvent extends OrdersEvent {
-  const GetTravelsEvent({this.page = 0,this.companyId});
-  final int page;
+  const GetTravelsEvent({this.params});
+  final TravelParams? params;
+
+  @override
+  List<Object?> get props => [];
+}
+class GetFilteredTravelsEvent extends OrdersEvent {
+  const GetFilteredTravelsEvent({
+     this.date,
+     this.toCity,
+     this.fromCity,
+     this.companyId,
+  });
+
+  final int? fromCity;
+  final int? toCity;
   final int? companyId;
+  final DateTime? date;
+
+  @override
+  List<Object?> get props => [];
+}
+class CreateOrderEvent extends OrdersEvent {
+  const CreateOrderEvent({
+    required this.params,
+  });
+
+  final CreateOrderParams params;
 
   @override
   List<Object?> get props => [];
 }
 
+class CheckVoucherEvent extends OrdersEvent {
+  const CheckVoucherEvent({
+    this.paymentProvider,
+    required this.code,
+  });
+
+  final String code;
+  final int? paymentProvider;
+
+  @override
+  List<Object?> get props => [];
+}

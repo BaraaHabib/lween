@@ -28,6 +28,7 @@ class CompanyEntity extends ContentModel {
   int? centersCount;
   num? rate;
   int? userAvailableSeatsWithoutPayment;
+  int? futureAllowedSchedulingDays;
   String? description;
   bool? isFollowed;
   bool? receiveNotifications;
@@ -41,6 +42,7 @@ class CompanyEntity extends ContentModel {
     this.centersCount,
     this.rate,
     this.userAvailableSeatsWithoutPayment,
+    this.futureAllowedSchedulingDays,
     this.description,
     this.isFollowed,
     this.receiveNotifications,
@@ -59,8 +61,16 @@ class CompanyEntity extends ContentModel {
       description: json['description'],
       isFollowed: json['isFollowed'],
       receiveNotifications: json['receiveNotifications'],
+      futureAllowedSchedulingDays: json['futureAllowedSchedulingDays'],
     );
   }
+
+  LiteCompanyEntity get toLite => LiteCompanyEntity(
+      name: name,
+      id: id,
+      futureAllowedSchedulingDays: futureAllowedSchedulingDays,
+      userAvailableSeatsWithoutPayment: userAvailableSeatsWithoutPayment
+  );
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
@@ -75,6 +85,7 @@ class CompanyEntity extends ContentModel {
     data['description'] = description;
     data['isFollowed'] = isFollowed;
     data['receiveNotifications'] = receiveNotifications;
+    data['futureAllowedSchedulingDays'] = futureAllowedSchedulingDays;
     return data;
   }
 
@@ -83,4 +94,35 @@ class CompanyEntity extends ContentModel {
 
   @override
   List<Object?> get props => [id];
+}
+
+class LiteCompanyEntity {
+  int? id;
+  String? name;
+  int? futureAllowedSchedulingDays;
+  int? userAvailableSeatsWithoutPayment;
+
+  LiteCompanyEntity({
+    this.id,
+    this.name,
+    this.userAvailableSeatsWithoutPayment,
+    this.futureAllowedSchedulingDays,
+  });
+
+  LiteCompanyEntity.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    futureAllowedSchedulingDays = json['futureAllowedSchedulingDays'];
+    userAvailableSeatsWithoutPayment = json['userAvailableSeatsWithoutPayment'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['futureAllowedSchedulingDays'] = futureAllowedSchedulingDays;
+    data['userAvailableSeatsWithoutPayment'] =
+        userAvailableSeatsWithoutPayment;
+    return data;
+  }
 }

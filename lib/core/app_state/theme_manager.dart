@@ -40,12 +40,15 @@ mixin ThemeManager implements AppStateComponent {
     int newThemeIndex = (currentThemeType.index + 1) % 2;
     currentThemeType = ThemeType.values[newThemeIndex];
     await saveTheme(newThemeIndex);
+    // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    //   statusBarColor: isLightTheme  ? Styles.navbarLightBackgroundColor : Styles.navbarDarkBackgroundColor,
+    //   statusBarIconBrightness: isLightTheme ? Brightness.dark :  Brightness.light ,
+    // ));
+    // SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge,);
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: isLightTheme  ? Styles.navbarLightBackgroundColor : Styles.navbarDarkBackgroundColor,
+      // statusBarColor: isLightTheme  ? Styles.navbarLightBackgroundColor : Styles.navbarDarkBackgroundColor,
       statusBarIconBrightness: isLightTheme ? Brightness.dark :  Brightness.light ,
     ));
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge,);
-
     notifyListeners();
   }
   

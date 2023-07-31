@@ -10,7 +10,12 @@ import 'package:lween/features/home/main_screen.dart';
 import 'package:lween/features/home/screens/home/home_screen.dart';
 import 'package:lween/features/notifications/screens/notifications.dart';
 import 'package:lween/features/onboarding/screens/splash.dart';
+import 'package:lween/features/orders/models/daily_travels.dart';
 import 'package:lween/features/orders/screens/my_orders/my_orders_screen.dart';
+import 'package:lween/features/orders/screens/order_wizard/screens/order_from_to_screen.dart';
+import 'package:lween/features/orders/screens/order_wizard/screens/order_payment_method_screen.dart';
+import 'package:lween/features/orders/screens/order_wizard/screens/order_person_info_screen.dart';
+import 'package:lween/features/orders/screens/order_wizard/screens/order_seats_screen.dart';
 import 'package:lween/features/tickets/screens/my_tickets.dart';
 import 'package:lween/features/transportation_entities/models/transportation_entities.dart';
 import 'package:lween/features/transportation_entities/screens/company_profile/company_profile_screen.dart';
@@ -77,7 +82,28 @@ class AppRouter extends _$AppRouter {
                 path: CompanyProfileScreenRoute.name,
                 transitionsBuilder: TransitionsBuilders.fadeIn,
                 page: CompanyProfileScreenRoute.page,
-              )
+              ),
+              CustomRoute(
+                path: OrderFromToScreenRoute.name,
+                transitionsBuilder: TransitionsBuilders.fadeIn,
+                page: OrderFromToScreenRoute.page,
+              ),
+              CustomRoute(
+                path: OrderSeatsScreenRoute.name,
+                transitionsBuilder: TransitionsBuilders.fadeIn,
+                page: OrderSeatsScreenRoute.page,
+              ),
+              CustomRoute(
+                path: OrderPersonInfoScreenRoute.name,
+                transitionsBuilder: TransitionsBuilders.fadeIn,
+                page: OrderPersonInfoScreenRoute.page,
+              ),
+              CustomRoute(
+                path: OrderPaymentMethodScreenRoute.name,
+                transitionsBuilder: TransitionsBuilders.fadeIn,
+                page: OrderPaymentMethodScreenRoute.page,
+              ),
+
             ],
           ),
 

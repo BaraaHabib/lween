@@ -12,10 +12,6 @@ enum RequestType { GET, POST, PUT, DELETE }
 // api requests types
 enum ParametersType { Body, Url }
 
-enum AttachmentFileType { none, image, pdf, doc, docx, video }
-
-enum QuestionType { singleChoice, multiChoice, text, paragraph, signature }
-
 const shimmerDuration = Duration(milliseconds: 1500);
 
 const shimmerGradient = LinearGradient(
@@ -37,12 +33,3 @@ const shimmerGradient = LinearGradient(
 const shimmerDirection = ShimmerDirection.ltr;
 
 
-enum NavTab{
-  notification,
-  account,
-  tickets,
-  bookTrip,
-  home,
-  ;
-
-}

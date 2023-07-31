@@ -8,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lween/core/app_state/appstate.dart';
 import 'package:lween/core/configurations/assets.dart';
 import 'package:lween/core/configurations/styles/styles.dart';
+import 'package:lween/core/extended/get_utils/get_utils.dart';
 import 'package:lween/core/extended/numbers_ext.dart';
 import 'package:lween/core/locale/locale_provider.dart';
 import 'package:lween/core/navigation/navigation_service.dart';
@@ -37,9 +38,7 @@ class LanguageDialog extends HookWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Text(S.current.selectPreferredLanguage,
-                style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  color: Styles.lightFontColor,
-                ),
+                style: Theme.of(context).textTheme.titleLarge,
               ),
               SizedBox.square(
                 dimension: 30,
@@ -104,7 +103,7 @@ class _LanguageWidget extends StatelessWidget{
 
             },
           ),
-          Text(language.name,),
+          Text(language.name,style: context.textTheme.labelMedium,),
           const Spacer(),
           SizedBox.square(
             dimension: 30.rx,

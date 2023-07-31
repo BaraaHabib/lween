@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:lween/core/controller/base_controller.dart';
 import 'package:lween/features/orders/bloc/orders_bloc.dart';
+import 'package:lween/features/orders/params/daily_travel_params.dart';
 import 'package:lween/features/transportation_entities/models/transportation_entities.dart';
 
 class CompanyProfileScreenController extends Controller{
@@ -14,7 +15,7 @@ class CompanyProfileScreenController extends Controller{
 
   int get currentTab => tabsController.index;
 
-  ValueNotifier<int> currentIndexNotifier = ValueNotifier<int>(1);
+  ValueNotifier<int> currentIndexNotifier = ValueNotifier<int>(0);
 
   @override
   init(){
@@ -32,7 +33,7 @@ class CompanyProfileScreenController extends Controller{
 
 
   getTravels() {
-    OrdersBloc.instance.add(GetTravelsEvent(companyId: companyEntity.id,));
+    OrdersBloc.instance.add(GetTravelsEvent(params: TravelParams(companyId: companyEntity.id,withPagination: false,)));
   }
 
   bool buildWhen(OrdersState previous, OrdersState current) {
