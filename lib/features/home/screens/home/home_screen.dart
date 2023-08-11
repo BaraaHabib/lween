@@ -1,6 +1,7 @@
 
 
 import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -30,7 +31,7 @@ class HomeScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final HomeScreenController controller =
-    Controller.get(instance: HomeScreenController(),);
+    Controller.getInstance(instance: HomeScreenController(),);
     return BlocConsumer<HomeBloc, HomeState>(
         bloc: HomeBloc.instance,
         listener: controller.listener,
@@ -95,6 +96,7 @@ class HomeScreen extends HookWidget {
                             child: AppGradientTextButton(
                               gradientType: AppTextButtonGradientType.secondary,
                               content: S.of(context).bookATrip,
+                              onTap: () => controller.bookATrip(context),
                             ),
                           ),
                       )
@@ -108,5 +110,15 @@ class HomeScreen extends HookWidget {
           );
         }
     );
+  }
+}
+
+@RoutePage()
+class MainScreenStack extends StatelessWidget{
+  const MainScreenStack({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const AutoRouter();
   }
 }

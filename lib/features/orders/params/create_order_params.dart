@@ -35,6 +35,7 @@ class CreateOrderBodyParams extends BaseBodyModel with EquatableMixin {
   String? orderCreationTimestamp;
   String? travelId;
   String? executionDate;
+  String? couponCode;
   List<SeatParam>? seats = [];
   double? price;
   int? paymentMethod;
@@ -42,6 +43,7 @@ class CreateOrderBodyParams extends BaseBodyModel with EquatableMixin {
   CreateOrderBodyParams({this.orderCreationTimestamp,
     this.travelId,
     this.executionDate,
+    this.couponCode,
     this.seats,
     this.price,
     this.paymentMethod
@@ -59,6 +61,7 @@ class CreateOrderBodyParams extends BaseBodyModel with EquatableMixin {
     }
     data['price'] = price;
     data['paymentMethod'] = paymentMethod;
+    data['couponCode'] = couponCode;
     return data;
   }
 
@@ -68,7 +71,8 @@ class CreateOrderBodyParams extends BaseBodyModel with EquatableMixin {
       String? executionDate,
       List<SeatParam>? seats,
       double? price,
-      int? paymentMethod}){
+      int? paymentMethod,
+        String? voucher}){
 
     return CreateOrderBodyParams(
       seats: seats ?? this.seats,
@@ -77,6 +81,7 @@ class CreateOrderBodyParams extends BaseBodyModel with EquatableMixin {
       paymentMethod: paymentMethod ?? this.paymentMethod,
       price: price ?? this.price,
       travelId: travelId ?? this.travelId,
+      couponCode: voucher ?? couponCode,
     );
   }
 

@@ -29,7 +29,7 @@ class ResetPasswordScreen extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Controller.get(instance: ResetPasswordController());
+    final controller = Controller.getInstance(instance: ResetPasswordController());
     final bloc = sl<AccountBloc>();
     return BlocConsumer<AccountBloc,AccountState>(
         bloc: bloc,

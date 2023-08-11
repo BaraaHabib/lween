@@ -12,6 +12,9 @@ import 'package:lween/core/controller/base_controller.dart';
 import 'package:lween/core/extended/get_utils/get_utils.dart';
 import 'package:lween/core/extended/numbers_ext.dart';
 import 'package:lween/core/lween/widgets/app_scaffold.dart';
+import 'package:lween/core/messages/toast.dart';
+import 'package:lween/core/navigation/navigation_service.dart';
+import 'package:lween/core/routing/app_router.dart';
 import 'package:lween/core/widgets/animated/animated_toggle.dart';
 import 'package:lween/core/widgets/app_button.dart';
 import 'package:lween/core/widgets/app_image.dart';
@@ -31,8 +34,7 @@ class OrderSeatsScreen extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final OrderWizardController controller = Controller.get();
-
+    final OrderWizardController controller = Controller.getInstance();
 
     return Stack(
       children: [
@@ -42,7 +44,7 @@ class OrderSeatsScreen extends HookWidget {
               .chooseSeats,
           child: Column(
             children: [
-              5.vSpace,
+              15.vSpace,
               Row(
                 children: [
                   Expanded(
@@ -56,6 +58,9 @@ class OrderSeatsScreen extends HookWidget {
                       content: S
                           .of(context)
                           .previewVehicle,
+                      onTap: () => NavigationService
+                          .of(context,)
+                          .navigateTo(OrderPreviewVehicleScreenRoute(images: controller.selectedTravelEntity?.images ?? [])),
                       fontSize: 9.spx,
                       icon: Assets.eyeSVG,
                       padding: const EdgeInsets.symmetric(
@@ -69,11 +74,11 @@ class OrderSeatsScreen extends HookWidget {
                 child: Directionality(
                   textDirection: TextDirection.ltr,
                   child: ListView.separated(
-                    itemCount: controller.travelEntity?.seats?.length ?? 0,
+                    itemCount: controller.selectedTravelEntity?.seats?.length ?? 0,
                     separatorBuilder: (ctx, index) => 5.vSpace,
                     itemBuilder: (ctx, index) =>
                         SeatsRow(
-                          seats: controller.travelEntity?.seats?[index] ?? [],
+                          seats: controller.selectedTravelEntity?.seats?[index] ?? [],
                         ),
                   ),
                 ),

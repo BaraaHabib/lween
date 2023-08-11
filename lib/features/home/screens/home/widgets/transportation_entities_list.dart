@@ -59,7 +59,7 @@ class TopCompaniesList extends HookWidget {
           ),
           8.vSpace,
           SizedBox(
-            height: 75.hx,
+            height: 80.hx,
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
               shrinkWrap: true,
@@ -82,9 +82,10 @@ class _CompanyWidget extends HookWidget{
 
   @override
   Widget build(BuildContext context) {
-    final controller = Controller.get(
+    Controller.getInstance<CompanyItemController>(
       instance: CompanyItemController(entity),
-      key: entity.id?.toString(),);
+      key: entity.id.toString(),
+    );
     return GestureDetector(
       onTap: () {
         NavigationService.of(context).navigateTo(

@@ -6,7 +6,7 @@ class PasswordsFields extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ForgotPasswordCodeDialogController controller = Controller.get();
+    final ForgotPasswordCodeDialogController controller = Controller.getInstance();
     return Column(
       children: [
         10.vSpace,

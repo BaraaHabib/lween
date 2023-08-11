@@ -12,8 +12,10 @@ import 'package:lween/core/configurations/assets.dart';
 import 'package:lween/core/configurations/styles/nav_icons.dart';
 import 'package:lween/core/configurations/styles/styles.dart';
 import 'package:lween/core/controller/base_controller.dart';
+import 'package:lween/core/extended/extensions.dart';
 import 'package:lween/core/extended/get_utils/get_utils.dart';
 import 'package:lween/core/extended/numbers_ext.dart';
+import 'package:lween/core/navigation/logger.dart';
 import 'package:lween/core/navigation/navigation_service.dart';
 import 'package:lween/core/resources/constants.dart';
 import 'package:lween/core/routing/app_router.dart';
@@ -27,14 +29,13 @@ class AppScaffold extends StatelessWidget {
 
   const AppScaffold({
     Key? key,
-    required this.child,
     required this.title,
+    required this.child,
     this.withBackButton = true,
     this.centerTitle = false,
     this.padding,
     this.backgroundImage,
     this.onBackPressed,
-    this.navTab = NavTab.home,
     this.icon,
   }) : super(key: key);
 
@@ -45,7 +46,6 @@ class AppScaffold extends StatelessWidget {
   final bool withBackButton;
   final bool centerTitle;
   final EdgeInsetsGeometry? padding;
-  final NavTab navTab;
   final Function()? onBackPressed;
 
   @override
@@ -123,13 +123,6 @@ class AppScaffold extends StatelessWidget {
             ),
           ),
         ),
-        // if(withNav)
-        //   Positioned(
-        //     bottom: 0,
-        //     left: 0,
-        //     right: 0,
-        //     child: AppNavWidget(index: navTab,),
-        //   )
       ],
     );
   }

@@ -26,6 +26,9 @@ class MyOrdersParams extends ParamsModel<MyOrdersBody> {
   @override
   bool get paginated => true;
 
+  @override
+  bool get authorized => true;
+
 }
 
 class MyOrdersBody extends BaseBodyModel {

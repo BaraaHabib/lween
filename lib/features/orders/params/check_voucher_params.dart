@@ -22,13 +22,15 @@ class CheckVoucherParams extends ParamsModel<CheckVoucherBodyParams> {
   RequestType? get requestType => RequestType.GET;
 
   @override
-  String? get url => ApiConstants.checkCode;
+  String? get url => ApiConstants.checkVoucher;
 
   @override
   Map<String, String> get urlParams => {
     'code' : code,
-    if(paymentProvider != null)
-      'paymentProvider' : paymentProvider.toString(),
+    if(paymentProvider != null && paymentProvider! <=5 )
+      'paymentProvider' : paymentProvider.toString()
+    // else
+    //   'paymentProvider' : null
   };
 
   @override

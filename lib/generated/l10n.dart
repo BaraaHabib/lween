@@ -839,6 +839,406 @@ class S {
       args: [],
     );
   }
+
+  /// `Available trips in selected date`
+  String get availableDateTravels {
+    return Intl.message(
+      'Available trips in selected date',
+      name: 'availableDateTravels',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start from`
+  String get startFrom {
+    return Intl.message(
+      'Start from',
+      name: 'startFrom',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Arrive to`
+  String get arriveTo {
+    return Intl.message(
+      'Arrive to',
+      name: 'arriveTo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You have discount {value}`
+  String youHaveDiscount(Object value) {
+    return Intl.message(
+      'You have discount $value',
+      name: 'youHaveDiscount',
+      desc: '',
+      args: [value],
+    );
+  }
+
+  /// `Price after discount`
+  String get newRequiredPayment {
+    return Intl.message(
+      'Price after discount',
+      name: 'newRequiredPayment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save to device`
+  String get saveToDevice {
+    return Intl.message(
+      'Save to device',
+      name: 'saveToDevice',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Order details`
+  String get orderDetails {
+    return Intl.message(
+      'Order details',
+      name: 'orderDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Trip date`
+  String get travelDateTime {
+    return Intl.message(
+      'Trip date',
+      name: 'travelDateTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Passengers info`
+  String get passengersNames {
+    return Intl.message(
+      'Passengers info',
+      name: 'passengersNames',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Seat number`
+  String get seatNumber {
+    return Intl.message(
+      'Seat number',
+      name: 'seatNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `اسم صاحب الحجز`
+  String get reservationHolder {
+    return Intl.message(
+      'اسم صاحب الحجز',
+      name: 'reservationHolder',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Vehicle number`
+  String get vehicleNumber {
+    return Intl.message(
+      'Vehicle number',
+      name: 'vehicleNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Payment status`
+  String get paymentStatus {
+    return Intl.message(
+      'Payment status',
+      name: 'paymentStatus',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Waiting for payment in company center`
+  String get waitingPaymentInCompanyCenter {
+    return Intl.message(
+      'Waiting for payment in company center',
+      name: 'waitingPaymentInCompanyCenter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Payed in company center`
+  String get payedInCenter {
+    return Intl.message(
+      'Payed in company center',
+      name: 'payedInCenter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `payed with {value}`
+  String payedWithValue(Object value) {
+    return Intl.message(
+      'payed with $value',
+      name: 'payedWithValue',
+      desc: '',
+      args: [value],
+    );
+  }
+
+  /// `Payed amount {value}`
+  String payedAmount(Object value) {
+    return Intl.message(
+      'Payed amount $value',
+      name: 'payedAmount',
+      desc: '',
+      args: [value],
+    );
+  }
+
+  /// `Required payment {value}`
+  String requiredPayment(Object value) {
+    return Intl.message(
+      'Required payment $value',
+      name: 'requiredPayment',
+      desc: '',
+      args: [value],
+    );
+  }
+
+  /// `Coupon should be requested`
+  String get voucherShouldBeRequested {
+    return Intl.message(
+      'Coupon should be requested',
+      name: 'voucherShouldBeRequested',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This seat is not available`
+  String get thisSeatIsNotAvailable {
+    return Intl.message(
+      'This seat is not available',
+      name: 'thisSeatIsNotAvailable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Order has been canceled`
+  String get orderIsCanceled {
+    return Intl.message(
+      'Order has been canceled',
+      name: 'orderIsCanceled',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to cancel order?`
+  String get areYouSureYouWantToCancelOrder {
+    return Intl.message(
+      'Are you sure you want to cancel order?',
+      name: 'areYouSureYouWantToCancelOrder',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel order`
+  String get cancelOrder {
+    return Intl.message(
+      'Cancel order',
+      name: 'cancelOrder',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Order has been canceled`
+  String get orderHasBeenCanceled {
+    return Intl.message(
+      'Order has been canceled',
+      name: 'orderHasBeenCanceled',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Order saved to gallery`
+  String get orderSavedToGallery {
+    return Intl.message(
+      'Order saved to gallery',
+      name: 'orderSavedToGallery',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Trip details`
+  String get tripDetails {
+    return Intl.message(
+      'Trip details',
+      name: 'tripDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Available days`
+  String get availableDays {
+    return Intl.message(
+      'Available days',
+      name: 'availableDays',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Vehicle type`
+  String get transportationType {
+    return Intl.message(
+      'Vehicle type',
+      name: 'transportationType',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Travel duration`
+  String get travelDuration {
+    return Intl.message(
+      'Travel duration',
+      name: 'travelDuration',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You have exceeded the number of seats allowed to be reserved without payment, and you cannot complete the order without payment.`
+  String get exceededSeatsCountDialogMessage {
+    return Intl.message(
+      'You have exceeded the number of seats allowed to be reserved without payment, and you cannot complete the order without payment.',
+      name: 'exceededSeatsCountDialogMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The number of seats allowed to be reserved without payment has been exceeded`
+  String get cashPaymentNotAvailable {
+    return Intl.message(
+      'The number of seats allowed to be reserved without payment has been exceeded',
+      name: 'cashPaymentNotAvailable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Trip time`
+  String get tripTime {
+    return Intl.message(
+      'Trip time',
+      name: 'tripTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account settings`
+  String get accountSettings {
+    return Intl.message(
+      'Account settings',
+      name: 'accountSettings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Language`
+  String get language {
+    return Intl.message(
+      'Language',
+      name: 'language',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change password`
+  String get changePassword {
+    return Intl.message(
+      'Change password',
+      name: 'changePassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change phone number`
+  String get changePhoneNumber {
+    return Intl.message(
+      'Change phone number',
+      name: 'changePhoneNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Log out`
+  String get logOut {
+    return Intl.message(
+      'Log out',
+      name: 'logOut',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete account`
+  String get deleteAccount {
+    return Intl.message(
+      'Delete account',
+      name: 'deleteAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Deactivate account`
+  String get deactivateAccount {
+    return Intl.message(
+      'Deactivate account',
+      name: 'deactivateAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Yesterday`
+  String get yesterday {
+    return Intl.message(
+      'Yesterday',
+      name: 'yesterday',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

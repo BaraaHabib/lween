@@ -33,6 +33,7 @@ class AppConfigurations {
   static DateFormat appAPIDateFormat = DateFormat('MM-dd-yyyy', langEN);
   static DateFormat appDisplayDateFormat = DateFormat('dd/MM/yyyy', langEN);
   static DateFormat appDisplayDateFormatHB = DateFormat('dd/MM/yyyy HH:mm', langEN);
+  static DateFormat appDisplayTimeFormat = DateFormat.MMM(langEN);
 
   static String currency = S.current.currency;
 

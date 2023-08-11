@@ -7,7 +7,7 @@ class ResendButton extends HookWidget {
   final AccountState state;
   @override
   Widget build(BuildContext context) {
-    final ForgotPasswordCodeDialogController controller = Controller.get();
+    final ForgotPasswordCodeDialogController controller = Controller.getInstance();
     final height = 30.hx;
     return SizedBox(
       height: height,

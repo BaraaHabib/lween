@@ -6,8 +6,8 @@ class TripsWidgets extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final CompanyProfileScreenController controller = Controller.get();
-    final CompanyItemController companyController = Controller.get(key: controller.companyEntity.id.toString(),);
+    final CompanyProfileScreenController controller = Controller.getInstance();
+    final CompanyItemController companyController = Controller.getInstance(key: controller.companyEntity.id.toString(),);
     return SizedBox(
       width: 1.sw,
       child: BlocBuilder<OrdersBloc,OrdersState>(
@@ -39,22 +39,19 @@ class TripsWidgets extends StatelessWidget {
                   separatorBuilder: (ctx,index) => 12.hSpace,
                   itemBuilder: (ctx,index) {
                     final item = orders[index];
-                    return GestureDetector(
-                      onTap: (){
-                        NavigationService.of(context).navigateTo(OrderFromToScreenRoute(
-                          travelEntity: item,
-                          companyEntity: controller.companyEntity,
-                        ));
-                      },
-                      child: TripCard(
-                        type: TripCardType.future,
-                        subtitle: item.availableDaysText ?? '',
-                        date: item.travelTime ?? '',
-                        from: item.fromCity?.text ?? '',
-                        to: item.toCity?.text ?? '',
-                        imageUrl: Assets.tripOrderIcon(context,),
-                        // imageUrl: item.?.imageUrl,
-                      ),
+                    return TripCard(
+                      type: TripCardType.future,
+                      subtitle: item.availableDaysText ?? '',
+                      date: item.travelTime ?? '',
+                      from: item.fromCity?.text ?? '',
+                      to: item.toCity?.text ?? '',
+                      imageUrl: Assets.tripOrderIcon(context,),
+                      vehicleType:item.travelMethodEnum,
+                      vehicleTypeText:item.travelMethodText,
+                      onTap: () {
+                        NavigationService.of(context).navigateTo(
+                          OrderTripPreviewScreenRoute(travelEntity: item,),);
+                      },                        // imageUrl: item.?.imageUrl,
                     );
                   },
                 ),

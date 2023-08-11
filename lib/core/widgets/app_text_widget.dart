@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:lween/core/app_state/appstate.dart';
 import 'package:lween/core/extended/get_utils/src/extensions/export.dart';
+import 'package:lween/core/locale/locale_provider.dart';
 
 /// this should be used to show text instead of [Text] widget
 /// to fix language direction
@@ -26,9 +28,15 @@ class AppTextWidget extends StatelessWidget {
       text,
       style: style,
       maxLines: maxLines,
-      textDirection: textDirection ?? text.preferredDirection,
+      // textDirection: textDirection ?? text.preferredDirection,
       overflow: overflow ?? TextOverflow.ellipsis,
       textAlign: textAlign,
+      strutStyle: StrutStyle(
+        // fontFamily: 'FontName',
+        // forceStrutHeight: true,
+        fontSize: style?.fontSize,
+        // height: LocaleProvider.of(context).isRTL ? 1.2 : 1.5,
+      ),
     );
   }
 }

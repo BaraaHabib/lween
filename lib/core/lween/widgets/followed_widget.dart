@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:lween/core/configurations/assets.dart';
 import 'package:lween/core/configurations/styles/styles.dart';
 import 'package:lween/core/controller/base_controller.dart';
@@ -13,7 +14,7 @@ import 'package:lween/core/widgets/waiting_widget.dart';
 import 'package:lween/features/transportation_entities/bloc/transportation_entities_bloc.dart';
 import 'package:lween/features/transportation_entities/screens/widgets/controller.dart';
 
-class FollowedWidget extends StatelessWidget {
+class FollowedWidget extends HookWidget {
 
   const FollowedWidget({
     super.key,
@@ -24,7 +25,7 @@ class FollowedWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final CompanyItemController controller
-    = Controller.get(key: id.toString());
+    = Controller.getInstance<CompanyItemController>(key: id.toString());
     return  BlocConsumer<CompanyBloc,CompanyState>(
       bloc: CompanyBloc.instance,
       listener: controller.listener,

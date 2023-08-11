@@ -35,7 +35,9 @@ class Styles {
   static const hintDarkColor = Color(0xFFFFFFFF);
 
   static Color textFieldColor(BuildContext context) =>
-      AppStateModel.of(context).isLightTheme ? textFieldLightColor : textFieldDarkColor;
+      AppStateModel
+          .of(context)
+          .isLightTheme ? textFieldLightColor : textFieldDarkColor;
   static const textFieldLabelColor = Color(0xFF89A3B4);
   static const textFieldFontColor = Color(0xFF110D32);
 
@@ -67,6 +69,8 @@ class Styles {
   static double textFieldBorderWidth = 1.5;
 
   static const liteGrayColor = Color(0xFF9EA0A2);
+  static const brightGrayColor = Color(0xFF9DB2BF);
+
   static const colorGreen = Color(0xFF33CD84);
 
   static const yoloThemeColor = Color(0xFFE3E935);
@@ -79,7 +83,7 @@ class Styles {
   BorderRadius.all(Radius.circular(buttonBorderRadiusValue,));
 
   static const buttonTextColor = Color(0xFFFFFFFF);
-  
+
   static const buttonPrimaryColor1 = Color(0xFF302B63);
   static const buttonPrimaryColor2 = Color(0xFF0F0C29);
 
@@ -91,21 +95,31 @@ class Styles {
   static const dialogDarkBackgroundColor = Color(0xFF213560);
 
   static Color dialogBackgroundColor(BuildContext context) =>
-   AppStateModel.of(context).isLightTheme ? dialogLightBackgroundColor : dialogDarkBackgroundColor;
+      AppStateModel
+          .of(context)
+          .isLightTheme
+          ? dialogLightBackgroundColor
+          : dialogDarkBackgroundColor;
 
   /// card
   static const lightCardColor = Color(0xFFFFFFFF);
   static const darkCardColor = Color(0xFF213560);
+
   static Color cardBackgroundColor(BuildContext context) =>
-      AppStateModel.of(context).isLightTheme ? lightCardColor : darkCardColor;
+      AppStateModel
+          .of(context)
+          .isLightTheme ? lightCardColor : darkCardColor;
 
   static const lightCardShadowColor = Colors.transparent;
   static const darkCardShadowColor = Colors.transparent;
 
   static const navbarLightBackgroundColor = Color(0xFFFFFFFF);
   static const navbarDarkBackgroundColor = Color(0xFF213560);
+
   static Color navbarBackgroundColor(BuildContext context) =>
-      AppStateModel.of(context).isLightTheme ?
+      AppStateModel
+          .of(context)
+          .isLightTheme ?
       navbarLightBackgroundColor : navbarDarkBackgroundColor;
   static const selectedNavItemBackgroundColor = Color(0xFF029BFA);
   static const navActiveColor = Color(0xFF029BFA);
@@ -117,17 +131,53 @@ class Styles {
   static const followedIconColor = Color(0xFFFF6969,);
 
   /// shadow color
-  static const shadowColor =  Color.fromARGB(75,157,178,191,);
+  static const shadowColor = Color.fromARGB(75, 157, 178, 191,);
 
 
   static const reservedSeatColor = Color(0xFFFF6969,);
   static const availableSeatColor = Color(0xFF9DB2BF);
-  static const selectedSeatColor = Color(0xFF029BFA);
+  static const blueColor = Color(0xFF029BFA);
 
 
   static const warningColor = Color(0xFFFCF2C3);
 
+  static Color dropDownFontColor(BuildContext context) =>
+      AppStateModel
+          .of(context)
+          .isLightTheme ? dropDownFontLightColor : dropDownFontDarkColor;
 
+  static const dropDownFontDarkColor = Color(0xFFFFFFFF);
+  static const dropDownFontLightColor = Color(0xFF110D32);
+
+  static Color selectedVehicleStartColor(BuildContext c) =>
+      AppStateModel
+          .of(c)
+          .isLightTheme ?
+      selectedVehicleStartLightColor : selectedVehicleStartDarkColor;
+  static const selectedVehicleStartDarkColor = Color(0xFF029BFA);
+  static const selectedVehicleStartLightColor = Color(0xFF110D32);
+
+  static const selectedVehicleEndColor = Color(0xFF110D32);
+
+  static Color unselectedVehicleColor(BuildContext c) =>
+      AppStateModel
+          .of(c)
+          .isLightTheme ?
+      unselectedVehicleLightColor : unselectedVehicleDarkColor;
+  static const unselectedVehicleDarkColor = Color(0xFF89A3B4);
+  static const unselectedVehicleLightColor = Color(0xFF9DB2BF);
+
+  static const greenColor = Color(0xFF0FE1C4);
+  static const ghostWhiteColor = Color(0xFFF9F9F9);
+
+  static const labelInsideCard = Color(0xFF110D32);
+  static const textInsideCard = Color(0xFF89A3B4);
+
+  static Color unreadNotificationColor(BuildContext context) =>
+      AppStateModel
+          .of(context)
+          .isLightTheme ?
+      const Color(0xFFDBF1FF) : const Color(0xFF304980);
 
 }
 

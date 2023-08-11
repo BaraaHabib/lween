@@ -3,6 +3,7 @@
 
     <application
         android:label="lween"
+        android:requestLegacyExternalStorage="true"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity

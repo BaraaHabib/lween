@@ -30,14 +30,21 @@ class ErrorEntity extends Entity {
   }
 
   factory ErrorEntity.fromAppException(AppException exception) {
-    final message = exception.data?['error']['message'] ?? exception.message;
-    int? code = exception.data?['error']['code'];
-    Map? data = json.decode(exception.data?['error']['details'] ?? '{}');
-    return ErrorEntity(
-        errorMessage:message,
+    try {
+      final message = exception.data?['error']['message'] ?? exception.message;
+      int? code = exception.data?['error']['code'];
+      Map? data = json.decode(exception.data?['error']['details'] ?? '{}');
+      return ErrorEntity(
+        errorMessage: message,
         code: code,
-        data:data,
-    );
+        data: data,
+      );
+    }
+    on Exception catch (e) {
+      return ErrorEntity(
+        errorMessage: e.toString(),
+      );
+    }
     // errorMessage = exception.message;
   }
   factory ErrorEntity.fromException(Exception exception) {

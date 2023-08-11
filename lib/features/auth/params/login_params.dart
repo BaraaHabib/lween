@@ -2,8 +2,6 @@ import 'package:lween/core/features/params/params_model.dart';
 import 'package:lween/core/resources/api_consts.dart';
 import 'package:lween/core/resources/constants.dart';
 
-import '../../../../../../core/configurations/app_configuration.dart';
-
 class LogInParams extends ParamsModel<LogInParamsBody> {
   LogInParams({required LogInParamsBody body})
       : super(body: body,);

@@ -10,12 +10,14 @@ class AppToast extends AppSystemMessage {
       : super(type: AppSystemMessageTyp.toast, message: message);
 
   @override
-  Future show() => Fluttertoast.showToast(
+  Future show() {
+    return Fluttertoast.showToast(
     msg: message,
       textColor  : Lween.navigatorKey.currentContext!.textTheme.titleMedium?.color,
       fontSize  : Lween.navigatorKey.currentContext!.textTheme.titleMedium?.fontSize,
       backgroundColor: Lween.navigatorKey.currentContext!.theme.cardTheme.color,
-    gravity: ToastGravity.TOP,
+      gravity: ToastGravity.TOP,
 
   );
+  }
 }

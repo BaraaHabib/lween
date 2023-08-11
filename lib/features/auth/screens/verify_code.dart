@@ -32,7 +32,7 @@ class VerifyCodeScreen extends HookWidget {
   final String phoneNumber;
   @override
   Widget build(BuildContext context) {
-    final controller = Controller.get(instance: VerifyCodeController(accountId,phoneNumber));
+    final controller = Controller.getInstance(instance: VerifyCodeController(accountId,phoneNumber));
     final bloc = sl<AccountBloc>();
     return BlocConsumer<AccountBloc,AccountState>(
       bloc: bloc,

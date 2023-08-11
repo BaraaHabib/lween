@@ -4,9 +4,32 @@ import 'dart:io';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:jiffy/jiffy.dart';
 import 'package:mime/mime.dart';
 
 extension DateTimeExten on DateTime {
+
+  bool get isToday {
+    final now = DateTime.now();
+    return now.day == day &&
+        now.month == month &&
+        now.year == year;
+  }
+
+  bool get isYesterday {
+    final jiffyDate = Jiffy.parseFromDateTime(this,);
+    return Jiffy.now()
+        .subtract(days: 1)
+        .startOf(Unit.day,)
+        .isBefore(jiffyDate);
+  }
+
+  bool get isWeekAgo {
+    final jiffyDate = Jiffy.parseFromDateTime(this,);
+    final weekAgo = Jiffy.now().subtract(days: 6,);
+    return jiffyDate.isAfter(weekAgo);
+  }
+
   DateTime roundUp({Duration delta = const Duration(minutes: 15)}) {
     final roundedDate = add(delta);
     return DateTime.fromMillisecondsSinceEpoch(

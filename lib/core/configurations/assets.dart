@@ -19,19 +19,31 @@ class Assets {
   static const lockIcon = 'assets/auth/SVG/ic_lock_outline_24px.svg';
   static const phoneIcon = 'assets/auth/SVG/ic_phone_24px.svg';
   static const previousIcon = 'assets/previous.svg';
-  static Widget previousIconWidget(BuildContext context) =>
-      Transform.rotate(
+  static Widget previousIconWidget(BuildContext context,{ThemeType? forceTheme, Color? color}) {
+    if(color == null){
+      color = AppStateModel.of(context).isLightTheme ?
+      Colors.black : Colors.white;
+      if(forceTheme != null){
+        if(forceTheme == ThemeType.light){
+          color = Colors.black;
+        }else{
+          color = Colors.white;
+
+        }
+      }
+    }
+    return Transform.rotate(
         angle: context.isDirectionRTL(context) ? 0 : pi,
         child: SvgPicture.asset(
             previousIcon,
             colorFilter: ColorFilter.mode(
-              AppStateModel.of(context).isLightTheme ?
-              Colors.black : Colors.white,
+              color,
               BlendMode.srcIn,
             )
         ),
 
       );
+  }
   static const locationIcon = 'assets/auth/SVG/ic_place_24px.svg';
 
   static Widget get locationIconWidget =>
@@ -78,10 +90,29 @@ class Assets {
 
   static const arrowBack = 'assets/icons/SVG/ic_back.svg';
 
-  static Widget arrowBackWidget(BuildContext context) =>
+  static Widget arrowBackWidget(BuildContext context, {Color? color,}) =>
       Transform.rotate(
         angle: context.isDirectionRTL(context) ? 0 : pi,
-        child: SvgPicture.asset(arrowBack),
+        child: SvgPicture.asset(
+            arrowBack,
+        ),
+      );
+  static const arrowRoundedSVG = 'assets/icons/SVG/ic_arrow_rounded.svg';
+
+  static Widget arrowRoundedWidget(BuildContext context, {Color? color,}) =>
+      Transform.rotate(
+        angle: context.isDirectionRTL(context) ? 0 : pi,
+        child: SvgPicture.asset(
+          arrowRoundedSVG,
+        ),
+      );
+
+  static const doubleArrow = 'assets/icons/SVG/double_arrow.svg';
+
+  static Widget doubleArrowWidget(BuildContext context) =>
+      Transform.rotate(
+        angle: context.isDirectionRTL(context) ? 0 : pi,
+        child: SvgPicture.asset(doubleArrow),
       );
 
   /// icons
@@ -107,12 +138,21 @@ class Assets {
   static const seatSVG = 'assets/orders/SVG/seat.svg';
   static String bookedSeat(BuildContext context) =>
       AppStateModel.of(context).isLightTheme ?
-      bookedSeatDarkSVG :  bookedSeatLightPng;
-  static const bookedSeatDarkSVG = 'assets/orders/SVG/seat-booked.svg';
-  static const bookedSeatLightPng = 'assets/orders/PNG/seat-booked-dark.png';
+      bookedSeatLightSVG :  bookedSeatDarkSVG;
+  static const bookedSeatDarkSVG = 'assets/orders/SVG/seat-booked-dark.svg';
+  static const bookedSeatLightSVG = 'assets/orders/SVG/seat-booked.svg';
   static const eyeSVG = 'assets/icons/SVG/ic_eye.svg';
   static const priceTagSVG = 'assets/orders/SVG/price-tag.svg';
   static const reservedSeatPNG = 'assets/orders/PNG/ic_reserved_seat.png';
+  static String tripClockPNG(BuildContext context) =>AppStateModel.of(context).isLightTheme ? tripClockLightPNG
+   : tripClockDarkPNG;
+  static const tripClockDarkPNG = 'assets/orders/PNG/clock-dark.png';
+  static const tripClockLightPNG = 'assets/orders/PNG/clock.png';
+  static const busPNG = 'assets/orders/PNG/bus.png';
+  static const microbusPNG = 'assets/orders/PNG/microbus.png';
+  static const vanPNG = 'assets/orders/PNG/van.png';
+  static const carPNG = 'assets/orders/PNG/car.png';
+  static const otherPNG = 'assets/orders/SVG/wheel.svg';
 
   /// payment
   static const mtnPNG = 'assets/payment/mtn.png';
@@ -129,5 +169,33 @@ class Assets {
       AppStateModel.of(context).isLightTheme ? fatoraPNG : fatoraDarkPNG;
   static const warningPNG = 'assets/payment/warning.png';
 
+  static const calendarSVG = 'assets/icons/SVG/calendar.svg';
+  static const clockSVG = 'assets/icons/SVG/clock.svg';
+
+  static const busBgPNG = 'assets/images/bus_bg.png';
+
+
+  /// trip gifs
+  static const busGIF = 'assets/gifs/Bus.gif';
+  static const busVIPGIF = 'assets/gifs/VIP-Bus.gif';
+  static const microbusGIF = 'assets/gifs/Microbus.gif';
+  static const vanGIF = 'assets/gifs/Van.gif';
+  static const carGIF = 'assets/gifs/Car.gif';
+
+  static const mBusGIF = 'assets/gifs/Bus3d.gif.mp4';
+  static const mMicrobusGIF = 'assets/gifs/microbus3d.gif.mp4';
+  static const mVanGIF = 'assets/gifs/Van3d.gif.mp4';
+  static const mCarGIF = 'assets/gifs/Taxi3d.gif.mp4';
+
+
+  /// account
+  static const languageSVG = 'assets/account/SVG/language.svg';
+  static const changePhoneNumberSVG = 'assets/account/SVG/ic_call_24px.svg';
+  static const deleteAccountSVG = 'assets/account/SVG/ic_highlight_off_24px.svg';
+  static const deactivateAccountSVG = 'assets/account/SVG/ic_not_interested_24px.svg';
+  static const logOutSVG = 'assets/account/SVG/ic_settings_power_24px.svg';
+  static const changePasswordSVG = 'assets/account/SVG/ic_vpn_key_24px.svg';
+  static const darkModeIconSVG = 'assets/account/SVG/ic_brightness_2_24px.svg';
+  static const lightModeIconSVG = 'assets/account/SVG/ic_brightness_high_24px.svg';
 
 }

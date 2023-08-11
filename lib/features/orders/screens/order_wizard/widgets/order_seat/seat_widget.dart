@@ -8,16 +8,15 @@ class SeatWidget extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final OrderWizardController controller = Controller.get();
+    final OrderWizardController controller = Controller.getInstance();
     final isAvailable = seat.isAvailable ?? true;
     final isSelected = useState(controller.isSeatSelected(seat.number ?? 0,));
     Color color = isAvailable ? Styles.availableSeatColor : Styles
         .reservedSeatColor;
     late Widget widget;
     if (isSelected.value) {
-      widget = AppImage(
-        path: Assets.bookedSeat(context),
-        type: ImageType.asset,
+      widget = SvgPicture.asset(
+          Assets.bookedSeat(context),
       );
     }
     else {
@@ -30,8 +29,10 @@ class SeatWidget extends HookWidget {
 
     return Card(
       child: InkWell(
-        onTap: !isAvailable ? null : () {
-          final isSeatSelected = controller.seatPressed(seat.number ?? 0);
+        onTap: !isAvailable ? (){
+          AppToast(S.of(context).thisSeatIsNotAvailable).show();
+        } : () {
+          final isSeatSelected = controller.seatPressed(seat.number ?? 0,context,);
           isSelected.value = isSeatSelected;
         },
         splashColor: Colors.transparent,

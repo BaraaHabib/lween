@@ -6,6 +6,7 @@ class InitAppEntity extends ContentModel {
   String? lastVersionUrl;
   bool? isUpToDate;
   bool? isAuthenticated;
+  bool? inStoreReview;
   String? phoneNumber1;
   String? phoneNumber2;
   List<Country>? countries;
@@ -15,12 +16,14 @@ class InitAppEntity extends ContentModel {
         this.lastVersionUrl,
         this.isUpToDate,
         this.isAuthenticated,
+        this.inStoreReview,
         this.phoneNumber1,
         this.phoneNumber2,
         this.countries});
 
   InitAppEntity.fromJson(json) {
     lastVersion = json['lastVersion'];
+    inStoreReview = json['inStoreReview'] ?? false;
     lastVersionUrl = json['lastVersionUrl'];
     isUpToDate = json['isUpToDate'];
     isAuthenticated = json['isAuthenticated'];
@@ -37,6 +40,7 @@ class InitAppEntity extends ContentModel {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['lastVersion'] = lastVersion;
+    data['inStoreReview'] = inStoreReview;
     data['lastVersionUrl'] = lastVersionUrl;
     data['isUpToDate'] = isUpToDate;
     data['isAuthenticated'] = isAuthenticated;

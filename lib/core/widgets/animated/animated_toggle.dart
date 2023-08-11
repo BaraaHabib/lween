@@ -17,7 +17,7 @@ class AnimatedToggle extends StatelessWidget {
     return AnimatedSwitcher(
       duration: const Duration(milliseconds: 300),
       child: SizedBox(
-        key: ValueKey('$keyId$value'),
+        key: ValueKey('${this.hashCode}$keyId$value'),
         child: child,
       ),
     );

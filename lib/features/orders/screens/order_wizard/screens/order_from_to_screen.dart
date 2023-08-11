@@ -8,10 +8,12 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:lween/core/configurations/app_configuration.dart';
 import 'package:lween/core/configurations/assets.dart';
+import 'package:lween/core/configurations/styles/styles.dart';
 import 'package:lween/core/controller/base_controller.dart';
 import 'package:lween/core/extended/get_utils/get_utils.dart';
 import 'package:lween/core/extended/numbers_ext.dart';
 import 'package:lween/core/lween/widgets/app_scaffold.dart';
+import 'package:lween/core/widgets/animated/animated_toggle.dart';
 import 'package:lween/core/widgets/app_button.dart';
 import 'package:lween/core/widgets/app_date_field.dart';
 import 'package:lween/core/widgets/app_drop_down.dart';
@@ -38,9 +40,9 @@ class OrderFromToScreen extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final OrderWizardController controller = Controller.get(instance: OrderWizardController(
+    final OrderWizardController controller = Controller.getInstance(instance: OrderWizardController(
         travelEntity: travelEntity,
-        selectedCompanyEntity: companyEntity?.toLite,
+        // selectedCompanyEntity: companyEntity?.toLite,
       ),
     );
     return BlocConsumer<OrdersBloc,OrdersState>(
@@ -60,7 +62,7 @@ class OrderFromToScreen extends HookWidget {
                 key: controller.fromToFormKey,
                 child: Column(
                   children: [
-                    14.vSpace,
+                    10.vSpace,
                     AppImage(
                       path: Assets.bookMapLocation(context),
                       type: ImageType.asset,
@@ -76,12 +78,13 @@ class OrderFromToScreen extends HookWidget {
                           duration: 300.milliseconds,
                       ),
                     ),
-                    12.vSpace,
+                    6.vSpace,
                     LabelWithField(
                       label: S.of(context).source,
                       child: ValueListenableBuilder(
                         valueListenable: controller.citiesNotifier,
                         builder: (ctx, cities, child) => AppDropDownField(
+                          dropDownKey: controller.fromCityKey,
                           onChange: (v) {
                             controller.selectedFromCity = v;
                             controller.getTravels();
@@ -98,12 +101,13 @@ class OrderFromToScreen extends HookWidget {
                         ),
                       ),
                     ),
-                    12.vSpace,
+                    6.vSpace,
                     LabelWithField(
                       label: S.of(context).destination,
                       child: ValueListenableBuilder(
                         valueListenable: controller.citiesNotifier,
                         builder: (ctx, cities, child) => AppDropDownField(
+                          dropDownKey: controller.toCityKey,
                           onChange: (v) {
                             controller.selectedToCity = v;
                             controller.getTravels();
@@ -119,7 +123,7 @@ class OrderFromToScreen extends HookWidget {
                         ),
                       ),
                     ),
-                    12.vSpace,
+                    6.vSpace,
                     LabelWithField(
                       label: S.of(context).travelDate,
                       child: GestureDetector(
@@ -151,27 +155,47 @@ class OrderFromToScreen extends HookWidget {
                         ),
                       ),
                     ),
-                    12.vSpace,
-                    LabelWithField(
-                      label: S.of(context).companyName,
-                      child: ValueListenableBuilder(
-                        valueListenable: controller.companiesNotifier,
-                        builder: (ctx, value, child) => AppDropDownField(
-                          onChange: (v) {
-                            controller.selectedCompany = v;
-                            controller.companyDropDownKey?.currentState?.validate();
-                          },
-                          dropDownKey: controller.companyDropDownKey,
-                          contentPadding: EdgeInsets.zero,
-                          hintText: S.of(context).companyName,
-                          name: 'company',
-                          data: value,
-                          initValue: controller.selectedCompany,
-                          validator: FormBuilderValidators.required(),
-                        ),
+                    6.vSpace,
+                    SizedBox(
+                      height: 90.hx,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          if(controller.travelsResult?.isEmpty ?? false)
+                            AppTextWidget(
+                              S.current.noTripsAvailableForThisDate,
+                              style: context
+                                  .textTheme
+                                  .titleMedium
+                              ?.copyWith(
+                                color: Styles.colorOrange,
+                              ),
+                            )
+                          else if(!controller.isTravelAlreadySelected)
+                            ...[
+                              LabelWithField(
+                                label: S.of(context).companyName,
+                                child: ValueListenableBuilder(
+                                  valueListenable: controller.companiesNotifier,
+                                  builder: (ctx, value, child) => AppDropDownField(
+                                    onChange: controller.changeCompany,
+                                    dropDownKey: controller.companyDropDownKey,
+                                    contentPadding: EdgeInsets.zero,
+                                    hintText: S.of(context).companyName,
+                                    name: 'company',
+                                    data: value,
+                                    initValue: controller.selectedCompany,
+                                    validator: FormBuilderValidators.required(),
+                                  ),
+                                ),
+                              ),
+                              6.vSpace,
+                            ]
+                          else
+                            const SizedBox.shrink(),
+                        ],
                       ),
                     ),
-                    10.vSpace,
                     Hero(
                       tag: 'order-next',
                       child: AppGradientTextButton(
@@ -182,8 +206,6 @@ class OrderFromToScreen extends HookWidget {
                         content: S.current.next,
                       ),
                     ),
-                    context.mediaQueryPadding.bottom.vSpace,
-
                   ],
                 ),
               ),

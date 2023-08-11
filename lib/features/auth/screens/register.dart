@@ -29,7 +29,7 @@ class RegisterScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final fieldSeparator = 10.vSpace;
-    final controller = Controller.get(instance: RegisterController());
+    final controller = Controller.getInstance(instance: RegisterController());
     // final countryValue = useValueListenable(controller.selectedCountryNotifier);
 
     final cities = useState<List<DropdownItemDataModel>?>(

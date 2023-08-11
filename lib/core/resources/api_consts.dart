@@ -18,5 +18,7 @@ abstract class ApiConstants{
   static const dailyTravels = 'Client/DailyTravel/List';
   static const createOrder = 'Client/Order/Create';
   static const checkVoucher = 'Client/Order/checkCode';
+  static const cancelOrder = 'Client/Order/Cancel';
+  static const notifications = 'Client/Notification/List';
 
 }

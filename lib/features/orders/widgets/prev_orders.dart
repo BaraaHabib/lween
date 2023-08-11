@@ -10,6 +10,8 @@ import 'package:lween/core/controller/base_controller.dart';
 import 'package:lween/core/extended/get_utils/get_utils.dart';
 import 'package:lween/core/extended/numbers_ext.dart';
 import 'package:lween/core/lween/widgets/trip_card_widget.dart';
+import 'package:lween/core/navigation/navigation_service.dart';
+import 'package:lween/core/routing/app_router.dart';
 import 'package:lween/core/widgets/app_image.dart';
 import 'package:lween/core/widgets/app_text_widget.dart';
 import 'package:lween/core/widgets/empty_widget.dart';
@@ -24,7 +26,7 @@ class MyPreviousOrders extends HookWidget {
     super.key});
   @override
   Widget build(BuildContext context) {
-    final OrdersController controller = Controller.get(instance: OrdersController(),);
+    final OrdersController controller = Controller.getInstance(instance: OrdersController(),);
     return BlocBuilder<OrdersBloc,OrdersState>(
       bloc: sl<OrdersBloc>(),
       buildWhen: controller.buildWhen,
@@ -77,6 +79,11 @@ class MyPreviousOrders extends HookWidget {
                         from: item.fromCity?.text ?? '',
                         to: item.toCity?.text ?? '',
                         imageUrl: Assets.tripOrderIcon(context,),
+                        onTap: () {
+                          NavigationService.of(context).navigateTo(
+                            OrderDetailsScreenRoute(order: item,),
+                          );
+                        },
                       );
                     },
                   ),

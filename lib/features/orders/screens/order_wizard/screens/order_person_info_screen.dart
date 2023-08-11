@@ -3,25 +3,31 @@
 import 'package:auto_route/annotations.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:lween/core/app_state/appstate.dart';
+import 'package:lween/core/configurations/app_configuration.dart';
 import 'package:lween/core/configurations/assets.dart';
 import 'package:lween/core/configurations/styles/styles.dart';
 import 'package:lween/core/controller/base_controller.dart';
 import 'package:lween/core/extended/get_utils/get_utils.dart';
 import 'package:lween/core/extended/numbers_ext.dart';
 import 'package:lween/core/lween/widgets/app_scaffold.dart';
+import 'package:lween/core/widgets/animated/animated_toggle.dart';
 import 'package:lween/core/widgets/app_button.dart';
 import 'package:lween/core/widgets/app_text_widget.dart';
 import 'package:lween/core/widgets/text_field.dart';
+import 'package:lween/core/widgets/waiting_widget.dart';
+import 'package:lween/features/orders/bloc/orders_bloc.dart';
 import 'package:lween/features/orders/screens/order_wizard/order_wizard_controller.dart';
 import 'package:lween/features/orders/screens/order_wizard/screens/order_from_to_screen.dart';
 import 'package:lween/generated/l10n.dart';
 
-part '../widgets/order_person_info/voucher_widget.dart';
+part '../widgets/order_payment_method/voucher_widget.dart';
 
 @RoutePage()
 class OrderPersonInfoScreen extends HookWidget {
@@ -29,12 +35,12 @@ class OrderPersonInfoScreen extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final OrderWizardController controller = Controller.get();
+    final OrderWizardController controller = Controller.getInstance();
     useEffect(() {
       controller.initPassengersNames();
       return () {};
     },
-      const [],);
+    );
     return AppScaffold(
       title: S
           .of(context)

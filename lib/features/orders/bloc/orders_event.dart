@@ -31,12 +31,14 @@ class GetFilteredTravelsEvent extends OrdersEvent {
      this.toCity,
      this.fromCity,
      this.companyId,
+     this.ids,
   });
 
   final int? fromCity;
   final int? toCity;
   final int? companyId;
   final DateTime? date;
+  final List<String>? ids;
 
   @override
   List<Object?> get props => [];
@@ -60,6 +62,17 @@ class CheckVoucherEvent extends OrdersEvent {
 
   final String code;
   final int? paymentProvider;
+
+  @override
+  List<Object?> get props => [];
+}
+
+class CancelOrderEvent extends OrdersEvent {
+  const CancelOrderEvent({
+    required this.orderId,
+  });
+
+  final String orderId;
 
   @override
   List<Object?> get props => [];

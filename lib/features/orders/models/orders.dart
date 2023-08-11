@@ -1,8 +1,13 @@
 
+import 'package:flutter/material.dart';
 import 'package:lween/core/configurations/app_configuration.dart';
+import 'package:lween/core/configurations/styles/styles.dart';
+import 'package:lween/core/extended/get_utils/get_utils.dart';
 import 'package:lween/core/features/entities/entity.dart';
 import 'package:lween/core/features/entities/shared/lite_entity.dart';
+import 'package:lween/core/resources/constants.dart';
 import 'package:lween/features/home/models/home_entity.dart';
+import 'package:lween/generated/l10n.dart';
 
 class OrdersEntity extends ContentModel{
 
@@ -36,10 +41,91 @@ class OrderEntity extends ContentModel {
   String? travelTime;
   LiteEntity? fromCity;
   LiteEntity? toCity;
+  bool? canBeCanceled;
 
   String get formattedTravelTimeDate => AppConfigurations.appDisplayDateFormat.format(travelTimeDate);
+  String get formattedTravelTime => AppConfigurations.appDisplayTimeFormat.format(travelTimeDate);
 
   DateTime get travelTimeDate => DateTime.tryParse(travelTime ?? '')?.toLocal() ?? DateTime.now();
+
+  OrderPaymentStatus get statusEnum {
+    switch(status){
+      case -2:
+        return OrderPaymentStatus.rejected;
+      case -1:
+        return OrderPaymentStatus.canceled;
+      case 1:
+        return OrderPaymentStatus.pending;
+      case 2:
+        return OrderPaymentStatus.paid;
+      case 3:
+        return OrderPaymentStatus.convertedToPhysicalTicket;
+        default:
+          return OrderPaymentStatus.pending;
+    }
+  }
+
+  PaymentMethod get paymentMethodEnum {
+    switch(paymentProvider) {
+      case 1:
+        return PaymentMethod.mtn;
+      case 2:
+        return PaymentMethod.syriatel;
+      case 3:
+        return PaymentMethod.bemo;
+      case 4:
+        return PaymentMethod.fatora;
+      case 5:
+        return PaymentMethod.eCash;
+      default:
+        return PaymentMethod.cash;
+    }
+  }
+
+  bool get isPaid => statusEnum == OrderPaymentStatus.paid;
+
+  bool get isRejected => statusEnum == OrderPaymentStatus.rejected;
+
+  bool get isConverted => statusEnum == OrderPaymentStatus.convertedToPhysicalTicket;
+
+  bool get isPending => statusEnum == OrderPaymentStatus.pending;
+
+  bool get isCanceled => statusEnum == OrderPaymentStatus.canceled;
+
+
+  String get currentPaymentStatusText {
+    if(paymentMethodEnum == PaymentMethod.cash){
+      if (isPaid || isConverted) {
+        return S.current.payedInCenter;
+      }
+      else if(isPending){
+        return S.current.waitingPaymentInCompanyCenter;
+      }
+    }
+    return S.current.payedWithValue(paymentProviderText ?? '');
+  }
+
+  Color? paymentStatusTextColor(BuildContext context) {
+    if (!isPaid) {
+      return Styles.colorOrange;
+    }
+    return context.textTheme.headlineMedium?.color;
+  }
+
+  String? get paymentAmountText {
+    if (isPaid) {
+      return S.current.payedAmount(price ?? '');
+    }
+    return S.current.requiredPayment(price ?? '');
+  }
+
+  Color? paymentAmountTextColor(BuildContext context) {
+    if (isPaid) {
+      return Styles.blueColor;
+    }
+    return Styles.colorOrange;
+  }
+
 
   OrderEntity(
       {this.id,
@@ -84,6 +170,7 @@ class OrderEntity extends ContentModel {
         ? LiteEntity.fromJson(json['toCity'])
         : null;
     travelTime = json['travelTime'];
+    canBeCanceled = json['canBeCanceled'];
   }
 
   Map<String?, dynamic> toJson() {
@@ -104,6 +191,7 @@ class OrderEntity extends ContentModel {
       data['transportationEntity'] = transportationCompany?.toJson();
     }
     data['travelTime'] = travelTime;
+    data['canBeCanceled'] = canBeCanceled;
     return data;
   }
 

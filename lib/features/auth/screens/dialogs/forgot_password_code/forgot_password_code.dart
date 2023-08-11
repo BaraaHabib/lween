@@ -40,7 +40,7 @@ class ForgotPasswordCodeDialog extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Controller.get(
+    final controller = Controller.getInstance(
       instance: ForgotPasswordCodeDialogController(phone),);
     return BlocConsumer<AccountBloc, AccountState>(
         bloc: sl<AccountBloc>(),

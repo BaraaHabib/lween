@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:lween/core/app_state/appstate.dart';
 import 'package:lween/core/configurations/styles/styles.dart';
+import 'package:lween/core/controller/base_controller.dart';
 import 'package:lween/core/extended/get_utils/get_utils.dart';
 import 'package:lween/core/lween/widgets/app_scaffold.dart';
 import 'package:lween/core/navigation/navigation_service.dart';
@@ -23,8 +24,8 @@ class MainScreen extends HookWidget {
       padding: EdgeInsets.only(bottom: context.mediaQueryPadding.bottom,),
       child: AutoTabsScaffold(
         routes: const [
-          HomeScreenRoute(),
-          CompaniesRoutesScreenRoute(),
+          MainScreenStackRoute(),
+          CompaniesStackRoute(),
           MyOrdersScreenRoute(),
           AccountScreenRoute(),
           NotificationsScreenRoute(),
@@ -57,5 +58,4 @@ class MainScreen extends HookWidget {
   void _setActiveIndex(int index, {bool notify = false}) {
   }
 }
-
 

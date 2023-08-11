@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lween/core/configurations/assets.dart';
 import 'package:lween/core/configurations/styles/styles.dart';
 import 'package:shimmer/shimmer.dart';
 

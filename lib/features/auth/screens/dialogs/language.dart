@@ -40,14 +40,6 @@ class LanguageDialog extends HookWidget {
               Text(S.current.selectPreferredLanguage,
                 style: Theme.of(context).textTheme.titleLarge,
               ),
-              SizedBox.square(
-                dimension: 30,
-                child: FloatingActionButton(
-                  mini: true,
-                  onPressed: appState.toggleTheme,
-                  child: Icon(appState.isLightTheme ? Icons.sunny : Icons.sunny_snowing,),
-                ),
-              ),
             ],
           ),
           ...LocaleProvider.of(context)
@@ -56,7 +48,7 @@ class LanguageDialog extends HookWidget {
               .toList(),
           20.vSpace,
           AppGradientTextButton(
-            gradientType: AppTextButtonGradientType.primary,
+            gradientType: AppTextButtonGradientType.secondary,
             onTap: () {
               sl<LocaleProvider>().initLanguageSelected = true;
               Provider.of<LocaleProvider>(context,listen: false)
@@ -90,26 +82,28 @@ class _LanguageWidget extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return AppTextButton(
-      onPressed: (){
-        _changeSelection(language,context,);
+      onPressed: () {
+        _changeSelection(language, context,);
       },
       child: Row(
         children: [
           Radio(
             value: language.code,
             groupValue: selectedLanguage.value,
-            onChanged: (r){
-              _changeSelection(language,context,);
-
+            onChanged: (r) {
+              _changeSelection(language, context,);
             },
           ),
-          Text(language.name,style: context.textTheme.labelMedium,),
+          Text(language.name, style: context.textTheme.labelMedium,),
           const Spacer(),
           SizedBox.square(
             dimension: 30.rx,
-            child: AppImage(
-                path: language.icon,
-                type: ImageType.asset,
+            child: AppStateModel
+                .of(context)
+                .initAppEntity
+                .inStoreReview! ? null : AppImage(
+              path: language.icon,
+              type: ImageType.asset,
             ),
           )
         ],

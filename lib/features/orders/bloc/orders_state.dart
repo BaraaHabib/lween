@@ -229,3 +229,35 @@ class CheckVoucherError extends CheckVoucherState {
   List<Object> get props => [];
 }
 //#endregion check voucher
+
+//#region cancel order
+abstract class CancelOrderState extends OrdersState {
+  const CancelOrderState({
+    String? message,
+  }) : super(message: message);
+
+}
+
+class CancelOrderLoading extends CancelOrderState {
+  const CancelOrderLoading();
+
+  @override
+  List<Object> get props => [];
+}
+
+class CancelOrderLoaded extends CancelOrderState {
+  const CancelOrderLoaded();
+
+
+  @override
+  List<Object> get props => [];
+}
+
+class CancelOrderError extends CancelOrderState {
+
+  const CancelOrderError(String? message): super(message: message);
+
+  @override
+  List<Object> get props => [];
+}
+//#endregion cancel order

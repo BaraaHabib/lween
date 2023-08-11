@@ -41,10 +41,12 @@ class NavigationService {
   void restart() => clearAllAndPushNamed(SplashScreenRoute());
 
   Future<dynamic> navigateTo(PageRouteInfo route) async {
-    return await router.push(route, onFailure: (NavigationFailure f) {
+    return await closestRouter.push(route, onFailure: (NavigationFailure f) {
       AppLogger.log('${f.runtimeType} --- $f', LoggingType.error);
     });
   }
+
+  StackRouter get closestRouter => AutoRouter.of(context);
 
   // Future<dynamic> navigateToWithoutNav(PageRouteInfo route) async {
   //   return await router.push(route, onFailure: (NavigationFailure f) {

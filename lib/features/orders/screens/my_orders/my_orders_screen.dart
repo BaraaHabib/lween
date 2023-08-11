@@ -7,7 +7,9 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:lween/core/controller/base_controller.dart';
 import 'package:lween/core/extended/numbers_ext.dart';
 import 'package:lween/core/lween/widgets/app_scaffold.dart';
+import 'package:lween/core/navigation/navigation_service.dart';
 import 'package:lween/core/resources/constants.dart';
+import 'package:lween/core/routing/app_router.dart';
 import 'package:lween/core/widgets/empty_widget.dart';
 import 'package:lween/core/widgets/error_widget.dart';
 import 'package:lween/core/widgets/shimmer_ui.dart';
@@ -25,13 +27,12 @@ class MyOrdersScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
     MyOrdersController controller =
-    Controller.get(
+    Controller.getInstance(
       instance: MyOrdersController(),);
     return AppScaffold(
       title: S.current.myTickets,
       withBackButton: false,
       centerTitle: true,
-      navTab: NavTab.bookTrip,
       child: BlocBuilder<OrdersBloc, OrdersState>(
           bloc: OrdersBloc.instance,
           buildWhen: controller.buildWhen,
@@ -45,7 +46,9 @@ class MyOrdersScreen extends HookWidget {
                       itemCount:  6,
                       itemBuilder: (ctx, index) {return ShimmerUI.widgetLoader(
                         enabled: true,
-                        child: OrderItem(item: OrderEntity(),
+                        child: OrderItem(
+                          item: OrderEntity(),
+                          onTap: (){},
                         ),
                       );
                       },
@@ -77,7 +80,10 @@ class MyOrdersScreen extends HookWidget {
                               itemCount:  state.ordersResult.orders?.length ?? 0,
                               itemBuilder: (ctx, index) {
                                 final item = state.ordersResult.orders![index];
-                                return OrderItem(item: item,);
+                                return OrderItem(
+                                  item: item,
+                                  onTap: () => NavigationService.of(context).navigateTo(OrderDetailsScreenRoute(order: item,)),
+                                );
                               },
                             ),
                           ),
@@ -91,5 +97,16 @@ class MyOrdersScreen extends HookWidget {
           }
       ),
     );
+  }
+}
+
+
+@RoutePage()
+class MyOrdersStack extends StatelessWidget {
+  const MyOrdersStack({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const AutoRouter();
   }
 }

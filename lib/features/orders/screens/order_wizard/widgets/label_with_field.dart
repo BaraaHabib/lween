@@ -33,7 +33,7 @@ class LabelWithField extends StatelessWidget {
             ],
           ),
         ),
-        5.vSpace,
+        3.vSpace,
         child,
       ],
     );

@@ -1,5 +1,6 @@
 
 
+import 'package:equatable/equatable.dart';
 import 'package:lween/core/features/entities/entity.dart';
 
 class CompaniesEntity extends ContentModel{
@@ -96,7 +97,7 @@ class CompanyEntity extends ContentModel {
   List<Object?> get props => [id];
 }
 
-class LiteCompanyEntity {
+class LiteCompanyEntity extends Equatable {
   int? id;
   String? name;
   int? futureAllowedSchedulingDays;
@@ -125,4 +126,7 @@ class LiteCompanyEntity {
         userAvailableSeatsWithoutPayment;
     return data;
   }
+
+  @override
+  List<Object?> get props => [];
 }

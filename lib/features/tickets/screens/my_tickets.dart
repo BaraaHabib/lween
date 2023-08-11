@@ -14,7 +14,7 @@ class MyTicketsScreen extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final MyTicketsController controller = Controller.get(instance: MyTicketsController(),permanent: true,);
+    final MyTicketsController controller = Controller.getInstance(instance: MyTicketsController(),permanent: true,);
     return AppScaffold(
         title: S.of(context).myTickets,
         child: const Text('Tickets'),

@@ -27,7 +27,8 @@ abstract class ParamsModel<T extends BaseBodyModel>
   /// query parameters to be included in url
   Map<String, dynamic> get urlParams;
 
-  bool get authorized => false;
+  /// all API requests are authorized
+  bool get authorized => true;
 
   bool get paginated => false;
 

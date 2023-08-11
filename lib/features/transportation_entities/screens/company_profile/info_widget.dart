@@ -6,8 +6,8 @@ class InfoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final CompanyProfileScreenController controller = Controller.get();
-    final CompanyItemController companyController = Controller.get(key: controller.companyEntity.id.toString(),);
+    final CompanyProfileScreenController controller = Controller.getInstance();
+    final CompanyItemController companyController = Controller.getInstance(key: controller.companyEntity.id.toString(),);
     return SingleChildScrollView(
       child: Column(
         mainAxisSize: MainAxisSize.min,

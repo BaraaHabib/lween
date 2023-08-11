@@ -33,8 +33,6 @@ class CompanyItemWidget extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final CompanyItemController controller
-    = Controller.get(key: item.id?.toString(),);
     // final followedValue = useValueListenable(controller.isFollowedNotifier);
     return GestureDetector(
       onTap: (){

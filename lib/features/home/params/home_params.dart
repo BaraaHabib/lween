@@ -23,6 +23,9 @@ class HomeParams extends ParamsModel<HomeParamsBody> {
 
   @override
   List<Object?> get props => [url, urlParams, requestType, body];
+
+  @override
+  bool get authorized => true;
 }
 
 class HomeParamsBody extends BaseBodyModel {

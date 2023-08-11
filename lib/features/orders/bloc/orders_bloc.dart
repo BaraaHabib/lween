@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lween/features/orders/models/daily_travels.dart';
 import 'package:lween/features/orders/models/orders.dart';
 import 'package:lween/features/orders/models/voucher.dart';
+import 'package:lween/features/orders/params/cancel_order_params.dart';
 import 'package:lween/features/orders/params/check_voucher_params.dart';
 import 'package:lween/features/orders/params/create_order_params.dart';
 import 'package:lween/features/orders/params/daily_travel_params.dart';
@@ -29,6 +30,7 @@ class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
     on<GetFilteredTravelsEvent>(_getGetFilteredTravelsEventHandler);
     on<CreateOrderEvent>(_createOrderEventHandler);
     on<CheckVoucherEvent>(_checkVoucherEventHandler);
+    on<CancelOrderEvent>(_cancelOrderEventHandler);
   }
 
 
@@ -76,10 +78,11 @@ class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
       toCity: event.toCity, fromCity: event.fromCity, date: event.date,),);
     final res = await sl<OrdersRepository>().getTravels(
       TravelParams(
-        toCity: event.toCity, 
+        toCity: event.toCity,
         fromCity: event.fromCity,
         date: event.date,
         companyId: event.companyId,
+        ids: event.ids ?? [],
       ),
     );
     emit(
@@ -100,7 +103,8 @@ class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
     );
   }
 
-  Future<FutureOr<void>> _createOrderEventHandler(CreateOrderEvent event, Emitter<OrdersState> emit) async {
+  Future<FutureOr<void>> _createOrderEventHandler(CreateOrderEvent event,
+      Emitter<OrdersState> emit) async {
     emit(const CreateOrderLoading(),);
     final res = await sl<OrdersRepository>().createOrder(event.params,);
     emit(
@@ -109,19 +113,37 @@ class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
       ),
     );
   }
-  
-  Future<FutureOr<void>> _checkVoucherEventHandler(CheckVoucherEvent event, Emitter<OrdersState> emit) async {
+
+  Future<FutureOr<void>> _checkVoucherEventHandler(CheckVoucherEvent event,
+      Emitter<OrdersState> emit) async {
     emit(const CheckVoucherLoading(),);
     final res = await sl<OrdersRepository>().checkVoucher(
-        CheckVoucherParams(
-          code: event.code,
-          paymentProvider: event.paymentProvider,
-        ),
+      CheckVoucherParams(
+        code: event.code,
+        paymentProvider: event.paymentProvider,
+      ),
     );
     emit(
       res.fold((l) => CheckVoucherError(l.errorMessage ?? ''),
             (r) => CheckVoucherLoaded(voucher: r,),
       ),
     );
+  }
+
+  Future<FutureOr<void>> _cancelOrderEventHandler(CancelOrderEvent event,
+      Emitter<OrdersState> emit) async {
+    emit(const CancelOrderLoading(),);
+    final res = await sl<OrdersRepository>().cancelOrder(
+        CancelOrderParams(orderId: event.orderId));
+    emit(
+      res.fold((l) => CancelOrderError(l.errorMessage ?? ''),
+            (r) => const CancelOrderLoaded(),
+      ),
+    );
+  }
+
+  refreshOrders(){
+    add(const GetLatestOrdersEvent(),);
+    add(const GetOrdersEvent(),);
   }
 }

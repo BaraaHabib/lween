@@ -8,7 +8,7 @@ class OrderSummeryWidget extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final OrderWizardController controller = Controller.get();
+    final OrderWizardController controller = Controller.getInstance();
     return ValueListenableBuilder(
       valueListenable: controller.orderBodyNotifier,
 

@@ -10,7 +10,7 @@ class SeatsRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final OrderWizardController controller = Controller.get();
+    final OrderWizardController controller = Controller.getInstance();
     return Wrap(
       children: seats.map((e) {
         return SizedBox.square(

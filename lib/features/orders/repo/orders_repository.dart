@@ -5,6 +5,7 @@ import 'package:lween/core/features/entities/error_entity.dart';
 import 'package:lween/features/orders/models/daily_travels.dart';
 import 'package:lween/features/orders/models/orders.dart';
 import 'package:lween/features/orders/models/voucher.dart';
+import 'package:lween/features/orders/params/cancel_order_params.dart';
 import 'package:lween/features/orders/params/check_voucher_params.dart';
 import 'package:lween/features/orders/params/create_order_params.dart';
 import 'package:lween/features/orders/params/daily_travel_params.dart';
@@ -63,6 +64,18 @@ class OrdersRepository extends IOrdersRepository {
       var res = await remoteDataSource.getRemoteData(model,);
       final data = Entity<VoucherEntity>.fromJson(
         res, parser: VoucherEntity.fromJson,);
+      return Right(data.content!);
+    } on AppException catch (e) {
+      return Left(ErrorEntity.fromAppException(e));
+    }
+  }
+
+  @override
+  Future<Either<ErrorEntity, EmptyEntity>> cancelOrder(CancelOrderParams model) async {
+    try {
+      var res = await remoteDataSource.getRemoteData(model,);
+      final data = Entity<EmptyEntity>.fromJson(
+        res, parser: EmptyEntity.fromJson,);
       return Right(data.content!);
     } on AppException catch (e) {
       return Left(ErrorEntity.fromAppException(e));

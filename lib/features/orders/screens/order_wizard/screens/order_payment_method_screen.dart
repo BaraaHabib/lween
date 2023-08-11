@@ -28,115 +28,157 @@ class OrderPaymentMethodScreen extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final OrderWizardController controller = Controller.get();
+    final OrderWizardController controller = Controller.getInstance();
+    useEffect(() {
+      controller.checkVoucher();
+      controller.orderCreationTimestamp = DateTime
+          .now()
+          .millisecondsSinceEpoch
+          .toString();
+      return () {};
+    }, const [],);
     return BlocConsumer<OrdersBloc, OrdersState>(
         bloc: OrdersBloc.instance,
         listener: controller.paymentMethodListener,
         builder: (context, state) {
-          return IgnorePointer(
-            ignoring: state is CreateOrderLoading,
-            child: AppScaffold(
-              title: S
-                  .of(context)
-                  .choosePaymentMethod,
-              child: ListView(
-
-                children: [
-                  20.vSpace,
-                  Container(
-                    height: 50.hx,
-                    padding: EdgeInsets.all(10.rx),
-                    decoration: BoxDecoration(
-                      color: Styles.warningColor,
-                      border: Border.all(color: const Color(0xFFD2C27B).withOpacity(0.2),),
-                    ),
-                    child: Row(
+          return SizedBox(
+            child: IgnorePointer(
+              ignoring: state is CreateOrderLoading,
+              child: AppScaffold(
+                title: S
+                    .of(context)
+                    .choosePaymentMethod,
+                child: Stack(
+                  children: [
+                    ListView(
                       children: [
-                        AppImage(
-                          path: Assets.warningPNG, type: ImageType.asset,
-                        ),
-                        6.hSpace,
-                        Expanded(
-                          child: AppTextWidget(
-                            S
-                                .of(context)
-                                .orderDeletionWarning,
-                            maxLines: 2,
-                            style: context.textTheme.headlineMedium,
+                        20.vSpace,
+                        Container(
+                          // height: 50.hx,
+                          padding: EdgeInsets.all(10.rx),
+                          decoration: BoxDecoration(
+                            color: Styles.warningColor,
+                            borderRadius: Styles.borderRadius14px,
+                            border: Border.all(
+                              color: const Color(0xFFD2C27B).withOpacity(0.2),),
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 390.hx,
-                    child: ValueListenableBuilder(
-                        valueListenable: controller.selectedPaymentMethod,
-                        builder: (context, value, child) {
-                          return ListView(
+                          child: Row(
                             children: [
-                              PaymentMethodWidget(
-                                icon: Assets.syriatelPNG,
-                                title: S
-                                    .of(context)
-                                    .syriatelCash,
-                                paymentMethod: PaymentMethod.syriatel,
-                                onTap: controller.changeSelectedPaymentMethod,
+                              SizedBox.square(
+                                dimension: 23.rx,
+                                child: AppImage(
+                                  path: Assets.warningPNG,
+                                  type: ImageType.asset,
+                                ),
                               ),
-                              PaymentMethodWidget(
-                                icon: Assets.mtnPNG,
-                                title: S
-                                    .of(context)
-                                    .cashMtn,
-                                paymentMethod: PaymentMethod.mtn,
-                                onTap: controller.changeSelectedPaymentMethod,
-                              ),
-                              PaymentMethodWidget(
-                                icon: Assets.bemoPNG,
-                                title: S
-                                    .of(context)
-                                    .bemoBank,
-                                paymentMethod: PaymentMethod.bemo,
-                                onTap: controller.changeSelectedPaymentMethod,
-                              ),
-                              PaymentMethodWidget(
-                                icon: Assets.fatoraLogoPNG(context),
-                                title: S
-                                    .of(context)
-                                    .fatora,
-                                paymentMethod: PaymentMethod.fatora,
-                                onTap: controller.changeSelectedPaymentMethod,
-                              ),
-                              PaymentMethodWidget(
-                                icon: Assets.eCashPNG(context),
-                                title: S.of(context).eCash,
-                                paymentMethod: PaymentMethod.eCash,
-                                onTap: controller.changeSelectedPaymentMethod,
-                              ),
-                              PaymentMethodWidget(
-                                icon: Assets.cashPNG,
-                                title: S
-                                    .of(context)
-                                    .payAtCenter,
-                                paymentMethod: PaymentMethod.cash,
-                                onTap: controller.changeSelectedPaymentMethod,
+                              6.hSpace,
+                              Expanded(
+                                child: AppTextWidget(
+                                  S
+                                      .of(context)
+                                      .orderDeletionWarning,
+                                  maxLines: 2,
+                                  style: context.textTheme.headlineMedium,
+                                ),
                               ),
                             ],
+                          ),
+                        ),
+                        5.vSpace,
+                        SizedBox(
+                          height: 300.hx,
+                          child: ValueListenableBuilder(
+                              valueListenable: controller.selectedPaymentMethod,
+                              builder: (context, value, child) {
+                                return ListView(
+                                  children: [
+                                    PaymentMethodWidget(
+                                      icon: Assets.cashPNG,
+                                      title: S
+                                          .of(context)
+                                          .payAtCenter,
+                                      paymentMethod: PaymentMethod.cash,
+                                      onTap: controller
+                                          .changeSelectedPaymentMethod,
+                                      disabled: controller
+                                          .userExceededAllowedSeatsWithoutPayment,
+                                    ),
+                                    PaymentMethodWidget(
+                                      icon: Assets.syriatelPNG,
+                                      title: S
+                                          .of(context)
+                                          .syriatelCash,
+                                      paymentMethod: PaymentMethod.syriatel,
+                                      onTap: controller
+                                          .changeSelectedPaymentMethod,
+                                    ),
+                                    PaymentMethodWidget(
+                                      icon: Assets.mtnPNG,
+                                      title: S
+                                          .of(context)
+                                          .cashMtn,
+                                      paymentMethod: PaymentMethod.mtn,
+                                      onTap: controller
+                                          .changeSelectedPaymentMethod,
+                                    ),
+                                    PaymentMethodWidget(
+                                      icon: Assets.bemoPNG,
+                                      title: S
+                                          .of(context)
+                                          .bemoBank,
+                                      paymentMethod: PaymentMethod.bemo,
+                                      onTap: controller
+                                          .changeSelectedPaymentMethod,
+                                    ),
+                                    PaymentMethodWidget(
+                                      icon: Assets.fatoraLogoPNG(context),
+                                      title: S
+                                          .of(context)
+                                          .fatora,
+                                      paymentMethod: PaymentMethod.fatora,
+                                      onTap: controller
+                                          .changeSelectedPaymentMethod,
+                                    ),
+                                    PaymentMethodWidget(
+                                      icon: Assets.eCashPNG(context),
+                                      title: S
+                                          .of(context)
+                                          .eCash,
+                                      paymentMethod: PaymentMethod.eCash,
+                                      onTap: controller
+                                          .changeSelectedPaymentMethod,
+                                    ),
+
+                                  ],
+                                );
+                              }
+                          ),
+                        ),
+                        const VoucherWidget(),
+                        45.vSpace,
+                      ],
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      child: (state is CreateOrderLoading) ?
+                    const WaitingWidget()
+                        :
+                    BlocBuilder<OrdersBloc, OrdersState>(
+                        bloc: OrdersBloc.instance,
+                        buildWhen: controller.voucherBuildWhen,
+                        builder: (context, voucherState) {
+                          return IgnorePointer(
+                            ignoring: voucherState is CheckVoucherLoading,
+                            child: AppGradientTextButton(
+                              content: S.current.next,
+                              gradientType: AppTextButtonGradientType.secondary,
+                              onTap: () => controller.pay(context),
+                            ),
                           );
                         }
-                    ),
-                  ),
-                  const VoucherWidget(),
-                  12.vSpace,
-                  if(state is CreateOrderLoading)
-                    const WaitingWidget()
-                  else
-                    AppGradientTextButton(
-                      content: S.current.next,
-                      gradientType: AppTextButtonGradientType.secondary,
-                      onTap: () => controller.pay(context),
-                    )
-                ],
+                    ),)
+                  ],
+                ),
               ),
             ),
           );

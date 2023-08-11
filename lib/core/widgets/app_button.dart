@@ -85,27 +85,31 @@ class AppGradientTextButton extends HookWidget {
     this.onTap,
     required this.content,
     this.color,
+    this.fontColor,
     this.borderColor,
     this.fixedSize,
     this.gradientType,
     this.fontSize,
+    this.withGradiant = true,
   }) : super(key: key);
 
   final Function()? onTap;
   final String content;
   final Color? color;
+  final Color? fontColor;
   final Color? borderColor;
   final Size? fixedSize;
   final double? fontSize;
   final AppTextButtonGradientType? gradientType;
-
+  final bool withGradiant;
   @override
   Widget build(BuildContext context) {
     return Container(
       width: fixedSize?.width ?? 312.wx,
       height: fixedSize?.height ?? 44.hx,
       decoration: BoxDecoration(
-        gradient: LinearGradient(
+        color: color,
+        gradient: withGradiant ? LinearGradient(
           colors: [
             if(gradientType == AppTextButtonGradientType.secondary)
               ...[
@@ -118,7 +122,7 @@ class AppGradientTextButton extends HookWidget {
                 Styles.buttonPrimaryColor2,
               ],
           ],
-        ),
+        ) : null,
         borderRadius: Styles.buttonBorderRadius,
       ),
       child: ElevatedButton(
@@ -135,7 +139,7 @@ class AppGradientTextButton extends HookWidget {
           child: Text(
             content,
             style: TextStyle(
-                color: Styles.buttonTextColor,
+                color: fontColor ?? Styles.buttonTextColor,
                 fontSize: fontSize,
             ),
           ),
@@ -169,56 +173,59 @@ class AppGradientTextButtonWithIcon extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: padding ?? EdgeInsets.zero,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            if(gradientType == AppTextButtonGradientType.secondary)
-              ...[
-                Styles.buttonSecondaryColor1,
-                Styles.buttonSecondaryColor2,
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: padding ?? EdgeInsets.zero,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              if(gradientType == AppTextButtonGradientType.secondary)
+                ...[
+                  Styles.buttonSecondaryColor1,
+                  Styles.buttonSecondaryColor2,
 
-              ] else
-              ...[
-                Styles.buttonPrimaryColor1,
-                Styles.buttonPrimaryColor2,
-              ],
-          ],
+                ] else
+                ...[
+                  Styles.buttonPrimaryColor1,
+                  Styles.buttonPrimaryColor2,
+                ],
+            ],
+          ),
+          borderRadius: Styles.buttonBorderRadius,
         ),
-        borderRadius: Styles.buttonBorderRadius,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          if(icon != null)
-            AppImage(
-              type: ImageType.asset,
-              path: icon!,
-            ).paddingOnly(bottom: 4),
-          5.hSpace,
-          ElevatedButton(
-            onPressed: onTap,
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.transparent,
-              shadowColor: Colors.transparent,
-              shape: RoundedRectangleBorder(
-                borderRadius: Styles.buttonBorderRadius,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            if(icon != null)
+              AppImage(
+                type: ImageType.asset,
+                path: icon!,
+              ).paddingOnly(bottom: 4),
+            5.hSpace,
+            ElevatedButton(
+              onPressed: onTap,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.transparent,
+                shadowColor: Colors.transparent,
+                shape: RoundedRectangleBorder(
+                  borderRadius: Styles.buttonBorderRadius,
+                ),
+                padding: EdgeInsets.zero,
               ),
-              padding: EdgeInsets.zero,
-            ),
-            child: FittedBox(
-              fit: BoxFit.scaleDown,
-              child: Text(
-                content,
-                style: TextStyle(
-                  color: Styles.buttonTextColor,
-                  fontSize: fontSize,
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(
+                  content,
+                  style: TextStyle(
+                    color: Styles.buttonTextColor,
+                    fontSize: fontSize,
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -1,21 +1,26 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:lween/core/loaders/loading_overlay.dart';
-import 'package:lween/features/auth/screens/account.dart';
+import 'package:lween/features/auth/screens/account/account.dart';
 import 'package:lween/features/auth/screens/login.dart';
 import 'package:lween/features/auth/screens/reset_password.dart';
 import 'package:lween/features/auth/screens/register.dart';
 import 'package:lween/features/auth/screens/verify_code.dart';
 import 'package:lween/features/home/main_screen.dart';
 import 'package:lween/features/home/screens/home/home_screen.dart';
-import 'package:lween/features/notifications/screens/notifications.dart';
+import 'package:lween/features/notifications/screens/notifications_screen.dart';
 import 'package:lween/features/onboarding/screens/splash.dart';
 import 'package:lween/features/orders/models/daily_travels.dart';
+import 'package:lween/features/orders/models/orders.dart';
 import 'package:lween/features/orders/screens/my_orders/my_orders_screen.dart';
+import 'package:lween/features/orders/screens/order_wizard/screens/order_details_screen.dart';
 import 'package:lween/features/orders/screens/order_wizard/screens/order_from_to_screen.dart';
 import 'package:lween/features/orders/screens/order_wizard/screens/order_payment_method_screen.dart';
 import 'package:lween/features/orders/screens/order_wizard/screens/order_person_info_screen.dart';
+import 'package:lween/features/orders/screens/order_wizard/screens/order_preview_vehicle_screen.dart';
 import 'package:lween/features/orders/screens/order_wizard/screens/order_seats_screen.dart';
+import 'package:lween/features/orders/screens/order_wizard/screens/order_travels_screen.dart';
+import 'package:lween/features/orders/screens/order_wizard/screens/order_trip_preview_screen.dart';
 import 'package:lween/features/tickets/screens/my_tickets.dart';
 import 'package:lween/features/transportation_entities/models/transportation_entities.dart';
 import 'package:lween/features/transportation_entities/screens/company_profile/company_profile_screen.dart';
@@ -65,12 +70,65 @@ class AppRouter extends _$AppRouter {
         path: '/${MainScreenRoute.name}',
         transitionsBuilder: TransitionsBuilders.fadeIn,
         children: [
-          CustomRoute(page: HomeScreenRoute.page,
+          CustomRoute(
+            page: MainScreenStackRoute.page,
             transitionsBuilder: TransitionsBuilders.fadeIn,
+            children: [
+              CustomRoute(
+                path: '',
+                transitionsBuilder: TransitionsBuilders.fadeIn,
+                page: HomeScreenRoute.page,
+              ),
+              CustomRoute(
+                path: CompanyProfileScreenRoute.name,
+                transitionsBuilder: TransitionsBuilders.fadeIn,
+                page: CompanyProfileScreenRoute.page,
+              ),
+              CustomRoute(
+                path: OrderFromToScreenRoute.name,
+                transitionsBuilder: TransitionsBuilders.fadeIn,
+                page: OrderFromToScreenRoute.page,
+              ),
+              CustomRoute(
+                path: OrderSeatsScreenRoute.name,
+                transitionsBuilder: TransitionsBuilders.fadeIn,
+                page: OrderSeatsScreenRoute.page,
+              ),
+              CustomRoute(
+                path: OrderPersonInfoScreenRoute.name,
+                transitionsBuilder: TransitionsBuilders.fadeIn,
+                page: OrderPersonInfoScreenRoute.page,
+              ),
+              CustomRoute(
+                path: OrderPaymentMethodScreenRoute.name,
+                transitionsBuilder: TransitionsBuilders.fadeIn,
+                page: OrderPaymentMethodScreenRoute.page,
+              ),
+              CustomRoute(
+                path: OrderTravelsScreenRoute.name,
+                transitionsBuilder: TransitionsBuilders.fadeIn,
+                page: OrderTravelsScreenRoute.page,
+              ),
+              CustomRoute(
+                path: OrderDetailsScreenRoute.name,
+                transitionsBuilder: TransitionsBuilders.fadeIn,
+                page: OrderDetailsScreenRoute.page,
+              ),
+              CustomRoute(
+                path: OrderTripPreviewScreenRoute.name,
+                transitionsBuilder: TransitionsBuilders.fadeIn,
+                page: OrderTripPreviewScreenRoute.page,
+              ),
+              CustomRoute(
+                path: OrderPreviewVehicleScreenRoute.name,
+                transitionsBuilder: TransitionsBuilders.fadeIn,
+                page: OrderPreviewVehicleScreenRoute.page,
+              ),
+            ],
           ),
           CustomRoute(
-            path: CompaniesRoutesScreenRoute.name,
-            page: CompaniesRoutesScreenRoute.page,
+            path: CompaniesStackRoute.name,
+            page: CompaniesStackRoute.page,
             transitionsBuilder: TransitionsBuilders.fadeIn,
             children: [
               CustomRoute(
@@ -103,40 +161,69 @@ class AppRouter extends _$AppRouter {
                 transitionsBuilder: TransitionsBuilders.fadeIn,
                 page: OrderPaymentMethodScreenRoute.page,
               ),
-
+              CustomRoute(
+                path: OrderTravelsScreenRoute.name,
+                transitionsBuilder: TransitionsBuilders.fadeIn,
+                page: OrderTravelsScreenRoute.page,
+              ),
+              CustomRoute(
+                path: OrderDetailsScreenRoute.name,
+                transitionsBuilder: TransitionsBuilders.fadeIn,
+                page: OrderDetailsScreenRoute.page,
+              ),
+              CustomRoute(
+                path: OrderTripPreviewScreenRoute.name,
+                transitionsBuilder: TransitionsBuilders.fadeIn,
+                page: OrderTripPreviewScreenRoute.page,
+              ),
+              CustomRoute(
+                path: OrderPreviewVehicleScreenRoute.name,
+                transitionsBuilder: TransitionsBuilders.fadeIn,
+                page: OrderPreviewVehicleScreenRoute.page,
+              ),
             ],
           ),
 
-          CustomRoute(page: NotificationsScreenRoute.page,
+          CustomRoute(
+            path: NotificationsStackRoute.name,
+            page: NotificationsStackRoute.page,
             transitionsBuilder: TransitionsBuilders.fadeIn,
+            children: [
+              CustomRoute(
+                path: '',
+                transitionsBuilder: TransitionsBuilders.fadeIn,
+                page: NotificationsScreenRoute.page,
+              ),
+            ],
           ),
           CustomRoute(page: AccountScreenRoute.page,
             transitionsBuilder: TransitionsBuilders.fadeIn,
           ),
-          CustomRoute(page: MyOrdersScreenRoute.page,
+          CustomRoute(
+            page: MyOrdersStackRoute.page,
             transitionsBuilder: TransitionsBuilders.fadeIn,
+            children: [
+              CustomRoute(
+                path: '',
+                transitionsBuilder: TransitionsBuilders.fadeIn,
+                page: MyOrdersScreenRoute.page,
+              ),
+              CustomRoute(
+                path: OrderDetailsScreenRoute.name,
+                transitionsBuilder: TransitionsBuilders.fadeIn,
+                page: OrderDetailsScreenRoute.page,
+              ),
+            ],
           ),
-
-         ]
+        ]
     ),
-    // CustomRoute(
-    //     page: CompaniesNestedScreenRoute.page,
-    //     path: CompaniesNestedScreenRoute.name,
-    //     transitionsBuilder: TransitionsBuilders.fadeIn,
-    //     children: [
-    //       CustomRoute(
-    //         path:CompaniesScreenRoute.name ,
-    //         page: CompaniesScreenRoute.page,
-    //       ),
-    //       CustomRoute(
-    //         path:CompanyProfileScreenRoute.name ,
-    //         page: CompanyProfileScreenRoute.page,
-    //       ),
-    //     ]
-    // ),
-
     CustomRoute(page: AppWebViewRoute.page,
       transitionsBuilder: TransitionsBuilders.fadeIn,),
-
+    CustomRoute(
+      // path: OrderDetailsScreenRoute.name,
+      transitionsBuilder: TransitionsBuilders.fadeIn,
+      page: OrderDetailsScreenRoute.page,
+    ),
   ];
+
 }

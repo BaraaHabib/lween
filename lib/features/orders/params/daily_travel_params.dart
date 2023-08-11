@@ -9,6 +9,7 @@ class TravelParams extends ParamsModel<DailyTravelBody> {
     int pageLength = 4,
     int page = 0,
     this.withPagination = false,
+    this.ids = const [],
 
     this.companyId, this.fromCity, this.toCity, this.date,
   })
@@ -19,6 +20,7 @@ class TravelParams extends ParamsModel<DailyTravelBody> {
   final int? fromCity;
   final int? toCity;
   final DateTime? date;
+  final List<String> ids;
 
   @override
   Map<String, String> get additionalHeaders => {};
@@ -40,6 +42,8 @@ class TravelParams extends ParamsModel<DailyTravelBody> {
       'FromCityId' : fromCity!.toString(),
     if(toCity != null)
       'ToCityId' : toCity!.toString(),
+    if(ids.isNotEmpty)
+      'Ids': ids.join(','),
 
 
   };

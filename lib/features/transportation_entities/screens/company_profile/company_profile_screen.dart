@@ -40,8 +40,11 @@ class CompanyProfileScreen extends HookWidget {
   Widget build(BuildContext context) {
     final tabsController = useTabController(initialLength: 2,initialIndex: 0);
     final CompanyProfileScreenController controller =
-    Controller.get(instance: CompanyProfileScreenController(companyEntity, tabsController),);
-    final CompanyItemController companyController = Controller.get(key: controller.companyEntity.id.toString(),);
+    Controller.getInstance(instance: CompanyProfileScreenController(companyEntity, tabsController),);
+    final CompanyItemController companyController = Controller.getInstance(
+      key: controller.companyEntity.id.toString(),
+    );
+
     return DefaultTabController(
       length: 2,
       initialIndex: 0,
@@ -144,7 +147,7 @@ class TabItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final CompanyProfileScreenController controller = Controller.get();
+    final CompanyProfileScreenController controller = Controller.getInstance();
     return ValueListenableBuilder(
         valueListenable: controller.currentIndexNotifier,
         builder: (context, currentIndex, child) {

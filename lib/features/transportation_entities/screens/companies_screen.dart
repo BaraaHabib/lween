@@ -25,11 +25,10 @@ class CompaniesScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
     CompaniesController controller =
-    Controller.get(
+    Controller.getInstance(
       instance: CompaniesController(), );
     return AppScaffold(
       title: S.current.transportationEntities,
-      navTab: NavTab.bookTrip,
       withBackButton: false,
       centerTitle: true,
       child: BlocBuilder<CompanyBloc, CompanyState>(
@@ -101,8 +100,8 @@ class CompaniesScreen extends HookWidget {
 }
 
 @RoutePage()
-class CompaniesRoutesScreen extends HookWidget {
-  const CompaniesRoutesScreen({super.key});
+class CompaniesStack extends HookWidget {
+  const CompaniesStack({super.key});
 
   @override
   Widget build(BuildContext context) {

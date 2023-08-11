@@ -22,7 +22,7 @@ class HomeSlider extends HookWidget {
   Widget build(BuildContext context) {
     useAutomaticKeepAlive(wantKeepAlive: true,);
     final HomeSliderController controller =
-    Controller.get(instance: HomeSliderController(ads), permanent: true,);
+    Controller.getInstance(instance: HomeSliderController(ads), permanent: true,);
     bool isVideo = false;
 
     if (ads.any((ad) => ad.isVideo)) {

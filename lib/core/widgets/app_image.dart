@@ -14,7 +14,7 @@ import 'package:lween/core/widgets/waiting_widget.dart';
 import '../resources/constants.dart';
 
 class AppImage extends StatelessWidget {
-  final String path;
+  String? path;
   final ImageType type;
   final BoxFit fit;
   Widget? errorWidget;
@@ -24,6 +24,7 @@ class AppImage extends StatelessWidget {
   final double? height;
   final double? width;
   final Color? backgroundColor;
+  final Color? color;
   final EdgeInsets? margin;
   final String? errorImage;
 
@@ -41,7 +42,9 @@ class AppImage extends StatelessWidget {
     this.margin,
     this.border,
     this.errorImage,
+    this.color,
   }) {
+    path ??= Assets.logoPNG;
     errorWidget ??= Image.asset(
       errorImage ?? Assets.logoPNG,
     );
@@ -80,41 +83,31 @@ class AppImage extends StatelessWidget {
           builder: (context) {
             switch (type) {
               case ImageType.cachedNetwork:
-                if (path.split('.').lastOrNull?.contains('svg') ?? false) {
+                if (path?.split('.').lastOrNull?.contains('svg') ?? false) {
                   return SvgPicture.network(
-                    path,
-                    // errorBuilder: (context, _, i) => errorWidget!,
-                    // loadingBuilder: (BuildContext context, Widget child,
-                    //     ImageChunkEvent? loadingProgress) {
-                    //   if (loadingProgress == null) return child;
-                    //   return loadingWidget ?? const WaitingWidget();
-                    // },
+                    path!,
+                    colorFilter: color == null ? null : ColorFilter.mode(color!, BlendMode.srcIn,),
                     fit: BoxFit.contain,
                   );
                 }
                 return CachedNetworkImage(
-                  imageUrl: path,
+                  imageUrl: path!,
                   fit: fit,
                   progressIndicatorBuilder: (context, url, downloadProgress) =>
                       loadingWidget ?? const WaitingWidget(),
                   errorWidget: (context, _, i) => errorWidget!,
+                  color: color,
                 );
               case ImageType.network:
-                if (path.split('.').lastOrNull?.contains('svg') ?? false) {
+                if (path!.split('.').lastOrNull?.contains('svg') ?? false) {
                   return SvgPicture.network(
-                    path,
-                    // color: Colors.re,
-                    // errorBuilder: (context, _, i) => errorWidget!,
-                    // loadingBuilder: (BuildContext context, Widget child,
-                    //     ImageChunkEvent? loadingProgress) {
-                    //   if (loadingProgress == null) return child;
-                    //   return loadingWidget ?? const WaitingWidget();
-                    // },
+                    path!,
+                    colorFilter: color == null ? null : ColorFilter.mode(color!, BlendMode.srcIn,),
                     fit: BoxFit.contain,
                   );
                 }
                 return Image.network(
-                  path,
+                  path!,
                   errorBuilder: (context, _, i) => errorWidget!,
                   loadingBuilder: (BuildContext context, Widget child,
                       ImageChunkEvent? loadingProgress) {
@@ -122,27 +115,30 @@ class AppImage extends StatelessWidget {
                     return loadingWidget ?? const WaitingWidget();
                   },
                   fit: fit,
+                  color: color,
                 );
               case ImageType.asset:
-                if (path.split('.').lastOrNull?.contains('svg') ?? false) {
+                if (path!.split('.').lastOrNull?.contains('svg') ?? false) {
                   return SvgPicture.asset(
-                    path,
+                    path!,
                     placeholderBuilder: (ctx) => loadingWidget!,
-                    // errorBuilder: (context, _, i) => errorWidget!,
+                    colorFilter: color == null ? null : ColorFilter.mode(color!, BlendMode.srcIn,),
                     fit: fit,
                   );
                 } else {
                   return Image.asset(
-                    path,
+                    path!,
                     errorBuilder: (context, _, i) => errorWidget!,
                     fit: fit,
+                    color: color,
                   );
                 }
               case ImageType.file:
                 return Image.file(
-                  File(path),
+                  File(path!,),
                   fit: fit,
                   errorBuilder: (context, _, i) => errorWidget!,
+                  color: color,
                 );
               default:
                 return const SizedBox();

@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lween/core/configurations/styles/styles.dart';
 import 'package:lween/core/controller/base_controller.dart';
 import 'package:lween/core/extended/get_utils/get_utils.dart';
@@ -9,6 +10,8 @@ import 'package:lween/core/resources/constants.dart';
 import 'package:lween/core/widgets/app_image.dart';
 import 'package:lween/core/widgets/app_text_button.dart';
 import 'package:lween/features/orders/screens/order_wizard/order_wizard_controller.dart';
+import 'package:lween/generated/l10n.dart';
+import 'package:screenshot/screenshot.dart';
 
 
 
@@ -19,45 +22,79 @@ class PaymentMethodWidget extends StatelessWidget {
     required this.title,
     required this.icon,
     this.onTap,
+    this.disabled = false,
 
   });
 
   final PaymentMethod paymentMethod;
   final String title;
   final String icon;
+  final bool disabled;
   final Function(PaymentMethod p,)? onTap;
   @override
   Widget build(BuildContext context) {
-    final OrderWizardController controller = Controller.get();
-    return Card(
-      child: InkWell(
-        onTap: (){
-          onTap?.call(paymentMethod,);
-        },
-        borderRadius: Styles.borderRadius16px,
-        child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: Row(
-            children: [
-              Radio(
-                value: paymentMethod.paymentProviderEnum,
-                groupValue: controller.selectedPaymentMethod.value?.paymentProviderEnum,
-                onChanged: (r){
-                  onTap?.call(paymentMethod,);
-                },
-              ),
-              Text(title,style: context.textTheme.labelMedium,),
-              const Spacer(),
-              SizedBox(
-                width: 60.wx,
-                height: 50.hx,
-                child: AppImage(
-                  path: icon,
-                  type: ImageType.asset,
-                  fit: BoxFit.contain,
+    final OrderWizardController controller = Controller.getInstance();
+    return IgnorePointer(
+      ignoring: disabled,
+      child: Card(
+        child: InkWell(
+          onTap: (){
+            onTap?.call(paymentMethod,);
+          },
+          borderRadius: Styles.borderRadius16px,
+          child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: Row(
+              children: [
+                Radio(
+                  value: paymentMethod.paymentProviderEnum,
+                  groupValue: controller.selectedPaymentMethod.value?.paymentProviderEnum,
+                  onChanged: (r){
+                    onTap?.call(paymentMethod,);
+                  },
+                  fillColor: disabled ? MaterialStateColor.resolveWith((states) => Styles.liteGrayColor,) : null,
                 ),
-              )
-            ],
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if(disabled)
+                        const Text('',),
+                      Text(title,
+                        style: context
+                            .textTheme
+                            .labelMedium?.copyWith(
+                          color:  disabled ? Styles.liteGrayColor: null,
+                        ),),
+                      if(disabled)
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                S.of(context).cashPaymentNotAvailable,
+                                maxLines: 2,
+                                style: context.textTheme.bodySmall?.copyWith(
+                                  color: Styles.colorOrange,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                    ],
+                  ),
+                ),
+                // const Spacer(),
+                SizedBox(
+                  width: 60.wx,
+                  height: 50.hx,
+                  child: AppImage(
+                    path: icon,
+                    type: ImageType.asset,
+                    fit: BoxFit.contain,
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),

@@ -1,22 +1,26 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lween/core/app_state/appstate.dart';
 import 'package:lween/core/extended/get_utils/get_utils.dart';
+import 'package:lween/core/extended/numbers_ext.dart';
+import 'package:lween/core/resources/constants.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:lween/core/configurations/styles/styles.dart';
 
 abstract class ShimmerUI {
-  static Widget text({double? w, double? h}) => Container(
-        height: h ?? 80.h,
-        width: w ?? 300.w,
+  static Widget text({double? w, double? h}) =>
+      Container(
+        height: h ?? 15.hx,
+        width: w ?? 120.wx,
         decoration: BoxDecoration(
           borderRadius: Styles.borderRadius30px,
-          color: Styles.colorPrimary,
+            color: Colors.grey.withOpacity(0.5),
         ),
       );
 
   static Widget widget(
-          [double h = 10, double w = 10, Color color = Colors.white]) =>
+      [double h = 10, double w = 10, Color color = Colors.grey]) =>
       Container(
         width: w,
         height: h,
@@ -26,11 +30,12 @@ abstract class ShimmerUI {
         ),
       );
 
-  static Widget circle([double d = 10]) => Container(
+  static Widget circle([double d = 10]) =>
+      Container(
         height: d,
         width: d,
         decoration: BoxDecoration(
-          color: Styles.colorPrimary,
+          color: Colors.grey.withOpacity(0.5),
           borderRadius: Styles.borderRadius30px,
         ),
       );
@@ -42,12 +47,17 @@ abstract class ShimmerUI {
       !enabled
           ? child
           : Shimmer.fromColors(
-              enabled: true,
-        baseColor: Colors.grey.shade300,
-        highlightColor: Colors.grey.shade200,
-              loop: 0,
-              child: child,
-            );
+        enabled: true,
+
+        baseColor: Colors.grey[300]!,
+        highlightColor: Colors.grey[100]!.withOpacity(0.5),
+        // baseColor: Styles.liteGrayColor,
+        // highlightColor: Styles.liteGrayColor.withOpacity(0.5),
+        loop: 0,
+        direction: ShimmerDirection.ltr,
+        period: shimmerDuration,
+        child: child,
+      );
 }
 
 abstract class ShimmerBase extends StatelessWidget {

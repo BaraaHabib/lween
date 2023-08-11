@@ -2,7 +2,7 @@
 part of 'app_scaffold.dart';
 
 class AppNavWidget extends HookWidget{
-  AppNavWidget({
+  const AppNavWidget({
     required this.index,
     required this.setActiveIndex,
     required this.tabsRouter,
@@ -15,7 +15,7 @@ class AppNavWidget extends HookWidget{
 
   @override
   Widget build(BuildContext context) {
-    final controller = Controller.get(instance: NavController(),);
+    final controller = Controller.getInstance<NavController>(instance: NavController(),);
     return GNav(
         backgroundColor: Styles.navbarBackgroundColor(context,),
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -29,8 +29,13 @@ class AppNavWidget extends HookWidget{
         duration: 250.milliseconds, // tab animation duration
         gap: 2 .wx, // the tab button gap between icon and text
         color: Styles.navUnselectedIcon,
-        iconSize: 25, // tab button icon size
-        padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 7), // navigation bar padding
+        iconSize: 20, // tab button icon size
+        padding: const EdgeInsetsDirectional.only(
+            start: 11,
+            end: 11,
+            top: 7,
+            bottom: 7
+        ), // navigation bar padding
         tabMargin: const EdgeInsets.symmetric(vertical: 14,),
         selectedIndex:NavTab.values.length - index - 1,
         onTabChange: (index){
@@ -100,14 +105,41 @@ class NavController extends Controller{
  /*   if(index == tabsRouter.activeIndex){
       return;
     }*/
+    tabsRouter.root.popUntilRoot();
+
+    // final rrrr = AutoRouter.of(context);
+    // rrrr.logger();
+    // switch(currentTab) {
+    //   case NavTab.home:tabsRouter.current.name;AutoRouter.of(context).current;
+    //     tabsRouter.root.popUntilRoot();
+    //     break;
+    //   case NavTab.bookTrip:
+    //     tabsRouter.root.popUntilRouteWithName(CompaniesScreenRoute.name,);
+    //     break;
+    //   case NavTab.tickets:
+    //     AutoRouter.of(context).popUntilRouteWithName(MyTicketsScreenRoute.name,);
+    //     break;
+    //   case NavTab.account:
+    //     AutoRouter.of(context).popUntilRouteWithName(AccountScreenRoute.name,);
+    //     break;
+    //   case NavTab.notification:
+    //     AutoRouter.of(context).popUntilRouteWithName(
+    //       NotificationsScreenRoute.name,);
+    //     break;
+    //   default:
+    //     NavTab.home;
+    // }
+
     currentTab = NavTab.values[index];
-    // TabsRouter();
+
     switch(currentTab){
       case NavTab.home:
+        // NavigationService.of(context).popUntilRout(HomeScreenRoute.name,);
         tabsRouter.navigate(const HomeScreenRoute());
         // tabsRouter.navigate(route)
         break;
       case NavTab.bookTrip:
+        // NavigationService.of(context).popUntilRout(HomeScreenRoute.name,);
         tabsRouter.navigate(const CompaniesScreenRoute());
         break;
       case NavTab.tickets:

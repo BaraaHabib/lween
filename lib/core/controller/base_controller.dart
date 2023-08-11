@@ -2,8 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:lween/core/navigation/logger.dart';
 import 'package:lween/injection_container.dart';
-
-abstract class Controller {
+class Controller extends BaseController {
   bool isPermanent;
   bool initialized = false;
 
@@ -21,7 +20,7 @@ abstract class Controller {
   @mustCallSuper
   void dispose() {}
 
-  static T get<T extends Controller>({
+  static T getInstance<T extends Controller>({
     T? instance,
     String? key,
     bool permanent = false,
@@ -47,7 +46,7 @@ abstract class Controller {
       }
     }
 
-    if (instance != null) {
+    if (controller != null && instance != null) {
       if (controller.isPermanent) {}
       useEffect(() {
         if (controller!.isPermanent && !controller.initialized) {
@@ -94,4 +93,8 @@ abstract class Controller {
 
     return controller;
   }
+}
+
+abstract class BaseController {
+
 }

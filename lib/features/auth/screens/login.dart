@@ -29,7 +29,7 @@ class LogInScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final bloc = sl<AccountBloc>();
-    final controller = Controller.get(instance: LoginController(context,));
+    final controller = Controller.getInstance(instance: LoginController(context,));
     return BlocBuilder<AccountBloc,AccountState>(
       bloc: bloc,
       builder:(ctc, state) => IgnorePointer(
