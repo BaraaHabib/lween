@@ -6,6 +6,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:lween/core/extended/extensions.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:lween/core/configurations/assets.dart';
 import 'package:lween/core/configurations/styles/styles.dart';
@@ -45,6 +46,9 @@ class AppImage extends StatelessWidget {
     this.color,
   }) {
     path ??= Assets.logoPNG;
+    if(path == null){
+      path.logger();
+    }
     errorWidget ??= Image.asset(
       errorImage ?? Assets.logoPNG,
     );

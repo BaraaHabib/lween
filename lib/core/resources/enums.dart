@@ -10,16 +10,22 @@ enum NavTab{
 }
 
 enum PaymentMethod{
-  mtn(1,1),
-  syriatel(1,2),
-  bemo(1,3),
-  fatora(1,4),
-  eCash(1,5),
-  cash(2,6);
+  cashMobile(1,1),
+  bemo(1,2),
+  fatora(1,3),
+  eCash(1,4),
+  cash(2,5);
 
   const PaymentMethod(this.type,this.paymentProviderEnum);
   final int type;
   final int? paymentProviderEnum;
+
+  bool get isByPhoneNumber => this == PaymentMethod.cashMobile;
+  bool get isWebView =>
+      this == PaymentMethod.bemo ||
+      this == PaymentMethod.eCash ||
+      this == PaymentMethod.fatora
+  ;
 }
 
 enum VehicleType {

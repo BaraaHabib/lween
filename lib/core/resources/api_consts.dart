@@ -20,5 +20,8 @@ abstract class ApiConstants{
   static const checkVoucher = 'Client/Order/checkCode';
   static const cancelOrder = 'Client/Order/Cancel';
   static const notifications = 'Client/Notification/List';
+  static const requestPayment = 'Client/OnlinePayment/RequestPayment';
+  static const resendPaymentCode = 'Client/OnlinePayment/ResendPaymentConfirmationCode';
+  static const completePayment = 'Client/OnlinePayment/CompletePayment';
 
 }

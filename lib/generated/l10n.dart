@@ -400,10 +400,10 @@ class S {
     );
   }
 
-  /// `Code was resent to your number`
+  /// `Verification code was resent to your number`
   String get codeWasResentToYourNumber {
     return Intl.message(
-      'Code was resent to your number',
+      'Verification code was resent to your number',
       name: 'codeWasResentToYourNumber',
       desc: '',
       args: [],
@@ -1235,6 +1235,76 @@ class S {
     return Intl.message(
       'Yesterday',
       name: 'yesterday',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter phone number`
+  String get enterPhoneNumber {
+    return Intl.message(
+      'Enter phone number',
+      name: 'enterPhoneNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You must have a cash account with the service provider you want to pay through`
+  String get youMustHaveCashAccount {
+    return Intl.message(
+      'You must have a cash account with the service provider you want to pay through',
+      name: 'youMustHaveCashAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cash Mobile`
+  String get cashMobile {
+    return Intl.message(
+      'Cash Mobile',
+      name: 'cashMobile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your order finished successfully`
+  String get orderFinishedSuccessfully {
+    return Intl.message(
+      'Your order finished successfully',
+      name: 'orderFinishedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error`
+  String get error {
+    return Intl.message(
+      'Error',
+      name: 'error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm operation`
+  String get confirmOperation {
+    return Intl.message(
+      'Confirm operation',
+      name: 'confirmOperation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Order is not completed, it will be deleted later`
+  String get orderNotCompletedMessage {
+    return Intl.message(
+      'Order is not completed, it will be deleted later',
+      name: 'orderNotCompletedMessage',
       desc: '',
       args: [],
     );

@@ -27,7 +27,7 @@ class AppNavWidget extends HookWidget{
         // tabShadow: [BoxShadow(color: Colors.grey.withOpacity(0.5), blurRadius: 8)], // tab button shadow
         curve: Curves.easeIn, // tab animation curves
         duration: 250.milliseconds, // tab animation duration
-        gap: 2 .wx, // the tab button gap between icon and text
+        // gap: 2 .wx, // the tab button gap between icon and text
         color: Styles.navUnselectedIcon,
         iconSize: 20, // tab button icon size
         padding: const EdgeInsetsDirectional.only(
@@ -46,6 +46,7 @@ class AppNavWidget extends HookWidget{
           _NabButton(
             icon: NavIcons.notifications,
             text: S.of(context).notifications,
+            iconSize: 17.rx,
           ),
           _NabButton(
             icon: NavIcons.user,
@@ -54,6 +55,7 @@ class AppNavWidget extends HookWidget{
           _NabButton(
             icon: NavIcons.ticket,
             text: S.of(context).myTrips,
+            iconSize: 17.rx,
           ),
           _NabButton(
             icon: NavIcons.seo,
@@ -62,6 +64,7 @@ class AppNavWidget extends HookWidget{
           _NabButton(
             icon: NavIcons.home,
             text: S.of(context).home,
+            iconSize: 17.rx,
           ),
         ]
     );
@@ -72,6 +75,7 @@ class _NabButton extends GButton {
   _NabButton({
     required String text,
     required IconData icon,
+    double? iconSize,
     super.key,
   }) : super(
     icon: icon,
@@ -80,10 +84,12 @@ class _NabButton extends GButton {
     activeBorder: Border.all(color: Colors.transparent,),
     textColor: Styles.navTextColor,
     iconActiveColor: Styles.navIconActiveColor,
+    gap: 5,
     textStyle: TextStyle(
       color: Styles.navTextColor,
       fontSize: 14.spx,
     ),
+    iconSize: iconSize,
   );
 }
 

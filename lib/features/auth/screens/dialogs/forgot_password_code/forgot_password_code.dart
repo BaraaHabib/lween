@@ -58,6 +58,7 @@ class ForgotPasswordCodeDialog extends HookWidget {
                   builder: (context, isCodeChecked, child,) {
                     return Column(
                       children: [
+                        8.vSpace,
                         AppTextField(
                           name: 'code',
                           textAlign: TextAlign.center,

@@ -46,6 +46,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "bookATrip": MessageLookupByLibrary.simpleMessage("Book a trip"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "cancelOrder": MessageLookupByLibrary.simpleMessage("Cancel order"),
+        "cashMobile": MessageLookupByLibrary.simpleMessage("Cash Mobile"),
         "cashMtn": MessageLookupByLibrary.simpleMessage("MTN Cash"),
         "cashPaymentNotAvailable": MessageLookupByLibrary.simpleMessage(
             "The number of seats allowed to be reserved without payment has been exceeded"),
@@ -59,13 +60,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "chooseSeats": MessageLookupByLibrary.simpleMessage("Choose seats"),
         "city": MessageLookupByLibrary.simpleMessage("City"),
         "codeWasResentToYourNumber": MessageLookupByLibrary.simpleMessage(
-            "Code was resent to your number"),
+            "Verification code was resent to your number"),
         "company": MessageLookupByLibrary.simpleMessage("Company"),
         "companyInfo":
             MessageLookupByLibrary.simpleMessage("Company description"),
         "companyName": MessageLookupByLibrary.simpleMessage("Company name"),
         "confirmAccount":
             MessageLookupByLibrary.simpleMessage("Confirm Account"),
+        "confirmOperation":
+            MessageLookupByLibrary.simpleMessage("Confirm operation"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("Confirm password"),
         "country": MessageLookupByLibrary.simpleMessage("Country"),
@@ -80,12 +83,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "enter": MessageLookupByLibrary.simpleMessage("Enter"),
         "enterFullNameForSeats": MessageLookupByLibrary.simpleMessage(
             "Enter full names of the passengers in the reserved seats"),
+        "enterPhoneNumber":
+            MessageLookupByLibrary.simpleMessage("Enter phone number"),
         "enterPhoneToSendCode": MessageLookupByLibrary.simpleMessage(
             "Enter the phone number you used to create the account. We will send you a verification code to reset your password"),
         "enterVerificationCode":
             MessageLookupByLibrary.simpleMessage("Enter verification code"),
         "enterVoucherCode": MessageLookupByLibrary.simpleMessage(
             "If you have a discount code, enter it to get a discount on the ticket price"),
+        "error": MessageLookupByLibrary.simpleMessage("Error"),
         "exceededSeatsCountDialogMessage": MessageLookupByLibrary.simpleMessage(
             "You have exceeded the number of seats allowed to be reserved without payment, and you cannot complete the order without payment."),
         "fatora": MessageLookupByLibrary.simpleMessage("Fatora"),
@@ -117,10 +123,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "orderDeletionWarning": MessageLookupByLibrary.simpleMessage(
             "If you choose online payment method, the payment process must be completed within 10 minutes at most."),
         "orderDetails": MessageLookupByLibrary.simpleMessage("Order details"),
+        "orderFinishedSuccessfully": MessageLookupByLibrary.simpleMessage(
+            "Your order finished successfully"),
         "orderHasBeenCanceled":
             MessageLookupByLibrary.simpleMessage("Order has been canceled"),
         "orderIsCanceled":
             MessageLookupByLibrary.simpleMessage("Order has been canceled"),
+        "orderNotCompletedMessage": MessageLookupByLibrary.simpleMessage(
+            "Order is not completed, it will be deleted later"),
         "orderSavedToGallery":
             MessageLookupByLibrary.simpleMessage("Order saved to gallery"),
         "passengersNames":
@@ -198,6 +208,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Welcome to Lween app"),
         "yes": MessageLookupByLibrary.simpleMessage("Yes"),
         "yesterday": MessageLookupByLibrary.simpleMessage("Yesterday"),
-        "youHaveDiscount": m4
+        "youHaveDiscount": m4,
+        "youMustHaveCashAccount": MessageLookupByLibrary.simpleMessage(
+            "You must have a cash account with the service provider you want to pay through")
       };
 }

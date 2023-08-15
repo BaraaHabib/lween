@@ -50,8 +50,10 @@ class MyOrdersLoading extends MyOrdersState {
 }
 
 class MyOrdersLoaded extends MyOrdersState {
-  const MyOrdersLoaded({required this.ordersResult});
+  const MyOrdersLoaded({required this.ordersResult,required this.navigateToDetails,});
+
   final OrdersEntity ordersResult;
+  final bool navigateToDetails;
 
   @override
   List<Object> get props => [ordersResult];
@@ -261,3 +263,97 @@ class CancelOrderError extends CancelOrderState {
   List<Object> get props => [];
 }
 //#endregion cancel order
+
+//#region Request Payment
+abstract class RequestPaymentState extends OrdersState {
+  const RequestPaymentState({
+    String? message,
+  }) : super(message: message);
+
+}
+
+class RequestPaymentLoading extends RequestPaymentState {
+  const RequestPaymentLoading();
+
+  @override
+  List<Object> get props => [];
+}
+
+class RequestPaymentLoaded extends RequestPaymentState {
+  const RequestPaymentLoaded(this.data,);
+
+  final RequestPaymentEntity data;
+  @override
+  List<Object> get props => [];
+}
+
+class RequestPaymentError extends RequestPaymentState {
+
+  const RequestPaymentError(String? message): super(message: message);
+
+  @override
+  List<Object> get props => [];
+}
+//#endregion Request Payment
+//#region complete Payment
+abstract class CompletePaymentState extends OrdersState {
+  const CompletePaymentState({
+    String? message,
+  }) : super(message: message);
+
+}
+
+class CompletePaymentLoading extends CompletePaymentState {
+  const CompletePaymentLoading();
+
+  @override
+  List<Object> get props => [];
+}
+
+class CompletePaymentLoaded extends CompletePaymentState {
+  const CompletePaymentLoaded(this.data,);
+
+  final CompletePaymentEntity data;
+  @override
+  List<Object> get props => [];
+}
+
+class CompletePaymentError extends CompletePaymentState {
+
+  const CompletePaymentError(String? message): super(message: message);
+
+  @override
+  List<Object> get props => [];
+}
+//#endregion complete Payment
+
+//#region Resend Payment Code
+abstract class ResendPaymentCodeState extends OrdersState {
+  const ResendPaymentCodeState({
+    String? message,
+  }) : super(message: message);
+
+}
+
+class ResendPaymentCodeLoading extends ResendPaymentCodeState {
+  const ResendPaymentCodeLoading();
+
+  @override
+  List<Object> get props => [];
+}
+
+class ResendPaymentCodeLoaded extends ResendPaymentCodeState {
+  const ResendPaymentCodeLoaded();
+
+  @override
+  List<Object> get props => [];
+}
+
+class ResendPaymentCodeError extends ResendPaymentCodeState {
+
+  const ResendPaymentCodeError(String? message): super(message: message);
+
+  @override
+  List<Object> get props => [];
+}
+//#endregion Resend Payment Code

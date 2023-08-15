@@ -5,12 +5,10 @@ class SystemDialog extends StatelessWidget {
     super.key,
     this.retry,
     required this.content,
-    this.title = 'Error',
   });
 
   final Function? retry;
   final Widget content;
-  final String title;
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -34,11 +32,6 @@ class SystemDialog extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
-              title,
-              style: Theme.of(context).textTheme.titleMedium,
-            ),
-            20.vSpace,
             content,
             20.vSpace,
             // CommonSizes.v10,

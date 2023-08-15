@@ -58,11 +58,12 @@ class OrderDetailsScreen extends HookWidget {
                 .of(context)
                 .orderDetails,
             child: SizedBox(
-              width: 0.83.sw,
+              width: 0.9.sw,
               child: SingleChildScrollView(
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    10.vSpace,
+                    30.vSpace,
                     Screenshot(
                       controller: controller.screenshotController,
                       child: Container(

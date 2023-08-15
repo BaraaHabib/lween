@@ -13,7 +13,7 @@ import 'package:lween/core/navigation/navigation_service.dart';
 import 'package:lween/core/routing/app_router.dart';
 import 'package:lween/features/auth/bloc/account_bloc.dart';
 import 'package:lween/features/auth/params/login_params.dart';
-import 'package:lween/features/auth/screens/dialogs/language.dart';
+import 'package:lween/features/auth/screens/dialogs/language_dialog.dart';
 import 'package:lween/features/onboarding/bloc/splash_bloc.dart';
 import 'package:lween/generated/l10n.dart';
 import 'package:lween/injection_container.dart';
@@ -35,6 +35,7 @@ class LoginController extends Controller {
       ){
         AppDialogs.showGeneralDialog(
           context: Lween.navigatorKey.currentContext!,
+          title: S.current.selectPreferredLanguage,
           content: const LanguageDialog(),
         );
       }
@@ -91,6 +92,7 @@ class LoginController extends Controller {
   }
 
   forgotPassword(context) {
+    // AppDialogs.showRetryDialog(context: context, content: 'ddd');
     NavigationService.of(context).navigateTo(const ResetPasswordScreenRoute());
   }
 }

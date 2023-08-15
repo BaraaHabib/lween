@@ -19,7 +19,7 @@
   "placeOfResidence": "مكان الإقامة",
   "city": "المدينة",
   "enterVerificationCode": "أدخل رمز التحقق",
-  "resendCode": "إعادة إرسال رمز التحقق",
+  "resendCode": "إعادة إرسال الرمز",
   "confirmAccount": "تأكيد الحساب",
   "enter": "دخول",
   "send": "إرسال",
@@ -34,7 +34,7 @@
   "passwordsDoesNotMatch": "كلمة المرور غير مطابقة",
   "verify": "تأكيد",
   "passwordUpdatedSuccessfully": "تم تغيير كلمة المرور بنجاح",
-  "codeWasResentToYourNumber": "تم إعادة إرسال رمز التحقق إلى رقمك",
+  "codeWasResentToYourNumber": "تم إعادة إرسال رمز التحقق",
   "transportationEntities": "شركات النقل",
   "reservations": "حجوزات",
   "previousTrips": "رحلاتك السابقة",
@@ -117,5 +117,12 @@
   "logOut": "تسجيل الخروج",
   "deleteAccount": "حذف الحساب",
   "deactivateAccount": "تعطيل الحساب",
-  "yesterday": "البارحة"
+  "yesterday": "البارحة",
+  "enterPhoneNumber": "أدخل رقم الهاتف",
+  "youMustHaveCashAccount": "يجب أن يكون لديك حساب كاش لدى مزود الخدمة الذي تريد الدفع من خلاله",
+  "cashMobile": "كاش موبايل",
+  "orderFinishedSuccessfully": "اكتملت عملية الحجز بنجاح",
+  "error": "خطأ",
+  "confirmOperation": "تأكيد العملية",
+  "orderNotCompletedMessage": "لم يتم إكمال الطلب، سيتم حذفه بعد مدة"
 }

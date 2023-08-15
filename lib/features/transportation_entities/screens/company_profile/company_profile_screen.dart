@@ -50,8 +50,8 @@ class CompanyProfileScreen extends HookWidget {
       initialIndex: 0,
       child: AppScaffold(
         title: companyEntity.name ?? '',
-        child: ListView(
-          shrinkWrap: true,
+        child: Column(
+          // shrinkWrap: true,
           // mainAxisSize: MainAxisSize.min,
           children: [
             DecoratedBox(
@@ -117,8 +117,7 @@ class CompanyProfileScreen extends HookWidget {
               ),
             ),
             32.vSpace,
-            SizedBox(
-              height: 420.hx,
+            Expanded(
               child: TabBarView(
                 controller: controller.tabsController,
                 children: const [

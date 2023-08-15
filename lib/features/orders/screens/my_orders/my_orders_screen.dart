@@ -33,9 +33,11 @@ class MyOrdersScreen extends HookWidget {
       title: S.current.myTickets,
       withBackButton: false,
       centerTitle: true,
-      child: BlocBuilder<OrdersBloc, OrdersState>(
+      child: BlocConsumer<OrdersBloc, OrdersState>(
           bloc: OrdersBloc.instance,
           buildWhen: controller.buildWhen,
+          listenWhen: controller.listenWhen,
+          listener: controller.listener,
           builder: (context, state) {
             return Builder(
                 builder: (context) {
@@ -82,7 +84,11 @@ class MyOrdersScreen extends HookWidget {
                                 final item = state.ordersResult.orders![index];
                                 return OrderItem(
                                   item: item,
-                                  onTap: () => NavigationService.of(context).navigateTo(OrderDetailsScreenRoute(order: item,)),
+                                  onTap: () => NavigationService
+                                      .of(context)
+                                      .navigateTo(
+                                      withNavigation: false,
+                                      OrderDetailsScreenRoute(order: item,)),
                                 );
                               },
                             ),

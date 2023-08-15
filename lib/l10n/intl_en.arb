@@ -34,7 +34,7 @@
   "passwordsDoesNotMatch": "Passwords does not match",
   "verify": "Verify",
   "passwordUpdatedSuccessfully": "Password updated successfully",
-  "codeWasResentToYourNumber": "Code was resent to your number",
+  "codeWasResentToYourNumber": "Verification code was resent to your number",
   "transportationEntities": "Transportation entities",
   "reservations": "Reservations",
   "previousTrips": "Previous trips",
@@ -117,5 +117,12 @@
   "logOut": "Log out",
   "deleteAccount": "Delete account",
   "deactivateAccount": "Deactivate account",
-  "yesterday": "Yesterday"
+  "yesterday": "Yesterday",
+  "enterPhoneNumber": "Enter phone number",
+  "youMustHaveCashAccount": "You must have a cash account with the service provider you want to pay through",
+  "cashMobile": "Cash Mobile",
+  "orderFinishedSuccessfully": "Your order finished successfully",
+  "error": "Error",
+  "confirmOperation": "Confirm operation",
+  "orderNotCompletedMessage": "Order is not completed, it will be deleted later"
 }

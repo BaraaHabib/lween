@@ -47,6 +47,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "bookATrip": MessageLookupByLibrary.simpleMessage("حجز رحلة"),
         "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
         "cancelOrder": MessageLookupByLibrary.simpleMessage("إلغاء الطلب"),
+        "cashMobile": MessageLookupByLibrary.simpleMessage("كاش موبايل"),
         "cashMtn": MessageLookupByLibrary.simpleMessage("كاش MTN"),
         "cashPaymentNotAvailable": MessageLookupByLibrary.simpleMessage(
             "لقد تم تجاوز عدد المقاعد المسموح حجزها بدون دفع"),
@@ -59,12 +60,14 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("اختر وسيلة الدفع"),
         "chooseSeats": MessageLookupByLibrary.simpleMessage("حجز مقعد"),
         "city": MessageLookupByLibrary.simpleMessage("المدينة"),
-        "codeWasResentToYourNumber": MessageLookupByLibrary.simpleMessage(
-            "تم إعادة إرسال رمز التحقق إلى رقمك"),
+        "codeWasResentToYourNumber":
+            MessageLookupByLibrary.simpleMessage("تم إعادة إرسال رمز التحقق"),
         "company": MessageLookupByLibrary.simpleMessage("شركة النقل"),
         "companyInfo": MessageLookupByLibrary.simpleMessage("معلومات الشركة"),
         "companyName": MessageLookupByLibrary.simpleMessage("اسم الشركة"),
         "confirmAccount": MessageLookupByLibrary.simpleMessage("تأكيد الحساب"),
+        "confirmOperation":
+            MessageLookupByLibrary.simpleMessage("تأكيد العملية"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("تأكيد كلمة المرور"),
         "country": MessageLookupByLibrary.simpleMessage("البلد"),
@@ -79,12 +82,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "enter": MessageLookupByLibrary.simpleMessage("دخول"),
         "enterFullNameForSeats": MessageLookupByLibrary.simpleMessage(
             "قم بإدخال الأسماء الثلاثية للمسافرين في المقاعد المحجوزة"),
+        "enterPhoneNumber":
+            MessageLookupByLibrary.simpleMessage("أدخل رقم الهاتف"),
         "enterPhoneToSendCode": MessageLookupByLibrary.simpleMessage(
             "أدخل رقم الهاتف الذي استخدمته لإنشاء الحساب. سنقوم بإرسال رمز تحقق لك لإعادة ضبط كلمة المرور الخاصة بك"),
         "enterVerificationCode":
             MessageLookupByLibrary.simpleMessage("أدخل رمز التحقق"),
         "enterVoucherCode": MessageLookupByLibrary.simpleMessage(
             "إن كنت تملك كود حسم أدخله لتحصل على حسم على سعر التذاكر"),
+        "error": MessageLookupByLibrary.simpleMessage("خطأ"),
         "exceededSeatsCountDialogMessage": MessageLookupByLibrary.simpleMessage(
             "لقد تجاوزت عدد المقاعد المسموح حجزها بدون دفع، لن يمكنك إكمال الطلب بدون دفع."),
         "fatora": MessageLookupByLibrary.simpleMessage("فاتورة"),
@@ -117,10 +123,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "orderDeletionWarning": MessageLookupByLibrary.simpleMessage(
             "في حال اختيار الدفع الالكتروني فيجب اكمال عملية الدفع خلال ١٠ دقائق على الاكثر.."),
         "orderDetails": MessageLookupByLibrary.simpleMessage("تفاصيل التذكرة"),
+        "orderFinishedSuccessfully":
+            MessageLookupByLibrary.simpleMessage("اكتملت عملية الحجز بنجاح"),
         "orderHasBeenCanceled":
             MessageLookupByLibrary.simpleMessage("تم إلفاء الطلب"),
         "orderIsCanceled":
             MessageLookupByLibrary.simpleMessage("تم إلغاء الطلب"),
+        "orderNotCompletedMessage": MessageLookupByLibrary.simpleMessage(
+            "لم يتم إكمال الطلب، سيتم حذفه بعد مدة"),
         "orderSavedToGallery": MessageLookupByLibrary.simpleMessage(
             "تم حفظ الطلب في ملفات الجهاز"),
         "passengersNames":
@@ -151,8 +161,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("معاينة المركبة"),
         "previousTrips": MessageLookupByLibrary.simpleMessage("رحلاتك السابقة"),
         "requiredPayment": m2,
-        "resendCode":
-            MessageLookupByLibrary.simpleMessage("إعادة إرسال رمز التحقق"),
+        "resendCode": MessageLookupByLibrary.simpleMessage("إعادة إرسال الرمز"),
         "reservationHolder":
             MessageLookupByLibrary.simpleMessage("اسم صاحب الحجز"),
         "reservations": MessageLookupByLibrary.simpleMessage("حجوزات"),
@@ -200,6 +209,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("أهلاً بك في تطبيق لوين"),
         "yes": MessageLookupByLibrary.simpleMessage("نعم"),
         "yesterday": MessageLookupByLibrary.simpleMessage("البارحة"),
-        "youHaveDiscount": m4
+        "youHaveDiscount": m4,
+        "youMustHaveCashAccount": MessageLookupByLibrary.simpleMessage(
+            "يجب أن يكون لديك حساب كاش لدى مزود الخدمة الذي تريد الدفع من خلاله")
       };
 }

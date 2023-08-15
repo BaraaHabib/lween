@@ -68,14 +68,12 @@ class OrderEntity extends ContentModel {
   PaymentMethod get paymentMethodEnum {
     switch(paymentProvider) {
       case 1:
-        return PaymentMethod.mtn;
+        return PaymentMethod.cashMobile;
       case 2:
-        return PaymentMethod.syriatel;
-      case 3:
         return PaymentMethod.bemo;
-      case 4:
+      case 3:
         return PaymentMethod.fatora;
-      case 5:
+      case 4:
         return PaymentMethod.eCash;
       default:
         return PaymentMethod.cash;
@@ -94,7 +92,7 @@ class OrderEntity extends ContentModel {
 
 
   String get currentPaymentStatusText {
-    if(paymentMethodEnum == PaymentMethod.cash){
+    if(paymentMethodEnum == PaymentMethod.cash && paymentMethod != PaymentMethod.cash.type){
       if (isPaid || isConverted) {
         return S.current.payedInCenter;
       }
@@ -102,8 +100,17 @@ class OrderEntity extends ContentModel {
         return S.current.waitingPaymentInCompanyCenter;
       }
     }
+    else if(paymentProvider == null && paymentMethod != PaymentMethod.cash.type){
+      return S.current.orderNotCompletedMessage;
+    }
     return S.current.payedWithValue(paymentProviderText ?? '');
   }
+
+  bool get isPayedInCenter => paymentMethod == PaymentMethod.cash.type;
+  bool get isPaymentByPhone =>
+      paymentMethodEnum == PaymentMethod.cashMobile;
+  bool get isOnlinePayment =>
+      paymentMethod != PaymentMethod.cash.type;
 
   Color? paymentStatusTextColor(BuildContext context) {
     if (!isPaid) {
@@ -113,9 +120,17 @@ class OrderEntity extends ContentModel {
   }
 
   String? get paymentAmountText {
-    if (isPaid) {
-      return S.current.payedAmount(price ?? '');
+    if(isPayedInCenter){
+      if(isPending) {
+        return S.current.waitingPaymentInCompanyCenter;
+      }
+       else if(isPaid){
+        return S.current.payedInCenter;
+      }
     }
+    // if (isPaid) {
+    return paymentProviderText ?? '';
+    // }
     return S.current.requiredPayment(price ?? '');
   }
 

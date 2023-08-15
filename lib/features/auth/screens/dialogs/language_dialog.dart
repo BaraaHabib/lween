@@ -11,6 +11,7 @@ import 'package:lween/core/configurations/styles/styles.dart';
 import 'package:lween/core/extended/get_utils/get_utils.dart';
 import 'package:lween/core/extended/numbers_ext.dart';
 import 'package:lween/core/locale/locale_provider.dart';
+import 'package:lween/core/lween/widgets/in_store_widget.dart';
 import 'package:lween/core/navigation/navigation_service.dart';
 import 'package:lween/core/widgets/app_button.dart';
 import 'package:lween/core/widgets/app_image.dart';
@@ -27,21 +28,19 @@ class LanguageDialog extends HookWidget {
     final selectedLanguage = useState(
       LocaleProvider.of(context).locale.languageCode,
     );
-    final appState = Provider
-        .of<AppStateModel>(context, listen: false);
     return  SizedBox(
       width: 0.7.sw,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Text(S.current.selectPreferredLanguage,
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
-            ],
-          ),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          //   children: [
+          //     Text(S.current.selectPreferredLanguage,
+          //       style: Theme.of(context).textTheme.titleLarge,
+          //     ),
+          //   ],
+          // ),
           ...LocaleProvider.of(context)
               .languages
               .map((e) => _LanguageWidget(e,selectedLanguage),)
@@ -98,12 +97,11 @@ class _LanguageWidget extends StatelessWidget{
           const Spacer(),
           SizedBox.square(
             dimension: 30.rx,
-            child: AppStateModel
-                .of(context)
-                .initAppEntity
-                .inStoreReview! ? null : AppImage(
-              path: language.icon,
-              type: ImageType.asset,
+            child: InStoreWidget(
+              child: AppImage(
+                path: language.icon,
+                type: ImageType.asset,
+              ),
             ),
           )
         ],

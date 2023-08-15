@@ -73,7 +73,7 @@ class LocaleProvider extends ChangeNotifier {
 
   List<LanguageItem> languages =
   [
-    LanguageItem('عربية', langAr, Assets.arabicIcon,),
+    LanguageItem('العربية', langAr, Assets.arabicIcon,),
     LanguageItem('English', langEN, Assets.englishIcon,),
   ];
 

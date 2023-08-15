@@ -40,19 +40,20 @@ class NavigationService {
 
   void restart() => clearAllAndPushNamed(SplashScreenRoute());
 
-  Future<dynamic> navigateTo(PageRouteInfo route) async {
+  Future<dynamic> navigateTo(PageRouteInfo route,{bool withNavigation = false,}) async {
+    if(!withNavigation){
+      closestRouter.push(route);
+      return;// await noBottomNavigationRouter?.push(route);
+    }
     return await closestRouter.push(route, onFailure: (NavigationFailure f) {
       AppLogger.log('${f.runtimeType} --- $f', LoggingType.error);
     });
   }
 
   StackRouter get closestRouter => AutoRouter.of(context);
-
-  // Future<dynamic> navigateToWithoutNav(PageRouteInfo route) async {
-  //   return await router.push(route, onFailure: (NavigationFailure f) {
-  //     AppLogger.log('${f.runtimeType} --- $f', LoggingType.error);
-  //   });
-  // }
+  RootStackRouter? get noBottomNavigationRouter => closestRouter
+      .parent<TabsRouter>()
+      ?.root;
 
   until(bool Function(Route) predicate) => router.popUntil(predicate);
 

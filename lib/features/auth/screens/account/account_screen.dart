@@ -18,7 +18,7 @@ import 'package:lween/core/widgets/app_button.dart';
 import 'package:lween/core/widgets/app_image.dart';
 import 'package:lween/features/auth/screens/account/account_controller.dart';
 import 'package:lween/features/auth/screens/account/widgets/account_item_widget.dart';
-import 'package:lween/features/auth/screens/dialogs/language.dart';
+import 'package:lween/features/auth/screens/dialogs/language_dialog.dart';
 import 'package:lween/generated/l10n.dart';
 import 'package:lween/injection_container.dart';
 import 'package:provider/provider.dart';
@@ -119,6 +119,7 @@ class AccountScreen extends HookWidget {
                       AccountItemWidget(
                         icon: Assets.logOutSVG,
                         title: S.of(context).logOut,
+                        onTap: () => AppStateModel.of(context).logOut(),
                       ),
                       divider,
                       AccountItemWidget(

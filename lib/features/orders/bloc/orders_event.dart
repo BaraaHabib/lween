@@ -11,8 +11,15 @@ class GetLatestOrdersEvent extends OrdersEvent {
 }
 
 class GetOrdersEvent extends OrdersEvent {
-  const GetOrdersEvent([this.page = 0]);
+  const GetOrdersEvent({
+    this.page = 0,
+    this.navigateToDetails = false,
+    this.ids,
+  });
+
+  final List<String>? ids;
   final int page;
+  final bool navigateToDetails;
 
   @override
   List<Object?> get props => [];
@@ -73,6 +80,41 @@ class CancelOrderEvent extends OrdersEvent {
   });
 
   final String orderId;
+
+  @override
+  List<Object?> get props => [];
+}
+class RequestPaymentEvent extends OrdersEvent {
+  const RequestPaymentEvent({
+    required this.params,
+  });
+
+  final RequestPaymentParams params;
+
+  @override
+  List<Object?> get props => [];
+}
+class CompletePaymentEvent extends OrdersEvent {
+  const CompletePaymentEvent({
+    required this.params,
+  });
+
+  final CompletePaymentParams params;
+
+  @override
+  List<Object?> get props => [];
+}
+
+class ResendPaymentCodeEvent extends OrdersEvent {
+  const ResendPaymentCodeEvent({
+    required this.accountNumber,
+    required this.paymentType,
+    required this.transactionId,
+  });
+
+  final String accountNumber;
+  final PaymentMethod paymentType;
+  final String transactionId;
 
   @override
   List<Object?> get props => [];

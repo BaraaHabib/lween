@@ -3,7 +3,9 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:lween/core/configurations/styles/styles.dart';
 import 'package:lween/core/extended/get_utils/get_utils.dart';
 import 'package:lween/core/extended/numbers_ext.dart';
+import 'package:lween/core/widgets/animated/animated_toggle.dart';
 import 'package:lween/core/widgets/app_image.dart';
+import 'package:lween/core/widgets/waiting_widget.dart';
 
 class AppButton extends StatelessWidget {
   const AppButton({
@@ -91,6 +93,7 @@ class AppGradientTextButton extends HookWidget {
     this.gradientType,
     this.fontSize,
     this.withGradiant = true,
+    this.isLoading = false,
   }) : super(key: key);
 
   final Function()? onTap;
@@ -102,6 +105,8 @@ class AppGradientTextButton extends HookWidget {
   final double? fontSize;
   final AppTextButtonGradientType? gradientType;
   final bool withGradiant;
+  final bool isLoading;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -126,7 +131,7 @@ class AppGradientTextButton extends HookWidget {
         borderRadius: Styles.buttonBorderRadius,
       ),
       child: ElevatedButton(
-        onPressed: onTap,
+        onPressed: isLoading ? null : onTap,
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.transparent,
           shadowColor: Colors.transparent,
@@ -136,12 +141,21 @@ class AppGradientTextButton extends HookWidget {
         ),
         child: FittedBox(
           fit: BoxFit.scaleDown,
-          child: Text(
-            content,
-            style: TextStyle(
+          child: AnimatedCrossFade(
+            duration: 300.milliseconds,
+            firstChild: Text(
+              content,
+              style: TextStyle(
                 color: fontColor ?? Styles.buttonTextColor,
                 fontSize: fontSize,
+              ),
             ),
+            secondChild: Transform.scale(
+                scale: 0.7,
+                child: const WaitingWidget()),
+            crossFadeState: isLoading
+                ? CrossFadeState.showSecond
+                : CrossFadeState.showFirst,
           ),
         ),
       ),

@@ -57,158 +57,191 @@ class OrderFromToScreen extends HookWidget {
             title: S
                 .of(context)
                 .bookATrip,
-            child: SingleChildScrollView(
-              child: FormBuilder(
-                key: controller.fromToFormKey,
-                child: Column(
-                  children: [
-                    10.vSpace,
-                    AppImage(
-                      path: Assets.bookMapLocation(context),
-                      type: ImageType.asset,
-                      width: 310.wx,
-                      height: 180.hx,
-                    ),
-                    SizedBox(
-                      height: 5.hx,
-                      child: AnimatedCrossFade(
-                          firstChild: const LinearProgressIndicator(),
-                          secondChild: const SizedBox.shrink(),
-                          crossFadeState: state is CompanyFilteredTravelsLoading ? CrossFadeState.showFirst : CrossFadeState.showSecond,
-                          duration: 300.milliseconds,
-                      ),
-                    ),
-                    6.vSpace,
-                    LabelWithField(
-                      label: S.of(context).source,
-                      child: ValueListenableBuilder(
-                        valueListenable: controller.citiesNotifier,
-                        builder: (ctx, cities, child) => AppDropDownField(
-                          dropDownKey: controller.fromCityKey,
-                          onChange: (v) {
-                            controller.selectedFromCity = v;
-                            controller.getTravels();
-                          },
-                          contentPadding: EdgeInsets.zero,
-                          hintText: S
+            child: Stack(
+              children: [
+                SingleChildScrollView(
+                  child: FormBuilder(
+                    key: controller.fromToFormKey,
+                    child: Column(
+                      children: [
+                        10.vSpace,
+                        AppImage(
+                          path: Assets.bookMapLocation(context),
+                          type: ImageType.asset,
+                          width: 310.wx,
+                          height: 180.hx,
+                        ),
+                        SizedBox(
+                          height: 5.hx,
+                          child: AnimatedCrossFade(
+                            firstChild: const LinearProgressIndicator(),
+                            secondChild: const SizedBox.shrink(),
+                            crossFadeState: state is CompanyFilteredTravelsLoading
+                                ? CrossFadeState.showFirst
+                                : CrossFadeState.showSecond,
+                            duration: 300.milliseconds,
+                          ),
+                        ),
+                        6.vSpace,
+                        LabelWithField(
+                          label: S
                               .of(context)
-                              .pleaseSelectCity,
-                          name: 'from',
-                          data: cities.toList()..remove(controller.selectedToCity),
-                          // validator: controller.validateDropDownCity,
-                          initValue: controller.selectedFromCity,
-                          validator: FormBuilderValidators.required(),
-                        ),
-                      ),
-                    ),
-                    6.vSpace,
-                    LabelWithField(
-                      label: S.of(context).destination,
-                      child: ValueListenableBuilder(
-                        valueListenable: controller.citiesNotifier,
-                        builder: (ctx, cities, child) => AppDropDownField(
-                          dropDownKey: controller.toCityKey,
-                          onChange: (v) {
-                            controller.selectedToCity = v;
-                            controller.getTravels();
-                          },
-                          contentPadding: EdgeInsets.zero,
-                          hintText: S
-                              .of(context)
-                              .pleaseSelectCity,
-                          name: 'to',
-                          data: cities.toList()..remove(controller.selectedFromCity),
-                          validator: FormBuilderValidators.required(),
-                          initValue: controller.selectedToCity,
-                        ),
-                      ),
-                    ),
-                    6.vSpace,
-                    LabelWithField(
-                      label: S.of(context).travelDate,
-                      child: GestureDetector(
-                        onTap: () async {
-                          var res = await DatePicker.showCustomDatePicker(
-                              context,
-                              controller.selectedDate ?? DateTime.now(),
-                              // controller.selectedCompanyEntity?.futureAllowedSchedulingDays
-                          );
-                          if(res!= null) {
-                            controller.selectedDate = res;
-                            controller.dateController.text =
-                                AppConfigurations.appDisplayDateFormat.format(res,);
-                            controller.getTravels();
-                            controller.dateFieldKey?.currentState?.validate();
-                          }
-                        },
-                        child: AppTextField(
-                          enabled: false,
-                          validationKey: controller.dateFieldKey,
-                          controller: controller.dateController,
-                          textAlign: TextAlign.center,
-                          name: 'date',
-                          hint: '-- / -- / ----',
-                          inputFontColor: context.textTheme.titleMedium?.color,
-                          contentPadding: EdgeInsets.zero,
-                          padding: EdgeInsets.zero,
-                          validator: FormBuilderValidators.required(),
-                        ),
-                      ),
-                    ),
-                    6.vSpace,
-                    SizedBox(
-                      height: 90.hx,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          if(controller.travelsResult?.isEmpty ?? false)
-                            AppTextWidget(
-                              S.current.noTripsAvailableForThisDate,
-                              style: context
-                                  .textTheme
-                                  .titleMedium
-                              ?.copyWith(
-                                color: Styles.colorOrange,
-                              ),
-                            )
-                          else if(!controller.isTravelAlreadySelected)
-                            ...[
-                              LabelWithField(
-                                label: S.of(context).companyName,
-                                child: ValueListenableBuilder(
-                                  valueListenable: controller.companiesNotifier,
-                                  builder: (ctx, value, child) => AppDropDownField(
-                                    onChange: controller.changeCompany,
-                                    dropDownKey: controller.companyDropDownKey,
-                                    contentPadding: EdgeInsets.zero,
-                                    hintText: S.of(context).companyName,
-                                    name: 'company',
-                                    data: value,
-                                    initValue: controller.selectedCompany,
-                                    validator: FormBuilderValidators.required(),
-                                  ),
+                              .source,
+                          child: ValueListenableBuilder(
+                            valueListenable: controller.citiesNotifier,
+                            builder: (ctx, cities, child) =>
+                                AppDropDownField(
+                                  dropDownKey: controller.fromCityKey,
+                                  onChange: (v) {
+                                    controller.selectedFromCity = v;
+                                    controller.getTravels();
+                                  },
+                                  contentPadding: EdgeInsets.zero,
+                                  hintText: S
+                                      .of(context)
+                                      .pleaseSelectCity,
+                                  name: 'from',
+                                  data: cities.toList()
+                                    ..remove(controller.selectedToCity),
+                                  // validator: controller.validateDropDownCity,
+                                  initValue: controller.selectedFromCity,
+                                  validator: FormBuilderValidators.required(),
                                 ),
-                              ),
-                              6.vSpace,
-                            ]
-                          else
-                            const SizedBox.shrink(),
-                        ],
-                      ),
+                          ),
+                        ),
+                        6.vSpace,
+                        LabelWithField(
+                          label: S
+                              .of(context)
+                              .destination,
+                          child: ValueListenableBuilder(
+                            valueListenable: controller.citiesNotifier,
+                            builder: (ctx, cities, child) =>
+                                AppDropDownField(
+                                  dropDownKey: controller.toCityKey,
+                                  onChange: (v) {
+                                    controller.selectedToCity = v;
+                                    controller.getTravels();
+                                  },
+                                  contentPadding: EdgeInsets.zero,
+                                  hintText: S
+                                      .of(context)
+                                      .pleaseSelectCity,
+                                  name: 'to',
+                                  data: cities.toList()
+                                    ..remove(controller.selectedFromCity),
+                                  validator: FormBuilderValidators.required(),
+                                  initValue: controller.selectedToCity,
+                                ),
+                          ),
+                        ),
+                        6.vSpace,
+                        LabelWithField(
+                          label: S
+                              .of(context)
+                              .travelDate,
+                          child: GestureDetector(
+                            onTap: () async {
+                              var res = await DatePicker.showCustomDatePicker(
+                                context,
+                                controller.selectedDate ?? DateTime.now(),
+                                // controller.selectedCompanyEntity?.futureAllowedSchedulingDays
+                              );
+                              if (res != null) {
+                                controller.selectedDate = res;
+                                controller.dateController.text =
+                                    AppConfigurations.appDisplayDateFormat
+                                        .format(res,);
+                                controller.getTravels();
+                                controller.dateFieldKey?.currentState
+                                    ?.validate();
+                              }
+                            },
+                            child: AppTextField(
+                              enabled: false,
+                              validationKey: controller.dateFieldKey,
+                              controller: controller.dateController,
+                              textAlign: TextAlign.center,
+                              name: 'date',
+                              hint: '-- / -- / ----',
+                              inputFontColor: context.textTheme.titleMedium
+                                  ?.color,
+                              contentPadding: EdgeInsets.zero,
+                              padding: EdgeInsets.zero,
+                              validator: FormBuilderValidators.required(),
+                            ),
+                          ),
+                        ),
+                        6.vSpace,
+                        SizedBox(
+                          height: 100.hx,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              if(controller.travelsResult?.isEmpty ?? false)
+                                AppTextWidget(
+                                  S.current.noTripsAvailableForThisDate,
+                                  style: context
+                                      .textTheme
+                                      .titleMedium
+                                      ?.copyWith(
+                                    color: Styles.colorOrange,
+                                  ),
+                                )
+                              else
+                                if(!controller.isTravelAlreadySelected)
+                                  ...[
+                                    LabelWithField(
+                                      label: S
+                                          .of(context)
+                                          .companyName,
+                                      child: ValueListenableBuilder(
+                                        valueListenable: controller
+                                            .companiesNotifier,
+                                        builder: (ctx, value, child) =>
+                                            AppDropDownField(
+                                              onChange: controller
+                                                  .changeCompany,
+                                              dropDownKey: controller
+                                                  .companyDropDownKey,
+                                              contentPadding: EdgeInsets.zero,
+                                              hintText: S
+                                                  .of(context)
+                                                  .companyName,
+                                              name: 'company',
+                                              data: value,
+                                              initValue: controller
+                                                  .selectedCompany,
+                                              validator: FormBuilderValidators
+                                                  .required(),
+                                            ),
+                                      ),
+                                    ),
+                                    6.vSpace,
+                                  ]
+                                else
+                                  const SizedBox.shrink(),
+                            ],
+                          ),
+                        ),
+                        // Spacer(),
+                      ],
                     ),
-                    Hero(
-                      tag: 'order-next',
-                      child: AppGradientTextButton(
-                        onTap: (){
-                          controller.goToSeats(context);
-                        },
-                        gradientType: AppTextButtonGradientType.secondary,
-                        content: S.current.next,
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
-              ),
+                Positioned(
+                  bottom: 30.hx,
+                  child: Hero(
+                    tag: 'order-next',
+                    child: AppGradientTextButton(
+                      onTap: () {
+                        controller.goToSeats(context);
+                      },
+                      gradientType: AppTextButtonGradientType.secondary,
+                      content: S.current.next,
+                    ),
+                  ),)
+              ],
             ),
           ),
         );

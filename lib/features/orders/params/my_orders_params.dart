@@ -4,9 +4,14 @@ import 'package:lween/core/resources/constants.dart';
 
 
 class MyOrdersParams extends ParamsModel<MyOrdersBody> {
-  MyOrdersParams({int pageLength = 4,int page = 0})
+  MyOrdersParams({
+    int pageLength = 4,
+    int page = 0,
+    this.ids,
+  })
       : super(body: MyOrdersBody(),pageLength: pageLength,page: page,);
   
+  final List<String>? ids;
 
   @override
   Map<String, String> get additionalHeaders => {};
@@ -18,7 +23,10 @@ class MyOrdersParams extends ParamsModel<MyOrdersBody> {
   String? get url => ApiConstants.listOrders;
 
   @override
-  Map<String, String> get urlParams => {};
+  Map<String, String> get urlParams => {
+    if(ids != null && ids!.isNotEmpty)
+      'Ids' : ids!.join('Ids =')
+  };
 
   @override
   List<Object?> get props => [url, urlParams, requestType, body];

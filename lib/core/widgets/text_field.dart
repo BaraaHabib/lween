@@ -111,8 +111,8 @@ class AppTextField extends HookWidget {
             duration: 300.milliseconds,
             child: Container(
               decoration:  BoxDecoration(
-                color:  Styles.textFieldColor(context),
-                border: Border.all(color: Styles.textFieldColor(context),)
+                color: fillColor ??  Styles.textFieldColor(context),
+                border: Border.all(color: fillColor ?? Styles.textFieldColor(context),)
               ),
               child: Row(
                 children: [
@@ -161,7 +161,7 @@ class AppTextField extends HookWidget {
                                     // bottom: 0.wx,
                                 ),
                             disabledBorder: disabledBorder,
-                            alignLabelWithHint: true,
+                            alignLabelWithHint: false,
                             suffixIcon: _suffixIcon(obscureTextState),
                             suffixIconConstraints: BoxConstraints(
                               minWidth: 20.wx,

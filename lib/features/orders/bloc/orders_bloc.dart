@@ -3,14 +3,20 @@ import 'dart:async';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lween/core/resources/constants.dart';
+import 'package:lween/features/orders/models/complete_payment.dart';
 import 'package:lween/features/orders/models/daily_travels.dart';
 import 'package:lween/features/orders/models/orders.dart';
+import 'package:lween/features/orders/models/request_payment.dart';
 import 'package:lween/features/orders/models/voucher.dart';
 import 'package:lween/features/orders/params/cancel_order_params.dart';
 import 'package:lween/features/orders/params/check_voucher_params.dart';
+import 'package:lween/features/orders/params/complete_payment_params.dart';
 import 'package:lween/features/orders/params/create_order_params.dart';
 import 'package:lween/features/orders/params/daily_travel_params.dart';
 import 'package:lween/features/orders/params/my_orders_params.dart';
+import 'package:lween/features/orders/params/request_payment_params.dart';
+import 'package:lween/features/orders/params/resend_payment_code_params.dart';
 import 'package:lween/features/orders/repo/orders_repository.dart';
 import 'package:lween/injection_container.dart';
 
@@ -31,6 +37,9 @@ class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
     on<CreateOrderEvent>(_createOrderEventHandler);
     on<CheckVoucherEvent>(_checkVoucherEventHandler);
     on<CancelOrderEvent>(_cancelOrderEventHandler);
+    on<RequestPaymentEvent>(_requestPaymentEventHandler);
+    on<CompletePaymentEvent>(_completePaymentEventHandler);
+    on<ResendPaymentCodeEvent>(_resendPaymentCodeEventHandler);
   }
 
 
@@ -51,10 +60,11 @@ class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
     final res = await sl<OrdersRepository>().getMyOrders(MyOrdersParams(
       page: event.page,
       pageLength: 10,
+      ids:event.ids,
     ));
     emit(
       res.fold((l) => MyOrdersError(l.message,),
-            (r) => MyOrdersLoaded(ordersResult: r,),
+            (r) => MyOrdersLoaded(ordersResult: r,navigateToDetails: event.navigateToDetails,),
       ),
     );
   }
@@ -108,7 +118,7 @@ class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
     emit(const CreateOrderLoading(),);
     final res = await sl<OrdersRepository>().createOrder(event.params,);
     emit(
-      res.fold((l) => CreateOrderError(l.errorMessage ?? ''),
+      res.fold((l) => CreateOrderError(l.errorMessage),
             (r) => CreateOrderLoaded(order: r,),
       ),
     );
@@ -124,7 +134,7 @@ class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
       ),
     );
     emit(
-      res.fold((l) => CheckVoucherError(l.errorMessage ?? ''),
+      res.fold((l) => CheckVoucherError(l.errorMessage),
             (r) => CheckVoucherLoaded(voucher: r,),
       ),
     );
@@ -136,8 +146,35 @@ class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
     final res = await sl<OrdersRepository>().cancelOrder(
         CancelOrderParams(orderId: event.orderId));
     emit(
-      res.fold((l) => CancelOrderError(l.errorMessage ?? ''),
+      res.fold((l) => CancelOrderError(l.errorMessage),
             (r) => const CancelOrderLoaded(),
+      ),
+    );
+  }
+
+  Future<FutureOr<void>> _requestPaymentEventHandler(RequestPaymentEvent event, Emitter<OrdersState> emit) async {
+    emit(const RequestPaymentLoading(),);
+    final res = await sl<OrdersRepository>().requestPayment(event.params,);
+    emit(
+      res.fold((l) => RequestPaymentError(l.errorMessage),
+            (r) => RequestPaymentLoaded(r,),
+      ),
+    );
+  }
+
+  Future<FutureOr<void>> _resendPaymentCodeEventHandler(ResendPaymentCodeEvent event, Emitter<OrdersState> emit) async {
+    emit(const ResendPaymentCodeLoading(),);
+    final res = await sl<OrdersRepository>().resendPaymentCode(
+      ResendPaymentCodeParams(body: ResendPaymentCodeParamsBody(
+        accountNumber: event.accountNumber,
+        paymentType: event.paymentType,
+        transactionId: event.transactionId,
+      ),
+      ),
+    );
+    emit(
+      res.fold((l) => ResendPaymentCodeError(l.errorMessage),
+            (r) => const ResendPaymentCodeLoaded(),
       ),
     );
   }
@@ -145,5 +182,17 @@ class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
   refreshOrders(){
     add(const GetLatestOrdersEvent(),);
     add(const GetOrdersEvent(),);
+  }
+
+
+
+  Future<FutureOr<void>> _completePaymentEventHandler(CompletePaymentEvent event, Emitter<OrdersState> emit) async {
+    emit(const CompletePaymentLoading(),);
+    final res = await sl<OrdersRepository>().completePayment(event.params,);
+    emit(
+      res.fold((l) => CompletePaymentError(l.errorMessage),
+            (r) => CompletePaymentLoaded(r,),
+      ),
+    );
   }
 }

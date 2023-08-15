@@ -43,12 +43,13 @@ class OrderPaymentMethodScreen extends HookWidget {
         builder: (context, state) {
           return SizedBox(
             child: IgnorePointer(
-              ignoring: state is CreateOrderLoading,
+              ignoring: state is CreateOrderLoading || state is RequestPaymentLoading,
               child: AppScaffold(
                 title: S
                     .of(context)
                     .choosePaymentMethod,
                 child: Stack(
+                  alignment: Alignment.center,
                   children: [
                     ListView(
                       children: [
@@ -104,20 +105,9 @@ class OrderPaymentMethodScreen extends HookWidget {
                                           .userExceededAllowedSeatsWithoutPayment,
                                     ),
                                     PaymentMethodWidget(
-                                      icon: Assets.syriatelPNG,
-                                      title: S
-                                          .of(context)
-                                          .syriatelCash,
-                                      paymentMethod: PaymentMethod.syriatel,
-                                      onTap: controller
-                                          .changeSelectedPaymentMethod,
-                                    ),
-                                    PaymentMethodWidget(
-                                      icon: Assets.mtnPNG,
-                                      title: S
-                                          .of(context)
-                                          .cashMtn,
-                                      paymentMethod: PaymentMethod.mtn,
+                                      icon: Assets.cashMobilePNG,
+                                      title: S.of(context).cashMobile,
+                                      paymentMethod: PaymentMethod.cashMobile,
                                       onTap: controller
                                           .changeSelectedPaymentMethod,
                                     ),
@@ -155,13 +145,14 @@ class OrderPaymentMethodScreen extends HookWidget {
                           ),
                         ),
                         const VoucherWidget(),
-                        45.vSpace,
+                        // 45.vSpace,
                       ],
                     ),
-                    Positioned(
-                      bottom: 0,
+                    if(controller.orderEntity == null)
+                      Positioned(
+                      bottom: 30.hx,
                       child: (state is CreateOrderLoading) ?
-                    const WaitingWidget()
+                    const Center(child: WaitingWidget())
                         :
                     BlocBuilder<OrdersBloc, OrdersState>(
                         bloc: OrdersBloc.instance,
@@ -169,10 +160,13 @@ class OrderPaymentMethodScreen extends HookWidget {
                         builder: (context, voucherState) {
                           return IgnorePointer(
                             ignoring: voucherState is CheckVoucherLoading,
-                            child: AppGradientTextButton(
-                              content: S.current.next,
-                              gradientType: AppTextButtonGradientType.secondary,
-                              onTap: () => controller.pay(context),
+                            child: Hero(
+                              tag: 'order-next',
+                              child: AppGradientTextButton(
+                                content: S.current.next,
+                                gradientType: AppTextButtonGradientType.secondary,
+                                onTap: () => controller.pay(context),
+                              ),
                             ),
                           );
                         }

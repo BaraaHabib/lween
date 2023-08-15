@@ -12,7 +12,6 @@ import 'package:lween/core/resources/constants.dart';
 import 'package:lween/features/orders/bloc/orders_bloc.dart';
 import 'package:lween/features/orders/models/orders.dart';
 import 'package:lween/generated/l10n.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:screenshot/screenshot.dart';
 
@@ -25,6 +24,7 @@ class OrderDetailsController extends Controller {
   cancelOrder(BuildContext context) {
     AppDialogs.showYesNoDialog(
         context: context,
+        title: S.of(context).confirmOperation,
         content: S
             .of(context)
             .areYouSureYouWantToCancelOrder,

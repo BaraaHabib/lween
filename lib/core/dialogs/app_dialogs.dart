@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lween/core/configurations/assets.dart';
 import 'package:lween/core/extended/numbers_ext.dart';
 import 'package:lween/core/widgets/app_button.dart';
+import 'package:lween/core/widgets/app_image.dart';
 import 'package:lween/core/widgets/app_text_widget.dart';
 
 import '../../generated/l10n.dart';
@@ -21,14 +23,14 @@ abstract class AppDialogs {
     String? title,
     Function? retryCallBack,
   }) async {
-    showCupertinoDialog(
+    showGeneralDialog(
       context: context,
-      barrierDismissible: false,
+      // barrierDismissible: false,
       // barrierColor: Colors.white.withAlpha(50),
-      builder: (BuildContext context) => RetryDialog(
+      title: title ?? S.current.retry,
+      content: RetryDialog(
         message: content,
         retry: retryCallBack,
-        title: title,
       ),
     );
   }
@@ -40,15 +42,15 @@ abstract class AppDialogs {
     Function? yesCallBack,
     Function? noCallBack,
   }) async {
-    return showCupertinoDialog(
+    return showGeneralDialog(
       context: context,
-      barrierDismissible: false,
+      // barrierDismissible: false,
       // barrierColor: Colors.white.withAlpha(50),
-      builder: (BuildContext context) => YesNoDialog(
+      title: title,
+      content:  YesNoDialog(
         message: content,
         yesCallback: yesCallBack,
         noCallBack: noCallBack,
-        title: title,
       ),
     );
   }

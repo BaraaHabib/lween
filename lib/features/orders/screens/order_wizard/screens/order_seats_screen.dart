@@ -36,6 +36,7 @@ class OrderSeatsScreen extends HookWidget {
   Widget build(BuildContext context) {
     final OrderWizardController controller = Controller.getInstance();
 
+
     return Stack(
       children: [
         AppScaffold(
@@ -60,7 +61,9 @@ class OrderSeatsScreen extends HookWidget {
                           .previewVehicle,
                       onTap: () => NavigationService
                           .of(context,)
-                          .navigateTo(OrderPreviewVehicleScreenRoute(images: controller.selectedTravelEntity?.images ?? [])),
+                          .navigateTo(
+                          withNavigation: false,
+                          OrderPreviewVehicleScreenRoute(images: controller.selectedTravelEntity?.images ?? [])),
                       fontSize: 9.spx,
                       icon: Assets.eyeSVG,
                       padding: const EdgeInsets.symmetric(

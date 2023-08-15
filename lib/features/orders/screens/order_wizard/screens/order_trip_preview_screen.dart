@@ -153,7 +153,7 @@ class OrderTripPreviewScreen extends StatelessWidget {
                              ),
                              30.vSpace,
                              Row(
-                               crossAxisAlignment: CrossAxisAlignment.center,
+                               crossAxisAlignment: CrossAxisAlignment.start,
                                children: [
                                  Expanded(
                                    flex:12,
@@ -177,19 +177,27 @@ class OrderTripPreviewScreen extends StatelessWidget {
                                          child: SizedBox(
                                            // height: 30.hx,
                                            // width: 90.wx,
-                                           child: AppGradientTextButtonWithIcon(
-                                             content: S
-                                                 .of(context)
-                                                 .previewVehicle,
-                                             onTap: () {
-                                               return NavigationService
-                                                 .of(context,)
-                                                  .navigateTo(OrderPreviewVehicleScreenRoute(images: travelEntity.images ?? []));
-                                             },
-                                             fontSize: 11.spx,
-                                             icon: Assets.eyeSVG,
-                                             padding: const EdgeInsets.symmetric(
-                                                 horizontal: 15, vertical: 0),
+                                           child: FittedBox(
+                                             fit: BoxFit.scaleDown,
+                                             child: AppGradientTextButtonWithIcon(
+                                               content: S
+                                                   .of(context)
+                                                   .previewVehicle,
+                                               onTap: () {
+                                                 return NavigationService
+                                                   .of(context,)
+                                                    .navigateTo(
+                                                     withNavigation: false,
+                                                     OrderPreviewVehicleScreenRoute(
+                                                         images: travelEntity.images ?? [],
+                                                     ),
+                                                 );
+                                               },
+                                               fontSize: 11.spx,
+                                               icon: Assets.eyeSVG,
+                                               padding: const EdgeInsets.symmetric(
+                                                   horizontal: 15, vertical: 0),
+                                             ),
                                            ),
                                          ),
                                        ),

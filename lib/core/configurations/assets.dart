@@ -90,13 +90,20 @@ class Assets {
 
   static const arrowBack = 'assets/icons/SVG/ic_back.svg';
 
-  static Widget arrowBackWidget(BuildContext context, {Color? color,}) =>
-      Transform.rotate(
-        angle: context.isDirectionRTL(context) ? 0 : pi,
+  static Widget arrowBackWidget(BuildContext context, {Color? color,bool reverse = false}) {
+    double signe = 0;
+    if(reverse){
+      signe = pi;
+    }
+    return Transform.rotate(
+        angle: signe + (context.isDirectionRTL(context) ? 0 : pi.sign),
         child: SvgPicture.asset(
             arrowBack,
+          colorFilter: color == null ?
+          null : ColorFilter.mode(color, BlendMode.srcIn,),
         ),
       );
+  }
   static const arrowRoundedSVG = 'assets/icons/SVG/ic_arrow_rounded.svg';
 
   static Widget arrowRoundedWidget(BuildContext context, {Color? color,}) =>
@@ -155,8 +162,7 @@ class Assets {
   static const otherPNG = 'assets/orders/SVG/wheel.svg';
 
   /// payment
-  static const mtnPNG = 'assets/payment/mtn.png';
-  static const syriatelPNG = 'assets/payment/syriatel.png';
+  static const cashMobilePNG = 'assets/payment/cash_mobile.png';
   static const bemoPNG = 'assets/payment/bemo.png';
   static const cashPNG = 'assets/payment/cash.png';
   static const fatoraPNG = 'assets/payment/fatora_logo.png';
