@@ -72,9 +72,10 @@ class TripCard extends HookWidget {
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment:CrossAxisAlignment.start,
+                      crossAxisAlignment:CrossAxisAlignment.center,
                       children: [
                         Expanded(
+                          flex:75,
                           child: AppTextWidget(
                             '$from - $to',
                             style: context.theme.textTheme
@@ -93,15 +94,20 @@ class TripCard extends HookWidget {
                             AppTextWidget(
                               date,
                               style: context.theme.textTheme.headlineSmall?.copyWith(
-                                height: 1.1,
+                                height: 0.8,
                               ),
                             ),
                           ],
                         if(vehicleType != null && vehicleTypeText != null)
-                          MiniVehicleWidget(
-                              travelMethodEnum: vehicleType!,
-                              travelMethodText: vehicleTypeText!,
-                          ),
+                          ...[
+                            const Spacer(),
+                            Expanded(
+                            flex:35,
+                            child: MiniVehicleWidget(
+                                travelMethodEnum: vehicleType!,
+                                travelMethodText: vehicleTypeText!,
+                            ),
+                          ),]
                       ],
                     ),
                     5.vSpace,

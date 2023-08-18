@@ -3,6 +3,7 @@ import 'package:lween/core/app_state/appstate.dart';
 import 'package:lween/core/data/data_sources/remote_data_source.dart';
 import 'package:lween/core/locale/locale_provider.dart';
 import 'package:lween/core/services/files/file_manager.dart';
+import 'package:lween/core/services/notification_service.dart';
 import 'package:lween/features/auth/bloc/account_bloc.dart';
 import 'package:lween/features/auth/repo/account_repository.dart';
 import 'package:lween/features/home/bloc/home_bloc.dart';
@@ -54,6 +55,7 @@ void initInjection() {
   //! External
 
   sl.registerLazySingleton(() => FileManager());
+  sl.registerLazySingleton(() => NotificationService());
 
 
   //!

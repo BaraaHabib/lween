@@ -107,7 +107,7 @@
   "availableDays": "Available days",
   "transportationType": "Vehicle type",
   "travelDuration": "Travel duration",
-  "exceededSeatsCountDialogMessage": "You have exceeded the number of seats allowed to be reserved without payment, and you cannot complete the order without payment.",
+  "exceededSeatsCountDialogMessage": "Due to the reservation of {count} seats, you will not be able to schedule your order without paying it directly from the application via the available electronic payment methods.",
   "cashPaymentNotAvailable": "The number of seats allowed to be reserved without payment has been exceeded",
   "tripTime": "Trip time",
   "accountSettings": "Account settings",
@@ -124,5 +124,8 @@
   "orderFinishedSuccessfully": "Your order finished successfully",
   "error": "Error",
   "confirmOperation": "Confirm operation",
-  "orderNotCompletedMessage": "Order is not completed, it will be deleted later"
+  "orderNotCompletedMessage": "The order payment process has not been completed and will be deleted after a few minutes",
+  "importantWarning": "Important Notice",
+  "apply": "Apply",
+  "city1City2DateXPrice": "Do you want to confirm sending a reservation request from {city1} to {city2} within {company} on {date} for {X} passengers and at a cost of {price} Syrian pounds"
 }

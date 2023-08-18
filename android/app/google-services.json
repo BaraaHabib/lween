@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "774086218053",
+    "project_id": "lween-6e0ee",
+    "storage_bucket": "lween-6e0ee.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:774086218053:android:6c3ddf1fe4c57bc711ee2c",
+        "android_client_info": {
+          "package_name": "lween.lween.com"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "774086218053-or8nbhhpcqc82jfioj3e3jnvl638jid1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDik7pBv9AYbG3_zV352GYNcnKGDxA2UOQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "774086218053-or8nbhhpcqc82jfioj3e3jnvl638jid1.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "774086218053-jknu4giv8bvnuomngf8eifr516met4tr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.lween.app.lween"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

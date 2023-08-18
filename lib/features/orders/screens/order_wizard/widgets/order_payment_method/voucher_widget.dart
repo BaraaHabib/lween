@@ -126,14 +126,13 @@ class _CheckCodeIconWidget extends StatelessWidget {
         fit: BoxFit.scaleDown,
         child: AnimatedToggle(
           value: state is CheckVoucherLoading ,
-          child: state is CheckVoucherLoading ? Transform.scale(scale:0.7, child: const WaitingWidget()) : IconButton(
+          child: state is CheckVoucherLoading ? Transform.scale(scale:0.7, child: const WaitingWidget()) :
+          AppTextButton(
             onPressed: (){
               FocusManager.instance.primaryFocus?.unfocus();
               controller.checkVoucher();
             },
-            icon: Icon(
-                Icons.search,
-                color: AppStateModel.of(context).isLightTheme ? null : Colors.white),
+            child: Text(S.of(context).apply),
           ),
         ),
       ),

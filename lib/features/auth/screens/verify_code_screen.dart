@@ -110,11 +110,9 @@ class VerifyCodeScreen extends HookWidget {
                           listener: controller.listener,
                           buildWhen: controller.buildWhen,
                           builder: (ctx, cs) {
-                            if (cs is VerifyAccountLoading) {
-                              return const WaitingWidget();
-                            }
                             return AppGradientTextButton(
                               gradientType: AppTextButtonGradientType.primary,
+                              isLoading: cs is VerifyAccountLoading,
                               onTap: () => controller.verifyCode(context,),
                               content: S.of(context).verify,
                             );

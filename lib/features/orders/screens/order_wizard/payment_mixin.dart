@@ -1,10 +1,17 @@
 
 
 import 'package:auto_route/auto_route.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import 'package:lween/core/app_state/appstate.dart';
 import 'package:lween/core/configurations/app_configuration.dart';
 import 'package:lween/core/controller/base_controller.dart';
+import 'package:lween/core/dialogs/app_dialogs.dart';
 import 'package:lween/core/locale/locale_provider.dart';
 import 'package:lween/core/messages/toast.dart';
 import 'package:lween/core/navigation/logger.dart';
@@ -12,9 +19,15 @@ import 'package:lween/core/navigation/navigation_service.dart';
 import 'package:lween/core/resources/constants.dart';
 import 'package:lween/core/routing/app_router.dart';
 import 'package:lween/features/orders/bloc/orders_bloc.dart';
+import 'package:lween/features/orders/models/orders.dart';
+import 'package:lween/features/orders/models/request_payment.dart';
+import 'package:lween/features/orders/params/complete_payment_params.dart';
 import 'package:lween/features/orders/params/create_order_params.dart';
+import 'package:lween/features/orders/params/request_payment_params.dart';
+import 'package:lween/features/orders/screens/order_wizard/dialogs/phone_number_dialog.dart';
 import 'package:lween/features/orders/screens/order_wizard/order_wizard_controller.dart';
 import 'package:lween/generated/l10n.dart';
+import 'package:lween/main.dart';
 
 mixin PaymentMixin implements Controller{
 
@@ -23,6 +36,8 @@ mixin PaymentMixin implements Controller{
   final selectedPaymentMethod = ValueNotifier<PaymentMethod?>(null);
 
   num discount = 0;
+
+  OrderEntity? orderEntity;
 
   changeSelectedPaymentMethod(PaymentMethod p) {
     selectedPaymentMethod.value = p;
@@ -33,40 +48,45 @@ mixin PaymentMixin implements Controller{
       AppToast(state.message ?? '').show();
     }
     else if (state is CreateOrderLoaded) {
-      OrdersBloc.instance.refreshOrders();
-      NavigationService.of(context).popUntilRoot();
-      // AutoTabsRouter.of(context).navigate(const MyOrdersScreenRoute());
-      NavigationService.of(context).navigateTo(OrderDetailsScreenRoute(order: state.order),);
+      orderEntity = state.order;
+      continueToPayment(state,context,);
     }
   }
 
-  pay(BuildContext context) {
-    if(selectedPaymentMethod.value == null){
+  pay(BuildContext context) async {
+    if (selectedPaymentMethod.value == null) {
       return;
     }
-    switch (selectedPaymentMethod.value!) {
-      case PaymentMethod.syriatel:
-      case PaymentMethod.mtn:
-        break;
-      case PaymentMethod.cash:
-        baseController!.updateOrder(
-          orderCreationTimestamp: orderCreationTimestamp,
-          executionDate: DateFormat('yyyy-MM-dd', langEN).format(baseController!.selectedDate!,),
-          paymentMethod: selectedPaymentMethod.value?.type,
-          travelId: baseController?.selectedTravelEntity?.id ?? '',
-        );
-        // AppLogger.log(baseController!.orderBody);
-        OrdersBloc.instance.add(
-          CreateOrderEvent(
-            params: CreateOrderParams(body: baseController!.orderBody,),
-          ),
-        );
-        break;
-      default:
-        break;
+    bool? isConfirmed = await AppDialogs.showYesNoDialog(
+        context: context,
+        title: S.of(context).confirmOperation,
+        content: S.of(context).city1City2DateXPrice(
+          baseController?.selectedFromCity?.name ?? '',
+          baseController?.selectedToCity?.name ?? '',
+          baseController?.selectedCompany?.name ?? '',
+          baseController?.selectedDateFormatted ?? '',
+          baseController?.orderBody.seats?.length.toString() ?? '',
+          baseController?.orderBody.price.toString() ?? '',
+        ));
+    if(!(isConfirmed ?? false)){
+      return;
     }
+    baseController!.updateOrder(
+      orderCreationTimestamp: orderCreationTimestamp,
+      executionDate: DateFormat('yyyy-MM-dd', langEN).format(
+        baseController!.selectedDate!,),
+      paymentMethod: selectedPaymentMethod.value?.type,
+      travelId: baseController?.selectedTravelEntity?.id ?? '',
+    );
+    // AppLogger.log(baseController?.orderBody);
+    OrdersBloc.instance.add(
+      CreateOrderEvent(
+        params: CreateOrderParams(body: baseController!.orderBody,),
+      ),
+    );
   }
 
+  //#region voucher
   final TextEditingController voucherController = TextEditingController();
 
   void voucherListener(BuildContext context, OrdersState state) {
@@ -107,9 +127,12 @@ mixin PaymentMixin implements Controller{
   }
 
   void checkVoucher() {
-    if(voucherController.text.isEmpty){
-      baseController?.updateOrder(
-        price: baseController?.totalPrice,
+    if (voucherController.text.isEmpty) {
+      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+        baseController?.updateOrder(
+          price: baseController?.totalPrice,
+        );
+      }
       );
       return;
     }
@@ -120,6 +143,48 @@ mixin PaymentMixin implements Controller{
       ),
     );
   }
+  //#endregion voucher
+
+  void continueToPayment(CreateOrderLoaded state,BuildContext context,) {
+    if (selectedPaymentMethod.value!.isByPhoneNumber) {
+      showDialog(
+        context: context,
+        useRootNavigator: false,
+        builder: (ctx) =>
+            OrderPhoneNumberDialog(
+              state,
+            ),
+      );
+    }
+    else if (selectedPaymentMethod.value!.isWebView) {
+      AutoRouter
+          .of(context)
+          .push(PaymentWebViewScreenRoute(order: orderEntity!,))
+          .then((value) {
+        goToOrderDetailsScreen(orderEntity!, context,);
+      });
+    }
+    else if (state.order.isPayedInCenter) {
+      goToOrderDetailsScreen(state.order, context,);
+    }
+  }
 
 
+
+  goToOrderDetailsScreen(OrderEntity order, BuildContext context) {
+    OrdersBloc.instance.refreshOrders();
+    final currentRouter = NavigationService
+        .of(context,)
+        .closestRouter;
+    final tabsRouter = currentRouter.childControllers.firstWhereOrNull((e) => e is TabsRouter);
+    tabsRouter?.navigate(const MyOrdersScreenRoute());
+    currentRouter.popUntilRoot();
+    // NavigationService
+    //     .of(context,)
+    //     .closestRouter
+    //     .parent<TabsRouter>()
+    //     ?.navigate(const MyOrdersScreenRoute());
+    OrdersBloc.instance.add(
+        GetOrdersEvent(navigateToDetails: true, ids: [order.id!,]));
+  }
 }

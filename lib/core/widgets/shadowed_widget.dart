@@ -36,7 +36,7 @@ class ShadowedWidget extends StatelessWidget {
                 opacity: 0.9,
                 child: ColorFiltered(
                   colorFilter: ColorFilter.mode(
-                      color ?? Styles.colorPrimary, BlendMode.srcATop),
+                      color ?? Styles.colorPrimaryDark, BlendMode.srcATop),
                   child: child,
                 ),
               ),

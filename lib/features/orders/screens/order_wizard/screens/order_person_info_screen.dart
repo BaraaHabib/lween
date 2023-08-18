@@ -19,6 +19,7 @@ import 'package:lween/core/extended/numbers_ext.dart';
 import 'package:lween/core/lween/widgets/app_scaffold.dart';
 import 'package:lween/core/widgets/animated/animated_toggle.dart';
 import 'package:lween/core/widgets/app_button.dart';
+import 'package:lween/core/widgets/app_text_button.dart';
 import 'package:lween/core/widgets/app_text_widget.dart';
 import 'package:lween/core/widgets/text_field.dart';
 import 'package:lween/core/widgets/waiting_widget.dart';
@@ -57,60 +58,57 @@ class OrderPersonInfoScreen extends HookWidget {
           .passsengersInfo,
       child: Stack(
         children: [
-          SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                5.vSpace,
-                Row(
-                  children: [
-                    Expanded(
-                      child: AppTextWidget(S
-                          .of(context)
-                          .enterFullNameForSeats, maxLines: 2,),
-                    ),
-                  ],
-                ),
-                10.vSpace,
-                SizedBox(
-                  height: 0.65.sh,
-                  child: FormBuilder(
-                    key: controller.passengersInfoFormKey,
-                    child: ListView.separated(
-                      shrinkWrap: true,
-                      itemCount: (controller.orderBody.seats?.length ?? 0),
-                      separatorBuilder: (ctx, index) => 20.vSpace,
-                      itemBuilder: (ctx, index) {
-                        final seat = controller
-                            .orderBody
-                            .seats?.elementAt(index);
-                        return LabelWithField(
-                          prefix: '#',
-                          label: seat?.seatNumber.toString() ?? '',
-                          labelColor: Styles.tripsCountTextColor,
-                          labelPadding: const EdgeInsetsDirectional.only(
-                            start: 10,),
-                          child: AppTextField(
-                            name: seat?.seatNumber.toString() ?? '',
-                            prefixIcon: SvgPicture.asset(Assets.profileIcon,),
-                            controller: controller.passengerNamesMap[seat
-                                ?.seatNumber],
-                            label: S.current.fullName,
-                            // onChanged: (v) => controller.updatePersonName(v,seat?.seatNumber,),
-                            validator: FormBuilderValidators.compose([
-                              FormBuilderValidators.required(),
-                              FormBuilderValidators.minLength(5),
-                            ]),
-                          ),
-                        );
-                      }
-                      ,
-                    ),
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              5.vSpace,
+              Row(
+                children: [
+                  Expanded(
+                    child: AppTextWidget(S
+                        .of(context)
+                        .enterFullNameForSeats, maxLines: 2,),
+                  ),
+                ],
+              ),
+              10.vSpace,
+              Expanded(
+                child: FormBuilder(
+                  key: controller.passengersInfoFormKey,
+                  child: ListView.separated(
+                    shrinkWrap: true,
+                    itemCount: (controller.orderBody.seats?.length ?? 0),
+                    separatorBuilder: (ctx, index) => 20.vSpace,
+                    itemBuilder: (ctx, index) {
+                      final seat = controller
+                          .orderBody
+                          .seats?.elementAt(index);
+                      return LabelWithField(
+                        prefix: '#',
+                        label: seat?.seatNumber.toString() ?? '',
+                        labelColor: Styles.tripsCountTextColor,
+                        labelPadding: const EdgeInsetsDirectional.only(
+                          start: 10,),
+                        child: AppTextField(
+                          name: seat?.seatNumber.toString() ?? '',
+                          prefixIcon: SvgPicture.asset(Assets.profileIcon,),
+                          controller: controller.passengerNamesMap[seat
+                              ?.seatNumber],
+                          label: S.current.fullName,
+                          // onChanged: (v) => controller.updatePersonName(v,seat?.seatNumber,),
+                          validator: FormBuilderValidators.compose([
+                            FormBuilderValidators.required(),
+                            FormBuilderValidators.minLength(5),
+                          ]),
+                        ),
+                      );
+                    }
+                    ,
                   ),
                 ),
-                // 15.vSpace,
-              ],
-            ),
+              ),
+              80.vSpace,
+            ],
           ),
           Positioned(
             bottom: 30.hx,

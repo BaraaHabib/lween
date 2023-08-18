@@ -20,15 +20,21 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ar';
 
-  static String m0(value) => "المبلغ المدفوع ${value}";
+  static String m0(city1, city2, company, date, X, price) =>
+      "هل تريد تأكيد ارسال طلب حجز من ${city1} الى ${city2} ضمن ${company} بتاريخ ${date} ل ${X} مسافر وبتكلفة ${price} ليرة سورية؟";
 
-  static String m1(value) => "payed with ${value}";
+  static String m1(count) =>
+      "بسبب حجز ${count} مقعد فإنه لن تتمكن من جدولة طلبك دون دفعه مباشرة من التطبيق عبر وسائل الدفع الإلكتروني المتوفرة.";
 
-  static String m2(value) => "المبلغ المترتب ${value}";
+  static String m2(value) => "المبلغ المدفوع ${value}";
 
-  static String m3(entity) => "عذراً لايوجد ${entity} بعد";
+  static String m3(value) => "payed with ${value}";
 
-  static String m4(value) => "لديك حسم بقيمة ${value}";
+  static String m4(value) => "المبلغ المترتب ${value}";
+
+  static String m5(entity) => "عذراً لايوجد ${entity} بعد";
+
+  static String m6(value) => "لديك حسم بقيمة ${value}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -36,6 +42,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "يمكنك معاينة باص الرحلة, أو حجز المقاعد مباشرة"),
         "accountSettings":
             MessageLookupByLibrary.simpleMessage("إعدادات الحساب"),
+        "apply": MessageLookupByLibrary.simpleMessage("تطبيق"),
         "areYouSureYouWantToCancelOrder": MessageLookupByLibrary.simpleMessage(
             "هل انت متأكد من إلغاء الطلب؟"),
         "arriveTo": MessageLookupByLibrary.simpleMessage("الوصول إلى"),
@@ -60,6 +67,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("اختر وسيلة الدفع"),
         "chooseSeats": MessageLookupByLibrary.simpleMessage("حجز مقعد"),
         "city": MessageLookupByLibrary.simpleMessage("المدينة"),
+        "city1City2DateXPrice": m0,
         "codeWasResentToYourNumber":
             MessageLookupByLibrary.simpleMessage("تم إعادة إرسال رمز التحقق"),
         "company": MessageLookupByLibrary.simpleMessage("شركة النقل"),
@@ -91,14 +99,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterVoucherCode": MessageLookupByLibrary.simpleMessage(
             "إن كنت تملك كود حسم أدخله لتحصل على حسم على سعر التذاكر"),
         "error": MessageLookupByLibrary.simpleMessage("خطأ"),
-        "exceededSeatsCountDialogMessage": MessageLookupByLibrary.simpleMessage(
-            "لقد تجاوزت عدد المقاعد المسموح حجزها بدون دفع، لن يمكنك إكمال الطلب بدون دفع."),
+        "exceededSeatsCountDialogMessage": m1,
         "fatora": MessageLookupByLibrary.simpleMessage("فاتورة"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("نسيت كلمة المرور؟"),
         "from": MessageLookupByLibrary.simpleMessage("من"),
         "fullName": MessageLookupByLibrary.simpleMessage("الاسم الثلاثي"),
         "home": MessageLookupByLibrary.simpleMessage("الرئيسية"),
+        "importantWarning": MessageLookupByLibrary.simpleMessage("ملاحظة هامة"),
         "invalidphonenumber":
             MessageLookupByLibrary.simpleMessage("خطأ في رقم الهاتف"),
         "language": MessageLookupByLibrary.simpleMessage("اللغة"),
@@ -126,11 +134,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "orderFinishedSuccessfully":
             MessageLookupByLibrary.simpleMessage("اكتملت عملية الحجز بنجاح"),
         "orderHasBeenCanceled":
-            MessageLookupByLibrary.simpleMessage("تم إلفاء الطلب"),
+            MessageLookupByLibrary.simpleMessage("تم إلغاء الطلب"),
         "orderIsCanceled":
             MessageLookupByLibrary.simpleMessage("تم إلغاء الطلب"),
         "orderNotCompletedMessage": MessageLookupByLibrary.simpleMessage(
-            "لم يتم إكمال الطلب، سيتم حذفه بعد مدة"),
+            "لم يتم اكمال عملية دفع الطلب الكترونيا وسيتم حذفه بعد عدة دقائق"),
         "orderSavedToGallery": MessageLookupByLibrary.simpleMessage(
             "تم حفظ الطلب في ملفات الجهاز"),
         "passengersNames":
@@ -143,10 +151,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "passwordsDoesNotMatch":
             MessageLookupByLibrary.simpleMessage("كلمة المرور غير مطابقة"),
         "payAtCenter": MessageLookupByLibrary.simpleMessage("دفع في المكتب"),
-        "payedAmount": m0,
+        "payedAmount": m2,
         "payedInCenter":
             MessageLookupByLibrary.simpleMessage("تم الدفع ضمن المركز"),
-        "payedWithValue": m1,
+        "payedWithValue": m3,
         "paymentStatus": MessageLookupByLibrary.simpleMessage("حالة الدفع"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
         "phoneShouldStartWith09":
@@ -160,7 +168,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "previewVehicle":
             MessageLookupByLibrary.simpleMessage("معاينة المركبة"),
         "previousTrips": MessageLookupByLibrary.simpleMessage("رحلاتك السابقة"),
-        "requiredPayment": m2,
+        "requiredPayment": m4,
         "resendCode": MessageLookupByLibrary.simpleMessage("إعادة إرسال الرمز"),
         "reservationHolder":
             MessageLookupByLibrary.simpleMessage("اسم صاحب الحجز"),
@@ -178,7 +186,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("المقاعد المحجوزة"),
         "send": MessageLookupByLibrary.simpleMessage("إرسال"),
         "signup": MessageLookupByLibrary.simpleMessage("إنشاء حساب"),
-        "sorryThereAreNoEntityYet": m3,
+        "sorryThereAreNoEntityYet": m5,
         "source": MessageLookupByLibrary.simpleMessage("الانطلاق"),
         "startFrom": MessageLookupByLibrary.simpleMessage("الانطلاق من"),
         "syriatelCash": MessageLookupByLibrary.simpleMessage("سيريتيل كاش"),
@@ -209,7 +217,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("أهلاً بك في تطبيق لوين"),
         "yes": MessageLookupByLibrary.simpleMessage("نعم"),
         "yesterday": MessageLookupByLibrary.simpleMessage("البارحة"),
-        "youHaveDiscount": m4,
+        "youHaveDiscount": m6,
         "youMustHaveCashAccount": MessageLookupByLibrary.simpleMessage(
             "يجب أن يكون لديك حساب كاش لدى مزود الخدمة الذي تريد الدفع من خلاله")
       };

@@ -1130,13 +1130,13 @@ class S {
     );
   }
 
-  /// `You have exceeded the number of seats allowed to be reserved without payment, and you cannot complete the order without payment.`
-  String get exceededSeatsCountDialogMessage {
+  /// `Due to the reservation of {count} seats, you will not be able to schedule your order without paying it directly from the application via the available electronic payment methods.`
+  String exceededSeatsCountDialogMessage(Object count) {
     return Intl.message(
-      'You have exceeded the number of seats allowed to be reserved without payment, and you cannot complete the order without payment.',
+      'Due to the reservation of $count seats, you will not be able to schedule your order without paying it directly from the application via the available electronic payment methods.',
       name: 'exceededSeatsCountDialogMessage',
       desc: '',
-      args: [],
+      args: [count],
     );
   }
 
@@ -1300,13 +1300,44 @@ class S {
     );
   }
 
-  /// `Order is not completed, it will be deleted later`
+  /// `The order payment process has not been completed and will be deleted after a few minutes`
   String get orderNotCompletedMessage {
     return Intl.message(
-      'Order is not completed, it will be deleted later',
+      'The order payment process has not been completed and will be deleted after a few minutes',
       name: 'orderNotCompletedMessage',
       desc: '',
       args: [],
+    );
+  }
+
+  /// `Important Notice`
+  String get importantWarning {
+    return Intl.message(
+      'Important Notice',
+      name: 'importantWarning',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Apply`
+  String get apply {
+    return Intl.message(
+      'Apply',
+      name: 'apply',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Do you want to confirm sending a reservation request from {city1} to {city2} within {company} on {date} for {X} passengers and at a cost of {price} Syrian pounds`
+  String city1City2DateXPrice(Object city1, Object city2, Object company,
+      Object date, Object X, Object price) {
+    return Intl.message(
+      'Do you want to confirm sending a reservation request from $city1 to $city2 within $company on $date for $X passengers and at a cost of $price Syrian pounds',
+      name: 'city1City2DateXPrice',
+      desc: '',
+      args: [city1, city2, company, date, X, price],
     );
   }
 }

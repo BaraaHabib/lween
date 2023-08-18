@@ -28,7 +28,8 @@ class NavigationService {
       AppLogger.log('Restarting');
       AppStateModel.isRestartingApp = true;
     }
-    router.popUntilRoot();
+    // router.popUntilRoot();
+    router.popUntil((route) => route.isFirst,);
     // router.popUntil((route) => route.isFirst,);
     await router.replace(
       route,

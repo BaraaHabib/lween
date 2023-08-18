@@ -84,17 +84,10 @@ class ForgotPasswordCodeDialog extends HookWidget {
                           height: 45.hx,
                           child: Builder(
                             builder: (ctx,) {
-                              if (
-                              cs is EnterForgotPasswordLoading ||
-                                  cs is CheckCodeLoading
-                              ) {
-                                return const FittedBox(
-                                  fit: BoxFit.scaleDown,
-                                  child: WaitingWidget(),
-                                );
-                              }
                               return AppGradientTextButton(
                                 gradientType: AppTextButtonGradientType.primary,
+                                isLoading: cs is EnterForgotPasswordLoading ||
+                                    cs is CheckCodeLoading,
                                 onTap: () => controller.nextStep(context),
                                 content: S
                                     .of(context)

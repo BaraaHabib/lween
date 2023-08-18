@@ -21,6 +21,7 @@ enum PaymentMethod{
   final int? paymentProviderEnum;
 
   bool get isByPhoneNumber => this == PaymentMethod.cashMobile;
+  bool get isOnlinePayment => this != PaymentMethod.cash;
   bool get isWebView =>
       this == PaymentMethod.bemo ||
       this == PaymentMethod.eCash ||

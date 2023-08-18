@@ -20,15 +20,21 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static String m0(value) => "Payed amount ${value}";
+  static String m0(city1, city2, company, date, X, price) =>
+      "Do you want to confirm sending a reservation request from ${city1} to ${city2} within ${company} on ${date} for ${X} passengers and at a cost of ${price} Syrian pounds";
 
-  static String m1(value) => "payed with ${value}";
+  static String m1(count) =>
+      "Due to the reservation of ${count} seats, you will not be able to schedule your order without paying it directly from the application via the available electronic payment methods.";
 
-  static String m2(value) => "Required payment ${value}";
+  static String m2(value) => "Payed amount ${value}";
 
-  static String m3(entity) => "Sorry, there are no ${entity} yet";
+  static String m3(value) => "payed with ${value}";
 
-  static String m4(value) => "You have discount ${value}";
+  static String m4(value) => "Required payment ${value}";
+
+  static String m5(entity) => "Sorry, there are no ${entity} yet";
+
+  static String m6(value) => "You have discount ${value}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -36,6 +42,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "You can view the vehicle, or reserve seats directly"),
         "accountSettings":
             MessageLookupByLibrary.simpleMessage("Account settings"),
+        "apply": MessageLookupByLibrary.simpleMessage("Apply"),
         "areYouSureYouWantToCancelOrder": MessageLookupByLibrary.simpleMessage(
             "Are you sure you want to cancel order?"),
         "arriveTo": MessageLookupByLibrary.simpleMessage("Arrive to"),
@@ -59,6 +66,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Choose payment method"),
         "chooseSeats": MessageLookupByLibrary.simpleMessage("Choose seats"),
         "city": MessageLookupByLibrary.simpleMessage("City"),
+        "city1City2DateXPrice": m0,
         "codeWasResentToYourNumber": MessageLookupByLibrary.simpleMessage(
             "Verification code was resent to your number"),
         "company": MessageLookupByLibrary.simpleMessage("Company"),
@@ -92,14 +100,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterVoucherCode": MessageLookupByLibrary.simpleMessage(
             "If you have a discount code, enter it to get a discount on the ticket price"),
         "error": MessageLookupByLibrary.simpleMessage("Error"),
-        "exceededSeatsCountDialogMessage": MessageLookupByLibrary.simpleMessage(
-            "You have exceeded the number of seats allowed to be reserved without payment, and you cannot complete the order without payment."),
+        "exceededSeatsCountDialogMessage": m1,
         "fatora": MessageLookupByLibrary.simpleMessage("Fatora"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Forgot password"),
         "from": MessageLookupByLibrary.simpleMessage("from"),
         "fullName": MessageLookupByLibrary.simpleMessage("full name"),
         "home": MessageLookupByLibrary.simpleMessage("Home"),
+        "importantWarning":
+            MessageLookupByLibrary.simpleMessage("Important Notice"),
         "invalidphonenumber":
             MessageLookupByLibrary.simpleMessage("invalidPhoneNumber"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
@@ -130,7 +139,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "orderIsCanceled":
             MessageLookupByLibrary.simpleMessage("Order has been canceled"),
         "orderNotCompletedMessage": MessageLookupByLibrary.simpleMessage(
-            "Order is not completed, it will be deleted later"),
+            "The order payment process has not been completed and will be deleted after a few minutes"),
         "orderSavedToGallery":
             MessageLookupByLibrary.simpleMessage("Order saved to gallery"),
         "passengersNames":
@@ -143,10 +152,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "passwordsDoesNotMatch":
             MessageLookupByLibrary.simpleMessage("Passwords does not match"),
         "payAtCenter": MessageLookupByLibrary.simpleMessage("Pay at center"),
-        "payedAmount": m0,
+        "payedAmount": m2,
         "payedInCenter":
             MessageLookupByLibrary.simpleMessage("Payed in company center"),
-        "payedWithValue": m1,
+        "payedWithValue": m3,
         "paymentStatus": MessageLookupByLibrary.simpleMessage("Payment status"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone number"),
         "phoneShouldStartWith09":
@@ -160,7 +169,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "previewVehicle":
             MessageLookupByLibrary.simpleMessage("Preview vehicle"),
         "previousTrips": MessageLookupByLibrary.simpleMessage("Previous trips"),
-        "requiredPayment": m2,
+        "requiredPayment": m4,
         "resendCode": MessageLookupByLibrary.simpleMessage("Resend code"),
         "reservationHolder":
             MessageLookupByLibrary.simpleMessage("اسم صاحب الحجز"),
@@ -175,7 +184,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "selectedSeats": MessageLookupByLibrary.simpleMessage("Selected seats"),
         "send": MessageLookupByLibrary.simpleMessage("Send"),
         "signup": MessageLookupByLibrary.simpleMessage("Signup"),
-        "sorryThereAreNoEntityYet": m3,
+        "sorryThereAreNoEntityYet": m5,
         "source": MessageLookupByLibrary.simpleMessage("From"),
         "startFrom": MessageLookupByLibrary.simpleMessage("Start from"),
         "syriatelCash": MessageLookupByLibrary.simpleMessage("Syriatel cash"),
@@ -208,7 +217,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Welcome to Lween app"),
         "yes": MessageLookupByLibrary.simpleMessage("Yes"),
         "yesterday": MessageLookupByLibrary.simpleMessage("Yesterday"),
-        "youHaveDiscount": m4,
+        "youHaveDiscount": m6,
         "youMustHaveCashAccount": MessageLookupByLibrary.simpleMessage(
             "You must have a cash account with the service provider you want to pay through")
       };

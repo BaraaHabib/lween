@@ -15,6 +15,7 @@ import 'package:lween/features/auth/params/init_app_params.dart';
 import 'package:lween/features/auth/params/login_params.dart';
 import 'package:lween/features/auth/params/register_params.dart';
 import 'package:lween/features/auth/params/resend_code_params.dart';
+import 'package:lween/features/auth/params/update_token_params.dart';
 import 'package:lween/features/auth/params/verify_account_params.dart';
 
 abstract class IAccountRepository extends IRepository {
@@ -27,5 +28,6 @@ abstract class IAccountRepository extends IRepository {
   Future<Either<ErrorEntity, EmptyEntity>> checkCode(CheckCodeParams model);
   Future<Either<ErrorEntity, EmptyEntity>> resendCode(ResendCodeParams model);
   Future<Either<ErrorEntity, EmptyEntity>> enterForgotPassword(EnterForgotPasswordParams model);
+  Future<Either<ErrorEntity, EmptyEntity>> updateToken(UpdateTokenParams model);
 
 }

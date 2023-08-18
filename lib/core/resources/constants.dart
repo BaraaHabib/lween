@@ -33,4 +33,6 @@ const shimmerGradient = LinearGradient(
 
 const shimmerDirection = ShimmerDirection.ltr;
 
+const generalFCMTopic = 'general';
+
 

@@ -92,7 +92,7 @@ class OrderEntity extends ContentModel {
 
 
   String get currentPaymentStatusText {
-    if(paymentMethodEnum == PaymentMethod.cash && paymentMethod != PaymentMethod.cash.type){
+    if(paymentMethodEnum == PaymentMethod.cash && paymentMethod == PaymentMethod.cash.type){
       if (isPaid || isConverted) {
         return S.current.payedInCenter;
       }
@@ -106,7 +106,7 @@ class OrderEntity extends ContentModel {
     return S.current.payedWithValue(paymentProviderText ?? '');
   }
 
-  bool get isPayedInCenter => paymentMethod == PaymentMethod.cash.type;
+  bool get isPayedInCenter => paymentMethod == PaymentMethod.cash.type && paymentProvider == null;
   bool get isPaymentByPhone =>
       paymentMethodEnum == PaymentMethod.cashMobile;
   bool get isOnlinePayment =>
@@ -121,15 +121,21 @@ class OrderEntity extends ContentModel {
 
   String? get paymentAmountText {
     if(isPayedInCenter){
-      if(isPending) {
-        return S.current.waitingPaymentInCompanyCenter;
-      }
-       else if(isPaid){
+      // if(isPending) {
+      //   return S.current.waitingPaymentInCompanyCenter;
+      // }
+      //  else
+         if(isPaid){
         return S.current.payedInCenter;
       }
     }
+    else if(isOnlinePayment){
+      if(isPaid){
+         return S.current.payedAmount(price.toString());
+      }
+    }
     // if (isPaid) {
-    return paymentProviderText ?? '';
+    return  '';
     // }
     return S.current.requiredPayment(price ?? '');
   }

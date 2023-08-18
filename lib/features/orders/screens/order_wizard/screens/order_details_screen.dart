@@ -248,24 +248,42 @@ class OrderDetailsScreen extends HookWidget {
                                         Row(
                                           mainAxisAlignment:MainAxisAlignment.center,
                                           children: [
-                                            AppTextWidget(
-                                              order.currentPaymentStatusText ?? '',
-                                              style: context.textTheme.headlineMedium?.copyWith(
-                                                color: order.paymentStatusTextColor(context),
+                                            // const Spacer(
+                                            //   flex: 1,
+                                            // ),
+                                            15.hSpace,
+                                            Flexible(
+                                              child: AppTextWidget(
+                                                order.currentPaymentStatusText ?? '',
+                                                textAlign: TextAlign.center,
+                                                maxLines: 2,
+                                                style: context.textTheme.headlineMedium?.copyWith(
+                                                  color: order.paymentStatusTextColor(context),
+                                                ),
                                               ),
                                             ),
+                                            15.hSpace,
+                                            // const Spacer(
+                                            //   flex: 1,
+                                            // ),
                                           ],
                                         ),
                                         12.vSpace,
                                         Row(
                                           mainAxisAlignment:MainAxisAlignment.center,
                                           children: [
-                                            AppTextWidget(
-                                              order.paymentAmountText ?? '',
-                                              style: context.textTheme.headlineMedium?.copyWith(
-                                                color: order.paymentAmountTextColor(context),
+                                            15.hSpace,
+                                            Flexible(
+                                              child: AppTextWidget(
+                                                order.paymentAmountText ?? '',
+                                                textAlign: TextAlign.center,
+                                                maxLines: 2,
+                                                style: context.textTheme.headlineMedium?.copyWith(
+                                                  color: order.paymentAmountTextColor(context),
+                                                ),
                                               ),
                                             ),
+                                            15.hSpace,
                                           ],
                                         ),
                                       ],
@@ -296,18 +314,16 @@ class OrderDetailsScreen extends HookWidget {
                     if(controller.order.canBeCanceled ?? false)
                       ...[
                         10.vSpace,
-                        if(state is CancelOrderLoading)
-                          const WaitingWidget()
-                        else
-                          AppGradientTextButton(
-                            onTap: () => controller.cancelOrder(context,),
-                            color: Styles.colorOrange,
-                            fontColor: Styles.darkFontColor,
-                            withGradiant: false,
-                            content: S
-                                .of(context)
-                                .cancelOrder,
-                          ),
+                        AppGradientTextButton(
+                          onTap: () => controller.cancelOrder(context,),
+                          isLoading: state is CancelOrderLoading,
+                          color: Styles.colorOrange,
+                          fontColor: Styles.darkFontColor,
+                          withGradiant: false,
+                          content: S
+                              .of(context)
+                              .cancelOrder,
+                        ),
                       ],
                   ],
                 ),

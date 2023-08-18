@@ -9,7 +9,7 @@ class CompaniesController extends Controller{
   @override
   void init() {
     super.init();
-    getCompanies();
+    // getCompanies();
   }
   bool buildWhen(CompanyState previous, CompanyState current) {
     return current is GetCompaniesState;

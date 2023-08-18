@@ -16,8 +16,10 @@ import 'package:lween/core/widgets/app_image.dart';
 import 'package:lween/core/widgets/app_text_widget.dart';
 import 'package:lween/core/widgets/shimmer_ui.dart';
 import 'package:lween/features/notifications/models/notifications.dart';
+import 'package:lween/features/orders/bloc/orders_bloc.dart';
 import 'package:lween/features/orders/models/orders.dart';
 import 'package:lween/generated/l10n.dart';
+import 'package:lween/main.dart';
 
 class NotificationItemWidget extends HookWidget {
   const NotificationItemWidget({
@@ -39,7 +41,7 @@ class NotificationItemWidget extends HookWidget {
     }
 
     return InkWell(
-      onTap: () => controller.onTap(context),
+      onTap: () => NotificationController.onTap(item.data?..putIfAbsent('eventType', () => item.eventType),),
       splashColor:  context.theme.primaryColor.withOpacity(0.7),
       child: Container(
         width: 1.sw,
@@ -70,12 +72,20 @@ class NotificationItemWidget extends HookWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      AppTextWidget(
-                        controller.item.title ?? '',
-                        style: context.textTheme.titleMedium,
+                      Expanded(
+                        flex:8,
+                        child: AppTextWidget(
+                          controller.item.title ?? '',
+                          style: context.textTheme.titleMedium,
+                        ),
                       ),
-                      AppTextWidget(
-                        controller.item.formattedTime ?? '',
+                      Expanded(
+                        flex:2,
+                        child: FittedBox(
+                          child: AppTextWidget(
+                            controller.item.formattedTime ?? '',
+                          ),
+                        ),
                       ),
                     ],
                   ),
@@ -171,13 +181,23 @@ class NotificationController extends Controller{
     // });
   }
 
-  void onTap(BuildContext context) {
-    switch (item.eventType ?? 1) {
+  static void onTap(Map? data) {
+    final eventType = int.tryParse(data?['eventType'].toString() ?? '-1');
+
+    switch (eventType ?? 1) {
       case 2:
       case 3:
       case 4:
       case 5:
-        NavigationService.of(context).closestRouter.navigate(const MyOrdersStackRoute());
+        NavigationService.of(Lween.navigatorKey.currentContext!,).closestRouter.popUntilRouteWithName(MainScreenRoute.name);
+        NavigationService.of(Lween.navigatorKey.currentContext!,).closestRouter.navigate(const MyOrdersStackRoute());
+        if(data?['orderId'] is String){
+          OrdersBloc.instance.add(GetOrdersEvent(
+              ids: data?['orderId'],
+              navigateToDetails: true,
+            ),
+          );
+        }
       case 1:
       default:
 

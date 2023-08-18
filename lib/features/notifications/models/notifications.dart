@@ -35,11 +35,6 @@ class NotificationEntity extends ContentModel {
 
   String get formattedTime => date ?? '';
 
-  DateTime get dateTimeDate => DateTime.tryParse(date ?? '')?.toLocal() ?? DateTime.now();
-
-
-
-
   NotificationEntity(
       {
         this.id,

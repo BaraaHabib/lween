@@ -87,7 +87,7 @@ class OrderPaymentMethodScreen extends HookWidget {
                         ),
                         5.vSpace,
                         SizedBox(
-                          height: 300.hx,
+                          height: 330.hx,
                           child: ValueListenableBuilder(
                               valueListenable: controller.selectedPaymentMethod,
                               builder: (context, value, child) {
@@ -151,26 +151,24 @@ class OrderPaymentMethodScreen extends HookWidget {
                     if(controller.orderEntity == null)
                       Positioned(
                       bottom: 30.hx,
-                      child: (state is CreateOrderLoading) ?
-                    const Center(child: WaitingWidget())
-                        :
-                    BlocBuilder<OrdersBloc, OrdersState>(
-                        bloc: OrdersBloc.instance,
-                        buildWhen: controller.voucherBuildWhen,
-                        builder: (context, voucherState) {
-                          return IgnorePointer(
-                            ignoring: voucherState is CheckVoucherLoading,
-                            child: Hero(
-                              tag: 'order-next',
-                              child: AppGradientTextButton(
-                                content: S.current.next,
-                                gradientType: AppTextButtonGradientType.secondary,
-                                onTap: () => controller.pay(context),
+                      child: BlocBuilder<OrdersBloc, OrdersState>(
+                          bloc: OrdersBloc.instance,
+                          buildWhen: controller.voucherBuildWhen,
+                          builder: (context, voucherState) {
+                            return IgnorePointer(
+                              ignoring: voucherState is CheckVoucherLoading,
+                              child: Hero(
+                                tag: 'order-next',
+                                child: AppGradientTextButton(
+                                  content: S.current.next,
+                                  isLoading: state is CreateOrderLoading,
+                                  gradientType: AppTextButtonGradientType.secondary,
+                                  onTap: () => controller.pay(context),
+                                ),
                               ),
-                            ),
-                          );
-                        }
-                    ),)
+                            );
+                          }
+                      ))
                   ],
                 ),
               ),

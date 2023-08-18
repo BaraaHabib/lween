@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:collection/collection.dart';
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -12,7 +13,12 @@ import 'package:lween/core/configurations/styles/themes.dart';
 import 'package:lween/core/features/entities/shared/city.dart';
 import 'package:lween/core/features/entities/shared/country.dart';
 import 'package:lween/core/navigation/navigation_service.dart';
+import 'package:lween/core/resources/constants.dart';
 import 'package:lween/features/auth/models/init_app_entity.dart';
+import 'package:lween/features/auth/params/update_token_params.dart';
+import 'package:lween/features/auth/repo/account_repository.dart';
+import 'package:lween/features/notifications/screens/widgets/notification_item.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:lween/core/navigation/logger.dart';
@@ -37,7 +43,6 @@ class AppStateModel extends AppStateComponent with _DeviceInfoMixin, ThemeManage
   bool _rememberMe = false;
   String? _userToken;
   String? _firebaseToken;
-  String? _idToken;
   String? _refreshToken;
   String? _email;
   DateTime? _expiresAt;
@@ -64,8 +69,6 @@ class AppStateModel extends AppStateComponent with _DeviceInfoMixin, ThemeManage
   String? get userToken => _userToken;
 
   String? get firebaseToken => _firebaseToken;
-
-  String? get idToken => _idToken;
 
   String? get refreshToken => _refreshToken;
 
@@ -108,8 +111,21 @@ class AppStateModel extends AppStateComponent with _DeviceInfoMixin, ThemeManage
   Future<void> logOut() async {
     _authenticated = false;
     _userToken = null;
+    /// delete fcm token
+    FirebaseMessaging.instance.deleteToken();
+    FirebaseMessaging.instance.unsubscribeFromTopic(generalFCMTopic);
+
+    sl<AccountRepository>().updateToken(
+      UpdateTokenParams(
+        body: UpdateTokenParamsBody(
+          oldToken: sl<AppStateModel>().firebaseToken,
+          isLogingOut: true,
+        ),
+      ),
+    );
     _firebaseToken = null;
-    _idToken = null;
+    ///
+
     _refreshToken = null;
     // _expires = null;
     _expiresAt = null;
@@ -120,8 +136,6 @@ class AppStateModel extends AppStateComponent with _DeviceInfoMixin, ThemeManage
       currentLocale.languageCode,
     );
 
-    // reset all registered instances
-    // await lween.storage.reset();
     await resetInjection();
     await Lween.storage.init();
     NavigationService.of(Lween.navigatorKey.currentContext!,).restart();
@@ -148,15 +162,7 @@ class AppStateModel extends AppStateComponent with _DeviceInfoMixin, ThemeManage
         ) ??
         true;
 
-    // _firebaseToken = await sl<FirebaseService>().initAndGetToken();
-    if (_firebaseToken != null) {
-      AppLogger.log(_firebaseToken);
-      await prefs.setString(
-        SharedPreferencesKeys.FB_TOKEN,
-        _firebaseToken!,
-      );
-    }
-
+    _firebaseToken = prefs.getString(SharedPreferencesKeys.FB_TOKEN,);
     if (_userToken == null) {
       _authenticated = false;
     } else if (isTokenExpired) {
@@ -200,17 +206,17 @@ class AppStateModel extends AppStateComponent with _DeviceInfoMixin, ThemeManage
     required String token,
     expires,
     refreshToken,
-    fbToken,
+    // fbToken,
   }) async {
     _userToken = token;
-    _firebaseToken = fbToken;
+    // _firebaseToken = fbToken;
     _refreshToken = refreshToken;
     _expiresAt = DateTime.now().add(Duration(seconds: expires ?? 86400));
     _authenticated = true;
 
-    if (fbToken != null) {
-      await prefs.setString(SharedPreferencesKeys.FB_TOKEN, fbToken);
-    }
+    // if (fbToken != null) {
+    //   await prefs.setString(SharedPreferencesKeys.FB_TOKEN, fbToken);
+    // }
     await prefs.setString(SharedPreferencesKeys.TOKEN, token);
     await prefs.setString(SharedPreferencesKeys.RefreshTOKEN, refreshToken);
     await prefs.setString(
@@ -220,5 +226,12 @@ class AppStateModel extends AppStateComponent with _DeviceInfoMixin, ThemeManage
   }
 
   static AppStateModel of(BuildContext context) => Provider.of<AppStateModel>(context,listen: false,);
+
+  Future<void> updateFcmToken(String? fcmToken) async {
+    if(fcmToken != null) {
+      await prefs.setString(SharedPreferencesKeys.FB_TOKEN,fcmToken,);
+    }
+  }
+
 
 }

@@ -25,6 +25,7 @@ class PhonePaymentController extends Controller{
   TextEditingController phoneNumberController = TextEditingController();
   TextEditingController codeController = TextEditingController();
   ValueNotifier isCodeSent = ValueNotifier(false);
+  FocusNode codeFocusNode = FocusNode();
 
   void phoneDialogListener(BuildContext context, OrdersState state) {
     if (state is RequestPaymentError ||
@@ -36,6 +37,9 @@ class PhonePaymentController extends Controller{
     else if (state is RequestPaymentLoaded) {
       requestPaymentEntity = state.data;
       isCodeSent.value = true;
+      codeFocusNode.requestFocus();
+      phoneFormKey.currentState?.fields['code']?.effectiveFocusNode.requestFocus();
+      // print(phoneFormKey.currentState?.fields['code']?.effectiveFocusNode.canRequestFocus);
     }
     else if (state is ResendPaymentCodeLoaded) {
       AppToast(S.current.codeWasResentToYourNumber,).show();
@@ -53,7 +57,7 @@ class PhonePaymentController extends Controller{
   }
 
   sendCode(BuildContext context) {
-    FocusManager.instance.primaryFocus?.unfocus();
+    // FocusManager.instance.primaryFocus?.unfocus();
     if (!isCodeSent.value) {
       if ((phoneFormKey.currentState?.fields['phone']?.validate() ?? false)) {
         OrdersBloc.instance.add(

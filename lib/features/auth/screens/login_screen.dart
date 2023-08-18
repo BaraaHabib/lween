@@ -114,11 +114,9 @@ class LogInScreen extends HookWidget {
                         listener: controller.listener,
                         buildWhen: controller.buildWhen,
                         builder: (ctx, cs) {
-                          if (cs is LogInLoading) {
-                            return const WaitingWidget();
-                          }
                           return AppGradientTextButton(
                             gradientType: AppTextButtonGradientType.primary,
+                            isLoading: cs is LogInLoading,
                             onTap: () => controller.logIn(context),
                             content: S
                                 .of(context)

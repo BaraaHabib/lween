@@ -46,6 +46,9 @@ class OrderWizardController extends Controller with PaymentMixin {
   DropdownItemDataModel? selectedCompany;
   CompanyEntity? get selectedCompanyEntity => CompaniesRepository.companies.firstWhereOrNull((c) => c.id == selectedCompany?.id);
   DateTime? selectedDate;
+  String? get selectedDateFormatted =>
+      selectedDate == null ? null :
+      AppConfigurations.appDisplayDateFormat.format(selectedDate!);
 
 
   final citiesNotifier = ValueNotifier<List<DropdownItemDataModel>>(sl<AppStateModel>()
@@ -102,6 +105,10 @@ class OrderWizardController extends Controller with PaymentMixin {
   final GlobalKey<FormBuilderFieldState>? toCityKey = GlobalKey<FormBuilderFieldState>();
   final GlobalKey<FormBuilderFieldState>? dateFieldKey = GlobalKey<FormBuilderFieldState>();
   final GlobalKey<FormBuilderFieldState>? companyDropDownKey = GlobalKey<FormBuilderFieldState>();
+
+  String get fromToTitle =>
+      '${S.current.bookATrip}'
+          '${isTravelAlreadySelected ? ' (${travelEntity!.transportationEntity?.name})' : ''}';
 
   void listener(BuildContext context, OrdersState state) {
     if (state is CompanyFilteredTravelsError) {
@@ -341,11 +348,13 @@ class OrderWizardController extends Controller with PaymentMixin {
     if (!isSeatsDialogShown && userExceededAllowedSeatsWithoutPayment) {
       AppDialogs.showGeneralDialog(
           context: context,
-          // title: S.current.,
+          title: S.of(context).importantWarning,
           content: AppTextWidget(
-            S.of(context).exceededSeatsCountDialogMessage,
+            S.of(context).exceededSeatsCountDialogMessage(selectedTravelEntity!.transportationEntity!
+                .userAvailableSeatsWithoutPayment!),
             style: context.textTheme.titleMedium,
             maxLines: 4,
+            textAlign: TextAlign.justify,
           ),
           actions: [
             DialogAction(text: S.current.ok, callback: (){}),

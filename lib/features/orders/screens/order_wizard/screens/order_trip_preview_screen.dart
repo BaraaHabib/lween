@@ -49,201 +49,205 @@ class OrderTripPreviewScreen extends StatelessWidget {
           ),
         ),
         SafeArea(
-          child: Scaffold(
-            body: Column(
-              children: [
-                12.vSpace,
-                Padding(
-                  padding: padding,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          // AutoTabsRouter.of(context).pop();
-                          NavigationService
-                              .of(context)
-                              .pop();
-                        },
-                        child: Assets.previousIconWidget(context,forceTheme: ThemeType.light,),
+          child: Stack(
+            children: [
+              Scaffold(
+                body: Column(
+                  children: [
+                    12.vSpace,
+                    Padding(
+                      padding: padding,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              // AutoTabsRouter.of(context).pop();
+                              NavigationService
+                                  .of(context)
+                                  .pop();
+                            },
+                            child: Assets.previousIconWidget(context,forceTheme: ThemeType.light,),
+                          ),
+                          // 24.hSpace,
+                        ],
                       ),
-                      // 24.hSpace,
-                    ],
-                  ),
-                ),
-                 SizedBox(
-                   height: 80.hx,
-                 ),
-                 Expanded(
-                   child: Container(
-                     width: 1.sw,
-                     padding: EdgeInsetsDirectional.only(
-                         start: 15.wx,
-                         end: 10.wx,
+                    ),
+                     SizedBox(
+                       height: 80.hx,
                      ),
-                     decoration: BoxDecoration(
-                       color: context.theme.cardTheme.color,
-                       borderRadius: BorderRadius.vertical(
-                         top: Styles.circularBorderRadius20px,
-                       ),
-                     ),
-                     child: Container(
-                       padding: const EdgeInsetsDirectional.only(start: 10),
-                       width: 0.9.sw,
-                       child: SingleChildScrollView(
-                         child: Column(
-                           crossAxisAlignment: CrossAxisAlignment.center,
-                           children: [
-                             20.vSpace,
-                             Container(
-                               width: 50.wx,
-                               height: 4.hx,
-                               decoration: BoxDecoration(
-                                 color: Styles.liteGrayColor.withOpacity(0.3,),
-                                 borderRadius: Styles.borderRadius14px,
-                               ),
-                             ),
-                             30.vSpace,
-                             Row(
+                     Expanded(
+                       child: Container(
+                         width: 1.sw,
+                         padding: EdgeInsetsDirectional.only(
+                             start: 15.wx,
+                             end: 10.wx,
+                         ),
+                         decoration: BoxDecoration(
+                           color: context.theme.cardTheme.color,
+                           borderRadius: BorderRadius.vertical(
+                             top: Styles.circularBorderRadius20px,
+                           ),
+                         ),
+                         child: Container(
+                           padding: const EdgeInsetsDirectional.only(start: 10),
+                           width: 0.9.sw,
+                           child: SingleChildScrollView(
+                             child: Column(
                                crossAxisAlignment: CrossAxisAlignment.center,
                                children: [
-                                 Expanded(
-                                   flex:12,
-                                   child: _FromToWidget(
-                                     label: S.current.startFrom,
-                                     text: travelEntity.fromCity?.text ?? '',
-                                     subText: travelEntity.startLocation ?? '',
+                                 20.vSpace,
+                                 Container(
+                                   width: 50.wx,
+                                   height: 4.hx,
+                                   decoration: BoxDecoration(
+                                     color: Styles.liteGrayColor.withOpacity(0.3,),
+                                     borderRadius: Styles.borderRadius14px,
                                    ),
                                  ),
-                                 Expanded(
-                                   flex:12,
-                                   child: _FromToWidget(
-                                     label: S.current.destination,
-                                     text: travelEntity.toCity?.text ?? '',
-                                     subText: travelEntity.destinationLocation ?? '',
-                                   ),
+                                 30.vSpace,
+                                 Row(
+                                   crossAxisAlignment: CrossAxisAlignment.center,
+                                   children: [
+                                     Expanded(
+                                       flex:12,
+                                       child: _FromToWidget(
+                                         label: S.current.startFrom,
+                                         text: travelEntity.fromCity?.text ?? '',
+                                         subText: travelEntity.startLocation ?? '',
+                                       ),
+                                     ),
+                                     Expanded(
+                                       flex:12,
+                                       child: _FromToWidget(
+                                         label: S.current.destination,
+                                         text: travelEntity.toCity?.text ?? '',
+                                         subText: travelEntity.destinationLocation ?? '',
+                                       ),
+                                     ),
+                                   ],
                                  ),
-                               ],
-                             ),
-                             30.vSpace,
-                             Row(
-                               crossAxisAlignment: CrossAxisAlignment.center,
-                               children: [
-                                 Expanded(
-                                   flex:12,
-                                   child: _LabelWithWidget(
-                                     label: S.of(context).availableDays,
-                                     text: travelEntity.availableDaysText ?? '',
-                                     icon: Assets.calendarSVG,
-                                   ),
+                                 30.vSpace,
+                                 Row(
+                                   crossAxisAlignment: CrossAxisAlignment.center,
+                                   children: [
+                                     Expanded(
+                                       flex:12,
+                                       child: _LabelWithWidget(
+                                         label: S.of(context).availableDays,
+                                         text: travelEntity.availableDaysText ?? '',
+                                         icon: Assets.calendarSVG,
+                                       ),
+                                     ),
+                                     // const Expanded(
+                                     //   flex:2,
+                                     //   child: SizedBox(),
+                                     // ),
+                                     Expanded(
+                                       flex:12,
+                                       child: _LabelWithWidget(
+                                         label: S.of(context).tripTime,
+                                         text: travelEntity.travelTime ?? '',
+                                         icon: Assets.clockSVG,
+                                       ),
+                                     ),
+                                   ],
                                  ),
-                                 // const Expanded(
-                                 //   flex:2,
-                                 //   child: SizedBox(),
-                                 // ),
-                                 Expanded(
-                                   flex:12,
-                                   child: _LabelWithWidget(
-                                     label: S.of(context).tripTime,
-                                     text: travelEntity.travelTime ?? '',
-                                     icon: Assets.clockSVG,
-                                   ),
-                                 ),
-                               ],
-                             ),
-                             30.vSpace,
-                             Row(
-                               crossAxisAlignment: CrossAxisAlignment.start,
-                               children: [
-                                 Expanded(
-                                   flex:12,
-                                   child: _LabelWithWidget(
-                                     label: S.of(context).transportationType,
-                                     text: "${travelEntity.travelMethodText ?? ''} ${(travelEntity.isVip ?? false) ? '- VIP' : ''}",
-                                     icon: Assets.microbusPNG,
-                                   ),
-                                 ),
-                                 // const Expanded(
-                                 //   flex:2,
-                                 //   child: SizedBox(),
-                                 // ),
-                                 Expanded(
-                                   flex:12,
-                                   child: Row(
-                                     children: [
-                                       const Spacer(flex: 1),
-                                       Expanded(
-                                         flex: 5,
-                                         child: SizedBox(
-                                           // height: 30.hx,
-                                           // width: 90.wx,
-                                           child: FittedBox(
-                                             fit: BoxFit.scaleDown,
-                                             child: AppGradientTextButtonWithIcon(
-                                               content: S
-                                                   .of(context)
-                                                   .previewVehicle,
-                                               onTap: () {
-                                                 return NavigationService
-                                                   .of(context,)
-                                                    .navigateTo(
-                                                     withNavigation: false,
-                                                     OrderPreviewVehicleScreenRoute(
-                                                         images: travelEntity.images ?? [],
-                                                     ),
-                                                 );
-                                               },
-                                               fontSize: 11.spx,
-                                               icon: Assets.eyeSVG,
-                                               padding: const EdgeInsets.symmetric(
-                                                   horizontal: 15, vertical: 0),
+                                 30.vSpace,
+                                 Row(
+                                   crossAxisAlignment: CrossAxisAlignment.start,
+                                   children: [
+                                     Expanded(
+                                       flex:12,
+                                       child: _LabelWithWidget(
+                                         label: S.of(context).transportationType,
+                                         text: "${travelEntity.travelMethodText ?? ''} ${(travelEntity.isVip ?? false) ? '- VIP' : ''}",
+                                         icon: Assets.microbusPNG,
+                                       ),
+                                     ),
+                                     // const Expanded(
+                                     //   flex:2,
+                                     //   child: SizedBox(),
+                                     // ),
+                                     Expanded(
+                                       flex:12,
+                                       child: Row(
+                                         children: [
+                                           const Spacer(flex: 1),
+                                           Expanded(
+                                             flex: 5,
+                                             child: SizedBox(
+                                               // height: 30.hx,
+                                               // width: 90.wx,
+                                               child: FittedBox(
+                                                 fit: BoxFit.scaleDown,
+                                                 child: AppGradientTextButtonWithIcon(
+                                                   content: S
+                                                       .of(context)
+                                                       .previewVehicle,
+                                                   onTap: () {
+                                                     return NavigationService
+                                                       .of(context,)
+                                                        .navigateTo(
+                                                         withNavigation: false,
+                                                         OrderPreviewVehicleScreenRoute(
+                                                             images: travelEntity.images ?? [],
+                                                         ),
+                                                     );
+                                                   },
+                                                   fontSize: 11.spx,
+                                                   icon: Assets.eyeSVG,
+                                                   padding: const EdgeInsets.symmetric(
+                                                       horizontal: 15, vertical: 0),
+                                                 ),
+                                               ),
                                              ),
                                            ),
-                                         ),
+                                           const Spacer(flex: 1),
+                                         ],
                                        ),
-                                       const Spacer(flex: 1),
-                                     ],
-                                   ),
+                                     ),
+                                   ],
                                  ),
+                                 30.vSpace,
+                                 Row(
+                                   crossAxisAlignment: CrossAxisAlignment.start,
+                                   children: [
+                                     Expanded(
+                                       child: _LabelWithWidget(
+                                         label: S.of(context).travelDuration,
+                                         text: travelEntity.travelDuration ?? '',
+                                         icon: Assets.clockSVG,
+                                       ),
+                                     ),
+                                   ],
+                                 ),
+                                 30.vSpace,
                                ],
                              ),
-                             30.vSpace,
-                             Row(
-                               crossAxisAlignment: CrossAxisAlignment.start,
-                               children: [
-                                 Expanded(
-                                   child: _LabelWithWidget(
-                                     label: S.of(context).travelDuration,
-                                     text: travelEntity.travelDuration ?? '',
-                                     icon: Assets.clockSVG,
-                                   ),
-                                 ),
-                               ],
-                             ),
-                             30.vSpace,
-                           ],
+                           ),
                          ),
                        ),
                      ),
-                   ),
-                 ),
-              ],
-            ),
+                  ],
+                ),
+              ),
+              Positioned(
+                bottom: 30.hx,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 24.wx,),
+                  child: AppGradientTextButton(
+                    gradientType: AppTextButtonGradientType.secondary,
+                    content: S.of(context).bookATrip,
+                    onTap: () {
+                      NavigationService.of(context).navigateTo(OrderFromToScreenRoute(travelEntity: travelEntity,));
+                    },
+                  ),
+                ),
+              )
+            ],
           ),
         ),
-        Positioned(
-          bottom: 10.hx,
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24.wx,),
-            child: AppGradientTextButton(
-              gradientType: AppTextButtonGradientType.secondary,
-              content: S.of(context).bookATrip,
-              onTap: () {
-                NavigationService.of(context).navigateTo(OrderFromToScreenRoute(travelEntity: travelEntity,));
-              },
-            ),
-          ),
-        )
       ],
     );
   }

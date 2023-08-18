@@ -101,13 +101,13 @@
   "orderIsCanceled": "تم إلغاء الطلب",
   "areYouSureYouWantToCancelOrder": "هل انت متأكد من إلغاء الطلب؟",
   "cancelOrder": "إلغاء الطلب",
-  "orderHasBeenCanceled": "تم إلفاء الطلب",
+  "orderHasBeenCanceled": "تم إلغاء الطلب",
   "orderSavedToGallery": "تم حفظ الطلب في ملفات الجهاز",
   "tripDetails": "تفاصيل الرحلة",
   "availableDays": "الأيام المتوفرة",
   "transportationType": "وسيلة النقل",
   "travelDuration": "مدة الرحلة",
-  "exceededSeatsCountDialogMessage": "لقد تجاوزت عدد المقاعد المسموح حجزها بدون دفع، لن يمكنك إكمال الطلب بدون دفع.",
+  "exceededSeatsCountDialogMessage": "بسبب حجز {count} مقعد فإنه لن تتمكن من جدولة طلبك دون دفعه مباشرة من التطبيق عبر وسائل الدفع الإلكتروني المتوفرة.",
   "cashPaymentNotAvailable": "لقد تم تجاوز عدد المقاعد المسموح حجزها بدون دفع",
   "tripTime": "وقت الرحلة",
   "accountSettings": "إعدادات الحساب",
@@ -124,5 +124,8 @@
   "orderFinishedSuccessfully": "اكتملت عملية الحجز بنجاح",
   "error": "خطأ",
   "confirmOperation": "تأكيد العملية",
-  "orderNotCompletedMessage": "لم يتم إكمال الطلب، سيتم حذفه بعد مدة"
+  "orderNotCompletedMessage": "لم يتم اكمال عملية دفع الطلب الكترونيا وسيتم حذفه بعد عدة دقائق",
+  "importantWarning": "ملاحظة هامة",
+  "apply": "تطبيق",
+  "city1City2DateXPrice": "هل تريد تأكيد ارسال طلب حجز من {city1} الى {city2} ضمن {company} بتاريخ {date} ل {X} مسافر وبتكلفة {price} ليرة سورية؟"
 }

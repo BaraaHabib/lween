@@ -118,7 +118,7 @@ class GeneralDialog extends StatelessWidget {
                         ],
                         if(actions != null && actions!.length == 1)...[
                           Padding(
-                            padding: EdgeInsetsDirectional.symmetric(horizontal: 50.wx,),
+                            padding: EdgeInsetsDirectional.only(start: 50.wx,end: 50.wx,top: 15.hx,),
                             child: AppGradientTextButton(
                               onTap: () async {
                                 await NavigationService.of(context).pop();

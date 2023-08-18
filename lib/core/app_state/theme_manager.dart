@@ -11,6 +11,11 @@ enum ThemeType{
 mixin ThemeManager implements AppStateComponent {
   static ThemeType currentThemeType = ThemeType.light;
 
+  static SystemUiOverlayStyle get systemUiOverlayStyle => SystemUiOverlayStyle(
+    statusBarIconBrightness: currentThemeType == ThemeType.light ? Brightness.dark :  Brightness.light ,
+    systemNavigationBarColor: currentThemeType == ThemeType.light ? Styles.colorPrimaryLight :  Styles.colorPrimaryDark,
+    systemNavigationBarIconBrightness: currentThemeType == ThemeType.light ? Brightness.dark :  Brightness.light ,
+  );
 
   ThemeData get currentThemeData => currentThemeType == ThemeType.light ? lightTheme : darkTheme;
 
@@ -40,15 +45,7 @@ mixin ThemeManager implements AppStateComponent {
     int newThemeIndex = (currentThemeType.index + 1) % 2;
     currentThemeType = ThemeType.values[newThemeIndex];
     await saveTheme(newThemeIndex);
-    // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    //   statusBarColor: isLightTheme  ? Styles.navbarLightBackgroundColor : Styles.navbarDarkBackgroundColor,
-    //   statusBarIconBrightness: isLightTheme ? Brightness.dark :  Brightness.light ,
-    // ));
-    // SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge,);
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      // statusBarColor: isLightTheme  ? Styles.navbarLightBackgroundColor : Styles.navbarDarkBackgroundColor,
-      statusBarIconBrightness: isLightTheme ? Brightness.dark :  Brightness.light ,
-    ));
+    SystemChrome.setSystemUIOverlayStyle(ThemeManager.systemUiOverlayStyle,);
     notifyListeners();
   }
   

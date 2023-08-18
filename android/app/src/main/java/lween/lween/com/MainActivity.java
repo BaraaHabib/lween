@@ -1,4 +1,4 @@
-package com.lween.app.lween;
+package lween.lween.com;
 
 import io.flutter.embedding.android.FlutterActivity;
 

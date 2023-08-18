@@ -45,6 +45,9 @@ class OrderFromToScreen extends HookWidget {
         // selectedCompanyEntity: companyEntity?.toLite,
       ),
     );
+    final selectedFromCity = useState<DropdownItemDataModel?>(controller.selectedFromCity,);
+    final selectedToCity = useState<DropdownItemDataModel?>(controller.selectedToCity,);
+
     return BlocConsumer<OrdersBloc,OrdersState>(
       bloc: OrdersBloc.instance,
       listener: controller.listener,
@@ -54,9 +57,7 @@ class OrderFromToScreen extends HookWidget {
         return IgnorePointer(
           ignoring: state is CompanyFilteredTravelsLoading,
           child: AppScaffold(
-            title: S
-                .of(context)
-                .bookATrip,
+            title: controller.fromToTitle,
             child: Stack(
               children: [
                 SingleChildScrollView(
@@ -87,26 +88,23 @@ class OrderFromToScreen extends HookWidget {
                           label: S
                               .of(context)
                               .source,
-                          child: ValueListenableBuilder(
-                            valueListenable: controller.citiesNotifier,
-                            builder: (ctx, cities, child) =>
-                                AppDropDownField(
-                                  dropDownKey: controller.fromCityKey,
-                                  onChange: (v) {
-                                    controller.selectedFromCity = v;
-                                    controller.getTravels();
-                                  },
-                                  contentPadding: EdgeInsets.zero,
-                                  hintText: S
-                                      .of(context)
-                                      .pleaseSelectCity,
-                                  name: 'from',
-                                  data: cities.toList()
-                                    ..remove(controller.selectedToCity),
-                                  // validator: controller.validateDropDownCity,
-                                  initValue: controller.selectedFromCity,
-                                  validator: FormBuilderValidators.required(),
-                                ),
+                          child: AppDropDownField(
+                            dropDownKey: controller.fromCityKey,
+                            onChange: (v) {
+                              controller.selectedFromCity = v;
+                              selectedFromCity.value = v;
+                              controller.getTravels();
+                            },
+                            contentPadding: EdgeInsets.zero,
+                            hintText: S
+                                .of(context)
+                                .pleaseSelectCity,
+                            name: 'from',
+                            data: controller.cities.toList()
+                              ..remove(controller.selectedToCity),
+                            // validator: controller.validateDropDownCity,
+                            initValue: controller.selectedFromCity,
+                            validator: FormBuilderValidators.required(),
                           ),
                         ),
                         6.vSpace,
@@ -114,25 +112,22 @@ class OrderFromToScreen extends HookWidget {
                           label: S
                               .of(context)
                               .destination,
-                          child: ValueListenableBuilder(
-                            valueListenable: controller.citiesNotifier,
-                            builder: (ctx, cities, child) =>
-                                AppDropDownField(
-                                  dropDownKey: controller.toCityKey,
-                                  onChange: (v) {
-                                    controller.selectedToCity = v;
-                                    controller.getTravels();
-                                  },
-                                  contentPadding: EdgeInsets.zero,
-                                  hintText: S
-                                      .of(context)
-                                      .pleaseSelectCity,
-                                  name: 'to',
-                                  data: cities.toList()
-                                    ..remove(controller.selectedFromCity),
-                                  validator: FormBuilderValidators.required(),
-                                  initValue: controller.selectedToCity,
-                                ),
+                          child: AppDropDownField(
+                            dropDownKey: controller.toCityKey,
+                            onChange: (v) {
+                              controller.selectedToCity = v;
+                              selectedToCity.value = v;
+                              controller.getTravels();
+                            },
+                            contentPadding: EdgeInsets.zero,
+                            hintText: S
+                                .of(context)
+                                .pleaseSelectCity,
+                            name: 'to',
+                            data: controller.cities.toList()
+                              ..remove(controller.selectedFromCity),
+                            validator: FormBuilderValidators.required(),
+                            initValue: controller.selectedToCity,
                           ),
                         ),
                         6.vSpace,
@@ -246,6 +241,8 @@ class OrderFromToScreen extends HookWidget {
           ),
         );
       }
+
     );
   }
+
 }

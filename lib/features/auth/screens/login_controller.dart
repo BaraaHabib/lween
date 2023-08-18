@@ -70,7 +70,8 @@ class LoginController extends Controller {
         expires: state.logInEntity.expireInSeconds,
         refreshToken: state.logInEntity.refreshToken,
       ).then((value) {
-        SplashBloc.initApp(context).then((value) => NavigationService.of(context).clearAllAndPushNamed(const MainScreenRoute()));
+        SplashBloc.initApp(context)
+            .then((value) => NavigationService.of(context).clearAllAndPushNamed(const MainScreenRoute()));
       });
     }
     else if(state is LogInError){

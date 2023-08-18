@@ -15,6 +15,7 @@ import 'package:lween/features/auth/params/init_app_params.dart';
 import 'package:lween/features/auth/params/login_params.dart';
 import 'package:lween/features/auth/params/register_params.dart';
 import 'package:lween/features/auth/params/resend_code_params.dart';
+import 'package:lween/features/auth/params/update_token_params.dart';
 import 'package:lween/features/auth/params/verify_account_params.dart';
 import 'package:lween/features/auth/repo/iaccount_repository.dart';
 import '../../../../core/exceptions/app_exceptions.dart';
@@ -107,6 +108,16 @@ class AccountRepository extends IAccountRepository {
 
   @override
   Future<Either<ErrorEntity, EmptyEntity>> enterForgotPassword(EnterForgotPasswordParams model) async {
+    try {
+      var res = await remoteDataSource.getRemoteData(model,);
+      Entity<EmptyEntity> data = Entity<EmptyEntity>.fromJson(res,parser: EmptyEntity.fromJson,);
+      return Right(data.content!);
+    } on AppException catch (e) {
+      return Left(ErrorEntity.fromAppException(e));
+    }
+  }
+  @override
+  Future<Either<ErrorEntity, EmptyEntity>> updateToken(UpdateTokenParams model) async {
     try {
       var res = await remoteDataSource.getRemoteData(model,);
       Entity<EmptyEntity> data = Entity<EmptyEntity>.fromJson(res,parser: EmptyEntity.fromJson,);

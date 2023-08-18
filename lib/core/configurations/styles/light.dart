@@ -8,8 +8,8 @@ final textFieldBorder = OutlineInputBorder(
 final lightTheme = ThemeData(
   useMaterial3: true,
   fontFamily: 'Tajawal',
-  primaryColor: Styles.colorPrimary,
-  splashColor: Styles.colorPrimary,
+  primaryColor: Styles.colorPrimaryLight,
+  splashColor: Styles.colorPrimaryLight,
   inputDecorationTheme: InputDecorationTheme(
     fillColor: Styles.textFieldLightColor,
     filled: true,

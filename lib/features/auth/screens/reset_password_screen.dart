@@ -83,11 +83,9 @@ class ResetPasswordScreen extends HookWidget {
                       const Spacer(),
                       Builder(
                         builder: (ctx,) {
-                          if (state is ForgetPasswordLoading) {
-                            return const WaitingWidget();
-                          }
                           return AppGradientTextButton(
                             gradientType: AppTextButtonGradientType.primary,
+                            isLoading: state is ForgetPasswordLoading,
                             onTap: () => controller.resetPassword(context),
                             content: S
                                 .of(context)

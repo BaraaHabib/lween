@@ -65,30 +65,27 @@ class MyPreviousOrders extends HookWidget {
                   ],
                 ),
                 12.vSpace,
-                SizedBox(
-                  height: 190.hx,
-                  child: ListView.separated(
-                    itemCount: orders.length ,
-                    shrinkWrap: true,
-                    // physics: const NeverScrollableScrollPhysics(),
-                    separatorBuilder: (ctx,index) => 12.hSpace,
-                    itemBuilder: (ctx,index) {
-                      final item = orders[index];
-                      return TripCard(
-                        subtitle: item.transportationCompany?.text ?? '',
-                        date: item.formattedTravelTimeDate,
-                        from: item.fromCity?.text ?? '',
-                        to: item.toCity?.text ?? '',
-                        imageUrl: Assets.tripOrderIcon(context,),
-                        onTap: () {
-                          NavigationService.of(context).navigateTo(
-                            withNavigation: false,
-                            OrderDetailsScreenRoute(order: item,),
-                          );
-                        },
-                      );
-                    },
-                  ),
+                ListView.separated(
+                  itemCount: orders.length ,
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  separatorBuilder: (ctx,index) => 12.hSpace,
+                  itemBuilder: (ctx,index) {
+                    final item = orders[index];
+                    return TripCard(
+                      subtitle: item.transportationCompany?.text ?? '',
+                      date: item.formattedTravelTimeDate,
+                      from: item.fromCity?.text ?? '',
+                      to: item.toCity?.text ?? '',
+                      imageUrl: Assets.tripOrderIcon(context,),
+                      onTap: () {
+                        NavigationService.of(context).navigateTo(
+                          withNavigation: false,
+                          OrderDetailsScreenRoute(order: item,),
+                        );
+                      },
+                    );
+                  },
                 ),
               ],
             ),

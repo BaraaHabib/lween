@@ -89,6 +89,7 @@ class Assets {
   static const darkBackgroundPNG = 'assets/dark_background.png';
 
   static const arrowBack = 'assets/icons/SVG/ic_back.svg';
+  static const noNotificationsSVG = 'assets/icons/SVG/ic_no_notification.svg';
 
   static Widget arrowBackWidget(BuildContext context, {Color? color,bool reverse = false}) {
     double signe = 0;

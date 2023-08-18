@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:lween/core/configurations/assets.dart';
 import 'package:lween/core/configurations/styles/styles.dart';
 import 'package:lween/core/controller/base_controller.dart';
 import 'package:lween/core/extended/get_utils/get_utils.dart';
@@ -44,6 +45,10 @@ class NotificationsScreen extends HookWidget {
           builder: (context, state) {
             return Builder(
                 builder: (context) {
+                  // return EmptyWidget(
+                  //   imageAssetPath: Assets.noNotificationsSVG,
+                  //   entity: S.current.notifications,
+                  // );
                   if (state is GetNotificationsLoading && state.page == 0) {
                     return ShimmerUI.widgetLoader(
                       enabled: true,
@@ -70,6 +75,7 @@ class NotificationsScreen extends HookWidget {
                   }
                     if(controller.pagingController.itemList?.isEmpty ?? true){
                       return EmptyWidget(
+                        imageAssetPath: Assets.noNotificationsSVG,
                         entity: S.current.notifications,
                       );
                     }

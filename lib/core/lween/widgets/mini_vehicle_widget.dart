@@ -37,12 +37,14 @@ class MiniVehicleWidget extends StatelessWidget {
           ),
         ),
         3.hSpace,
-        AppTextWidget(
-          travelMethodText ?? '',
-          style: context.textTheme.headlineSmall,
-
+        Expanded(
+          child: AppTextWidget(
+            travelMethodText ?? '',
+            style: context.textTheme.headlineSmall,
+            maxLines: 2,
+          ),
         ),
-        30.hSpace,
+        // 30.hSpace,
       ],
     );
   }

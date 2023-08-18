@@ -25,7 +25,7 @@ import 'package:lween/generated/l10n.dart';
 part '../widgets/order_travels/company_card_widget.dart';
 @RoutePage()
 class OrderTravelsScreen extends HookWidget {
-  const OrderTravelsScreen({super.key});
+  const  OrderTravelsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

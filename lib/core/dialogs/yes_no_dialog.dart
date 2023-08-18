@@ -40,13 +40,14 @@ class YesNoDialog extends StatelessWidget {
           Text(
             message,
             style: Theme.of(context).textTheme.bodyLarge,
+            textAlign: TextAlign.justify,
           ),
           20.vSpace,
           Row(
             children: [
               AppButton(
                 onTap: () async {
-                  await NavigationService.of(context).pop();
+                  await NavigationService.of(context).pop(true,);
                   yesCallback?.call();
                 },
                 content: Text(
@@ -56,7 +57,7 @@ class YesNoDialog extends StatelessWidget {
               const Spacer(),
               AppButton(
                 onTap: () async {
-                  await NavigationService.of(context).pop();
+                  await NavigationService.of(context).pop(false,);
                   noCallBack?.call();
                 },
                 color: Colors.transparent,

@@ -6,7 +6,8 @@ import 'package:lween/core/extended/numbers_ext.dart';
 
 class Styles {
 
-  static Color colorPrimary = Color(0xFF13A7C8);
+  static Color colorPrimaryDark = const Color(0xFF213560);
+  static Color colorPrimaryLight = const Color(0xFFFFFFFF);
   static const Color colorSecondary = Color(0xFF2F455C);
 
   static const Color colorSecondary2 = Color(0xFF474747);

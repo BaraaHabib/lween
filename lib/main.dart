@@ -1,4 +1,5 @@
 import 'package:auto_route/annotations.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -18,6 +19,8 @@ import 'package:lween/core/locale/locale_provider.dart';
 import 'package:lween/core/storage/hive/app_storage.dart';
 import 'package:lween/injection_container.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 AppRouter? appRouter;
 
 Future<void> main() async {
@@ -25,20 +28,15 @@ Future<void> main() async {
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge,);
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
-
   initInjection();
   var prefs = await SharedPreferences.getInstance();
-  final appTheme = ThemeManager.initTheme(prefs);
-  // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-  //   statusBarColor: appTheme == ThemeType.light  ? Styles.navbarLightBackgroundColor : Styles.navbarDarkBackgroundColor,
-  //   statusBarIconBrightness: appTheme == ThemeType.light ? Brightness.dark :  Brightness.light ,
-  // ));
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    // statusBarColor: isLightTheme  ? Styles.navbarLightBackgroundColor : Styles.navbarDarkBackgroundColor,
-    statusBarIconBrightness: appTheme == ThemeType.light ? Brightness.dark :  Brightness.light ,
-  ));
+  ThemeManager.initTheme(prefs);
+  SystemChrome.setSystemUIOverlayStyle(ThemeManager.systemUiOverlayStyle,);
   await sl<LocaleProvider>().fetchLocale(prefs);
   Environment().initConfig();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const Lween());
 }
 
@@ -61,6 +59,8 @@ class Lween extends HookWidget {
   @override
   Widget build(BuildContext context) {
     appRouter ??= AppRouter(navigatorKey);
+    useOnAppLifecycleStateChange((previous, current) =>
+    AppStateModel.appLifecycleState = current,);
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
@@ -74,32 +74,34 @@ class Lween extends HookWidget {
         designSize: const Size(360, 750),
         // scaleByHeight: true,
         useInheritedMediaQuery: true,
-        builder:(ctx,child) => Consumer2<AppStateModel, LocaleProvider>(
-          builder: (context, appState, local, child) {
-            return MaterialApp.router(
-              title: AppConfigurations.ApplicationName,
-              // routerConfig: appRouter.config(),
-              scrollBehavior: const ScrollBehaviorModified(),
-              routeInformationParser: appRouter!.defaultRouteParser(),
-              routerDelegate: appRouter!.delegate(
-                navigatorObservers: () => [
-                  // NavigationService.navigatorObserver,
-                ],
-              ),
-              theme: appState.currentThemeData,
-              localizationsDelegates: const [
-                S.delegate,
-                GlobalCupertinoLocalizations.delegate,
-                ...GlobalMaterialLocalizations.delegates,
-                GlobalWidgetsLocalizations.delegate,
-                OverrideFormBuilderLocalizationsAr.delegate,
-                FormBuilderLocalizations.delegate,
-              ],
-              supportedLocales: S.delegate.supportedLocales,
-              locale: local.locale,
-            );
-          }
-        ),
+        builder: (ctx, child) =>
+            Consumer2<AppStateModel, LocaleProvider>(
+                builder: (context, appState, local, child) {
+                  return MaterialApp.router(
+                    title: AppConfigurations.ApplicationName,
+                    // routerConfig: appRouter.config(),
+                    scrollBehavior: const ScrollBehaviorModified(),
+                    routeInformationParser: appRouter!.defaultRouteParser(),
+                    routerDelegate: appRouter!.delegate(
+                      navigatorObservers: () =>
+                      [
+                        // NavigationService.navigatorObserver,
+                      ],
+                    ),
+                    theme: appState.currentThemeData,
+                    localizationsDelegates: const [
+                      S.delegate,
+                      GlobalCupertinoLocalizations.delegate,
+                      ...GlobalMaterialLocalizations.delegates,
+                      GlobalWidgetsLocalizations.delegate,
+                      OverrideFormBuilderLocalizationsAr.delegate,
+                      FormBuilderLocalizations.delegate,
+                    ],
+                    supportedLocales: S.delegate.supportedLocales,
+                    locale: local.locale,
+                  );
+                }
+            ),
       ),
     );
   }
@@ -109,6 +111,7 @@ class Lween extends HookWidget {
 ///Used to change default scroll physics
 class ScrollBehaviorModified extends ScrollBehavior {
   const ScrollBehaviorModified();
+
   @override
   ScrollPhysics getScrollPhysics(BuildContext context) {
     switch (getPlatform(context)) {

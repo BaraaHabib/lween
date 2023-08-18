@@ -23,5 +23,6 @@ abstract class ApiConstants{
   static const requestPayment = 'Client/OnlinePayment/RequestPayment';
   static const resendPaymentCode = 'Client/OnlinePayment/ResendPaymentConfirmationCode';
   static const completePayment = 'Client/OnlinePayment/CompletePayment';
+  static const updateToken = 'Client/Home/FirebaseToken';
 
 }

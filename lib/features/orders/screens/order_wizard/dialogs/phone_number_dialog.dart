@@ -81,12 +81,11 @@ class OrderPhoneNumberDialog extends HookWidget{
                               controller: phoneController.phoneNumberController,
                               prefixIcon: SvgPicture.asset(Assets.phoneIcon,),
                               label: S.current.phoneNumber,
-                              enabled: !isCodeSent,
+                              enabled: !isCodeSent && cs is! RequestPaymentLoading,
                               maxLength: 10,
                               formatters: [
                                 FilteringTextInputFormatter.digitsOnly,
                               ],
-                              // textAlign: TextAlign.center,
                               validator: FormBuilderValidators.compose([
                                 FormBuilderValidators.required(),
                                     (v) => v is String && v.startsWith('09') ? null : S.of(context).phoneShouldStartWith09,
@@ -153,6 +152,7 @@ class OrderPhoneNumberDialog extends HookWidget{
                               name: 'code',
                               controller: phoneController.codeController,
                               textAlign: TextAlign.center,
+                              focusNode: phoneController.codeFocusNode,
                               label: S
                                   .of(context)
                                   .verificationCode,

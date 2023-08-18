@@ -43,54 +43,58 @@ class OrderSeatsScreen extends HookWidget {
           title: S
               .of(context)
               .chooseSeats,
-          child: Column(
+          child: Stack(
             children: [
-              15.vSpace,
-              Row(
+              Column(
                 children: [
-                  Expanded(
-                    child: AppTextWidget(S
-                        .of(context)
-                        .YouCanViewOrReserveSeats, maxLines: 2,),
+                  15.vSpace,
+                  Row(
+                    children: [
+                      Expanded(
+                        child: AppTextWidget(S
+                            .of(context)
+                            .YouCanViewOrReserveSeats, maxLines: 2,),
+                      ),
+                      SizedBox(
+                        height: 30.hx,
+                        child: AppGradientTextButtonWithIcon(
+                          content: S
+                              .of(context)
+                              .previewVehicle,
+                          onTap: () => NavigationService
+                              .of(context,)
+                              .navigateTo(
+                              withNavigation: false,
+                              OrderPreviewVehicleScreenRoute(images: controller.selectedTravelEntity?.images ?? [])),
+                          fontSize: 9.spx,
+                          icon: Assets.eyeSVG,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 0),
+                        ),
+                      ),
+                    ],
                   ),
-                  SizedBox(
-                    height: 30.hx,
-                    child: AppGradientTextButtonWithIcon(
-                      content: S
-                          .of(context)
-                          .previewVehicle,
-                      onTap: () => NavigationService
-                          .of(context,)
-                          .navigateTo(
-                          withNavigation: false,
-                          OrderPreviewVehicleScreenRoute(images: controller.selectedTravelEntity?.images ?? [])),
-                      fontSize: 9.spx,
-                      icon: Assets.eyeSVG,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 0),
+                  10.vSpace,
+                  Expanded(
+                    child: Directionality(
+                      textDirection: TextDirection.ltr,
+                      child: ListView.separated(
+                        itemCount: controller.selectedTravelEntity?.seats?.length ?? 0,
+                        separatorBuilder: (ctx, index) => 5.vSpace,
+                        itemBuilder: (ctx, index) =>
+                            SeatsRow(
+                              seats: controller.selectedTravelEntity?.seats?[index] ?? [],
+                            ),
+                      ),
                     ),
                   ),
                 ],
               ),
-              10.vSpace,
-              Expanded(
-                child: Directionality(
-                  textDirection: TextDirection.ltr,
-                  child: ListView.separated(
-                    itemCount: controller.selectedTravelEntity?.seats?.length ?? 0,
-                    separatorBuilder: (ctx, index) => 5.vSpace,
-                    itemBuilder: (ctx, index) =>
-                        SeatsRow(
-                          seats: controller.selectedTravelEntity?.seats?[index] ?? [],
-                        ),
-                  ),
-                ),
-              ),
             ],
           ),
         ),
-        const Positioned(
-          bottom: 0,
+        Positioned(
+          bottom: MediaQuery.of(context).padding.bottom,
           left: 0,
           right: 0,
           child: OrderSummeryWidget(),
