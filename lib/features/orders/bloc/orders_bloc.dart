@@ -57,11 +57,14 @@ class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
   Future<FutureOr<void>> _ordersEventHandler(GetOrdersEvent event,
       Emitter<OrdersState> emit) async {
     emit(MyOrdersLoading());
-    final res = await sl<OrdersRepository>().getMyOrders(MyOrdersParams(
-      page: event.page,
-      pageLength: 10,
-      ids:event.ids,
-    ));
+    final res = await sl<OrdersRepository>().getMyOrders(
+      MyOrdersParams(
+        page: event.page,
+        pageLength: 10,
+        ids:event.ids,
+        notCompletedYet:event.notCompletedYet,
+      ),
+    );
     emit(
       res.fold((l) => MyOrdersError(l.message,),
             (r) => MyOrdersLoaded(ordersResult: r,navigateToDetails: event.navigateToDetails,),

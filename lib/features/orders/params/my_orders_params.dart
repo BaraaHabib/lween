@@ -8,10 +8,12 @@ class MyOrdersParams extends ParamsModel<MyOrdersBody> {
     int pageLength = 4,
     int page = 0,
     this.ids,
+    this.notCompletedYet,
   })
       : super(body: MyOrdersBody(),pageLength: pageLength,page: page,);
   
   final List<String>? ids;
+  final bool? notCompletedYet;
 
   @override
   Map<String, String> get additionalHeaders => {};
@@ -24,8 +26,11 @@ class MyOrdersParams extends ParamsModel<MyOrdersBody> {
 
   @override
   Map<String, String> get urlParams => {
+    if(notCompletedYet != null)
+      'NotCompletedYet' : '$notCompletedYet',
     if(ids != null && ids!.isNotEmpty)
-      'Ids' : ids!.join('Ids =')
+      'Ids' : ids!.join('Ids ='),
+
   };
 
   @override

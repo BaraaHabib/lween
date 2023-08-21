@@ -108,33 +108,7 @@ class NavController extends Controller{
 
   changeTab(BuildContext context, TabsRouter tabsRouter, int index){
     assert(index < 5 && index >= 0);
- /*   if(index == tabsRouter.activeIndex){
-      return;
-    }*/
     tabsRouter.root.popUntilRoot();
-
-    // final rrrr = AutoRouter.of(context);
-    // rrrr.logger();
-    // switch(currentTab) {
-    //   case NavTab.home:tabsRouter.current.name;AutoRouter.of(context).current;
-    //     tabsRouter.root.popUntilRoot();
-    //     break;
-    //   case NavTab.bookTrip:
-    //     tabsRouter.root.popUntilRouteWithName(CompaniesScreenRoute.name,);
-    //     break;
-    //   case NavTab.tickets:
-    //     AutoRouter.of(context).popUntilRouteWithName(MyTicketsScreenRoute.name,);
-    //     break;
-    //   case NavTab.account:
-    //     AutoRouter.of(context).popUntilRouteWithName(AccountScreenRoute.name,);
-    //     break;
-    //   case NavTab.notification:
-    //     AutoRouter.of(context).popUntilRouteWithName(
-    //       NotificationsScreenRoute.name,);
-    //     break;
-    //   default:
-    //     NavTab.home;
-    // }
 
     currentTab = NavTab.values[index];
 
@@ -146,10 +120,10 @@ class NavController extends Controller{
         break;
       case NavTab.bookTrip:
         // NavigationService.of(context).popUntilRout(HomeScreenRoute.name,);
-        tabsRouter.navigate(const CompaniesScreenRoute());
+        tabsRouter.navigate(const CompaniesStackRoute());
         break;
       case NavTab.tickets:
-        tabsRouter.navigate(const MyOrdersScreenRoute());
+        tabsRouter.navigate( const MyOrdersStackRoute());
         break;
       case NavTab.account:
         tabsRouter.navigate(const AccountScreenRoute());

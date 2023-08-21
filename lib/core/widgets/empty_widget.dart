@@ -41,10 +41,10 @@ class EmptyWidget extends StatelessWidget {
           // 10.vSpace,
           Text(
             S.of(context).sorryThereAreNoEntityYet(entity ?? ''),
-            style: Theme.of(context).textTheme.headlineSmall,
+            style: Theme.of(context).textTheme.headlineLarge,
             textAlign: TextAlign.center,
           ),
-          35.vSpace,
+          25.vSpace,
           if (onAction != null && actionTitle != null)
             AppButton(
               onTap: onAction!,

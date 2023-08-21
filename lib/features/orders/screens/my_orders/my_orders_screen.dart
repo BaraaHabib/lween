@@ -22,17 +22,21 @@ import 'package:lween/generated/l10n.dart';
 
 @RoutePage()
 class MyOrdersScreen extends HookWidget {
-  const MyOrdersScreen({super.key});
+  const MyOrdersScreen({
+    super.key,
+    this.notCompletedYet,
+  });
+  final bool? notCompletedYet;
 
   @override
   Widget build(BuildContext context) {
     MyOrdersController controller =
     Controller.getInstance(
-      instance: MyOrdersController(),);
+      instance: MyOrdersController(notCompletedYet,),key:notCompletedYet.toString(),);
     return AppScaffold(
-      title: S.current.myTickets,
-      withBackButton: false,
-      centerTitle: true,
+      title: (notCompletedYet ?? false) ? S.current.myReservations : S.current.myTickets,
+      withBackButton: notCompletedYet ?? false,
+      centerTitle: !(notCompletedYet ?? false),
       child: BlocConsumer<OrdersBloc, OrdersState>(
           bloc: OrdersBloc.instance,
           buildWhen: controller.buildWhen,
@@ -62,19 +66,25 @@ class MyOrdersScreen extends HookWidget {
                       actionTitle: S
                           .of(context)
                           .retry,
-                      onAction: controller.refresh,
+                      onAction: controller.getData,
                     );
                   }
                   else if (state is MyOrdersLoaded) {
                     if(state.ordersResult.orders?.isEmpty ?? true){
                       return EmptyWidget(
-                        entity: S.current.tickets,
+                        entity: S.of(context).reservations,
+                        actionTitle: S.current.bookATrip,
+                        onAction: (){
+                          NavigationService
+                              .of(context)
+                              .navigateTo(OrderFromToScreenRoute());
+                        },
                       );
                     }
                     return Stack(
                       children: [
                         RefreshIndicator(
-                          onRefresh: () async => controller.refresh(),
+                          onRefresh: () async => controller.getData(),
                           child: Positioned.fill(
                             child: ListView.builder(
                               shrinkWrap: true,

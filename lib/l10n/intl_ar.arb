@@ -127,5 +127,11 @@
   "orderNotCompletedMessage": "لم يتم اكمال عملية دفع الطلب الكترونيا وسيتم حذفه بعد عدة دقائق",
   "importantWarning": "ملاحظة هامة",
   "apply": "تطبيق",
-  "city1City2DateXPrice": "هل تريد تأكيد ارسال طلب حجز من {city1} الى {city2} ضمن {company} بتاريخ {date} ل {X} مسافر وبتكلفة {price} ليرة سورية؟"
+  "city1City2DateXPrice": "هل تريد تأكيد ارسال طلب حجز من {city1} الى {city2} ضمن {company} بتاريخ {date} ل {X} مسافر وبتكلفة {price} ليرة سورية؟",
+  "currentBalance": "رصيدك الحالي",
+  "myReservations": "حجوزاتي / رحلاتي",
+  "favoriteCompanies": "شركات النقل المفضلة",
+  "helpAndSupport": "المساعدة والدعم",
+  "orders": "طلبات",
+  "browseCompanies": "استعرض الشركات"
 }

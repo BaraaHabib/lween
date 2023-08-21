@@ -26,9 +26,14 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     CompaniesScreenRoute.name: (routeData) {
+      final args = routeData.argsAs<CompaniesScreenRouteArgs>(
+          orElse: () => const CompaniesScreenRouteArgs());
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const CompaniesScreen(),
+        child: CompaniesScreen(
+          key: args.key,
+          isFollowed: args.isFollowed,
+        ),
       );
     },
     CompaniesStackRoute.name: (routeData) {
@@ -100,6 +105,12 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    AccountSettingsScreenRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const AccountSettingsScreen(),
+      );
+    },
     MyTicketsScreenRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -127,9 +138,14 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     MyOrdersScreenRoute.name: (routeData) {
+      final args = routeData.argsAs<MyOrdersScreenRouteArgs>(
+          orElse: () => const MyOrdersScreenRouteArgs());
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const MyOrdersScreen(),
+        child: MyOrdersScreen(
+          key: args.key,
+          notCompletedYet: args.notCompletedYet,
+        ),
       );
     },
     MyOrdersStackRoute.name: (routeData) {
@@ -257,16 +273,40 @@ class AppWebViewRouteArgs {
 
 /// generated route for
 /// [CompaniesScreen]
-class CompaniesScreenRoute extends PageRouteInfo<void> {
-  const CompaniesScreenRoute({List<PageRouteInfo>? children})
-      : super(
+class CompaniesScreenRoute extends PageRouteInfo<CompaniesScreenRouteArgs> {
+  CompaniesScreenRoute({
+    Key? key,
+    bool? isFollowed = false,
+    List<PageRouteInfo>? children,
+  }) : super(
           CompaniesScreenRoute.name,
+          args: CompaniesScreenRouteArgs(
+            key: key,
+            isFollowed: isFollowed,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'CompaniesScreenRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<CompaniesScreenRouteArgs> page =
+      PageInfo<CompaniesScreenRouteArgs>(name);
+}
+
+class CompaniesScreenRouteArgs {
+  const CompaniesScreenRouteArgs({
+    this.key,
+    this.isFollowed = false,
+  });
+
+  final Key? key;
+
+  final bool? isFollowed;
+
+  @override
+  String toString() {
+    return 'CompaniesScreenRouteArgs{key: $key, isFollowed: $isFollowed}';
+  }
 }
 
 /// generated route for
@@ -464,6 +504,20 @@ class VerifyCodeScreenRouteArgs {
 }
 
 /// generated route for
+/// [AccountSettingsScreen]
+class AccountSettingsScreenRoute extends PageRouteInfo<void> {
+  const AccountSettingsScreenRoute({List<PageRouteInfo>? children})
+      : super(
+          AccountSettingsScreenRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'AccountSettingsScreenRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [MyTicketsScreen]
 class MyTicketsScreenRoute extends PageRouteInfo<void> {
   const MyTicketsScreenRoute({List<PageRouteInfo>? children})
@@ -536,16 +590,40 @@ class SplashScreenRouteArgs {
 
 /// generated route for
 /// [MyOrdersScreen]
-class MyOrdersScreenRoute extends PageRouteInfo<void> {
-  const MyOrdersScreenRoute({List<PageRouteInfo>? children})
-      : super(
+class MyOrdersScreenRoute extends PageRouteInfo<MyOrdersScreenRouteArgs> {
+  MyOrdersScreenRoute({
+    Key? key,
+    bool? notCompletedYet,
+    List<PageRouteInfo>? children,
+  }) : super(
           MyOrdersScreenRoute.name,
+          args: MyOrdersScreenRouteArgs(
+            key: key,
+            notCompletedYet: notCompletedYet,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'MyOrdersScreenRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<MyOrdersScreenRouteArgs> page =
+      PageInfo<MyOrdersScreenRouteArgs>(name);
+}
+
+class MyOrdersScreenRouteArgs {
+  const MyOrdersScreenRouteArgs({
+    this.key,
+    this.notCompletedYet,
+  });
+
+  final Key? key;
+
+  final bool? notCompletedYet;
+
+  @override
+  String toString() {
+    return 'MyOrdersScreenRouteArgs{key: $key, notCompletedYet: $notCompletedYet}';
+  }
 }
 
 /// generated route for

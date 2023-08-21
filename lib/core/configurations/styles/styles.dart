@@ -34,6 +34,7 @@ class Styles {
   static const textFieldDarkColor = Color(0xFF213560);
 
   static const hintDarkColor = Color(0xFFFFFFFF);
+  static const rewardFontColor = Color(0xFFFF9600);
 
   static Color textFieldColor(BuildContext context) =>
       AppStateModel

@@ -23,7 +23,11 @@ class CompaniesRepository extends ICompaniesRepository {
     try {
       var res = await remoteDataSource.getRemoteData(model,);
       final data = Entity<CompaniesEntity>.fromJson(res,parser: CompaniesEntity.fromJson,);
-      companies = data.content?.items ?? [];
+
+      /// store companies when fetching all of them
+      if(model.isFollowed == null) {
+        companies = data.content?.items ?? [];
+      }
       return Right(data.content!);
     } on AppException catch (e) {
       return Left(ErrorEntity.fromAppException(e));

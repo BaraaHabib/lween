@@ -26,7 +26,7 @@ class MainScreen extends HookWidget {
         routes: const [
           MainScreenStackRoute(),
           CompaniesStackRoute(),
-          MyOrdersScreenRoute(),
+          MyOrdersStackRoute(),
           AccountScreenRoute(),
           NotificationsScreenRoute(),
         ],

@@ -204,5 +204,13 @@ class Assets {
   static const changePasswordSVG = 'assets/account/SVG/ic_vpn_key_24px.svg';
   static const darkModeIconSVG = 'assets/account/SVG/ic_brightness_2_24px.svg';
   static const lightModeIconSVG = 'assets/account/SVG/ic_brightness_high_24px.svg';
+  static const accountSettingsPNG = 'assets/account/PNG/configuration.png';
+  static const favouriteAccountPNG = 'assets/account/PNG/favourite.png';
+  static const avatarPlaceHolderPNG = 'assets/account/PNG/avatar_placeholder.png';
+  static const editAccountSVG = 'assets/account/SVG/fi_6830003.svg';
+  static const previousTripsIconPNG = 'assets/account/PNG/history.png';
+  static const rewardIconSVG = 'assets/account/SVG/reward 1.svg';
+  static const questionMarkIconPNG = 'assets/account/PNG/question-mark.png';
+  static const ordersCountPNG = 'assets/account/SVG/school-bus.png';
 
 }

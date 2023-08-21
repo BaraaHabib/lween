@@ -7,8 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:lween/core/app_state/appstate.dart';
 import 'package:lween/core/resources/constants.dart';
-import 'package:lween/features/auth/params/update_token_params.dart';
-import 'package:lween/features/auth/repo/account_repository.dart';
+import 'package:lween/features/account/params/update_token_params.dart';
+import 'package:lween/features/account/repo/account_repository.dart';
 import 'package:lween/features/notifications/screens/widgets/notification_item.dart';
 import 'package:lween/injection_container.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -19,8 +19,8 @@ class NotificationService {
 
   Future initFcmNotifications() async {
     final appState = sl<AppStateModel>();
-    final res = await Permission.notification.request();
-    if (res.isGranted) {
+    final permissionRes = await Permission.notification.request();
+    if (permissionRes.isGranted) {
       final newFCMToken = await FirebaseMessaging.instance.getToken();
       FirebaseMessaging.instance.subscribeToTopic(generalFCMTopic);
       if (newFCMToken != appState.firebaseToken) {

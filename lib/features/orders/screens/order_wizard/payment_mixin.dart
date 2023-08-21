@@ -177,7 +177,7 @@ mixin PaymentMixin implements Controller{
         .of(context,)
         .closestRouter;
     final tabsRouter = currentRouter.childControllers.firstWhereOrNull((e) => e is TabsRouter);
-    tabsRouter?.navigate(const MyOrdersScreenRoute());
+    tabsRouter?.navigate(MyOrdersScreenRoute());
     currentRouter.popUntilRoot();
     // NavigationService
     //     .of(context,)

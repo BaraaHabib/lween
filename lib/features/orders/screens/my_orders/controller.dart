@@ -9,10 +9,14 @@ import 'package:lween/features/orders/bloc/orders_bloc.dart';
 
 class MyOrdersController extends Controller{
 
+  MyOrdersController(this.notCompletedYet);
+
+  final bool? notCompletedYet;
+
   @override
   void init() {
     super.init();
-    OrdersBloc.instance.add(const GetOrdersEvent());
+    getData();
   }
 
   bool buildWhen(OrdersState previous, OrdersState current) {
@@ -23,18 +27,17 @@ class MyOrdersController extends Controller{
     return current is MyOrdersState;
   }
 
-  refresh() {
-    OrdersBloc.instance.add(const GetOrdersEvent());
+  getData() {
+    OrdersBloc.instance.add(
+        GetOrdersEvent(
+          notCompletedYet:notCompletedYet,
+        ),
+    );
   }
 
   void listener(BuildContext context, OrdersState state) {
     if(state is MyOrdersLoaded){
       if(state.navigateToDetails && state.ordersResult.orders?.length == 1) {
-        // NavigationService
-        //     .of(context)
-        //     .closestRouter
-        //     .parentAsStackRouter
-        //     ?.push(OrderDetailsScreenRoute(order: state.ordersResult.orders!.first,));
         NavigationService.of(context).navigateTo(
             withNavigation: false,
             OrderDetailsScreenRoute(order: state.ordersResult.orders!.first,));

@@ -52,6 +52,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("الأيام المتوفرة"),
         "bemoBank": MessageLookupByLibrary.simpleMessage("بنك بيمو"),
         "bookATrip": MessageLookupByLibrary.simpleMessage("حجز رحلة"),
+        "browseCompanies":
+            MessageLookupByLibrary.simpleMessage("استعرض الشركات"),
         "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
         "cancelOrder": MessageLookupByLibrary.simpleMessage("إلغاء الطلب"),
         "cashMobile": MessageLookupByLibrary.simpleMessage("كاش موبايل"),
@@ -80,6 +82,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("تأكيد كلمة المرور"),
         "country": MessageLookupByLibrary.simpleMessage("البلد"),
         "currency": MessageLookupByLibrary.simpleMessage("ل.س"),
+        "currentBalance": MessageLookupByLibrary.simpleMessage("رصيدك الحالي"),
         "date": MessageLookupByLibrary.simpleMessage("تاريخ"),
         "deactivateAccount":
             MessageLookupByLibrary.simpleMessage("تعطيل الحساب"),
@@ -101,10 +104,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "error": MessageLookupByLibrary.simpleMessage("خطأ"),
         "exceededSeatsCountDialogMessage": m1,
         "fatora": MessageLookupByLibrary.simpleMessage("فاتورة"),
+        "favoriteCompanies":
+            MessageLookupByLibrary.simpleMessage("شركات النقل المفضلة"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("نسيت كلمة المرور؟"),
         "from": MessageLookupByLibrary.simpleMessage("من"),
         "fullName": MessageLookupByLibrary.simpleMessage("الاسم الثلاثي"),
+        "helpAndSupport":
+            MessageLookupByLibrary.simpleMessage("المساعدة والدعم"),
         "home": MessageLookupByLibrary.simpleMessage("الرئيسية"),
         "importantWarning": MessageLookupByLibrary.simpleMessage("ملاحظة هامة"),
         "invalidphonenumber":
@@ -116,6 +123,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage(
                 "تأكد من إدخال المعلومات بدقة لإتمام عملية إنشاء الحساب."),
         "myAccount": MessageLookupByLibrary.simpleMessage("حسابي"),
+        "myReservations":
+            MessageLookupByLibrary.simpleMessage("حجوزاتي / رحلاتي"),
         "myTickets": MessageLookupByLibrary.simpleMessage("تذاكري"),
         "myTrips": MessageLookupByLibrary.simpleMessage("تذاكري"),
         "newRequiredPayment":
@@ -141,6 +150,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "لم يتم اكمال عملية دفع الطلب الكترونيا وسيتم حذفه بعد عدة دقائق"),
         "orderSavedToGallery": MessageLookupByLibrary.simpleMessage(
             "تم حفظ الطلب في ملفات الجهاز"),
+        "orders": MessageLookupByLibrary.simpleMessage("طلبات"),
         "passengersNames":
             MessageLookupByLibrary.simpleMessage("معلومات الركاب"),
         "passsengersInfo":

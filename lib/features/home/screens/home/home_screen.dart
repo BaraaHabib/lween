@@ -11,6 +11,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lween/core/configurations/app_configuration.dart';
 import 'package:lween/core/configurations/assets.dart';
 import 'package:lween/core/controller/base_controller.dart';
+import 'package:lween/core/extended/get_utils/get_utils.dart';
 import 'package:lween/core/extended/numbers_ext.dart';
 import 'package:lween/core/lween/widgets/app_scaffold.dart';
 import 'package:lween/core/widgets/app_button.dart';
@@ -32,6 +33,7 @@ class HomeScreen extends HookWidget {
   Widget build(BuildContext context) {
     final HomeScreenController controller =
     Controller.getInstance(instance: HomeScreenController(),);
+    final OrdersController ordersController = Controller.getInstance(instance: OrdersController(),);
     return BlocConsumer<HomeBloc, HomeState>(
         bloc: HomeBloc.instance,
         listener: controller.listener,
@@ -90,9 +92,10 @@ class HomeScreen extends HookWidget {
                         ),
                       ),
                       Positioned(
-                          bottom: 10.hx,
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 24.wx,),
+                          bottom: 0.hx,
+                          child: Container(
+                            color: context.theme.primaryColor.withOpacity(0.5),
+                            padding: EdgeInsets.symmetric(horizontal: 24.wx,vertical: 10.hx,),
                             child: AppGradientTextButton(
                               gradientType: AppTextButtonGradientType.secondary,
                               content: S.of(context).bookATrip,

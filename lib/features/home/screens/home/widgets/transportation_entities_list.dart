@@ -44,7 +44,7 @@ class TopCompaniesList extends HookWidget {
               TextButton(
                 onPressed: () =>
                     NavigationService.of(context).navigateTo(
-                        const CompaniesScreenRoute()),
+                        CompaniesScreenRoute()),
                 style: ButtonStyle(
                   padding: MaterialStateProperty.all(EdgeInsets.zero,),
                   visualDensity: VisualDensity.compact,

@@ -8,8 +8,11 @@ class GetCompaniesParams extends ParamsModel<GetCompaniesBody> {
   GetCompaniesParams(
       {
         int page = 0,
+        this.isFollowed ,
       })
       : super(body: GetCompaniesBody(),page: page,);
+
+  final bool? isFollowed;
 
 
   @override
@@ -23,6 +26,8 @@ class GetCompaniesParams extends ParamsModel<GetCompaniesBody> {
 
   @override
   Map<String, String> get urlParams => {
+    if(isFollowed != null)
+      'isFollowed' : isFollowed.toString(),
   };
 
   @override

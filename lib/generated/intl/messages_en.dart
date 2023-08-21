@@ -51,6 +51,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "availableDays": MessageLookupByLibrary.simpleMessage("Available days"),
         "bemoBank": MessageLookupByLibrary.simpleMessage("Bemo Bank"),
         "bookATrip": MessageLookupByLibrary.simpleMessage("Book a trip"),
+        "browseCompanies":
+            MessageLookupByLibrary.simpleMessage("Browse companies"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "cancelOrder": MessageLookupByLibrary.simpleMessage("Cancel order"),
         "cashMobile": MessageLookupByLibrary.simpleMessage("Cash Mobile"),
@@ -81,6 +83,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Confirm password"),
         "country": MessageLookupByLibrary.simpleMessage("Country"),
         "currency": MessageLookupByLibrary.simpleMessage("S.P"),
+        "currentBalance":
+            MessageLookupByLibrary.simpleMessage("Current balance"),
         "date": MessageLookupByLibrary.simpleMessage("Date"),
         "deactivateAccount":
             MessageLookupByLibrary.simpleMessage("Deactivate account"),
@@ -102,10 +106,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "error": MessageLookupByLibrary.simpleMessage("Error"),
         "exceededSeatsCountDialogMessage": m1,
         "fatora": MessageLookupByLibrary.simpleMessage("Fatora"),
+        "favoriteCompanies":
+            MessageLookupByLibrary.simpleMessage("Favorite companies"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Forgot password"),
         "from": MessageLookupByLibrary.simpleMessage("from"),
         "fullName": MessageLookupByLibrary.simpleMessage("full name"),
+        "helpAndSupport":
+            MessageLookupByLibrary.simpleMessage("Help and support"),
         "home": MessageLookupByLibrary.simpleMessage("Home"),
         "importantWarning":
             MessageLookupByLibrary.simpleMessage("Important Notice"),
@@ -117,6 +125,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "makeSureToEnterInformationAccuratly": MessageLookupByLibrary.simpleMessage(
             "Make sure to enter the information accurately to complete the account creation process."),
         "myAccount": MessageLookupByLibrary.simpleMessage("My account"),
+        "myReservations":
+            MessageLookupByLibrary.simpleMessage("My reservations"),
         "myTickets": MessageLookupByLibrary.simpleMessage("My tickets"),
         "myTrips": MessageLookupByLibrary.simpleMessage("My tickets"),
         "newRequiredPayment":
@@ -142,6 +152,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "The order payment process has not been completed and will be deleted after a few minutes"),
         "orderSavedToGallery":
             MessageLookupByLibrary.simpleMessage("Order saved to gallery"),
+        "orders": MessageLookupByLibrary.simpleMessage("Orders"),
         "passengersNames":
             MessageLookupByLibrary.simpleMessage("Passengers info"),
         "passsengersInfo":

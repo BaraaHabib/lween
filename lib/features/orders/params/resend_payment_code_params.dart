@@ -3,7 +3,7 @@ import 'package:lween/core/configurations/app_configuration.dart';
 import 'package:lween/core/features/params/params_model.dart';
 import 'package:lween/core/resources/api_consts.dart';
 import 'package:lween/core/resources/constants.dart';
-import 'package:lween/features/auth/params/check_code_params.dart';
+import 'package:lween/features/account/params/check_code_params.dart';
 
 class ResendPaymentCodeParams extends ParamsModel<ResendPaymentCodeParamsBody> {
   ResendPaymentCodeParams({required ResendPaymentCodeParamsBody body,})

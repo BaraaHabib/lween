@@ -1,10 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:lween/features/auth/screens/account/account_screen.dart';
-import 'package:lween/features/auth/screens/login_screen.dart';
-import 'package:lween/features/auth/screens/reset_password_screen.dart';
-import 'package:lween/features/auth/screens/register_screen.dart';
-import 'package:lween/features/auth/screens/verify_code_screen.dart';
+import 'package:lween/features/account/screens/account/account_screen.dart';
+import 'package:lween/features/account/screens/account_settings/account_settings_screen.dart';
+import 'package:lween/features/account/screens/login_screen.dart';
+import 'package:lween/features/account/screens/reset_password_screen.dart';
+import 'package:lween/features/account/screens/register_screen.dart';
+import 'package:lween/features/account/screens/verify_code_screen.dart';
 import 'package:lween/features/home/main_screen.dart';
 import 'package:lween/features/home/screens/home/home_screen.dart';
 import 'package:lween/features/notifications/screens/notifications_screen.dart';
@@ -257,6 +258,18 @@ class AppRouter extends _$AppRouter {
     CustomRoute(
       transitionsBuilder: TransitionsBuilders.fadeIn,
       page: OrderTripPreviewScreenRoute.page,
+    ),
+    CustomRoute(
+      transitionsBuilder: TransitionsBuilders.fadeIn,
+      page: AccountSettingsScreenRoute.page,
+    ),
+    CustomRoute(
+      transitionsBuilder: TransitionsBuilders.fadeIn,
+      page: MyOrdersScreenRoute.page,
+    ),
+    CustomRoute(
+      transitionsBuilder: TransitionsBuilders.fadeIn,
+      page: CompaniesScreenRoute.page,
     ),
   ];
 

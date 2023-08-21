@@ -1340,6 +1340,66 @@ class S {
       args: [city1, city2, company, date, X, price],
     );
   }
+
+  /// `Current balance`
+  String get currentBalance {
+    return Intl.message(
+      'Current balance',
+      name: 'currentBalance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `My reservations`
+  String get myReservations {
+    return Intl.message(
+      'My reservations',
+      name: 'myReservations',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Favorite companies`
+  String get favoriteCompanies {
+    return Intl.message(
+      'Favorite companies',
+      name: 'favoriteCompanies',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Help and support`
+  String get helpAndSupport {
+    return Intl.message(
+      'Help and support',
+      name: 'helpAndSupport',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Orders`
+  String get orders {
+    return Intl.message(
+      'Orders',
+      name: 'orders',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Browse companies`
+  String get browseCompanies {
+    return Intl.message(
+      'Browse companies',
+      name: 'browseCompanies',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

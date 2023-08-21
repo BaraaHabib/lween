@@ -145,24 +145,36 @@ class OrderDetailsScreen extends HookWidget {
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
-                                        _LabelWithText(S.current.from, order.fromCity?.text ??
-                                            ''),
-                                        _LabelWithText(S.current.to, order.toCity?.text ??
-                                            ''),
-                                        1.hSpace,
+                                        Expanded(
+                                          flex: 1,
+                                          child: _LabelWithText(S.current.from, order.fromCity?.text ??
+                                              ''),
+                                        ),
+                                        Expanded(
+                                          flex: 1,
+                                          child: _LabelWithText(S.current.to, order.toCity?.text ??
+                                              ''),
+                                        ),
+                                        // 1.hSpace,
                                       ],
                                     ),
                                     20.vSpace,
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
-                                        _LabelWithText(S.current.travelDate, order
-                                            .formattedTravelTimeDate ?? ''),
+                                        Expanded(
+                                          flex: 1,
+                                          child: _LabelWithText(S.current.travelDate, order
+                                              .formattedTravelTimeDate ?? ''),
+                                        ),
                                         // Spacer(),
-                                        _LabelWithText(S
-                                            .of(context)
-                                            .travelDateTime, DateFormat.jm(langEN).format(
-                                            order.travelTimeDate) ?? ''),
+                                        Expanded(
+                                          flex: 1,
+                                          child: _LabelWithText(S
+                                              .of(context)
+                                              .travelDateTime, DateFormat.jm(langEN).format(
+                                              order.travelTimeDate) ?? ''),
+                                        ),
                                         1.hSpace,
                                       ],
                                     ),
@@ -296,7 +308,7 @@ class OrderDetailsScreen extends HookWidget {
                         ),
                       ),
                     ),
-                    if(!order.isCanceled && !order.isRejected)
+                    if(controller.orderCanBeSaved)
                       ...[
                         20.vSpace,
                         AppGradientTextButton(

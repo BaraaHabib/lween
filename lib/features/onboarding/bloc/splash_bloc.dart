@@ -9,9 +9,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lween/core/exceptions/app_exceptions.dart';
 import 'package:lween/core/resources/constants.dart';
 import 'package:lween/core/services/notification_service.dart';
-import 'package:lween/features/auth/params/init_app_params.dart';
-import 'package:lween/features/auth/params/update_token_params.dart';
-import 'package:lween/features/auth/repo/account_repository.dart';
+import 'package:lween/features/account/bloc/account_bloc.dart';
+import 'package:lween/features/account/params/init_app_params.dart';
+import 'package:lween/features/account/params/update_token_params.dart';
+import 'package:lween/features/account/repo/account_repository.dart';
 import 'package:lween/features/home/bloc/home_bloc.dart';
 import 'package:lween/features/home/repo/account_repository.dart';
 import 'package:lween/features/home/screens/home/home_screen_controller.dart';
@@ -83,6 +84,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
   ) async {
     HomeScreenController.intiHomeScreen();
     CompanyBloc.instance.add(GetCompaniesEvent(params: GetCompaniesParams()));
+    AccountBloc.instance.add(const GetProfileEvent());
     final storage = Lween.storage; // sl<AppStorage>();
     final locale = Provider.of<LocaleProvider>(
       context,

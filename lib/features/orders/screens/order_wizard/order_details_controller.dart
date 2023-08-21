@@ -21,6 +21,8 @@ class OrderDetailsController extends Controller {
 
   OrderEntity order;
 
+  bool get orderCanBeSaved => (!order.isCanceled && !order.isRejected) && !(order.isOnlinePayment && order.isPending);
+
   cancelOrder(BuildContext context) {
     AppDialogs.showYesNoDialog(
         context: context,

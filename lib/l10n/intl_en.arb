@@ -127,5 +127,11 @@
   "orderNotCompletedMessage": "The order payment process has not been completed and will be deleted after a few minutes",
   "importantWarning": "Important Notice",
   "apply": "Apply",
-  "city1City2DateXPrice": "Do you want to confirm sending a reservation request from {city1} to {city2} within {company} on {date} for {X} passengers and at a cost of {price} Syrian pounds"
+  "city1City2DateXPrice": "Do you want to confirm sending a reservation request from {city1} to {city2} within {company} on {date} for {X} passengers and at a cost of {price} Syrian pounds",
+  "currentBalance": "Current balance",
+  "myReservations": "My reservations",
+  "favoriteCompanies": "Favorite companies",
+  "helpAndSupport": "Help and support",
+  "orders": "Orders",
+  "browseCompanies": "Browse companies"
 }

@@ -27,7 +27,7 @@ class MyPreviousOrders extends HookWidget {
     super.key});
   @override
   Widget build(BuildContext context) {
-    final OrdersController controller = Controller.getInstance(instance: OrdersController(),);
+    final OrdersController controller = Controller.getInstance();
     return BlocBuilder<OrdersBloc,OrdersState>(
       bloc: sl<OrdersBloc>(),
       buildWhen: controller.buildWhen,

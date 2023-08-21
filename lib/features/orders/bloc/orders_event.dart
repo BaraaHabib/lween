@@ -15,11 +15,13 @@ class GetOrdersEvent extends OrdersEvent {
     this.page = 0,
     this.navigateToDetails = false,
     this.ids,
+    this.notCompletedYet,
   });
 
   final List<String>? ids;
   final int page;
   final bool navigateToDetails;
+  final bool? notCompletedYet;
 
   @override
   List<Object?> get props => [];

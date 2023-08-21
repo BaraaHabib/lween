@@ -12,16 +12,22 @@ class CompanyInitial extends CompanyState {
 
 //#region get entities
 abstract class GetCompaniesState extends CompanyState {
-  const GetCompaniesState({String? message}) : super(message: message);
+  const GetCompaniesState({
+    String? message,
+    required this.isFollowedCompaniesScreen,
+  }) : super(message: message);
+  final bool isFollowedCompaniesScreen;
 }
 
 class CompaniesLoading extends GetCompaniesState {
+  const CompaniesLoading({required super.isFollowedCompaniesScreen});
+
   @override
   List<Object?> get props => [];
 }
 
 class CompaniesLoaded extends GetCompaniesState {
-  const CompaniesLoaded({required this.items});
+  const CompaniesLoaded({required this.items, required super.isFollowedCompaniesScreen});
   final CompaniesEntity items;
 
   @override
@@ -31,7 +37,8 @@ class CompaniesLoaded extends GetCompaniesState {
 class CompaniesError extends GetCompaniesState {
 
 
-  const CompaniesError(String message, ) : super(message: message);
+  const CompaniesError(String message, bool isFollowedCompaniesScreen) : super(
+    message: message, isFollowedCompaniesScreen: isFollowedCompaniesScreen,);
 
   @override
   List<Object?> get props => [message];

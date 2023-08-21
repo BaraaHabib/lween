@@ -29,11 +29,11 @@ class CompanyBloc extends Bloc<CompanyEvent, CompanyState> {
   Future<FutureOr<void>> _transportationCompanyEventCallback(
       GetCompaniesEvent event,
       Emitter<CompanyState> emit) async {
-    emit(CompaniesLoading());
+    emit(CompaniesLoading(isFollowedCompaniesScreen: event.params.isFollowed ?? false,));
     var res = await repo.getCompanies(event.params,);
     emit(res.fold(
-          (l) => CompaniesError(l.errorMessage,),
-          (r) => CompaniesLoaded(items: r,),
+          (l) => CompaniesError(l.errorMessage,event.params.isFollowed ?? false,),
+          (r) => CompaniesLoaded(items: r,isFollowedCompaniesScreen: event.params.isFollowed ?? false,),
     ));
   }
 
