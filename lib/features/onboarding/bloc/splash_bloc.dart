@@ -10,6 +10,8 @@ import 'package:lween/core/exceptions/app_exceptions.dart';
 import 'package:lween/core/resources/constants.dart';
 import 'package:lween/core/services/notification_service.dart';
 import 'package:lween/features/account/bloc/account_bloc.dart';
+import 'package:lween/features/account/models/init_app_entity.dart';
+import 'package:lween/features/account/models/profile_entity.dart';
 import 'package:lween/features/account/params/init_app_params.dart';
 import 'package:lween/features/account/params/update_token_params.dart';
 import 'package:lween/features/account/repo/account_repository.dart';
@@ -40,12 +42,23 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
       await appState.init();
 
       /// get app data
-      final res = await sl<AccountRepository>().initApp(InitAppParams(
+      final initAppFuture = sl<AccountRepository>().initApp(InitAppParams(
           deviceType: 1,
           deviceVersion: appState.deviceVersion,
         ),
       );
-      res.fold((l) => throw AppException(l.errorMessage ?? ''), (r) => appState.initAppEntity = r);
+      final getAppFuture = sl<AccountRepository>().getProfile();
+      final res = await Future.wait([initAppFuture, getAppFuture]);
+
+      for (var e in res) {
+        e.fold((l) => throw AppException(l.errorMessage,), (r) {
+          if (r is InitAppEntity) {
+            appState.initAppEntity = r;
+          } else if (r is ProfileEntity) {
+
+          }
+        });
+      }
 
       if (!appState.authenticated) {
         emit(

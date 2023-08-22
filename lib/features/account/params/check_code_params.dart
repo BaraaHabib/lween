@@ -15,7 +15,7 @@ enum ConfirmationCodeType
 
 class CheckCodeParams extends ParamsModel<CheckCodeParamsBody> {
   CheckCodeParams({required this.userName,required this.code,required this.confirmationCodeType,})
-      : super(body: CheckCodeParamsBody(), baseUrl: AppConfigurations.BaseUrl);
+      : super(body: CheckCodeParamsBody(), baseUrl: AppConfigurations.BaseUrl,);
 
   final String userName;
   final String code;

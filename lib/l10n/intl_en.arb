@@ -91,6 +91,7 @@
   "reservationHolder": "اسم صاحب الحجز",
   "vehicleNumber": "Vehicle number",
   "paymentStatus": "Payment status",
+  "bookingStatus": "Booking status",
   "waitingPaymentInCompanyCenter": "Waiting for payment in company center",
   "payedInCenter": "Payed in company center",
   "payedWithValue": "payed with {value}",
@@ -133,5 +134,10 @@
   "favoriteCompanies": "Favorite companies",
   "helpAndSupport": "Help and support",
   "orders": "Orders",
-  "browseCompanies": "Browse companies"
+  "browseCompanies": "Browse companies",
+  "editProfile": "Edit profile",
+  "informationUpdatedSuccessfully": "Profile updated successfully",
+  "camera": "Camera",
+  "gallery": "Gallery",
+  "youHaveNoPreviousReservations": "You have no previous reservations"
 }

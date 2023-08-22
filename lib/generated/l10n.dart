@@ -970,6 +970,16 @@ class S {
     );
   }
 
+  /// `Booking status`
+  String get bookingStatus {
+    return Intl.message(
+      'Booking status',
+      name: 'bookingStatus',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Waiting for payment in company center`
   String get waitingPaymentInCompanyCenter {
     return Intl.message(
@@ -1396,6 +1406,56 @@ class S {
     return Intl.message(
       'Browse companies',
       name: 'browseCompanies',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit profile`
+  String get editProfile {
+    return Intl.message(
+      'Edit profile',
+      name: 'editProfile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Profile updated successfully`
+  String get informationUpdatedSuccessfully {
+    return Intl.message(
+      'Profile updated successfully',
+      name: 'informationUpdatedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Camera`
+  String get camera {
+    return Intl.message(
+      'Camera',
+      name: 'camera',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Gallery`
+  String get gallery {
+    return Intl.message(
+      'Gallery',
+      name: 'gallery',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You have no previous reservations`
+  String get youHaveNoPreviousReservations {
+    return Intl.message(
+      'You have no previous reservations',
+      name: 'youHaveNoPreviousReservations',
       desc: '',
       args: [],
     );

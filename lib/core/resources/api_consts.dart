@@ -25,5 +25,7 @@ abstract class ApiConstants{
   static const completePayment = 'Client/OnlinePayment/CompletePayment';
   static const updateToken = 'Client/Home/FirebaseToken';
   static const getProfile = 'Client/Account/Profile';
+  static const editProfile = 'Client/Account/EditProfile';
+  static const uploadFile = 'File/Upload';
 
 }

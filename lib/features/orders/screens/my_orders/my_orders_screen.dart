@@ -74,6 +74,7 @@ class MyOrdersScreen extends HookWidget {
                       return EmptyWidget(
                         entity: S.of(context).reservations,
                         actionTitle: S.current.bookATrip,
+                        fullMessage: S.of(context).youHaveNoPreviousReservations,
                         onAction: (){
                           NavigationService
                               .of(context)

@@ -5,6 +5,8 @@ import 'package:lween/core/features/entities/entity.dart';
 
 class LiteEntity extends ContentModel{
 
+
+
   int? id;
   String? text;
 
@@ -19,4 +21,5 @@ class LiteEntity extends ContentModel{
   @override
   List<Object?> get props => [id,text,];
 
+  LiteEntity(this.id, this.text);
 }

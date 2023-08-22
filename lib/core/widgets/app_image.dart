@@ -27,7 +27,7 @@ class AppImage extends StatelessWidget {
   final Color? backgroundColor;
   final Color? color;
   final EdgeInsets? margin;
-  final String? errorImage;
+  String? errorImage;
 
   AppImage({
     super.key,
@@ -46,12 +46,25 @@ class AppImage extends StatelessWidget {
     this.color,
   }) {
     path ??= Assets.logoPNG;
-    if(path == null){
-      path.logger();
+
+    if(errorImage != null){
+      if(!errorImage!.contains('svg')){
+        errorWidget ??= Image.asset(
+          errorImage!
+        );
+      }
+      else{
+        errorWidget ??= SvgPicture.asset(
+          errorImage!
+        );
+      }
     }
-    errorWidget ??= Image.asset(
-      errorImage ?? Assets.logoPNG,
-    );
+    else{
+      errorWidget ??= Image.asset(
+          Assets.logoPNG
+      );
+    }
+
     loadingWidget ??= Center(
       child: Shimmer(
         period: shimmerDuration,

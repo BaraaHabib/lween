@@ -51,13 +51,16 @@ class AccountScreen extends HookWidget {
                 padding: EdgeInsets.all(20.rx,),
                 child: Row(
                   children: [
-                    AppImage(
-                        path: profile.imageUrl,
-                        errorImage: Assets.avatarPlaceHolderPNG,
-                        type: ImageType.cachedNetwork,
-                        width: 70.rx,
-                        height: 70.rx,
-                        borderRadius: BorderRadius.circular(50),
+                    Hero(
+                      tag: 'profile-image',
+                      child: AppImage(
+                          path: profile.imageUrl,
+                          errorImage: Assets.avatarPlaceHolderSVG,
+                          type: ImageType.cachedNetwork,
+                          width: 70.rx,
+                          height: 70.rx,
+                          borderRadius: BorderRadius.circular(50),
+                      ),
                     ),
                     15.hSpace,
                     Expanded(
@@ -69,18 +72,22 @@ class AccountScreen extends HookWidget {
                             children: [
                               Expanded(
                                   flex:8,
-                                  child: AppTextWidget(
-                                    profile.name ?? '',
-                                    maxLines: 2,
-                                    style: context
-                                        .textTheme
-                                        .labelLarge,
+                                  child: Hero(
+                                    tag: 'user-name',
+                                    child: AppTextWidget(
+                                      profile.name ?? '',
+                                      maxLines: 2,
+                                      style: context
+                                          .textTheme
+                                          .labelLarge,
+                                    ),
                                   ),
                               ),
                               const Spacer(),
                               Expanded(
                                   flex:2,
                                   child: GestureDetector(
+                                    onTap: () => controller.editProfile(context,),
                                     child: AppImage(
                                       path: Assets.editAccountSVG,
                                       type: ImageType.asset,

@@ -3,9 +3,16 @@ import 'dart:io';
 
 import 'package:android_path_provider/android_path_provider.dart';
 import 'package:collection/collection.dart';
+import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:lween/core/data/data_sources/remote_data_source.dart';
+import 'package:lween/core/exceptions/app_exceptions.dart';
+import 'package:lween/core/features/entities/entity.dart';
+import 'package:lween/core/features/entities/error_entity.dart';
+import 'package:lween/core/services/files/upload_file/params.dart';
+import 'package:lween/core/services/files/upload_file/response.dart';
 import 'package:open_filex/open_filex.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -16,6 +23,14 @@ import 'package:lween/core/extended/get_utils/src/extensions/export.dart';
 import 'package:lween/core/messages/toast.dart';
 import '../../../injection_container.dart';
 
+enum UploadFileType {
+  profile(apiValue: 3,);
+
+  final int apiValue;
+
+  const UploadFileType({required this.apiValue});
+
+}
 
 typedef OnUploadProgressCallback = void Function(int sentBytes, int totalBytes);
 
@@ -23,6 +38,7 @@ class FileManager {
   late String _localPath;
   final dio = Dio();
   static bool isInitialized = false;
+
   FileManager();
 
   Future<void> init() async {
@@ -64,16 +80,15 @@ class FileManager {
   Future<Directory> createFolder(String name) async {
     final dir = Directory(
       '${(Platform.isAndroid ? await getExternalStorageDirectory() //FOR ANDROID
-              : await getApplicationSupportDirectory() //FOR IOS
-          )!.path}/$name',
+          : await getApplicationSupportDirectory() //FOR IOS
+      )!.path}/$name',
     );
 
     final status = await Permission.storage.status;
     if (!status.isGranted) {
       await Permission.storage.request();
     }
-    if (await dir.exists()) {
-    } else {
+    if (await dir.exists()) {} else {
       dir.create();
     }
     return dir;
@@ -89,8 +104,7 @@ class FileManager {
   Future<Stream<FileResponse>?>? downloadFile(String name, String url,
       [bool? withAuth]) async {
     try {
-      if (Platform.isAndroid) {
-      }
+      if (Platform.isAndroid) {}
       final storagePermission = await Permission.storage.request();
       if (storagePermission.isGranted) {
         return DefaultCacheManager().getFileStream(
@@ -129,8 +143,7 @@ class FileManager {
   Future<Stream<FileResponse>?>? downloadImageFile(String name, String url,
       [bool? withAuth]) async {
     try {
-      if (Platform.isAndroid) {
-      }
+      if (Platform.isAndroid) {}
       final storagePermission = await Permission.storage.request();
       if (storagePermission.isGranted) {
         return DefaultCacheManager().getFileStream(
@@ -199,7 +212,9 @@ class FileManager {
     final dir = await getApplicationDocumentsDirectory();
 
     // get ext
-    final ext = url.split('.').lastOrNull;
+    final ext = url
+        .split('.')
+        .lastOrNull;
     final fullName = '$fileName${ext == null ? '' : '.$ext'}';
 
     // downloads the file
@@ -223,30 +238,20 @@ class FileManager {
     return res.isGranted;
   }
 
-  Stream<List<int>> uploadFile (String filePath,OnUploadProgressCallback onUploadProgress){
-    int byteCount = 0;
-    File file = File(filePath);
-    final fileStream = file.openRead();
 
-    int totalByteLength = file.lengthSync();
-    Stream<List<int>> streamUpload = fileStream.transform(
-        StreamTransformer.fromHandlers(
-        handleData: (data, sink) {
-          byteCount += data.length;
-          onUploadProgress(byteCount, totalByteLength);
-          sink.add(data);
-        },
-        handleError: (error, stack, sink) {
-          if (kDebugMode) {
-            print(error.toString());
-          }
-        },
-        handleDone: (sink) {
-          sink.close();
-          // UPLOAD DONE;
-        },
-      ),
-    );
-    return streamUpload;
+  Future<Either<ErrorEntity, FileUploadEntity>> uploadFile(String filePath, int fileType,) async {
+    try {
+      var res = await sl<RemoteDataSource>().getRemoteData(UploadFileParams(
+        fileType,
+        body: UploadFileParamsBody(
+          filePath: filePath,
+        ),
+      ),);
+      Entity<FileUploadEntity> data = Entity<FileUploadEntity>.fromJson(
+        res, parser: FileUploadEntity.fromJson,);
+      return Right(data.content!);
+    } on AppException catch (e) {
+      return Left(ErrorEntity.fromAppException(e));
+    }
   }
 }

@@ -14,19 +14,18 @@ class ProfileEntity extends ContentModel {
   LiteEntity? country;
   LiteEntity? city;
 
-  ProfileEntity(
-      {
-        this.externalLoginProvider,
-        this.accountType,
-        this.id,
-        this.imageUrl,
-        this.name,
-        this.phoneNumber,
-        this.balance,
-        this.ordersCount,
-        this.country,
-        this.city,
-});
+  ProfileEntity({
+    this.externalLoginProvider,
+    this.accountType,
+    this.id,
+    this.imageUrl,
+    this.name,
+    this.phoneNumber,
+    this.balance,
+    this.ordersCount,
+    this.country,
+    this.city,
+  });
 
   factory ProfileEntity.fromJson(json) {
     return ProfileEntity(
@@ -52,5 +51,25 @@ class ProfileEntity extends ContentModel {
 
   @override
   List<Object?> get props => [];
+
+  ProfileEntity copyWith({
+    LiteEntity? city,
+    LiteEntity? country,
+    String? imageUrl,
+    String? name,
+  }) {
+    return ProfileEntity(
+      imageUrl: imageUrl ?? this.imageUrl,
+      name: name ?? this.imageUrl,
+      accountType: accountType,
+      balance: balance,
+      city: city ?? this.city,
+      country: country ?? this.country,
+      externalLoginProvider: externalLoginProvider,
+      id: id,
+      ordersCount: ordersCount,
+      phoneNumber: phoneNumber,
+    );
+  }
 }
 

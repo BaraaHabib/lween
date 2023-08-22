@@ -249,7 +249,7 @@ class OrderDetailsScreen extends HookWidget {
                                           mainAxisAlignment:MainAxisAlignment.center,
                                           children: [
                                             AppTextWidget(
-                                              S.of(context).paymentStatus,
+                                              S.of(context).bookingStatus,
                                               style: context.textTheme.titleMedium?.copyWith(
                                                 color: Styles.labelInsideCard,
                                               ),
@@ -266,9 +266,9 @@ class OrderDetailsScreen extends HookWidget {
                                             15.hSpace,
                                             Flexible(
                                               child: AppTextWidget(
-                                                order.currentPaymentStatusText ?? '',
+                                                order.orderStateText ?? '',
                                                 textAlign: TextAlign.center,
-                                                maxLines: 2,
+                                                maxLines: 3,
                                                 style: context.textTheme.headlineMedium?.copyWith(
                                                   color: order.paymentStatusTextColor(context),
                                                 ),
@@ -281,23 +281,23 @@ class OrderDetailsScreen extends HookWidget {
                                           ],
                                         ),
                                         12.vSpace,
-                                        Row(
-                                          mainAxisAlignment:MainAxisAlignment.center,
-                                          children: [
-                                            15.hSpace,
-                                            Flexible(
-                                              child: AppTextWidget(
-                                                order.paymentAmountText ?? '',
-                                                textAlign: TextAlign.center,
-                                                maxLines: 2,
-                                                style: context.textTheme.headlineMedium?.copyWith(
-                                                  color: order.paymentAmountTextColor(context),
-                                                ),
-                                              ),
-                                            ),
-                                            15.hSpace,
-                                          ],
-                                        ),
+                                        // Row(
+                                        //   mainAxisAlignment:MainAxisAlignment.center,
+                                        //   children: [
+                                        //     15.hSpace,
+                                        //     Flexible(
+                                        //       child: AppTextWidget(
+                                        //         order.paymentAmountText ?? '',
+                                        //         textAlign: TextAlign.center,
+                                        //         maxLines: 2,
+                                        //         style: context.textTheme.headlineMedium?.copyWith(
+                                        //           color: order.paymentAmountTextColor(context),
+                                        //         ),
+                                        //       ),
+                                        //     ),
+                                        //     15.hSpace,
+                                        //   ],
+                                        // ),
                                       ],
 
                                 ],

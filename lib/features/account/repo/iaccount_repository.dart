@@ -10,6 +10,7 @@ import 'package:lween/features/account/models/profile_entity.dart';
 import 'package:lween/features/account/models/register_entity.dart';
 import 'package:lween/features/account/models/verify_account_entity.dart';
 import 'package:lween/features/account/params/check_code_params.dart';
+import 'package:lween/features/account/params/edit_profile_params.dart';
 import 'package:lween/features/account/params/enter_forgot_password_params.dart';
 import 'package:lween/features/account/params/forget_password_params.dart';
 import 'package:lween/features/account/params/get_profile_params.dart';
@@ -32,5 +33,6 @@ abstract class IAccountRepository extends IRepository {
   Future<Either<ErrorEntity, EmptyEntity>> enterForgotPassword(EnterForgotPasswordParams model);
   Future<Either<ErrorEntity, EmptyEntity>> updateToken(UpdateTokenParams model);
   Future<Either<ErrorEntity, ProfileEntity>> getProfile(GetProfileParams model);
+  Future<Either<ErrorEntity, EmptyEntity>> updateProfile(UpdateProfileParams model);
 
 }

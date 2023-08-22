@@ -168,9 +168,15 @@ class RemoteDataSource  {
     Response response;
     Map<String, dynamic> responseJson;
     final url = model.baseUrl ?? baseUrl;
+    late final dynamic body;
+    if (model.isFormData) {
+      body = FormData.fromMap(model.body.toJson() ?? {});
+    } else {
+      body = model.body.toJson() ?? {};
+    }
     response = await dio.post(
       url + model.url.toString(),
-      data: model.body.toJson(),
+      data: body,
       queryParameters: model.urlParams,
       options: Options(headers: headers, responseType: ResponseType.plain),
     );

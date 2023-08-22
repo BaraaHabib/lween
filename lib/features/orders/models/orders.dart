@@ -39,6 +39,7 @@ class OrderEntity extends ContentModel {
   int? status;
   LiteCompany? transportationCompany;
   String? travelTime;
+  String? orderStateText;
   LiteEntity? fromCity;
   LiteEntity? toCity;
   bool? canBeCanceled;
@@ -100,7 +101,7 @@ class OrderEntity extends ContentModel {
         return S.current.waitingPaymentInCompanyCenter;
       }
     }
-    else if(paymentProvider == null && paymentMethod != PaymentMethod.cash.type){
+    else if(!isPaid && paymentMethodEnum.isOnlinePayment){
       return S.current.orderNotCompletedMessage;
     }
     return S.current.payedWithValue(paymentProviderText ?? '');
@@ -120,24 +121,17 @@ class OrderEntity extends ContentModel {
   }
 
   String? get paymentAmountText {
-    if(isPayedInCenter){
-      // if(isPending) {
-      //   return S.current.waitingPaymentInCompanyCenter;
-      // }
-      //  else
-         if(isPaid){
+    if (isPayedInCenter) {
+      if (isPaid) {
         return S.current.payedInCenter;
       }
     }
-    else if(isOnlinePayment){
-      if(isPaid){
-         return S.current.payedAmount(price.toString());
+    else if (isOnlinePayment) {
+      if (isPaid) {
+        return S.current.payedAmount(price.toString());
       }
     }
-    // if (isPaid) {
-    return  '';
-    // }
-    return S.current.requiredPayment(price ?? '');
+    return '';
   }
 
   Color? paymentAmountTextColor(BuildContext context) {
@@ -191,6 +185,7 @@ class OrderEntity extends ContentModel {
         ? LiteEntity.fromJson(json['toCity'])
         : null;
     travelTime = json['travelTime'];
+    orderStateText = json['orderStateText'];
     canBeCanceled = json['canBeCanceled'];
   }
 
@@ -212,6 +207,7 @@ class OrderEntity extends ContentModel {
       data['transportationEntity'] = transportationCompany?.toJson();
     }
     data['travelTime'] = travelTime;
+    data['orderStateText'] = orderStateText;
     data['canBeCanceled'] = canBeCanceled;
     return data;
   }

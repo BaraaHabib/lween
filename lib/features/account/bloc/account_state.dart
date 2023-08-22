@@ -149,6 +149,31 @@ class CheckCodeError extends CheckCodeState {
 }
 //#endregion
 
+//#region Update profile
+abstract class UpdateProfileState extends AccountState {
+  const UpdateProfileState({String? message}) : super(message: message);
+}
+
+class UpdateProfileLoading extends UpdateProfileState {
+  @override
+  List<Object?> get props => [];
+}
+
+class UpdateProfileLoaded extends UpdateProfileState {
+  const UpdateProfileLoaded({this.newImageRemoteUrl});
+  final String? newImageRemoteUrl;
+  @override
+  List<Object> get props => [];
+}
+
+class UpdateProfileError extends UpdateProfileState {
+  const UpdateProfileError(String message) : super(message: message);
+
+  @override
+  List<Object?> get props => [message];
+}
+//#endregion
+
 //#region enter forgot password
 abstract class EnterForgotPasswordState extends AccountState {
   const EnterForgotPasswordState({String? message}) : super(message: message);

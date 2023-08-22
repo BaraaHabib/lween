@@ -91,6 +91,7 @@
   "reservationHolder": "اسم صاحب الحجز",
   "vehicleNumber": "رقم الباص",
   "paymentStatus": "حالة الدفع",
+  "bookingStatus": "حالة الحجز",
   "waitingPaymentInCompanyCenter": "بانتظار الدفع ضمن مركز الشركة",
   "payedInCenter": "تم الدفع ضمن المركز",
   "payedWithValue": "payed with {value}",
@@ -133,5 +134,10 @@
   "favoriteCompanies": "شركات النقل المفضلة",
   "helpAndSupport": "المساعدة والدعم",
   "orders": "طلبات",
-  "browseCompanies": "استعرض الشركات"
+  "browseCompanies": "استعرض الشركات",
+  "editProfile": "تعديل الحساب",
+  "informationUpdatedSuccessfully": "تم تعديل المعلومات بنجاح",
+  "camera": "الكاميرا",
+  "gallery": "معرض الصور",
+  "youHaveNoPreviousReservations": "لا يوجد لديك حجوزات سابقة!"
 }

@@ -13,6 +13,7 @@ class EmptyWidget extends StatelessWidget {
       this.onAction,
       this.topMargin,
       this.imageAssetPath,
+      this.fullMessage,
       })
       : super(key: key);
   final String? entity;
@@ -20,6 +21,7 @@ class EmptyWidget extends StatelessWidget {
   final Function()? onAction;
   final double? topMargin;
   final String? imageAssetPath;
+  final String? fullMessage;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +42,7 @@ class EmptyWidget extends StatelessWidget {
             ),
           // 10.vSpace,
           Text(
-            S.of(context).sorryThereAreNoEntityYet(entity ?? ''),
+            fullMessage ?? S.of(context).sorryThereAreNoEntityYet(entity ?? ''),
             style: Theme.of(context).textTheme.headlineLarge,
             textAlign: TextAlign.center,
           ),

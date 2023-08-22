@@ -4,17 +4,19 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lween/core/configurations/app_configuration.dart';
 import 'package:lween/core/features/entities/shared/authenticate.dart';
 import 'package:lween/core/features/params/params_model.dart';
 import 'package:lween/core/messages/toast.dart';
 import 'package:lween/core/navigation/logger.dart';
+import 'package:lween/core/services/files/file_manager.dart';
 import 'package:lween/features/account/models/profile_entity.dart';
 import 'package:lween/features/account/models/register_entity.dart';
 import 'package:lween/features/account/params/change_password_params.dart';
 import 'package:lween/features/account/params/check_code_params.dart';
+import 'package:lween/features/account/params/edit_profile_params.dart';
 import 'package:lween/features/account/params/enter_forgot_password_params.dart';
 import 'package:lween/features/account/params/forget_password_params.dart';
 import 'package:lween/features/account/params/login_params.dart';
@@ -44,6 +46,7 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
     on<ResendCodeEvent>(_resendVerifyCodeCallback);
     on<ForgetPasswordEvent>(_forgetPasswordEventCallback);
     on<GetProfileEvent>(_getProfileEventCallback);
+    on<UpdateProfileEvent>(_updateProfileEventCallback);
     on<ChangePasswordEvent>(
             (event, emit) async {
           emit(ChangePasswordLoading());
@@ -156,8 +159,8 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
     ));
   }
 
-  Future<FutureOr<void>> _getProfileEventCallback(GetProfileEvent event, Emitter<AccountState> emit) async {
-
+  Future<FutureOr<void>> _getProfileEventCallback(GetProfileEvent event,
+      Emitter<AccountState> emit) async {
     emit(GetProfileLoading());
     var res = await accountRepo.getProfile();
     emit(res.fold(
@@ -165,6 +168,30 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
           (r) => GetProfileLoaded(r,),
     ));
   }
+
+  Future<FutureOr<void>> _updateProfileEventCallback(UpdateProfileEvent event,
+      Emitter<AccountState> emit) async {
+    emit(UpdateProfileLoading());
+    String? newImageRemoteUrl;
+    if(event.newImagePath != null) {
+      final uploadFileRes = await sl<FileManager>().uploadFile(
+        event.newImagePath!, UploadFileType.profile.apiValue,);
+      newImageRemoteUrl = uploadFileRes.fold((l) => null, (r) => r.url,);
+    }
+    var res = await accountRepo.updateProfile(
+      UpdateProfileParams(UpdateProfileParamsBody(
+        name: event.name,
+        imageUrl: newImageRemoteUrl ?? event.imageUrl,
+        cityId: event.cityId,
+        ),
+      ),
+    );
+    emit(res.fold(
+          (l) => UpdateProfileError(l.errorMessage,),
+          (r) => UpdateProfileLoaded(newImageRemoteUrl: newImageRemoteUrl,),
+    ));
+  }
+
   bool buildWhen(AccountState previous, AccountState current) {
     return current is VerifyAccountState || current is ResendCodeState;
   }

@@ -95,3 +95,30 @@ class GetProfileEvent extends AccountEvent {
   @override
   List<Object?> get props => [];
 }
+
+class UpdateProfileEvent extends AccountEvent {
+  const UpdateProfileEvent({
+    required this.name,
+    this.imageUrl,
+    this.newImagePath,
+    required this.cityId,
+  });
+
+  final String name;
+  final String? newImagePath;
+  final String? imageUrl;
+  final int cityId;
+
+  @override
+  List<Object?> get props => [name,newImagePath,imageUrl,cityId];
+}
+
+class UpdateProfilePictureEvent extends AccountEvent {
+  const UpdateProfilePictureEvent(this.path,);
+
+  final String path;
+
+  @override
+  List<Object?> get props => [path,];
+}
+

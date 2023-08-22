@@ -178,6 +178,7 @@ class Assets {
 
   static const calendarSVG = 'assets/icons/SVG/calendar.svg';
   static const clockSVG = 'assets/icons/SVG/clock.svg';
+  static const cameraSVG = 'assets/icons/SVG/camera.svg';
 
   static const busBgPNG = 'assets/images/bus_bg.png';
 
@@ -206,7 +207,7 @@ class Assets {
   static const lightModeIconSVG = 'assets/account/SVG/ic_brightness_high_24px.svg';
   static const accountSettingsPNG = 'assets/account/PNG/configuration.png';
   static const favouriteAccountPNG = 'assets/account/PNG/favourite.png';
-  static const avatarPlaceHolderPNG = 'assets/account/PNG/avatar_placeholder.png';
+  static const avatarPlaceHolderSVG = 'assets/account/SVG/avatar_placeholder.svg';
   static const editAccountSVG = 'assets/account/SVG/fi_6830003.svg';
   static const previousTripsIconPNG = 'assets/account/PNG/history.png';
   static const rewardIconSVG = 'assets/account/SVG/reward 1.svg';

@@ -5,6 +5,7 @@ import 'package:lween/features/account/screens/account_settings/account_settings
 import 'package:lween/features/account/screens/login_screen.dart';
 import 'package:lween/features/account/screens/reset_password_screen.dart';
 import 'package:lween/features/account/screens/register_screen.dart';
+import 'package:lween/features/account/screens/update_profile/update_profile_screen.dart';
 import 'package:lween/features/account/screens/verify_code_screen.dart';
 import 'package:lween/features/home/main_screen.dart';
 import 'package:lween/features/home/screens/home/home_screen.dart';
@@ -270,6 +271,10 @@ class AppRouter extends _$AppRouter {
     CustomRoute(
       transitionsBuilder: TransitionsBuilders.fadeIn,
       page: CompaniesScreenRoute.page,
+    ),
+    CustomRoute(
+      transitionsBuilder: TransitionsBuilders.fadeIn,
+      page: UpdateProfileScreenRoute.page,
     ),
   ];
 

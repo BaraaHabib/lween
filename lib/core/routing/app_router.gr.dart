@@ -70,6 +70,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const MainScreen(),
       );
     },
+    UpdateProfileScreenRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const UpdateProfileScreen(),
+      );
+    },
     ResetPasswordScreenRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -400,6 +406,20 @@ class MainScreenRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'MainScreenRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [UpdateProfileScreen]
+class UpdateProfileScreenRoute extends PageRouteInfo<void> {
+  const UpdateProfileScreenRoute({List<PageRouteInfo>? children})
+      : super(
+          UpdateProfileScreenRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'UpdateProfileScreenRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

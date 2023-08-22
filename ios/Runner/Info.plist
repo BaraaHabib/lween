@@ -30,6 +30,10 @@
 	<string>Main</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>App need access to storage in order to save files</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>App need access to images in order to puck images</string>
+	<key>NSCameraUsageDescription</key>
+	<string>App need access to camera in order to take pictures</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

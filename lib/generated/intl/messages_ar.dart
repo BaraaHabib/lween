@@ -52,8 +52,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("الأيام المتوفرة"),
         "bemoBank": MessageLookupByLibrary.simpleMessage("بنك بيمو"),
         "bookATrip": MessageLookupByLibrary.simpleMessage("حجز رحلة"),
+        "bookingStatus": MessageLookupByLibrary.simpleMessage("حالة الحجز"),
         "browseCompanies":
             MessageLookupByLibrary.simpleMessage("استعرض الشركات"),
+        "camera": MessageLookupByLibrary.simpleMessage("الكاميرا"),
         "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
         "cancelOrder": MessageLookupByLibrary.simpleMessage("إلغاء الطلب"),
         "cashMobile": MessageLookupByLibrary.simpleMessage("كاش موبايل"),
@@ -90,6 +92,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "description": MessageLookupByLibrary.simpleMessage("المعلومات"),
         "destination": MessageLookupByLibrary.simpleMessage("الوجهة"),
         "eCash": MessageLookupByLibrary.simpleMessage("إي كاش"),
+        "editProfile": MessageLookupByLibrary.simpleMessage("تعديل الحساب"),
         "enter": MessageLookupByLibrary.simpleMessage("دخول"),
         "enterFullNameForSeats": MessageLookupByLibrary.simpleMessage(
             "قم بإدخال الأسماء الثلاثية للمسافرين في المقاعد المحجوزة"),
@@ -110,10 +113,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("نسيت كلمة المرور؟"),
         "from": MessageLookupByLibrary.simpleMessage("من"),
         "fullName": MessageLookupByLibrary.simpleMessage("الاسم الثلاثي"),
+        "gallery": MessageLookupByLibrary.simpleMessage("معرض الصور"),
         "helpAndSupport":
             MessageLookupByLibrary.simpleMessage("المساعدة والدعم"),
         "home": MessageLookupByLibrary.simpleMessage("الرئيسية"),
         "importantWarning": MessageLookupByLibrary.simpleMessage("ملاحظة هامة"),
+        "informationUpdatedSuccessfully":
+            MessageLookupByLibrary.simpleMessage("تم تعديل المعلومات بنجاح"),
         "invalidphonenumber":
             MessageLookupByLibrary.simpleMessage("خطأ في رقم الهاتف"),
         "language": MessageLookupByLibrary.simpleMessage("اللغة"),
@@ -228,6 +234,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "yes": MessageLookupByLibrary.simpleMessage("نعم"),
         "yesterday": MessageLookupByLibrary.simpleMessage("البارحة"),
         "youHaveDiscount": m6,
+        "youHaveNoPreviousReservations":
+            MessageLookupByLibrary.simpleMessage("لا يوجد لديك حجوزات سابقة!"),
         "youMustHaveCashAccount": MessageLookupByLibrary.simpleMessage(
             "يجب أن يكون لديك حساب كاش لدى مزود الخدمة الذي تريد الدفع من خلاله")
       };

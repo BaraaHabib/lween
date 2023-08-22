@@ -10,6 +10,7 @@ import 'package:lween/features/account/models/profile_entity.dart';
 import 'package:lween/features/account/models/register_entity.dart';
 import 'package:lween/features/account/models/verify_account_entity.dart';
 import 'package:lween/features/account/params/check_code_params.dart';
+import 'package:lween/features/account/params/edit_profile_params.dart';
 import 'package:lween/features/account/params/enter_forgot_password_params.dart';
 import 'package:lween/features/account/params/forget_password_params.dart';
 import 'package:lween/features/account/params/get_profile_params.dart';
@@ -136,6 +137,17 @@ class AccountRepository extends IAccountRepository {
       var res = await remoteDataSource.getRemoteData(model ?? GetProfileParams(),);
       Entity<ProfileEntity> data = Entity<ProfileEntity>.fromJson(res,parser: ProfileEntity.fromJson,);
       profile = data.content;
+      return Right(data.content!);
+    } on AppException catch (e) {
+      return Left(ErrorEntity.fromAppException(e));
+    }
+  }
+
+  @override
+  Future<Either<ErrorEntity, EmptyEntity>> updateProfile(UpdateProfileParams model) async {
+    try {
+      var res = await remoteDataSource.getRemoteData(model,);
+      Entity<EmptyEntity> data = Entity<EmptyEntity>.fromJson(res,parser: EmptyEntity.fromJson,);
       return Right(data.content!);
     } on AppException catch (e) {
       return Left(ErrorEntity.fromAppException(e));

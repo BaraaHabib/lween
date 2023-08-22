@@ -51,8 +51,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "availableDays": MessageLookupByLibrary.simpleMessage("Available days"),
         "bemoBank": MessageLookupByLibrary.simpleMessage("Bemo Bank"),
         "bookATrip": MessageLookupByLibrary.simpleMessage("Book a trip"),
+        "bookingStatus": MessageLookupByLibrary.simpleMessage("Booking status"),
         "browseCompanies":
             MessageLookupByLibrary.simpleMessage("Browse companies"),
+        "camera": MessageLookupByLibrary.simpleMessage("Camera"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "cancelOrder": MessageLookupByLibrary.simpleMessage("Cancel order"),
         "cashMobile": MessageLookupByLibrary.simpleMessage("Cash Mobile"),
@@ -92,6 +94,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "description": MessageLookupByLibrary.simpleMessage("Description"),
         "destination": MessageLookupByLibrary.simpleMessage("To"),
         "eCash": MessageLookupByLibrary.simpleMessage("E-Cash"),
+        "editProfile": MessageLookupByLibrary.simpleMessage("Edit profile"),
         "enter": MessageLookupByLibrary.simpleMessage("Enter"),
         "enterFullNameForSeats": MessageLookupByLibrary.simpleMessage(
             "Enter full names of the passengers in the reserved seats"),
@@ -112,11 +115,14 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Forgot password"),
         "from": MessageLookupByLibrary.simpleMessage("from"),
         "fullName": MessageLookupByLibrary.simpleMessage("full name"),
+        "gallery": MessageLookupByLibrary.simpleMessage("Gallery"),
         "helpAndSupport":
             MessageLookupByLibrary.simpleMessage("Help and support"),
         "home": MessageLookupByLibrary.simpleMessage("Home"),
         "importantWarning":
             MessageLookupByLibrary.simpleMessage("Important Notice"),
+        "informationUpdatedSuccessfully": MessageLookupByLibrary.simpleMessage(
+            "Profile updated successfully"),
         "invalidphonenumber":
             MessageLookupByLibrary.simpleMessage("invalidPhoneNumber"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
@@ -229,6 +235,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "yes": MessageLookupByLibrary.simpleMessage("Yes"),
         "yesterday": MessageLookupByLibrary.simpleMessage("Yesterday"),
         "youHaveDiscount": m6,
+        "youHaveNoPreviousReservations": MessageLookupByLibrary.simpleMessage(
+            "You have no previous reservations"),
         "youMustHaveCashAccount": MessageLookupByLibrary.simpleMessage(
             "You must have a cash account with the service provider you want to pay through")
       };
