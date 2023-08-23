@@ -20,6 +20,7 @@ import 'package:lween/core/widgets/error_widget.dart';
 import 'package:lween/core/widgets/waiting_widget.dart';
 import 'package:lween/features/home/bloc/home_bloc.dart';
 import 'package:lween/features/home/screens/home/home_screen_controller.dart';
+import 'package:lween/features/home/screens/home/widgets/upcoming_travels.dart';
 import 'package:lween/features/orders/widgets/prev_orders.dart';
 import 'package:lween/features/home/screens/home/widgets/slider.dart';
 import 'package:lween/features/home/screens/home/widgets/transportation_entities_list.dart';
@@ -68,17 +69,18 @@ class HomeScreen extends HookWidget {
                           child: ListView(
                             children: [
                               // 5.vSpace,
+                              if(state.homeEntity.topCompanies
+                                  .isNotEmpty)
+                                TopCompaniesList(
+                                  state.homeEntity.topCompanies,),
+                              // 5.vSpace,
                               if(state.homeEntity.advertisements.isNotEmpty)
                                 SizedBox(
                                   width:1.sw,
                                   child: HomeSlider(state.homeEntity.advertisements,),
                                 ),
-                              5.vSpace,
-                              if(state.homeEntity.topCompanies
-                                  .isNotEmpty)
-                                TopCompaniesList(
-                                  state.homeEntity.topCompanies,),
                               const MyPreviousOrders(),
+                              const UpcomingTravelsList(),
                               // Padding(
                               //   padding: EdgeInsets.symmetric(horizontal: 24.wx,),
                               //   child: AppGradientTextButton(

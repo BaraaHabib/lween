@@ -221,6 +221,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "tripTime": MessageLookupByLibrary.simpleMessage("Trip time"),
         "trips": MessageLookupByLibrary.simpleMessage("Trips"),
         "tripsCount": MessageLookupByLibrary.simpleMessage("Trips count"),
+        "upcomingTrips": MessageLookupByLibrary.simpleMessage("Upcoming trips"),
         "vehicleNumber": MessageLookupByLibrary.simpleMessage("Vehicle number"),
         "verificationCode":
             MessageLookupByLibrary.simpleMessage("Verification code"),
@@ -235,6 +236,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "yes": MessageLookupByLibrary.simpleMessage("Yes"),
         "yesterday": MessageLookupByLibrary.simpleMessage("Yesterday"),
         "youHaveDiscount": m6,
+        "youHaveNoFavoriteCompanies": MessageLookupByLibrary.simpleMessage(
+            "You do not have any companies in your favorites list!"),
         "youHaveNoPreviousReservations": MessageLookupByLibrary.simpleMessage(
             "You have no previous reservations"),
         "youMustHaveCashAccount": MessageLookupByLibrary.simpleMessage(

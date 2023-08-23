@@ -22,6 +22,7 @@ import 'package:lween/features/account/models/profile_entity.dart';
 import 'package:lween/features/account/params/edit_profile_params.dart';
 import 'package:lween/generated/l10n.dart';
 import 'package:lween/injection_container.dart';
+import 'package:lween/main.dart';
 import 'package:url_launcher/url_launcher.dart';
 class AccountController extends Controller {
   AccountController(this.profile);
@@ -39,11 +40,11 @@ class AccountController extends Controller {
   }
 
   bool listenWhen(AccountState previous, AccountState current) {
-    return current is GetProfileLoading;
+    return current is GetProfileState;
   }
 
   bool buildWhen(AccountState previous, AccountState current) {
-    return current is GetProfileLoading;
+    return current is GetProfileState;
   }
 
   void goToMyOrders(BuildContext context) {
@@ -126,13 +127,30 @@ class AccountController extends Controller {
       ),)
       .toList();
 
+  bool get _valuesChanged{
+    final newName = formKey.currentState?.getRawValue('name');
+    final newCityId = selectedCity!.id;
+    if(
+    newName == profile.name &&
+        newCityId == profile.city?.id &&
+        !isImageSelected.value
+    ){
+      return false;
+    }
+    return true;
+}
   save(BuildContext context) {
     if (formKey.currentState?.saveAndValidate() ?? false) {
+      if(!_valuesChanged){
+        NavigationService.of(context).pop();
+        return;
+      }
       FocusManager.instance.primaryFocus?.unfocus();
-      AccountBloc.instance.add(UpdateProfileEvent(
-        cityId: selectedCity!.id,
+      final newName = formKey.currentState?.getRawValue('name');
+      final newCityId = selectedCity!.id;AccountBloc.instance.add(UpdateProfileEvent(
+        cityId: newCityId,
         imageUrl: profile.imageUrl,
-        name: formKey.currentState?.getRawValue('name'),
+        name: newName,
         newImagePath: _newImagePath,
       ),);
     }
@@ -154,19 +172,25 @@ class AccountController extends Controller {
       if(state.newImageRemoteUrl != null){
         profile.imageUrl = state.newImageRemoteUrl;
       }
-      newImagePath = null;
+      localySelectedImage = null;
       AppToast(S.of(context).informationUpdatedSuccessfully).show();
+      NavigationService
+          .of(context)
+          .pop();
     }
     else if (state is UpdateProfileError) {
       AppToast(state.message ?? '').show();
+      if(state.uploadProfileError){
+        localySelectedImage = null;
+      }
     }
   //#endregion
   }
 
   //#region select image
   String? _newImagePath;
-  String? get newImagePath => _newImagePath;
-  set newImagePath(String? newImagePath){
+  String? get localySelectedImage => _newImagePath;
+  set localySelectedImage(String? newImagePath){
     _newImagePath = newImagePath;
     if(_newImagePath != null){
       isImageSelected.value = true;
@@ -177,13 +201,13 @@ class AccountController extends Controller {
   }
 
   resetSelectedImage() {
-    newImagePath = null;
+    localySelectedImage = null;
   }
 
   ValueNotifier<bool> isImageSelected = ValueNotifier<bool>(false,);
 
   changeProfileImage(BuildContext context) async {
-    newImagePath = await AppImagePicker.pickImage(context);
+    localySelectedImage = await AppImagePicker.pickImage(context);
   }
   //#endregion
 

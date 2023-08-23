@@ -13,7 +13,8 @@ class AppTextWidget extends StatelessWidget {
         this.maxLines,
         this.textDirection,
         this.overflow,
-        this.textAlign
+        this.textAlign,
+        this.strutStyle
       }) : super(key: key);
 
   final TextStyle? style;
@@ -22,6 +23,7 @@ class AppTextWidget extends StatelessWidget {
   final TextOverflow? overflow;
   final String text;
   final TextAlign? textAlign;
+  final StrutStyle? strutStyle;
   @override
   Widget build(BuildContext context) {
     return Text(
@@ -31,7 +33,7 @@ class AppTextWidget extends StatelessWidget {
       // textDirection: textDirection ?? text.preferredDirection,
       overflow: overflow ?? TextOverflow.ellipsis,
       textAlign: textAlign,
-      strutStyle: StrutStyle(
+      strutStyle: strutStyle ?? StrutStyle(
         // fontFamily: 'FontName',
         // forceStrutHeight: true,
         fontSize: style?.fontSize,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lween/core/configurations/styles/styles.dart';
 import 'package:lween/core/extended/numbers_ext.dart';
 import 'package:lween/core/widgets/app_button.dart';
 import 'package:lween/core/widgets/app_image.dart';
@@ -48,9 +49,31 @@ class EmptyWidget extends StatelessWidget {
           ),
           25.vSpace,
           if (onAction != null && actionTitle != null)
-            AppButton(
-              onTap: onAction!,
-              content: Text(actionTitle!),
+            Center(
+              child: Container(
+                decoration: BoxDecoration(
+                  // color: color,
+                  gradient: const LinearGradient(
+                    colors: [
+                      Styles.buttonSecondaryColor1,
+                      Styles.buttonSecondaryColor2,
+                    ],
+                  ),
+                  borderRadius: Styles.buttonBorderRadius,
+                ),
+                child: GestureDetector(
+                  onTap: onAction!,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 30.wx,vertical: 10.hx),
+                    child: Text(
+                      actionTitle!,
+                      style: const TextStyle(
+                        color:Styles.buttonTextColor,
+                      ),
+                    ),
+                  )
+                ),
+              ),
             ),
         ],
       ),

@@ -167,7 +167,9 @@ class UpdateProfileLoaded extends UpdateProfileState {
 }
 
 class UpdateProfileError extends UpdateProfileState {
-  const UpdateProfileError(String message) : super(message: message);
+  const UpdateProfileError(String message,{this.uploadProfileError = false}) : super(message: message);
+
+  final bool uploadProfileError;
 
   @override
   List<Object?> get props => [message];

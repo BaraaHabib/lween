@@ -34,6 +34,13 @@ class GetTravelsEvent extends OrdersEvent {
   @override
   List<Object?> get props => [];
 }
+class GetUpcomingTravelsEvent extends OrdersEvent {
+  const GetUpcomingTravelsEvent({required this.cityId,});
+  final int cityId;
+
+  @override
+  List<Object?> get props => [];
+}
 class GetFilteredTravelsEvent extends OrdersEvent {
   const GetFilteredTravelsEvent({
      this.date,

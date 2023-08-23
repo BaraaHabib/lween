@@ -29,12 +29,7 @@ class UpdateProfileScreen extends HookWidget {
   const UpdateProfileScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    final fieldSeparator = 20.vSpace;
-    final controller = Controller.getInstance(
-      instance: AccountController(
-        AccountRepository.profile ?? ProfileEntity(),
-      ),
-    );
+    final AccountController controller = Controller.getInstance();
 
     useEffect(() {
       controller.resetSelectedImage();
@@ -47,13 +42,14 @@ class UpdateProfileScreen extends HookWidget {
     final cities = useState<List<DropdownItemDataModel>?>(
         controller.countryCities,
     );
-    return BlocBuilder<AccountBloc,AccountState>(
+    return BlocConsumer<AccountBloc,AccountState>(
         bloc: sl<AccountBloc>(),
+        listener: controller.updateProfileListener,
+        buildWhen: controller.updateProfileBuildWhen,
         builder: (context,state) {
           return IgnorePointer(
             ignoring: state is UpdateProfileLoading,
             child: AppScaffold(
-              backgroundImage: Assets.logInBackgroundPNG(context),
               title: S.of(context).editProfile,
               child: FormBuilder(
                 key: controller.formKey,
@@ -88,7 +84,7 @@ class UpdateProfileScreen extends HookWidget {
                                       ValueListenableBuilder(
                                         valueListenable: controller.isImageSelected,
                                         builder: (ctx, isImageSelected, child) => AppImage(
-                                          path: isImageSelected ? controller.newImagePath : controller.profile.imageUrl,
+                                          path: isImageSelected ? controller.localySelectedImage : controller.profile.imageUrl,
                                           errorImage: Assets.avatarPlaceHolderSVG,
                                           type: isImageSelected ? ImageType.file :  ImageType.cachedNetwork,
                                           width: 70.rx,
@@ -194,22 +190,15 @@ class UpdateProfileScreen extends HookWidget {
                           ),
                         ],
                       ),
-                      170.vSpace,
+                      210.vSpace,
                       // const Spacer(),
-                      BlocConsumer<AccountBloc, AccountState>(
-                        bloc: sl<AccountBloc>(),
-                        listener: controller.updateProfileListener,
-                        buildWhen: controller.updateProfileBuildWhen,
-                        builder: (ctx, cs) {
-                          return AppGradientTextButton(
-                            gradientType: AppTextButtonGradientType.primary,
-                            isLoading: cs is UpdateProfileLoading,
-                            onTap: () => controller.save(context),
-                            content: S
-                                .of(context)
-                                .editProfile,
-                          );
-                        },
+                      AppGradientTextButton(
+                        gradientType: AppTextButtonGradientType.primary,
+                        isLoading: state is UpdateProfileLoading,
+                        onTap: () => controller.save(context),
+                        content: S
+                            .of(context)
+                            .editProfile,
                       ),
                       31.vSpace,
 

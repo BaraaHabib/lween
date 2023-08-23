@@ -18,10 +18,12 @@ import 'package:lween/features/orders/params/daily_travel_params.dart';
 import 'package:lween/features/orders/params/my_orders_params.dart';
 import 'package:lween/features/orders/params/request_payment_params.dart';
 import 'package:lween/features/orders/params/resend_payment_code_params.dart';
+import 'package:lween/features/orders/params/upcoming_travel_params.dart';
 
 abstract class IOrdersRepository extends IRepository {
   Future<Either<ErrorEntity, OrdersEntity>> getMyOrders(MyOrdersParams model);
   Future<Either<ErrorEntity, TravelsEntity>> getTravels(TravelParams model);
+  Future<Either<ErrorEntity, TravelsEntity>> getUpcomingTravels(GetUpcomingTravelsParams model);
   Future<Either<ErrorEntity, OrderEntity>> createOrder(CreateOrderParams model);
   Future<Either<ErrorEntity, EmptyEntity>> cancelOrder(CancelOrderParams model);
   Future<Either<ErrorEntity, VoucherEntity>> checkVoucher(CheckVoucherParams model);

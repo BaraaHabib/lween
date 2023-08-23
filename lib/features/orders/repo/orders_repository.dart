@@ -15,6 +15,7 @@ import 'package:lween/features/orders/params/daily_travel_params.dart';
 import 'package:lween/features/orders/params/my_orders_params.dart';
 import 'package:lween/features/orders/params/request_payment_params.dart';
 import 'package:lween/features/orders/params/resend_payment_code_params.dart';
+import 'package:lween/features/orders/params/upcoming_travel_params.dart';
 import 'package:lween/features/orders/repo/iorders_repository.dart';
 import '../../../../core/exceptions/app_exceptions.dart';
 
@@ -122,6 +123,18 @@ class OrdersRepository extends IOrdersRepository {
       var res = await remoteDataSource.getRemoteData(model,);
       final data = Entity<CompletePaymentEntity>.fromJson(
         res, parser: CompletePaymentEntity.fromJson,);
+      return Right(data.content!);
+    } on AppException catch (e) {
+      return Left(ErrorEntity.fromAppException(e));
+    }
+  }
+
+  @override
+  Future<Either<ErrorEntity, TravelsEntity>> getUpcomingTravels(GetUpcomingTravelsParams model) async {
+    try {
+      var res = await remoteDataSource.getRemoteData(model,);
+      final data = Entity<TravelsEntity>.fromJson(
+        res, parser: TravelsEntity.fromJson,);
       return Right(data.content!);
     } on AppException catch (e) {
       return Left(ErrorEntity.fromAppException(e));

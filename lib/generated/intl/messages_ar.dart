@@ -221,6 +221,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "tripTime": MessageLookupByLibrary.simpleMessage("وقت الرحلة"),
         "trips": MessageLookupByLibrary.simpleMessage("الرحلات"),
         "tripsCount": MessageLookupByLibrary.simpleMessage("عدد الرحلات"),
+        "upcomingTrips": MessageLookupByLibrary.simpleMessage("رحلات قادمة"),
         "vehicleNumber": MessageLookupByLibrary.simpleMessage("رقم الباص"),
         "verificationCode": MessageLookupByLibrary.simpleMessage("رمز التحقق"),
         "verify": MessageLookupByLibrary.simpleMessage("تأكيد"),
@@ -234,6 +235,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "yes": MessageLookupByLibrary.simpleMessage("نعم"),
         "yesterday": MessageLookupByLibrary.simpleMessage("البارحة"),
         "youHaveDiscount": m6,
+        "youHaveNoFavoriteCompanies": MessageLookupByLibrary.simpleMessage(
+            "ليس لديك أي شركات ضمن قائمة المفضلة!"),
         "youHaveNoPreviousReservations":
             MessageLookupByLibrary.simpleMessage("لا يوجد لديك حجوزات سابقة!"),
         "youMustHaveCashAccount": MessageLookupByLibrary.simpleMessage(

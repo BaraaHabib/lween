@@ -39,7 +39,7 @@ class OrderEntity extends ContentModel {
   int? status;
   LiteCompany? transportationCompany;
   String? travelTime;
-  String? orderStateText;
+  String? finalStateText;
   LiteEntity? fromCity;
   LiteEntity? toCity;
   bool? canBeCanceled;
@@ -185,7 +185,7 @@ class OrderEntity extends ContentModel {
         ? LiteEntity.fromJson(json['toCity'])
         : null;
     travelTime = json['travelTime'];
-    orderStateText = json['orderStateText'];
+    finalStateText = json['finalStateText'];
     canBeCanceled = json['canBeCanceled'];
   }
 
@@ -207,7 +207,7 @@ class OrderEntity extends ContentModel {
       data['transportationEntity'] = transportationCompany?.toJson();
     }
     data['travelTime'] = travelTime;
-    data['orderStateText'] = orderStateText;
+    data['finalStateText'] = finalStateText;
     data['canBeCanceled'] = canBeCanceled;
     return data;
   }

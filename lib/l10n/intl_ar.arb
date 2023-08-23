@@ -139,5 +139,7 @@
   "informationUpdatedSuccessfully": "تم تعديل المعلومات بنجاح",
   "camera": "الكاميرا",
   "gallery": "معرض الصور",
-  "youHaveNoPreviousReservations": "لا يوجد لديك حجوزات سابقة!"
+  "youHaveNoPreviousReservations": "لا يوجد لديك حجوزات سابقة!",
+  "youHaveNoFavoriteCompanies": "ليس لديك أي شركات ضمن قائمة المفضلة!",
+  "upcomingTrips": "رحلات قادمة"
 }

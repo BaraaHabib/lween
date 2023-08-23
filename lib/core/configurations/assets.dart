@@ -92,12 +92,15 @@ class Assets {
   static const noNotificationsSVG = 'assets/icons/SVG/ic_no_notification.svg';
 
   static Widget arrowBackWidget(BuildContext context, {Color? color,bool reverse = false}) {
-    double signe = 0;
+    double angle = 0;
+    if(!context.isDirectionRTL(context)){
+      angle = pi;
+    }
     if(reverse){
-      signe = pi;
+      angle *= -1;
     }
     return Transform.rotate(
-        angle: signe + (context.isDirectionRTL(context) ? 0 : pi.sign),
+        angle: angle,// angle * (context.isDirectionRTL(context) ? 0 : pi.sign),
         child: SvgPicture.asset(
             arrowBack,
           colorFilter: color == null ?
@@ -179,8 +182,10 @@ class Assets {
   static const calendarSVG = 'assets/icons/SVG/calendar.svg';
   static const clockSVG = 'assets/icons/SVG/clock.svg';
   static const cameraSVG = 'assets/icons/SVG/camera.svg';
+  static const upcomingTravelClockSVG = 'assets/icons/SVG/dark_clock.svg';
 
   static const busBgPNG = 'assets/images/bus_bg.png';
+  static const upcomingTravelBgPNG = 'assets/images/upcoming_travel_bg.png';
 
 
   /// trip gifs

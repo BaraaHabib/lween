@@ -27,6 +27,7 @@ class AppButton extends StatelessWidget {
     return Center(
       child: ElevatedButton(
         onPressed: onTap,
+
         style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
           backgroundColor: MaterialStateProperty.all(color),
           side: borderColor == null

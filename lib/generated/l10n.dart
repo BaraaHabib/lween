@@ -1460,6 +1460,26 @@ class S {
       args: [],
     );
   }
+
+  /// `You do not have any companies in your favorites list!`
+  String get youHaveNoFavoriteCompanies {
+    return Intl.message(
+      'You do not have any companies in your favorites list!',
+      name: 'youHaveNoFavoriteCompanies',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Upcoming trips`
+  String get upcomingTrips {
+    return Intl.message(
+      'Upcoming trips',
+      name: 'upcomingTrips',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

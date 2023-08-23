@@ -266,7 +266,7 @@ class OrderDetailsScreen extends HookWidget {
                                             15.hSpace,
                                             Flexible(
                                               child: AppTextWidget(
-                                                order.orderStateText ?? '',
+                                                order.finalStateText ?? '',
                                                 textAlign: TextAlign.center,
                                                 maxLines: 3,
                                                 style: context.textTheme.headlineMedium?.copyWith(

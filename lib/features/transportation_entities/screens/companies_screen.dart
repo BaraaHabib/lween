@@ -68,8 +68,8 @@ class CompaniesScreen extends HookWidget {
                   }
                 else if (controller.companies.isEmpty) {
                   return EmptyWidget(
-                    entity: S.of(context).favoriteCompanies,
                     actionTitle: S.of(context).browseCompanies,
+                    fullMessage: S.of(context).youHaveNoFavoriteCompanies,
                     onAction: () {
                       NavigationService.of(context).pop();
                       NavigationService.of(context).navigateTo(

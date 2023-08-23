@@ -110,6 +110,43 @@ class CompanyTravelsError extends CompanyTravelsState {
 }
 //#endregion company travels
 
+//#region upcoming travels
+abstract class GetUpcomingTravelsState extends OrdersState {
+  const GetUpcomingTravelsState({
+    String? message,
+  }) : super(message: message);
+
+}
+
+class GetUpcomingTravelsLoading extends GetUpcomingTravelsState {
+  @override
+  List<Object?> get props => [];
+
+  const GetUpcomingTravelsLoading() ;
+}
+
+class GetUpcomingTravelsLoaded extends GetUpcomingTravelsState {
+  const GetUpcomingTravelsLoaded({
+    required this.travelsResult,
+  });
+  final TravelsEntity travelsResult;
+
+  @override
+  List<Object> get props => [travelsResult];
+}
+
+class GetUpcomingTravelsError extends GetUpcomingTravelsState {
+
+
+  const GetUpcomingTravelsError(
+      String message,
+      ) : super(message: message,);
+
+  @override
+  List<Object?> get props => [message];
+}
+//#endregion company travels
+
 //#region filtered travels
 abstract class CompanyFilteredTravelsState extends OrdersState {
   const CompanyFilteredTravelsState({

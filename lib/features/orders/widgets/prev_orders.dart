@@ -17,6 +17,7 @@ import 'package:lween/core/widgets/app_image.dart';
 import 'package:lween/core/widgets/app_text_widget.dart';
 import 'package:lween/core/widgets/empty_widget.dart';
 import 'package:lween/core/widgets/error_widget.dart';
+import 'package:lween/features/account/repo/account_repository.dart';
 import 'package:lween/features/orders/bloc/orders_bloc.dart';
 import 'package:lween/features/orders/models/orders.dart';
 import 'package:lween/generated/l10n.dart';
@@ -51,7 +52,7 @@ class MyPreviousOrders extends HookWidget {
             return const SizedBox.shrink();
           }
           return Padding(
-            padding: EdgeInsets.only(left: 18.wx,right: 18.wx,top: 20.hx,),
+            padding: EdgeInsets.only(left: 18.wx,right: 18.wx,bottom: 20.hx,),
             child: Column(
               // shrinkWrap: true,
               // physics: const NeverScrollableScrollPhysics(),
@@ -112,4 +113,6 @@ class OrdersController extends Controller{
   getOrders() {
     OrdersBloc.instance.add(const GetLatestOrdersEvent());
   }
+
+
 }

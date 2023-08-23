@@ -139,5 +139,7 @@
   "informationUpdatedSuccessfully": "Profile updated successfully",
   "camera": "Camera",
   "gallery": "Gallery",
-  "youHaveNoPreviousReservations": "You have no previous reservations"
+  "youHaveNoPreviousReservations": "You have no previous reservations",
+  "youHaveNoFavoriteCompanies": "You do not have any companies in your favorites list!",
+  "upcomingTrips": "Upcoming trips"
 }

@@ -173,23 +173,34 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
       Emitter<AccountState> emit) async {
     emit(UpdateProfileLoading());
     String? newImageRemoteUrl;
+    bool imageUploadFail = false;
     if(event.newImagePath != null) {
       final uploadFileRes = await sl<FileManager>().uploadFile(
         event.newImagePath!, UploadFileType.profile.apiValue,);
-      newImageRemoteUrl = uploadFileRes.fold((l) => null, (r) => r.url,);
+
+      if(uploadFileRes.isLeft()){
+        uploadFileRes.fold((l) => emit(UpdateProfileError(l.errorMessage,uploadProfileError: true,)), (r) => null,);
+        imageUploadFail = true;
+      }else{
+        newImageRemoteUrl =
+            uploadFileRes.fold((l) => null, (r) => r.url,);
+      }
     }
-    var res = await accountRepo.updateProfile(
-      UpdateProfileParams(UpdateProfileParamsBody(
-        name: event.name,
-        imageUrl: newImageRemoteUrl ?? event.imageUrl,
-        cityId: event.cityId,
+    if(!imageUploadFail){
+      var res = await accountRepo.updateProfile(
+        UpdateProfileParams(UpdateProfileParamsBody(
+          name: event.name,
+          imageUrl: newImageRemoteUrl ?? event.imageUrl,
+          cityId: event.cityId,
         ),
-      ),
-    );
-    emit(res.fold(
-          (l) => UpdateProfileError(l.errorMessage,),
-          (r) => UpdateProfileLoaded(newImageRemoteUrl: newImageRemoteUrl,),
-    ));
+        ),
+      );
+      emit(res.fold(
+            (l) => UpdateProfileError(l.errorMessage,),
+            (r) => UpdateProfileLoaded(newImageRemoteUrl: newImageRemoteUrl,),
+      ));
+    }
+
   }
 
   bool buildWhen(AccountState previous, AccountState current) {

@@ -17,6 +17,7 @@ import 'package:lween/features/orders/params/daily_travel_params.dart';
 import 'package:lween/features/orders/params/my_orders_params.dart';
 import 'package:lween/features/orders/params/request_payment_params.dart';
 import 'package:lween/features/orders/params/resend_payment_code_params.dart';
+import 'package:lween/features/orders/params/upcoming_travel_params.dart';
 import 'package:lween/features/orders/repo/orders_repository.dart';
 import 'package:lween/injection_container.dart';
 
@@ -33,7 +34,8 @@ class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
     on<GetLatestOrdersEvent>(_latestOrdersEventHandler);
     on<GetOrdersEvent>(_ordersEventHandler);
     on<GetTravelsEvent>(_getTravelsEventHandler);
-    on<GetFilteredTravelsEvent>(_getGetFilteredTravelsEventHandler);
+    on<GetFilteredTravelsEvent>(_getFilteredTravelsEventHandler);
+    on<GetUpcomingTravelsEvent>(_getUpcomingTravelsEventHandler);
     on<CreateOrderEvent>(_createOrderEventHandler);
     on<CheckVoucherEvent>(_checkVoucherEventHandler);
     on<CancelOrderEvent>(_cancelOrderEventHandler);
@@ -85,7 +87,7 @@ class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
     );
   }
 
-  Future<FutureOr<void>> _getGetFilteredTravelsEventHandler(
+  Future<FutureOr<void>> _getFilteredTravelsEventHandler(
       GetFilteredTravelsEvent event, Emitter<OrdersState> emit) async {
     emit(CompanyFilteredTravelsLoading(
       toCity: event.toCity, fromCity: event.fromCity, date: event.date,),);
@@ -195,6 +197,23 @@ class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
     emit(
       res.fold((l) => CompletePaymentError(l.errorMessage),
             (r) => CompletePaymentLoaded(r,),
+      ),
+    );
+  }
+
+  Future<FutureOr<void>> _getUpcomingTravelsEventHandler(GetUpcomingTravelsEvent event, Emitter<OrdersState> emit) async {
+    emit(const GetUpcomingTravelsLoading(),);
+    final res = await sl<OrdersRepository>().getUpcomingTravels(
+      GetUpcomingTravelsParams(
+        cityId: event.cityId,
+      ),
+    );
+    emit(
+      res.fold((l) =>
+          GetUpcomingTravelsError(l.errorMessage),
+            (r) =>
+            GetUpcomingTravelsLoaded(
+              travelsResult: r,),
       ),
     );
   }
