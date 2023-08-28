@@ -28,5 +28,9 @@ abstract class ApiConstants{
   static const getProfile = 'Client/Account/Profile';
   static const editProfile = 'Client/Account/EditProfile';
   static const uploadFile = 'File/Upload';
+  static const changePassword = 'Client/Account/ChangePassword';
+  static const deleteAccount = 'Client/Account/Delete';
+  static const requestChangePhone = 'Client/Account/ChangePhoneNumber';
+  static const confirmChangePhone = 'Client/Account/EnterChangePhoneNumberCode';
 
 }

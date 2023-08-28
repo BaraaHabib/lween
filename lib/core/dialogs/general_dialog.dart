@@ -96,23 +96,20 @@ class GeneralDialog extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               for(DialogAction action in actions ?? [])
-                                AppGradientTextButton(
-                                  onTap: () {
-                                    action.callback.call();
-                                  },
-                                  content: action.text,
-                                  // content: S.of(context).send,
+                                Flexible(
+                                  child: Padding(
+                                    padding: const EdgeInsetsDirectional.only(start: 13,end: 13,),
+                                    child: AppGradientTextButton(
+                                      onTap: () {
+                                        action.callback.call();
+                                      },
+                                      color: action.color,
+                                      withGradiant: action.color == null ? true : false,
+                                      content: action.text,
+                                      // content: S.of(context).send,
+                                    ),
+                                  ),
                                 ),
-                              // AppButton(
-                              //   onTap: () async {
-                              //     // await NavigationService.of(context).pop();
-                              //     action.callback.call();
-                              //   },
-                              //   borderColor: action.borderColor,
-                              //   color: action.color,
-                              //   content: AppTextWidget(action.text,),
-                              //   fixedSize: action.fixedSize,
-                              // ),
                             ],
                           ),]
                         ],

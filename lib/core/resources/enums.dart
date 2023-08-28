@@ -14,7 +14,9 @@ enum PaymentMethod{
   bemo(1,2),
   fatora(1,3),
   eCash(1,4),
-  cash(2,5);
+  cash(2,5),
+  wallet(3,6),
+  ;
 
   const PaymentMethod(this.type,this.paymentProviderEnum);
   final int type;
@@ -22,6 +24,7 @@ enum PaymentMethod{
 
   bool get isByPhoneNumber => this == PaymentMethod.cashMobile;
   bool get isOnlinePayment => this != PaymentMethod.cash;
+  bool get isFromWallet => this == PaymentMethod.wallet;
   bool get isWebView =>
       this == PaymentMethod.bemo ||
       this == PaymentMethod.eCash ||

@@ -96,6 +96,7 @@ class AccountSettingsScreen extends HookWidget {
                       AccountSettingsItemWidget(
                         icon: Assets.changePhoneNumberSVG,
                         title: S.of(context).changePhoneNumber,
+                        onTap: () => controller.changePhone(context,),
                       ),
                     ],
                   ),
@@ -113,12 +114,13 @@ class AccountSettingsScreen extends HookWidget {
                       AccountSettingsItemWidget(
                         icon: Assets.logOutSVG,
                         title: S.of(context).logOut,
-                        onTap: () => AppStateModel.of(context).logOut(),
+                        onTap: () => controller.logOut(context),
                       ),
                       divider,
                       AccountSettingsItemWidget(
                         icon: Assets.deleteAccountSVG,
                         title: S.of(context).deleteAccount,
+                        onTap: () => controller.deleteAccount(context),
                       ),
                       // divider,
                       // AccountItemWidget(

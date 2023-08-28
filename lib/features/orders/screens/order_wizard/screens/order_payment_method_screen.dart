@@ -5,6 +5,7 @@ import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:lween/core/app_state/appstate.dart';
 import 'package:lween/core/configurations/assets.dart';
 import 'package:lween/core/configurations/styles/styles.dart';
 import 'package:lween/core/controller/base_controller.dart';
@@ -35,8 +36,14 @@ class OrderPaymentMethodScreen extends HookWidget {
           .now()
           .millisecondsSinceEpoch
           .toString();
+      controller.baseController?.updateOrder(
+        price: controller.baseController?.totalPrice,
+      );
       return () {};
     }, const [],);
+
+    final appState = AppStateModel
+    .of(context);
     return BlocConsumer<OrdersBloc, OrdersState>(
         bloc: OrdersBloc.instance,
         listener: controller.paymentMethodListener,
@@ -101,9 +108,22 @@ class OrderPaymentMethodScreen extends HookWidget {
                                       paymentMethod: PaymentMethod.cash,
                                       onTap: controller
                                           .changeSelectedPaymentMethod,
+                                      subtitle: controller
+                                          .userExceededAllowedSeatsWithoutPayment
+                                          ? S.of(context).cashPaymentNotAvailable : null,
                                       disabled: controller
                                           .userExceededAllowedSeatsWithoutPayment,
                                     ),
+                                    if(appState.profile.canPayFromWallet(controller.orderBody.price,))
+                                      PaymentMethodWidget(
+                                        icon: Assets.balancePaymentSVG,
+                                        title: S.of(context).payFromMyBalance,
+                                        paymentMethod: PaymentMethod.wallet,
+                                        onTap: controller
+                                            .changeSelectedPaymentMethod,
+                                        disabled: !appState.profile.canPayFromWallet(controller.orderBody.price,),
+                                        subtitle: '${S.current.currentBalance} ${appState.profile.balanceText}',
+                                      ),
                                     PaymentMethodWidget(
                                       icon: Assets.cashMobilePNG,
                                       title: S.of(context).cashMobile,
@@ -145,7 +165,7 @@ class OrderPaymentMethodScreen extends HookWidget {
                           ),
                         ),
                         const VoucherWidget(),
-                        // 45.vSpace,
+                        60.vSpace,
                       ],
                     ),
                     if(controller.orderEntity == null)

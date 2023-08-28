@@ -48,7 +48,6 @@ class UpcomingTravelsList extends HookWidget {
       HomeScreenController.getUpcomingTravels();
       return (){};
     },const []);
-    final scrollController = useScrollController(initialScrollOffset: 22.wx,);
     return BlocConsumer<OrdersBloc, OrdersState>(
       bloc: OrdersBloc.instance,
       buildWhen: controller.buildUpcomingTravelsWhen,
@@ -64,7 +63,7 @@ class UpcomingTravelsList extends HookWidget {
           if(controller.upcomingTravels.isNotEmpty) {
             return Column(
               children: [
-                10.vSpace,
+                // 10.vSpace,
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 22.hx,),
                   child: Row(
@@ -79,17 +78,18 @@ class UpcomingTravelsList extends HookWidget {
                 ),
                 8.vSpace,
                 SizedBox(
-                  height: 160.hx,
+                  height: 150.hx,
                   child: ListView.separated(
-                    controller: scrollController,
+                    // controller: SCc,
                     scrollDirection: Axis.horizontal,
+                    padding: EdgeInsetsDirectional.only(start: 22.wx,),
                     shrinkWrap: true,
                     itemCount: controller.upcomingTravels.length,
                     separatorBuilder: (ctx, index) => SizedBox(width: 18.hx,),
                     itemBuilder: (ctx, index) => _UpcomingTravelWidget(controller.upcomingTravels[index],),
                   ),
                 ),
-                30.vSpace,
+                20.vSpace,
               ],
             );
           }
@@ -110,14 +110,14 @@ class _UpcomingTravelWidget extends HookWidget{
 
   @override
   Widget build(BuildContext context) {
+    final HomeScreenController controller = Controller.getInstance();
     final textStyle = context.textTheme.titleMedium?.copyWith(
       color: Colors.white,
       fontWeight: FontWeight.w600,
     );
     return GestureDetector(
       onTap: () {
-        // NavigationService.of(context).navigateTo(
-        //     CompanyProfileScreenRoute(companyEntity: entity,));
+        controller.startQuickOrder(entity,context,);
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -186,13 +186,17 @@ class _UpcomingTravelWidget extends HookWidget{
                   path: Assets.upcomingTravelClockSVG,
                   type: ImageType.asset,
                 color: AppStateModel.of(context).isLightTheme ? null : Styles.headLineFontColor,
+                width: 14.rx,
+                height: 14.hx,
               ),
               3.hSpace,
               AppTextWidget(
                 entity.travelTime ?? '',
-                style: context.textTheme.titleMedium,
+                style: context.textTheme.bodyLarge?.copyWith(
+                  fontSize: 13.spx,
+                ),
                 strutStyle: const StrutStyle(
-                  height: 1.4,
+                  height: 1.3,
                 ),
               ),
             ],
@@ -201,8 +205,14 @@ class _UpcomingTravelWidget extends HookWidget{
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              2.hSpace,
-              Assets.locationIconWidget,
+              // 2.hSpace,
+              AppImage(
+                  path: entity.travelMethodEnum.icon,
+                  type: ImageType.asset,
+                  fit: BoxFit.scaleDown,
+                  width: 14.rx,
+                  height: 15.hx,
+              ),
               3.hSpace,
               AppTextWidget(
                 entity.transportationEntity?.name ?? '',

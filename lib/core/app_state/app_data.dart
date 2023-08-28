@@ -7,6 +7,8 @@ mixin AppData implements AppStateComponent {
   }
   InitAppEntity get initAppEntity => _initAppEntity!;
 
+  ProfileEntity get profile => AccountRepository.profile!;
+
 
   List<Country> get countries => initAppEntity.countries ?? [];
   List<City> cities([int? countryId]) {

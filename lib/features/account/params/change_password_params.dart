@@ -1,4 +1,5 @@
 import 'package:lween/core/features/params/params_model.dart';
+import 'package:lween/core/resources/api_consts.dart';
 import 'package:lween/core/resources/constants.dart';
 
 import '../../../../../../core/configurations/app_configuration.dart';
@@ -20,7 +21,7 @@ class ChangePasswordParams extends ParamsModel<ChangePasswordParamsBody> {
   RequestType? get requestType => RequestType.POST;
 
   @override
-  String? get url => 'UserAccount/UpdateUserPassword';
+  String? get url => ApiConstants.changePassword;
 
   @override
   Map<String, dynamic> get urlParams => body.toJson();
@@ -28,16 +29,16 @@ class ChangePasswordParams extends ParamsModel<ChangePasswordParamsBody> {
 
 class ChangePasswordParamsBody extends BaseBodyModel {
   ChangePasswordParamsBody({
-    required this.oldPassword,
+    required this.currentPassword,
     required this.newPassword,
   });
 
-  final String oldPassword;
+  final String currentPassword;
   final String newPassword;
 
   @override
   Map<String, dynamic> toJson() => {
-        'oldPassword': oldPassword,
+        'currentPassword': currentPassword,
         'newPassword': newPassword,
       };
 }

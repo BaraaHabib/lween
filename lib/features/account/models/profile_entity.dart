@@ -9,7 +9,8 @@ class ProfileEntity extends ContentModel {
   String? imageUrl;
   String? name;
   String? phoneNumber;
-  String? balance;
+  String? balanceText;
+  num? balance;
   String? ordersCount;
   LiteEntity? country;
   LiteEntity? city;
@@ -21,6 +22,7 @@ class ProfileEntity extends ContentModel {
     this.imageUrl,
     this.name,
     this.phoneNumber,
+    this.balanceText,
     this.balance,
     this.ordersCount,
     this.country,
@@ -35,7 +37,8 @@ class ProfileEntity extends ContentModel {
       imageUrl: json['imageUrl'],
       name: json['name'],
       phoneNumber: json['phoneNumber'],
-      balance: json['balance'],
+      balanceText: json['balanceText'],
+      balance: num.tryParse(json['balance'].toString()),
       ordersCount: json['ordersCount'],
       country: json['country'] != null
           ? LiteEntity.fromJson(json['country'])
@@ -62,6 +65,7 @@ class ProfileEntity extends ContentModel {
       imageUrl: imageUrl ?? this.imageUrl,
       name: name ?? this.imageUrl,
       accountType: accountType,
+      balanceText: balanceText,
       balance: balance,
       city: city ?? this.city,
       country: country ?? this.country,
@@ -71,5 +75,7 @@ class ProfileEntity extends ContentModel {
       phoneNumber: phoneNumber,
     );
   }
+
+  canPayFromWallet(num? price) => price != null && price <= (balance ?? 0);
 }
 

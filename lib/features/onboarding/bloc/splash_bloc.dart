@@ -2,10 +2,12 @@
 
 import 'dart:async';
 
+import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_clarity/flutter_clarity.dart';
 import 'package:lween/core/exceptions/app_exceptions.dart';
 import 'package:lween/core/resources/constants.dart';
 import 'package:lween/core/services/notification_service.dart';
@@ -41,16 +43,21 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
     try {
       await appState.init();
 
+      final initFutures = <Future>[];
       /// get app data
       final initAppFuture = sl<AccountRepository>().initApp(InitAppParams(
           deviceType: 1,
           deviceVersion: appState.deviceVersion,
         ),
       );
-      final getAppFuture = sl<AccountRepository>().getProfile();
-      final res = await Future.wait([initAppFuture, getAppFuture]);
+      initFutures.add(initAppFuture);
+      if(appState.authenticated){
+        final getAppFuture = sl<AccountRepository>().getProfile();
+        initFutures.add(getAppFuture);
+      }
 
-      for (var e in res) {
+      final initFutureResults = await Future.wait(initFutures,);
+      for (var e in initFutureResults) {
         e.fold((l) => throw AppException(l.errorMessage,), (r) {
           if (r is InitAppEntity) {
             appState.initAppEntity = r;
@@ -108,6 +115,23 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
     await sl<FileManager>().init();
 
     sl<NotificationService>().initFcmNotifications();
+    _initClarity();
+  }
+
+  static _initClarity() {
+    // Initialize Clarity.
+    FlutterClarityPlugin().initialize(projectId: "ikxovf1t2y");
+
+    // Set custom user id.
+    if (Lween.appState.authenticated && AccountRepository.profile?.id != null) {
+      FlutterClarityPlugin().setCustomUserId(
+        AccountRepository.profile!.id!.toString(),);
+    } else {
+      if (Lween.appState.deviceId != null) {
+        FlutterClarityPlugin().setCustomUserId(
+            Lween.appState.deviceId.toString());
+      }
+    }
   }
 }
 

@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:lween/features/account/screens/account/account_screen.dart';
 import 'package:lween/features/account/screens/account_settings/account_settings_screen.dart';
+import 'package:lween/features/account/screens/change_password_screen.dart';
 import 'package:lween/features/account/screens/login_screen.dart';
 import 'package:lween/features/account/screens/reset_password_screen.dart';
 import 'package:lween/features/account/screens/register_screen.dart';
@@ -275,6 +276,10 @@ class AppRouter extends _$AppRouter {
     CustomRoute(
       transitionsBuilder: TransitionsBuilders.fadeIn,
       page: UpdateProfileScreenRoute.page,
+    ),
+    CustomRoute(
+      transitionsBuilder: TransitionsBuilders.fadeIn,
+      page: ChangePasswordScreenRoute.page,
     ),
   ];
 

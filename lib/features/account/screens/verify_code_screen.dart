@@ -73,7 +73,8 @@ class VerifyCodeScreen extends HookWidget {
                         15.vSpace,
                         AppTextField(
                           name: 'code',
-                          textAlign: TextAlign.center,
+                          textAlign: TextAlign.start,
+                          prefixIcon: SvgPicture.asset(Assets.checkCodeSVG,),
                           validator: FormBuilderValidators.compose([
                             FormBuilderValidators.required(),
                           ]),

@@ -84,9 +84,9 @@ class RemoteDataSource  {
            response = await delete(model);
            break;
          case RequestType.PUT:
-           throw NotImplementedException(message: "Request type: PUT");
+           throw const NotImplementedException(message: "Request type: PUT");
          default:
-           throw NotImplementedException();
+           throw const NotImplementedException();
        }
        return (response);
      }
@@ -196,9 +196,15 @@ class RemoteDataSource  {
     Response response;
     Map<String, dynamic> responseJson;
     final url = model.baseUrl ?? baseUrl;
+    late final dynamic body;
+    if (model.isFormData) {
+      body = FormData.fromMap(model.body.toJson());
+    } else {
+      body = model.body.toJson();
+    }
     response = await dio.delete(
       url + model.url.toString(),
-      data: FormData.fromMap(model.body.toJson(),ListFormat.multiCompatible),
+      data: body,
       queryParameters: model.urlParams,
       options: Options(headers: headers, responseType: ResponseType.plain),
     );
@@ -207,7 +213,7 @@ class RemoteDataSource  {
 
     AppLogger.log('delete request url :${url + model.url.toString()}');
     // print text data (with out images)
-    var dataToPrint = model.body.toJson()..removeWhere((key, value) => value is List<MultipartFile>);
+    var dataToPrint = model.body.toJson()..removeWhere((key, value) => value is List<MultipartFile> || value is MultipartFile);
     AppLogger.log('delete request body :${json.encode(dataToPrint)}');
     AppLogger.log('delete response: $responseJson');
 

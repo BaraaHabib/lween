@@ -43,169 +43,191 @@ class AccountScreen extends HookWidget {
         title: S.of(context).myAccount,
         centerTitle: true,
         withBackButton: false,
-        child: ListView(
-          children: [
-            50.vSpace,
-            Card(
-              child: Container(
-                padding: EdgeInsets.all(20.rx,),
-                child: Row(
-                  children: [
-                    Hero(
-                      tag: 'profile-image',
-                      child: AppImage(
-                          path: profile.imageUrl,
-                          errorImage: Assets.avatarPlaceHolderSVG,
-                          type: ImageType.cachedNetwork,
-                          width: 70.rx,
-                          height: 70.rx,
-                          borderRadius: BorderRadius.circular(50),
-                      ),
-                    ),
-                    15.hSpace,
-                    Expanded(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Expanded(
-                                  flex:8,
-                                  child: Hero(
-                                    tag: 'user-name',
-                                    child: AppTextWidget(
-                                      profile.name ?? '',
-                                      maxLines: 2,
-                                      style: context
-                                          .textTheme
-                                          .labelLarge,
-                                    ),
-                                  ),
-                              ),
-                              const Spacer(),
-                              Expanded(
-                                  flex:2,
-                                  child: GestureDetector(
-                                    onTap: () => controller.editProfile(context,),
-                                    child: AppImage(
-                                      path: Assets.editAccountSVG,
-                                      type: ImageType.asset,
-                                      fit: BoxFit.scaleDown,
-                                      width: 32.rx,
-                                      height: 32.rx,
-                                    ),
-                                  ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Expanded(
-                                  child: AppTextWidget(
-                                    profile.phoneNumber ?? '',
-                                    maxLines: 2,
-                                    style: context.textTheme.headlineMedium,
-                                  ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              AppTextWidget('${S.of(context).currentBalance}:',),
-                              const Spacer(),
-                              AppImage(
-                                  path: Assets.rewardIconSVG,
-                                  type: ImageType.asset,
-                                  fit: BoxFit.scaleDown,
-                                  height: 18.rx,
-                                  width: 18.rx,
-                              ),
-                              5.hSpace,
-                              AppTextWidget(
-                                profile.balance ?? '',
-                                style: context.textTheme.bodyMedium?.copyWith(
-                                  color: Styles.rewardFontColor,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            40.vSpace,
-            Card(
-              child: InkWell(
-                onTap: () => controller.goToActiveOrders(context,),
-                borderRadius: Styles.borderRadius12px,
+        child: RefreshIndicator(
+          onRefresh: () async => AccountBloc.instance.add(const GetProfileEvent()),
+          child: ListView(
+            children: [
+              50.vSpace,
+              Card(
                 child: Container(
-                  padding: EdgeInsetsDirectional.only(
-                    start: 20.wx,
-                    bottom: 15.hx,
-                    top: 15.hx,
-                  ),
+                  padding: EdgeInsets.all(20.rx,),
                   child: Row(
                     children: [
-                      AppImage(
-                          path: Assets.ordersCountPNG,
-                          type: ImageType.asset,
-                          fit: BoxFit.scaleDown,
-                          height: 33.rx,
-                          width: 33.rx,
+                      Hero(
+                        tag: 'profile-image',
+                        child: AppImage(
+                            path: profile.imageUrl,
+                            errorImage: Assets.avatarPlaceHolderSVG,
+                            type: ImageType.cachedNetwork,
+                            width: 70.rx,
+                            height: 70.rx,
+                            borderRadius: BorderRadius.circular(50),
+                        ),
                       ),
-                      12.hSpace,
-                      AppTextWidget(
-                          S.of(context).myReservations,
-                          style: context.textTheme.titleSmall,
+                      15.hSpace,
+                      Expanded(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Expanded(
+                                    flex:8,
+                                    child: Hero(
+                                      tag: 'user-name',
+                                      child: AppTextWidget(
+                                        profile.name ?? '',
+                                        maxLines: 2,
+                                        style: context
+                                            .textTheme
+                                            .labelLarge,
+                                      ),
+                                    ),
+                                ),
+                                const Spacer(),
+                                Expanded(
+                                    flex:2,
+                                    child: GestureDetector(
+                                      onTap: () => controller.editProfile(context,),
+                                      child: AppImage(
+                                        path: Assets.editAccountSVG,
+                                        type: ImageType.asset,
+                                        fit: BoxFit.scaleDown,
+                                        width: 32.rx,
+                                        height: 32.rx,
+                                      ),
+                                    ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Expanded(
+                                    child: AppTextWidget(
+                                      profile.phoneNumber ?? '',
+                                      maxLines: 2,
+                                      style: context.textTheme.headlineMedium,
+                                    ),
+                                ),
+                              ],
+                            ),
+                            if(controller.profile.balanceText != null)
+                              Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                AppTextWidget(
+                                  '${S.of(context).currentBalance}:',
+                                  strutStyle: const StrutStyle(
+                                    height: 1.0
+                                  ),
+                                ),
+                                const Spacer(),
+                                // const Expanded(child: SizedBox()),
+                                Row(
+                                  children: [
+                                    AppImage(
+                                        path: Assets.rewardIconSVG,
+                                        type: ImageType.asset,
+                                        fit: BoxFit.scaleDown,
+                                        height: 13.rx,
+                                        width: 13.rx,
+                                    ),
+                                    3.hSpace,
+                                    FittedBox(
+                                      // fit: BoxFit.scaleDown,
+                                      child: AppTextWidget(
+                                        controller.profile.balanceText!,
+                                        style: context.textTheme.bodyMedium?.copyWith(
+                                          color: Styles.rewardFontColor,
+                                        ),
+                                        overflow: TextOverflow.visible,
+                                        maxLines: 1,
+                                        strutStyle: const StrutStyle(
+                                            height: 1.1
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
                 ),
               ),
-            ),
-            13.vSpace,
-            Row(
-              children: [
-                _MyAccountElementWidget(
-                  icon: Assets.favouriteAccountPNG,
-                  onTap: () => controller.goToFavoriteCompanies(context,),
-                  title: S.of(context).favoriteCompanies,
+              40.vSpace,
+              Card(
+                child: InkWell(
+                  onTap: () => controller.goToActiveOrders(context,),
+                  borderRadius: Styles.borderRadius12px,
+                  child: Container(
+                    padding: EdgeInsetsDirectional.only(
+                      start: 20.wx,
+                      bottom: 15.hx,
+                      top: 15.hx,
+                    ),
+                    child: Row(
+                      children: [
+                        AppImage(
+                            path: Assets.ordersCountPNG,
+                            type: ImageType.asset,
+                            fit: BoxFit.scaleDown,
+                            height: 33.rx,
+                            width: 33.rx,
+                        ),
+                        12.hSpace,
+                        AppTextWidget(
+                            S.of(context).myReservations,
+                            style: context.textTheme.titleSmall,
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
-                13.hSpace,
-                _MyAccountElementWidget(
-                  icon: Assets.previousTripsIconPNG,
-                  onTap: () => controller.goToMyOrders(context,),
+              ),
+              13.vSpace,
+              Row(
+                children: [
+                  _MyAccountElementWidget(
+                    icon: Assets.favouriteAccountPNG,
+                    onTap: () => controller.goToFavoriteCompanies(context,),
+                    title: S.of(context).favoriteCompanies,
+                  ),
+                  13.hSpace,
+                  _MyAccountElementWidget(
+                    icon: Assets.previousTripsIconPNG,
+                    onTap: () => controller.goToMyOrders(context,),
 
-                  title: S.of(context).previousTrips,
-                ),
-                // Expanded(child: Card()),
-              ],
-            ),
-            13.vSpace,
-            Row(
-              children: [
-                _MyAccountElementWidget(
-                  icon: Assets.accountSettingsPNG,
-                  onTap:() => controller.openAccountSettings(context),
+                    title: S.of(context).previousTrips,
+                  ),
+                  // Expanded(child: Card()),
+                ],
+              ),
+              13.vSpace,
+              Row(
+                children: [
+                  _MyAccountElementWidget(
+                    icon: Assets.accountSettingsPNG,
+                    onTap:() => controller.openAccountSettings(context),
 
-                  title: S.of(context).accountSettings,
-                ),
-                13.hSpace,
-                _MyAccountElementWidget(
-                  icon: Assets.questionMarkIconPNG,
-                  onTap: () => controller.openSupport(context,),
-                  title: S.of(context).helpAndSupport,
-                ),
-                // Expanded(child: Card()),
-              ],
-            ),
-          ],
+                    title: S.of(context).accountSettings,
+                  ),
+                  13.hSpace,
+                  _MyAccountElementWidget(
+                    icon: Assets.questionMarkIconPNG,
+                    onTap: () => controller.openSupport(context,),
+                    title: S.of(context).helpAndSupport,
+                  ),
+                  // Expanded(child: Card()),
+                ],
+              ),
+            ],
+          ),
         ),
       );
       },

@@ -80,12 +80,13 @@ class EnterForgotPasswordEvent extends AccountEvent {
 }
 
 class ChangePasswordEvent extends AccountEvent {
-  const ChangePasswordEvent(this.params);
+  const ChangePasswordEvent({required this.currentPassword, required this.newPassword,});
 
-  final ChangePasswordParams params;
+  final String currentPassword;
+  final String newPassword;
 
   @override
-  List<Object?> get props => [params];
+  List<Object?> get props => [currentPassword,newPassword,];
 }
 
 class GetProfileEvent extends AccountEvent {
@@ -120,5 +121,33 @@ class UpdateProfilePictureEvent extends AccountEvent {
 
   @override
   List<Object?> get props => [path,];
+}
+class DeleteAccountEvent extends AccountEvent {
+  const DeleteAccountEvent(this.password,);
+
+  final String password;
+
+  @override
+  List<Object?> get props => [password,];
+}
+class RequestChangePhoneEvent extends AccountEvent {
+  const RequestChangePhoneEvent(this.newPhoneNumber,);
+
+  final String newPhoneNumber;
+
+  @override
+  List<Object?> get props => [newPhoneNumber,];
+}
+class ConfirmChangePhoneCodeEvent extends AccountEvent {
+  const ConfirmChangePhoneCodeEvent({
+    required this.password,
+    required this.code,
+  });
+
+  final String password;
+  final String code;
+
+  @override
+  List<Object?> get props => [password,code,];
 }
 

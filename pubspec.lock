@@ -518,6 +518,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.3.0"
+  flutter_clarity:
+    dependency: "direct main"
+    description:
+      name: flutter_clarity
+      sha256: "526a01e7251f722891b20fcfa51fa07d300152d5314a7003acd052a5bbdfe359"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0+3"
   flutter_form_builder:
     dependency: "direct main"
     description:

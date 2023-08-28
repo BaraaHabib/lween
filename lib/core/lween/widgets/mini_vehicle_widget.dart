@@ -42,6 +42,9 @@ class MiniVehicleWidget extends StatelessWidget {
             travelMethodText ?? '',
             style: context.textTheme.headlineSmall,
             maxLines: 2,
+            strutStyle: const StrutStyle(
+              height: 1.1,
+            ),
           ),
         ),
         // 30.hSpace,

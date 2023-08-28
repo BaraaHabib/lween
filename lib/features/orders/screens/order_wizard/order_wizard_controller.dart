@@ -233,7 +233,7 @@ class OrderWizardController extends Controller with PaymentMixin {
         NavigationService
             .of(context)
             .navigateTo(
-          const OrderSeatsScreenRoute(),
+           OrderSeatsScreenRoute(),
         );
       }
       else {
@@ -468,7 +468,7 @@ class OrderWizardController extends Controller with PaymentMixin {
     selectTravel(item);
     NavigationService
         .of(context)
-        .navigateTo(const OrderSeatsScreenRoute());
+        .navigateTo( OrderSeatsScreenRoute());
   }
 
 

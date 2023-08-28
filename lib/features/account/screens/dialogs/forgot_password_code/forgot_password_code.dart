@@ -61,8 +61,9 @@ class ForgotPasswordCodeDialog extends HookWidget {
                         8.vSpace,
                         AppTextField(
                           name: 'code',
-                          textAlign: TextAlign.center,
+                          textAlign: TextAlign.start,
                           enabled: !isCodeChecked,
+                          prefixIcon: SvgPicture.asset(Assets.checkCodeSVG,),
                           label: S
                               .of(context)
                               .verificationCode,

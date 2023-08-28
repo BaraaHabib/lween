@@ -15,6 +15,7 @@ import 'package:lween/core/features/entities/shared/country.dart';
 import 'package:lween/core/navigation/navigation_service.dart';
 import 'package:lween/core/resources/constants.dart';
 import 'package:lween/features/account/models/init_app_entity.dart';
+import 'package:lween/features/account/models/profile_entity.dart';
 import 'package:lween/features/account/params/update_token_params.dart';
 import 'package:lween/features/account/repo/account_repository.dart';
 import 'package:lween/features/notifications/screens/widgets/notification_item.dart';
@@ -108,21 +109,25 @@ class AppStateModel extends AppStateComponent with _DeviceInfoMixin, ThemeManage
     notifyListeners();
   }
 
-  Future<void> logOut() async {
+  /// when [localOnly] is true, only local cash is removed
+  Future<void> logOut({bool localOnly = false,}) async {
     _authenticated = false;
     _userToken = null;
-    /// delete fcm token
-    FirebaseMessaging.instance.deleteToken();
-    FirebaseMessaging.instance.unsubscribeFromTopic(generalFCMTopic);
+    if(!localOnly){
+      /// delete fcm token
+      FirebaseMessaging.instance.unsubscribeFromTopic(generalFCMTopic);
+      FirebaseMessaging.instance.deleteToken();
 
-    sl<AccountRepository>().updateToken(
-      UpdateTokenParams(
-        body: UpdateTokenParamsBody(
-          oldToken: sl<AppStateModel>().firebaseToken,
-          isLogingOut: true,
+      sl<AccountRepository>().updateToken(
+        UpdateTokenParams(
+          body: UpdateTokenParamsBody(
+            oldToken: sl<AppStateModel>().firebaseToken,
+            isLogingOut: true,
+          ),
         ),
-      ),
-    );
+      );
+    }
+
     _firebaseToken = null;
     ///
 

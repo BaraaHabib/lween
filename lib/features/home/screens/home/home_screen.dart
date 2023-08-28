@@ -79,8 +79,8 @@ class HomeScreen extends HookWidget {
                                   width:1.sw,
                                   child: HomeSlider(state.homeEntity.advertisements,),
                                 ),
-                              const MyPreviousOrders(),
                               const UpcomingTravelsList(),
+                              const MyPreviousOrders(),
                               // Padding(
                               //   padding: EdgeInsets.symmetric(horizontal: 24.wx,),
                               //   child: AppGradientTextButton(

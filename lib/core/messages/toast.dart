@@ -15,9 +15,9 @@ class AppToast extends AppSystemMessage {
     msg: message,
       textColor  : Lween.navigatorKey.currentContext!.textTheme.titleMedium?.color,
       fontSize  : Lween.navigatorKey.currentContext!.textTheme.titleMedium?.fontSize,
-      backgroundColor: Lween.navigatorKey.currentContext!.theme.cardTheme.color,
+      backgroundColor: Lween.navigatorKey.currentContext!.theme.primaryColor,
       gravity: ToastGravity.TOP,
-
+      toastLength: Toast.LENGTH_LONG,
   );
   }
 }

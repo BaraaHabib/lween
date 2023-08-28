@@ -89,6 +89,7 @@ dependencies:
   flutter_local_notifications: ^15.1.0+1
   url_launcher: ^6.1.12
   image_picker: ^1.0.2
+  flutter_clarity: ^1.0.0+3
 dev_dependencies:
   flutter_test:
     sdk: flutter

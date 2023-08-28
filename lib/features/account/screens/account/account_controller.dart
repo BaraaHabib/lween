@@ -85,7 +85,8 @@ class AccountController extends Controller {
       if(cityData != null){
         selectedCity = DropdownItemDataModel(name: cityData.name!, id: cityData.id!);
       }
-    }  }
+    }
+  }
 
   //#region update profile
   final formKey = GlobalKey<FormBuilderState>();
@@ -210,5 +211,34 @@ class AccountController extends Controller {
     localySelectedImage = await AppImagePicker.pickImage(context);
   }
   //#endregion
+
+
+  //#region delete account
+
+  final deleteAccountFormKey = GlobalKey<FormBuilderState>();
+
+  bool deleteAccountListenBuildWhen(AccountState previous, AccountState current) {
+    return current is DeleteAccountState;
+  }
+
+  void deleteAccountListener(BuildContext context, AccountState state) {
+    if (state is DeleteAccountError) {
+      AppToast(state.message ?? '').show();
+    }
+    else if (state is DeleteAccountLoaded) {
+      AppStateModel.of(context).logOut(localOnly: true,);
+    }
+  }
+
+  confirmDeleteAccount() {
+    if (deleteAccountFormKey.currentState?.saveAndValidate() ?? false) {
+      AccountBloc.instance.add(DeleteAccountEvent(
+        deleteAccountFormKey.currentState?.getRawValue('password'),
+      ),
+      );
+    }
+  }
+
+  //#endregion delete account
 
 }

@@ -38,13 +38,14 @@ class TopCompaniesList extends HookWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               AppTextWidget(
-                S.current.transportationEntities
-                , style: context.theme.textTheme.headlineLarge,
+                S.current.transportationEntities,
+                style: context.theme.textTheme.headlineLarge,
               ),
               TextButton(
                 onPressed: () =>
                     NavigationService.of(context).navigateTo(
-                        CompaniesScreenRoute()),
+                        CompaniesScreenRoute(),
+                    ),
                 style: ButtonStyle(
                   padding: MaterialStateProperty.all(EdgeInsets.zero,),
                   visualDensity: VisualDensity.compact,

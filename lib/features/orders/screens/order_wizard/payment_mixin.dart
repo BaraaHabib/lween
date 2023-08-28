@@ -18,6 +18,7 @@ import 'package:lween/core/navigation/logger.dart';
 import 'package:lween/core/navigation/navigation_service.dart';
 import 'package:lween/core/resources/constants.dart';
 import 'package:lween/core/routing/app_router.dart';
+import 'package:lween/features/account/bloc/account_bloc.dart';
 import 'package:lween/features/orders/bloc/orders_bloc.dart';
 import 'package:lween/features/orders/models/orders.dart';
 import 'package:lween/features/orders/models/request_payment.dart';
@@ -164,8 +165,13 @@ mixin PaymentMixin implements Controller{
         goToOrderDetailsScreen(orderEntity!, context,);
       });
     }
-    else if (state.order.isPayedInCenter) {
+    else  {
       goToOrderDetailsScreen(state.order, context,);
+
+      /// refresh profile
+      if(selectedPaymentMethod.value!.isFromWallet){
+        AccountBloc.instance.add(const GetProfileEvent());
+      }
     }
   }
 

@@ -20,6 +20,7 @@ class PaymentMethodWidget extends StatelessWidget {
     super.key,
     required this.paymentMethod,
     required this.title,
+    this.subtitle,
     required this.icon,
     this.onTap,
     this.disabled = false,
@@ -28,6 +29,7 @@ class PaymentMethodWidget extends StatelessWidget {
 
   final PaymentMethod paymentMethod;
   final String title;
+  final String? subtitle;
   final String icon;
   final bool disabled;
   final Function(PaymentMethod p,)? onTap;
@@ -58,20 +60,22 @@ class PaymentMethodWidget extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      if(disabled)
-                        const Text('',),
+                      // if(subtitle != null)
+                      //   const Text('',),
                       Text(title,
                         style: context
                             .textTheme
                             .labelMedium?.copyWith(
                           color:  disabled ? Styles.liteGrayColor: null,
                         ),),
-                      if(disabled)
-                        Row(
+                      if(subtitle != null)
+                        ...[
+                          5.vSpace,
+                          Row(
                           children: [
                             Expanded(
                               child: Text(
-                                S.of(context).cashPaymentNotAvailable,
+                                subtitle!,
                                 maxLines: 2,
                                 style: context.textTheme.bodySmall?.copyWith(
                                   color: Styles.colorOrange,
@@ -79,7 +83,7 @@ class PaymentMethodWidget extends StatelessWidget {
                               ),
                             ),
                           ],
-                        ),
+                        )],
                     ],
                   ),
                 ),

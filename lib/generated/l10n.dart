@@ -410,10 +410,10 @@ class S {
     );
   }
 
-  /// `Transportation entities`
+  /// `Companies`
   String get transportationEntities {
     return Intl.message(
-      'Transportation entities',
+      'Companies',
       name: 'transportationEntities',
       desc: '',
       args: [],
@@ -1340,11 +1340,11 @@ class S {
     );
   }
 
-  /// `Do you want to confirm sending a reservation request from {city1} to {city2} within {company} on {date} for {X} passengers and at a cost of {price} Syrian pounds`
+  /// `Do you want to confirm sending a reservation request from {city1} to {city2} within {company} on {date} for {X} passengers at a cost of {price} Syrian pounds`
   String city1City2DateXPrice(Object city1, Object city2, Object company,
       Object date, Object X, Object price) {
     return Intl.message(
-      'Do you want to confirm sending a reservation request from $city1 to $city2 within $company on $date for $X passengers and at a cost of $price Syrian pounds',
+      'Do you want to confirm sending a reservation request from $city1 to $city2 within $company on $date for $X passengers at a cost of $price Syrian pounds',
       name: 'city1City2DateXPrice',
       desc: '',
       args: [city1, city2, company, date, X, price],
@@ -1476,6 +1476,96 @@ class S {
     return Intl.message(
       'Upcoming trips',
       name: 'upcomingTrips',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Current password`
+  String get currentPassword {
+    return Intl.message(
+      'Current password',
+      name: 'currentPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New password`
+  String get newPassword {
+    return Intl.message(
+      'New password',
+      name: 'newPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save changes`
+  String get saveChanges {
+    return Intl.message(
+      'Save changes',
+      name: 'saveChanges',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password changed successfully`
+  String get passwordChangedSuccessfully {
+    return Intl.message(
+      'Password changed successfully',
+      name: 'passwordChangedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to log out?`
+  String get areYouSureYouWantToLogOut {
+    return Intl.message(
+      'Are you sure you want to log out?',
+      name: 'areYouSureYouWantToLogOut',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter password to continue deleting account`
+  String get enterPasswordToContinueDeletingAccount {
+    return Intl.message(
+      'Enter password to continue deleting account',
+      name: 'enterPasswordToContinueDeletingAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Phone number changes successfully`
+  String get phoneNumberChangesSuccessfully {
+    return Intl.message(
+      'Phone number changes successfully',
+      name: 'phoneNumberChangesSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New phone number`
+  String get newPhoneNumber {
+    return Intl.message(
+      'New phone number',
+      name: 'newPhoneNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pay from wallet`
+  String get payFromMyBalance {
+    return Intl.message(
+      'Pay from wallet',
+      name: 'payFromMyBalance',
       desc: '',
       args: [],
     );

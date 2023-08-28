@@ -52,7 +52,7 @@ class MyPreviousOrders extends HookWidget {
             return const SizedBox.shrink();
           }
           return Padding(
-            padding: EdgeInsets.only(left: 18.wx,right: 18.wx,bottom: 20.hx,),
+            padding: EdgeInsets.only(left: 18.wx,right: 18.wx,bottom: 10.hx,),
             child: Column(
               // shrinkWrap: true,
               // physics: const NeverScrollableScrollPhysics(),

@@ -31,47 +31,53 @@ class HomeSlider extends HookWidget {
     else {
       ads.removeWhere((e) => e.isVideo);
     }
-    if (isVideo) {
-      final ad = ads.first;
-      return InkWell(
-        onTap: ad.url == null ? null
-            : () => controller.openAdPage(context,ad.url!),
-        child: SizedBox(
-          height: (9/16).sw,
-          width: 1.sw,
-          child: AppVideo(
-            key: Key(ad.attachmentUrl!),
-            fit: BoxFit.fill,
-            path: ad.attachmentUrl!,),
-        ),
-      );
-    }
-    else {
-      return CarouselSlider(
-        carouselController: controller.carouselController,
-        options: CarouselOptions(
-          height: 180.hx,
-          autoPlay: ads.length > 1,
-          enlargeCenterPage: false,
-          padEnds: false,
-          enableInfiniteScroll: ads.length > 1,
-          viewportFraction: 1,
-          enlargeStrategy: CenterPageEnlargeStrategy.zoom,
-          // aspectRatio: 1.5
-        ),
-        items: controller.ads.map((ad) {
-          return GestureDetector(
-            onTap: ad.url == null ? null :
-            () => controller.openAdPage(context, ad.url!),
-            child: AppImage(
-              path: ad.attachmentUrl!,
-              width: 1.sw,
-              type: ImageType.cachedNetwork,
-            ),
-          );
-        }).toList(),
-      );
-    }
+    return Padding(
+        padding: EdgeInsets.only(bottom: 20.hx,),
+        child: Builder(builder: (ctx){
+          if (isVideo) {
+            final ad = ads.first;
+            return InkWell(
+              onTap: ad.url == null ? null
+                  : () => controller.openAdPage(context,ad.url!),
+              child: SizedBox(
+                height: (9/16).sw,
+                width: 1.sw,
+                child: AppVideo(
+                  key: Key(ad.attachmentUrl!),
+                  fit: BoxFit.fill,
+                  path: ad.attachmentUrl!,),
+              ),
+            );
+          }
+          else {
+            return CarouselSlider(
+              carouselController: controller.carouselController,
+              options: CarouselOptions(
+                height: 180.hx,
+                autoPlay: ads.length > 1,
+                enlargeCenterPage: false,
+                padEnds: false,
+                enableInfiniteScroll: ads.length > 1,
+                viewportFraction: 1,
+                enlargeStrategy: CenterPageEnlargeStrategy.zoom,
+                // aspectRatio: 1.5
+              ),
+              items: controller.ads.map((ad) {
+                return GestureDetector(
+                  onTap: ad.url == null ? null :
+                      () => controller.openAdPage(context, ad.url!),
+                  child: AppImage(
+                    path: ad.attachmentUrl!,
+                    width: 1.sw,
+                    type: ImageType.cachedNetwork,
+                  ),
+                );
+              }).toList(),
+            );
+          }
+        }),
+    );
+
   }
 }
 

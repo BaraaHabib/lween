@@ -231,19 +231,19 @@ class OrderDetailsScreen extends HookWidget {
                               // height: 100.hx,
                               child: Column(
                                 children: [
-                                  if(order.isCanceled)
-                                    Row(
-                                      mainAxisAlignment:MainAxisAlignment.center,
-                                      children: [
-                                        AppTextWidget(
-                                          S.of(context).orderIsCanceled,
-                                          style: context.textTheme.headlineLarge?.copyWith(
-                                            color: order.paymentStatusTextColor(context),
-                                          ),
-                                        ),
-                                      ],
-                                    )
-                                    else
+                                  // if(order.isCanceled)
+                                  //   Row(
+                                  //     mainAxisAlignment:MainAxisAlignment.center,
+                                  //     children: [
+                                  //       AppTextWidget(
+                                  //         S.of(context).orderIsCanceled,
+                                  //         style: context.textTheme.headlineLarge?.copyWith(
+                                  //           color: order.paymentStatusTextColor(context),
+                                  //         ),
+                                  //       ),
+                                  //     ],
+                                  //   )
+                                  //   else
                                       ...[
                                         Row(
                                           mainAxisAlignment:MainAxisAlignment.center,

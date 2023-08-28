@@ -20,6 +20,7 @@ import 'package:lween/core/widgets/app_button.dart';
 import 'package:lween/core/widgets/app_image.dart';
 import 'package:lween/core/widgets/app_text_widget.dart';
 import 'package:lween/core/widgets/bordered_container.dart';
+import 'package:lween/features/orders/models/daily_travels.dart';
 import 'package:lween/features/orders/models/orders.dart';
 import 'package:lween/features/orders/screens/order_wizard/order_wizard_controller.dart';
 import 'package:lween/generated/l10n.dart';
@@ -30,11 +31,27 @@ part '../widgets/order_seat/summery_widget.dart';
 
 @RoutePage()
 class OrderSeatsScreen extends HookWidget {
-  const OrderSeatsScreen({super.key});
+  const OrderSeatsScreen({this.travelEntity,super.key});
+
+  /// this will have value when we want to start order from this screen
+  final TravelEntity? travelEntity;
 
   @override
   Widget build(BuildContext context) {
-    final OrderWizardController controller = Controller.getInstance();
+    final OrderWizardController controller;
+    if(travelEntity != null){
+      controller = Controller.getInstance(instance: OrderWizardController(travelEntity: travelEntity),);
+      useEffect(() {
+        controller.selectedDate = DateTime.now();
+        controller.selectTravel(travelEntity);
+        return (){};
+      },
+        const [],
+      );
+    }else{
+      controller = Controller.getInstance();
+    }
+
 
 
     return Stack(

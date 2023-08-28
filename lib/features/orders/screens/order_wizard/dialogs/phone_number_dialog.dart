@@ -101,57 +101,46 @@ class OrderPhoneNumberDialog extends HookWidget{
                           if (isCodeSent)
                             ...[
                               Row(
-                              children: [
-                                Flexible(
-                                  // flex: ,
-                                  child: Row(
-                                    children: [
-                                      AppTextButton(
-                                        onPressed: phoneController.backToEnterPhoneNumber,
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.start,
-                                          crossAxisAlignment: CrossAxisAlignment.center,
-                                          children: [
-                                            SizedBox.square(
-                                              dimension: 9.rx,
-                                              child: Assets.arrowBackWidget(
-                                                context,
-                                                color: Styles.textButtonColor,
-                                                reverse: true,),
-                                            ),
-                                            Text(
-                                              S.current.changePhoneNumber,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .bodyLarge
-                                                  ?.copyWith(
-                                                  color: Styles.blueColor,
-                                              ),
-                                            ),
-                                          ],
+                                children: [
+                                  AppTextButton(
+                                    onPressed: phoneController.backToEnterPhoneNumber,
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: [
+                                        SizedBox.square(
+                                          dimension: 9.rx,
+                                          child: Assets.arrowBackWidget(
+                                            context,
+                                            color: Styles.textButtonColor,
+                                            reverse: true,),
                                         ),
-                                      ),
-                                    ],
+                                        AppTextWidget(
+                                          S.current.changePhoneNumber,
+                                          strutStyle: const StrutStyle(
+                                            height: 1.4,
+                                          ),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyLarge
+                                              ?.copyWith(
+                                              color: Styles.blueColor,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                  // AppGradientTextButton(
-                                  //   content: S.current.changePhoneNumber,
-                                  //   color: Styles.brightGrayColor,
-                                  //   withGradiant : false,
-                                  //   onTap: (){
-                                  //     phoneController.isCodeSent.value = false;
-                                  //   },
-                                  // ),
-                                ),
-                                const Spacer(),
-                              ],
-                            ),
+                                ],
+                              ),
+                              // const Spacer(),
                             // 15.vSpace,
                             ],
                           AnimatedCrossFade(
                             firstChild:  AppTextField(
                               name: 'code',
                               controller: phoneController.codeController,
-                              textAlign: TextAlign.center,
+                              prefixIcon: SvgPicture.asset(Assets.checkCodeSVG,),
+                              textAlign: TextAlign.start,
                               focusNode: phoneController.codeFocusNode,
                               label: S
                                   .of(context)

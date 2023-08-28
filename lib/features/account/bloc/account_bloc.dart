@@ -16,12 +16,15 @@ import 'package:lween/features/account/models/profile_entity.dart';
 import 'package:lween/features/account/models/register_entity.dart';
 import 'package:lween/features/account/params/change_password_params.dart';
 import 'package:lween/features/account/params/check_code_params.dart';
+import 'package:lween/features/account/params/delete_account_params.dart';
 import 'package:lween/features/account/params/edit_profile_params.dart';
+import 'package:lween/features/account/params/confirm_change_phone_code_params.dart';
 import 'package:lween/features/account/params/enter_forgot_password_params.dart';
 import 'package:lween/features/account/params/forget_password_params.dart';
 import 'package:lween/features/account/params/login_params.dart';
 import 'package:lween/features/account/params/refresh_token_params.dart';
 import 'package:lween/features/account/params/register_params.dart';
+import 'package:lween/features/account/params/request_change_phone_params.dart';
 import 'package:lween/features/account/params/resend_code_params.dart';
 import 'package:lween/features/account/params/verify_account_params.dart';
 import 'package:lween/features/account/repo/account_repository.dart';
@@ -47,10 +50,10 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
     on<ForgetPasswordEvent>(_forgetPasswordEventCallback);
     on<GetProfileEvent>(_getProfileEventCallback);
     on<UpdateProfileEvent>(_updateProfileEventCallback);
-    on<ChangePasswordEvent>(
-            (event, emit) async {
-          emit(ChangePasswordLoading());
-        });
+    on<ChangePasswordEvent>(_changePasswordEventCallback);
+    on<DeleteAccountEvent>(_deleteAccountEventCallback);
+    on<RequestChangePhoneEvent>(_requestChangePhoneEventCallback);
+    on<ConfirmChangePhoneCodeEvent>(_confirmChangePhoneCodeEventCallback);
   }
 
   FutureOr<void> _verifyAccountCallback(VerifyAccountEvent event, emit) async {
@@ -203,9 +206,75 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
 
   }
 
+
+  Future<FutureOr<void>> _changePasswordEventCallback(ChangePasswordEvent event, Emitter<AccountState> emit) async {
+    emit(ChangePasswordLoading());
+    var res = await accountRepo.changePassword(
+        ChangePasswordParams(
+          ChangePasswordParamsBody(
+            currentPassword: event.currentPassword,
+            newPassword: event.newPassword
+          ),
+        ));
+    emit(res.fold(
+          (l) => ChangePasswordError(l.errorMessage,),
+          (r) => const ChangePasswordLoaded(),),
+    );
+  }
+
+
+
+
+  Future<FutureOr<void>> _deleteAccountEventCallback(DeleteAccountEvent event, Emitter<AccountState> emit) async {
+    emit(DeleteAccountLoading());
+    var res = await accountRepo.deleteAccount(
+        DeleteAccountParams(
+          body: DeleteAccountParamsBody(
+            password: event.password,
+          ),
+        ),
+    );
+    emit(res.fold(
+          (l) => DeleteAccountError(l.errorMessage,),
+          (r) => const DeleteAccountLoaded(),),
+    );
+  }
+
+
+
+  Future<FutureOr<void>> _requestChangePhoneEventCallback(RequestChangePhoneEvent event, Emitter<AccountState> emit) async {
+    emit(RequestChangePhoneLoading());
+    var res = await accountRepo.requestChangePhone(
+      RequestChangePhoneNumberParams(
+        phoneNumber: event.newPhoneNumber,
+      ),
+    );
+    emit(res.fold(
+          (l) => RequestChangePhoneError(l.errorMessage,),
+          (r) => const RequestChangePhoneLoaded(),),
+    );
+  }
+
+  Future<FutureOr<void>> _confirmChangePhoneCodeEventCallback(ConfirmChangePhoneCodeEvent event, Emitter<AccountState> emit) async {
+    emit(ConfirmChangePhoneCodeLoading());
+    var res = await accountRepo.confirmChangePhone(
+      ConfirmChangePhoneCodeParams(
+        body: ConfirmChangePhoneCodeParamsBody(
+          code: event.code,
+          password: event.password,
+        )
+      ),
+    );
+    emit(res.fold(
+          (l) => ConfirmChangePhoneCodeError(l.errorMessage,),
+          (r) => const ConfirmChangePhoneCodeLoaded(),),
+    );
+  }
+
   bool buildWhen(AccountState previous, AccountState current) {
     return current is VerifyAccountState || current is ResendCodeState;
   }
+
 
   void listener(BuildContext context, AccountState state) {
     if (state is ResendCodeLoaded) {

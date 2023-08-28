@@ -35,7 +35,7 @@
   "verify": "Verify",
   "passwordUpdatedSuccessfully": "Password updated successfully",
   "codeWasResentToYourNumber": "Verification code was resent to your number",
-  "transportationEntities": "Transportation entities",
+  "transportationEntities": "Companies",
   "reservations": "Reservations",
   "previousTrips": "Previous trips",
   "bookATrip": "Book a trip",
@@ -128,7 +128,7 @@
   "orderNotCompletedMessage": "The order payment process has not been completed and will be deleted after a few minutes",
   "importantWarning": "Important Notice",
   "apply": "Apply",
-  "city1City2DateXPrice": "Do you want to confirm sending a reservation request from {city1} to {city2} within {company} on {date} for {X} passengers and at a cost of {price} Syrian pounds",
+  "city1City2DateXPrice": "Do you want to confirm sending a reservation request from {city1} to {city2} within {company} on {date} for {X} passengers at a cost of {price} Syrian pounds",
   "currentBalance": "Current balance",
   "myReservations": "My reservations",
   "favoriteCompanies": "Favorite companies",
@@ -141,5 +141,14 @@
   "gallery": "Gallery",
   "youHaveNoPreviousReservations": "You have no previous reservations",
   "youHaveNoFavoriteCompanies": "You do not have any companies in your favorites list!",
-  "upcomingTrips": "Upcoming trips"
+  "upcomingTrips": "Upcoming trips",
+  "currentPassword": "Current password",
+  "newPassword": "New password",
+  "saveChanges": "Save changes",
+  "passwordChangedSuccessfully": "Password changed successfully",
+  "areYouSureYouWantToLogOut": "Are you sure you want to log out?",
+  "enterPasswordToContinueDeletingAccount": "Enter password to continue deleting account",
+  "phoneNumberChangesSuccessfully": "Phone number changes successfully",
+  "newPhoneNumber": "New phone number",
+  "payFromMyBalance": "Pay from wallet"
 }

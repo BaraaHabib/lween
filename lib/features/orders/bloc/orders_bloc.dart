@@ -48,7 +48,12 @@ class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
   Future<FutureOr<void>> _latestOrdersEventHandler(GetLatestOrdersEvent event,
       Emitter<OrdersState> emit) async {
     emit(MyRecentOrdersLoading());
-    final res = await sl<OrdersRepository>().getMyOrders();
+    final res = await sl<OrdersRepository>().getMyOrders(
+      MyOrdersParams(
+        pageLength: 4,
+        myRecentOrders : true,
+      ),
+    );
     emit(
       res.fold((l) => MyRecentOrdersError(l.message,),
             (r) => MyRecentOrdersLoaded(ordersResult: r,),

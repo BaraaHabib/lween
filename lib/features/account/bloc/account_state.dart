@@ -236,18 +236,106 @@ class AccountError extends AccountState {
   List<Object?> get props => [message];
 }
 
-class ChangePasswordLoading extends AccountState {
+//#region change password
+abstract class ChangePasswordState extends AccountState {
+  const ChangePasswordState({String? message}) : super(message: message);
+}
+
+class ChangePasswordLoading extends ChangePasswordState {
   @override
   List<Object?> get props => [];
 }
 
-class PasswordChangeError extends AccountState {
-  const PasswordChangeError(this.errorMessage);
+class ChangePasswordLoaded extends ChangePasswordState {
+  const ChangePasswordLoaded();
 
-  final String? errorMessage;
   @override
-  List<Object?> get props => [errorMessage];
+  List<Object> get props => [];
 }
+
+class ChangePasswordError extends ChangePasswordState {
+  const ChangePasswordError(String message) : super(message: message);
+
+  @override
+  List<Object?> get props => [message];
+}
+//#endregion
+
+//#region delete account
+abstract class DeleteAccountState extends AccountState {
+  const DeleteAccountState({String? message}) : super(message: message);
+}
+
+class DeleteAccountLoading extends DeleteAccountState {
+  @override
+  List<Object?> get props => [];
+}
+
+class DeleteAccountLoaded extends DeleteAccountState {
+  const DeleteAccountLoaded();
+
+  @override
+  List<Object> get props => [];
+}
+
+class DeleteAccountError extends DeleteAccountState {
+  const DeleteAccountError(String message) : super(message: message);
+
+  @override
+  List<Object?> get props => [message];
+}
+//#endregion
+
+//#region request change phone
+abstract class RequestChangePhoneState extends AccountState {
+  const RequestChangePhoneState({String? message}) : super(message: message);
+}
+
+class RequestChangePhoneLoading extends RequestChangePhoneState {
+  @override
+  List<Object?> get props => [];
+}
+
+class RequestChangePhoneLoaded extends RequestChangePhoneState {
+  const RequestChangePhoneLoaded();
+
+  @override
+  List<Object> get props => [];
+}
+
+class RequestChangePhoneError extends RequestChangePhoneState {
+  const RequestChangePhoneError(String message) : super(message: message);
+
+  @override
+  List<Object?> get props => [message];
+}
+//#endregion
+
+//#region request change phone
+abstract class ConfirmChangePhoneCodeState extends AccountState {
+  const ConfirmChangePhoneCodeState({String? message}) : super(message: message);
+}
+
+class ConfirmChangePhoneCodeLoading extends ConfirmChangePhoneCodeState {
+  @override
+  List<Object?> get props => [];
+}
+
+class ConfirmChangePhoneCodeLoaded extends ConfirmChangePhoneCodeState {
+  const ConfirmChangePhoneCodeLoaded();
+
+  @override
+  List<Object> get props => [];
+}
+
+class ConfirmChangePhoneCodeError extends ConfirmChangePhoneCodeState {
+  const ConfirmChangePhoneCodeError(String message) : super(message: message);
+
+  @override
+  List<Object?> get props => [message];
+}
+//#endregion
+
 
 abstract class ForgetPasswordState extends AccountState {
   const ForgetPasswordState({String? message}) : super(message: message);

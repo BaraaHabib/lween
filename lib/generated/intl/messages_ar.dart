@@ -45,6 +45,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "apply": MessageLookupByLibrary.simpleMessage("تطبيق"),
         "areYouSureYouWantToCancelOrder": MessageLookupByLibrary.simpleMessage(
             "هل انت متأكد من إلغاء الطلب؟"),
+        "areYouSureYouWantToLogOut": MessageLookupByLibrary.simpleMessage(
+            "هل انت متأكد من تسجيل الخروج؟"),
         "arriveTo": MessageLookupByLibrary.simpleMessage("الوصول إلى"),
         "availableDateTravels": MessageLookupByLibrary.simpleMessage(
             "الرحلات المتوفرة في التاريخ المطلوب"),
@@ -85,6 +87,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "country": MessageLookupByLibrary.simpleMessage("البلد"),
         "currency": MessageLookupByLibrary.simpleMessage("ل.س"),
         "currentBalance": MessageLookupByLibrary.simpleMessage("رصيدك الحالي"),
+        "currentPassword":
+            MessageLookupByLibrary.simpleMessage("كلمة المرور الحالية"),
         "date": MessageLookupByLibrary.simpleMessage("تاريخ"),
         "deactivateAccount":
             MessageLookupByLibrary.simpleMessage("تعطيل الحساب"),
@@ -96,6 +100,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "enter": MessageLookupByLibrary.simpleMessage("دخول"),
         "enterFullNameForSeats": MessageLookupByLibrary.simpleMessage(
             "قم بإدخال الأسماء الثلاثية للمسافرين في المقاعد المحجوزة"),
+        "enterPasswordToContinueDeletingAccount":
+            MessageLookupByLibrary.simpleMessage(
+                "أدخل كلمة المرور لمتابعة حذف الحساب"),
         "enterPhoneNumber":
             MessageLookupByLibrary.simpleMessage("أدخل رقم الهاتف"),
         "enterPhoneToSendCode": MessageLookupByLibrary.simpleMessage(
@@ -133,6 +140,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("حجوزاتي / رحلاتي"),
         "myTickets": MessageLookupByLibrary.simpleMessage("تذاكري"),
         "myTrips": MessageLookupByLibrary.simpleMessage("تذاكري"),
+        "newPassword":
+            MessageLookupByLibrary.simpleMessage("كلمة المرور الجديدة"),
+        "newPhoneNumber":
+            MessageLookupByLibrary.simpleMessage("رقم الهاتف الجديد"),
         "newRequiredPayment":
             MessageLookupByLibrary.simpleMessage("قيمة الحجز بعد الخصم"),
         "next": MessageLookupByLibrary.simpleMessage("التالي"),
@@ -162,17 +173,23 @@ class MessageLookup extends MessageLookupByLibrary {
         "passsengersInfo":
             MessageLookupByLibrary.simpleMessage("معلومات الركاب"),
         "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
+        "passwordChangedSuccessfully":
+            MessageLookupByLibrary.simpleMessage("تم تغيير كلمة المرور بنجاح"),
         "passwordUpdatedSuccessfully":
             MessageLookupByLibrary.simpleMessage("تم تغيير كلمة المرور بنجاح"),
         "passwordsDoesNotMatch":
             MessageLookupByLibrary.simpleMessage("كلمة المرور غير مطابقة"),
         "payAtCenter": MessageLookupByLibrary.simpleMessage("دفع في المكتب"),
+        "payFromMyBalance":
+            MessageLookupByLibrary.simpleMessage("دفع عن طريق رصيدي"),
         "payedAmount": m2,
         "payedInCenter":
             MessageLookupByLibrary.simpleMessage("تم الدفع ضمن المركز"),
         "payedWithValue": m3,
         "paymentStatus": MessageLookupByLibrary.simpleMessage("حالة الدفع"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
+        "phoneNumberChangesSuccessfully":
+            MessageLookupByLibrary.simpleMessage("تم تغيير رقم الهاتف بنجاح"),
         "phoneShouldStartWith09":
             MessageLookupByLibrary.simpleMessage("يجب أن يبدأ رقم الهاتف ب 09"),
         "placeOfResidence":
@@ -192,6 +209,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "resetPassword":
             MessageLookupByLibrary.simpleMessage("استعادة كلمة المرور"),
         "retry": MessageLookupByLibrary.simpleMessage("إعادة المحاولة"),
+        "saveChanges": MessageLookupByLibrary.simpleMessage("حفظ التغييرات"),
         "saveToDevice":
             MessageLookupByLibrary.simpleMessage("حفظ إلى ملفات الجهاز"),
         "seatNumber": MessageLookupByLibrary.simpleMessage("رقم المقعد"),

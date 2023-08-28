@@ -95,14 +95,14 @@ enum DialogType{
 class DialogAction{
   final String text;
   final Function callback;
-  final Color color;
+  final Color? color;
   final Color borderColor;
   final  Size? fixedSize;
   final  bool? isOneAction;
   DialogAction({
     required this.text,
     required this.callback,
-    this.color = const Color(0xFF13A7C8),
+    this.color,
     this.borderColor = Colors.transparent,
     this.fixedSize,
     this.isOneAction

@@ -57,4 +57,10 @@ class HomeScreenController extends Controller {
       upcomingTravels = state.travelsResult.travels ?? [];
     }
   }
+
+  void startQuickOrder(TravelEntity travelEntity, BuildContext context) {
+    NavigationService
+        .of(context)
+        .navigateTo(OrderSeatsScreenRoute(travelEntity:travelEntity,));
+  }
 }

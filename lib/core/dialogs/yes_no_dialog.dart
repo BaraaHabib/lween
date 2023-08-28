@@ -15,10 +15,6 @@ class YesNoDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // padding: EdgeInsets.symmetric(
-      //   vertical: 15.hx,
-      //   horizontal: 20.wx,
-      // ),
       constraints: BoxConstraints(
         // minHeight: 0.25.sh,
         maxHeight: 0.7.sh,
@@ -28,48 +24,46 @@ class YesNoDialog extends StatelessWidget {
         color: Theme.of(context).scaffoldBackgroundColor,
         borderRadius: Styles.borderRadius30px,
       ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          // Text(
-          //   title,
-          //   style: Theme.of(context).textTheme.titleMedium,
-          // ),
-          20.vSpace,
-          Text(
-            message,
-            style: Theme.of(context).textTheme.bodyLarge,
-            textAlign: TextAlign.justify,
-          ),
-          20.vSpace,
-          Row(
-            children: [
-              AppButton(
-                onTap: () async {
-                  await NavigationService.of(context).pop(true,);
-                  yesCallback?.call();
-                },
-                content: Text(
-                  S.of(context).yes,
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            20.vSpace,
+            Text(
+              message,
+              style: Theme.of(context).textTheme.bodyLarge,
+              textAlign: TextAlign.justify,
+            ),
+            20.vSpace,
+            Row(
+              children: [
+                AppButton(
+                  onTap: () async {
+                    await NavigationService.of(context).pop(true,);
+                    yesCallback?.call();
+                  },
+                  content: Text(
+                    S.of(context).yes,
+                  ),
                 ),
-              ),
-              const Spacer(),
-              AppButton(
-                onTap: () async {
-                  await NavigationService.of(context).pop(false,);
-                  noCallBack?.call();
-                },
-                color: Colors.transparent,
-                borderColor: Styles.colorSecondary,
-                content: Text(
-                  S.of(context).no,
+                const Spacer(),
+                AppButton(
+                  onTap: () async {
+                    await NavigationService.of(context).pop(false,);
+                    noCallBack?.call();
+                  },
+                  color: Colors.transparent,
+                  borderColor: Styles.colorSecondary,
+                  content: Text(
+                    S.of(context).no,
+                  ),
                 ),
-              ),
-            ],
-          ),
-          // CommonSizes.v10,
-        ],
+              ],
+            ),
+            10.vSpace,
+          ],
+        ),
       ),
     );
   }

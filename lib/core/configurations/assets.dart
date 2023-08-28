@@ -15,6 +15,7 @@ class Assets {
   static const logInHeader = 'assets/auth/login.png';
   static const verifyPhoneHeader = 'assets/auth/verification.png';
   static const forgotPasswordHeader = 'assets/auth/forgot_password.png';
+  static const changePasswordHeader = 'assets/account/SVG/reset-password.svg';
   static const profileIcon = 'assets/auth/SVG/Profile.svg';
   static const lockIcon = 'assets/auth/SVG/ic_lock_outline_24px.svg';
   static const phoneIcon = 'assets/auth/SVG/ic_phone_24px.svg';
@@ -67,6 +68,7 @@ class Assets {
   static const tripOrderIconLight = 'assets/orders/SVG/trip.svg';
   static const tripOrderDarkIcon = 'assets/orders/PNG/trip-dark.png';
   static const orderDateIcon = 'assets/orders/SVG/date.svg';
+  static const noOrdersSVG = 'assets/orders/SVG/no_orders.svg';
 
   static Widget get orderDateIconWidget => SvgPicture.asset(orderDateIcon);
 
@@ -90,6 +92,7 @@ class Assets {
 
   static const arrowBack = 'assets/icons/SVG/ic_back.svg';
   static const noNotificationsSVG = 'assets/icons/SVG/ic_no_notification.svg';
+  static const checkCodeSVG = 'assets/icons/SVG/check_code.svg';
 
   static Widget arrowBackWidget(BuildContext context, {Color? color,bool reverse = false}) {
     double angle = 0;
@@ -167,6 +170,7 @@ class Assets {
 
   /// payment
   static const cashMobilePNG = 'assets/payment/cash_mobile.png';
+  static const balancePaymentSVG = 'assets/payment/pay_balance.png';
   static const bemoPNG = 'assets/payment/bemo.png';
   static const cashPNG = 'assets/payment/cash.png';
   static const fatoraPNG = 'assets/payment/fatora_logo.png';

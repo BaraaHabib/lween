@@ -4,6 +4,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:lween/core/configurations/assets.dart';
 import 'package:lween/core/controller/base_controller.dart';
 import 'package:lween/core/extended/numbers_ext.dart';
 import 'package:lween/core/lween/widgets/app_scaffold.dart';
@@ -72,6 +73,7 @@ class MyOrdersScreen extends HookWidget {
                   else if (state is MyOrdersLoaded) {
                     if(state.ordersResult.orders?.isEmpty ?? true){
                       return EmptyWidget(
+                        imageAssetPath: Assets.noOrdersSVG,
                         entity: S.of(context).reservations,
                         actionTitle: S.current.bookATrip,
                         fullMessage: S.of(context).youHaveNoPreviousReservations,

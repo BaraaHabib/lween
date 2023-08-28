@@ -21,7 +21,7 @@ class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
   static String m0(city1, city2, company, date, X, price) =>
-      "Do you want to confirm sending a reservation request from ${city1} to ${city2} within ${company} on ${date} for ${X} passengers and at a cost of ${price} Syrian pounds";
+      "Do you want to confirm sending a reservation request from ${city1} to ${city2} within ${company} on ${date} for ${X} passengers at a cost of ${price} Syrian pounds";
 
   static String m1(count) =>
       "Due to the reservation of ${count} seats, you will not be able to schedule your order without paying it directly from the application via the available electronic payment methods.";
@@ -45,6 +45,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "apply": MessageLookupByLibrary.simpleMessage("Apply"),
         "areYouSureYouWantToCancelOrder": MessageLookupByLibrary.simpleMessage(
             "Are you sure you want to cancel order?"),
+        "areYouSureYouWantToLogOut": MessageLookupByLibrary.simpleMessage(
+            "Are you sure you want to log out?"),
         "arriveTo": MessageLookupByLibrary.simpleMessage("Arrive to"),
         "availableDateTravels": MessageLookupByLibrary.simpleMessage(
             "Available trips in selected date"),
@@ -87,6 +89,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "currency": MessageLookupByLibrary.simpleMessage("S.P"),
         "currentBalance":
             MessageLookupByLibrary.simpleMessage("Current balance"),
+        "currentPassword":
+            MessageLookupByLibrary.simpleMessage("Current password"),
         "date": MessageLookupByLibrary.simpleMessage("Date"),
         "deactivateAccount":
             MessageLookupByLibrary.simpleMessage("Deactivate account"),
@@ -98,6 +102,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "enter": MessageLookupByLibrary.simpleMessage("Enter"),
         "enterFullNameForSeats": MessageLookupByLibrary.simpleMessage(
             "Enter full names of the passengers in the reserved seats"),
+        "enterPasswordToContinueDeletingAccount":
+            MessageLookupByLibrary.simpleMessage(
+                "Enter password to continue deleting account"),
         "enterPhoneNumber":
             MessageLookupByLibrary.simpleMessage("Enter phone number"),
         "enterPhoneToSendCode": MessageLookupByLibrary.simpleMessage(
@@ -135,6 +142,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("My reservations"),
         "myTickets": MessageLookupByLibrary.simpleMessage("My tickets"),
         "myTrips": MessageLookupByLibrary.simpleMessage("My tickets"),
+        "newPassword": MessageLookupByLibrary.simpleMessage("New password"),
+        "newPhoneNumber":
+            MessageLookupByLibrary.simpleMessage("New phone number"),
         "newRequiredPayment":
             MessageLookupByLibrary.simpleMessage("Price after discount"),
         "next": MessageLookupByLibrary.simpleMessage("Next"),
@@ -164,17 +174,23 @@ class MessageLookup extends MessageLookupByLibrary {
         "passsengersInfo":
             MessageLookupByLibrary.simpleMessage("Passengers details"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
+        "passwordChangedSuccessfully": MessageLookupByLibrary.simpleMessage(
+            "Password changed successfully"),
         "passwordUpdatedSuccessfully": MessageLookupByLibrary.simpleMessage(
             "Password updated successfully"),
         "passwordsDoesNotMatch":
             MessageLookupByLibrary.simpleMessage("Passwords does not match"),
         "payAtCenter": MessageLookupByLibrary.simpleMessage("Pay at center"),
+        "payFromMyBalance":
+            MessageLookupByLibrary.simpleMessage("Pay from wallet"),
         "payedAmount": m2,
         "payedInCenter":
             MessageLookupByLibrary.simpleMessage("Payed in company center"),
         "payedWithValue": m3,
         "paymentStatus": MessageLookupByLibrary.simpleMessage("Payment status"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone number"),
+        "phoneNumberChangesSuccessfully": MessageLookupByLibrary.simpleMessage(
+            "Phone number changes successfully"),
         "phoneShouldStartWith09":
             MessageLookupByLibrary.simpleMessage("Phone should start with 09"),
         "placeOfResidence":
@@ -193,6 +209,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "reservations": MessageLookupByLibrary.simpleMessage("Reservations"),
         "resetPassword": MessageLookupByLibrary.simpleMessage("Reset Password"),
         "retry": MessageLookupByLibrary.simpleMessage("Retry"),
+        "saveChanges": MessageLookupByLibrary.simpleMessage("Save changes"),
         "saveToDevice": MessageLookupByLibrary.simpleMessage("Save to device"),
         "seatNumber": MessageLookupByLibrary.simpleMessage("Seat number"),
         "seatsCount": MessageLookupByLibrary.simpleMessage("Seats count"),
@@ -210,7 +227,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "tickets": MessageLookupByLibrary.simpleMessage("Tickets"),
         "to": MessageLookupByLibrary.simpleMessage("to"),
         "transportationEntities":
-            MessageLookupByLibrary.simpleMessage("Transportation entities"),
+            MessageLookupByLibrary.simpleMessage("Companies"),
         "transportationType":
             MessageLookupByLibrary.simpleMessage("Vehicle type"),
         "travelDate": MessageLookupByLibrary.simpleMessage("Travel date"),

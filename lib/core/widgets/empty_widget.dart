@@ -50,19 +50,19 @@ class EmptyWidget extends StatelessWidget {
           25.vSpace,
           if (onAction != null && actionTitle != null)
             Center(
-              child: Container(
-                decoration: BoxDecoration(
-                  // color: color,
-                  gradient: const LinearGradient(
-                    colors: [
-                      Styles.buttonSecondaryColor1,
-                      Styles.buttonSecondaryColor2,
-                    ],
+              child: GestureDetector(
+                onTap: onAction!,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Styles.blueColor,
+                    // gradient: const LinearGradient(
+                    //   colors: [
+                    //     Styles.buttonSecondaryColor1,
+                    //     Styles.buttonSecondaryColor2,
+                    //   ],
+                    // ),
+                    borderRadius: Styles.buttonBorderRadius,
                   ),
-                  borderRadius: Styles.buttonBorderRadius,
-                ),
-                child: GestureDetector(
-                  onTap: onAction!,
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 30.wx,vertical: 10.hx),
                     child: Text(
@@ -71,7 +71,7 @@ class EmptyWidget extends StatelessWidget {
                         color:Styles.buttonTextColor,
                       ),
                     ),
-                  )
+                  ),
                 ),
               ),
             ),

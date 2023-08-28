@@ -141,5 +141,14 @@
   "gallery": "معرض الصور",
   "youHaveNoPreviousReservations": "لا يوجد لديك حجوزات سابقة!",
   "youHaveNoFavoriteCompanies": "ليس لديك أي شركات ضمن قائمة المفضلة!",
-  "upcomingTrips": "رحلات قادمة"
+  "upcomingTrips": "رحلات قادمة",
+  "currentPassword": "كلمة المرور الحالية",
+  "newPassword": "كلمة المرور الجديدة",
+  "saveChanges": "حفظ التغييرات",
+  "passwordChangedSuccessfully": "تم تغيير كلمة المرور بنجاح",
+  "areYouSureYouWantToLogOut": "هل انت متأكد من تسجيل الخروج؟",
+  "enterPasswordToContinueDeletingAccount": "أدخل كلمة المرور لمتابعة حذف الحساب",
+  "phoneNumberChangesSuccessfully": "تم تغيير رقم الهاتف بنجاح",
+  "newPhoneNumber": "رقم الهاتف الجديد",
+  "payFromMyBalance": "دفع عن طريق رصيدي"
 }
