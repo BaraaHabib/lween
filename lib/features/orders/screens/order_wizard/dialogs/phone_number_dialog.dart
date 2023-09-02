@@ -55,8 +55,8 @@ class OrderPhoneNumberDialog extends HookWidget{
                       false,
                   );
                 },
-                child: IgnorePointer(
-                  ignoring:
+                child: AbsorbPointer(
+                  absorbing:
                   cs is CompletePaymentLoading ||
                   cs is RequestPaymentLoading ||
                       cs is ResendPaymentCodeLoading,

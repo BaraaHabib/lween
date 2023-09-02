@@ -41,19 +41,21 @@ class MyRecentOrdersError extends MyRecentOrdersState {
 
 //#region all orders
 abstract class MyOrdersState extends OrdersState {
-  const MyOrdersState({String? message}) : super(message: message);
+  const MyOrdersState({String? message,}) : super(message: message);
+
 }
 
 class MyOrdersLoading extends MyOrdersState {
+  const MyOrdersLoading();
+
   @override
   List<Object?> get props => [];
 }
 
 class MyOrdersLoaded extends MyOrdersState {
-  const MyOrdersLoaded({required this.ordersResult,required this.navigateToDetails,});
+  const MyOrdersLoaded({required this.ordersResult, });
 
   final OrdersEntity ordersResult;
-  final bool navigateToDetails;
 
   @override
   List<Object> get props => [ordersResult];
@@ -62,7 +64,7 @@ class MyOrdersLoaded extends MyOrdersState {
 class MyOrdersError extends MyOrdersState {
 
 
-  const MyOrdersError(String message,) : super(message: message);
+  const MyOrdersError(String message,) : super(message: message,);
 
   @override
   List<Object?> get props => [message];
@@ -225,49 +227,64 @@ class CreateOrderLoaded extends CreateOrderState {
   List<Object> get props => [];
 }
 
+enum CreateOrderExceptionCode
+{
+  priceChanged(1),
+  travelIsNotAvailableInScheduledDate(2),
+  seatWasReserved(3),
+  seatNumberIsNotAcceptable(4);
+
+  const CreateOrderExceptionCode(this.apiValue);
+
+  final int apiValue;
+}
+
 class CreateOrderError extends CreateOrderState {
 
-  const CreateOrderError(String? message): super(message: message);
+  const CreateOrderError(String? message, {this.code,this.data,}): super(message: message);
+
+  final CreateOrderExceptionCode? code;
+  final Map? data;
 
   @override
   List<Object> get props => [];
 }
 //#endregion filtered travels
 
-//#region check voucher
-abstract class CheckVoucherState extends OrdersState {
-  const CheckVoucherState({
+//#region check Coupon
+abstract class CheckCouponState extends OrdersState {
+  const CheckCouponState({
     String? message,
   }) : super(message: message);
 
 }
 
-class CheckVoucherLoading extends CheckVoucherState {
-  const CheckVoucherLoading();
+class CheckCouponLoading extends CheckCouponState {
+  const CheckCouponLoading();
 
   @override
   List<Object> get props => [];
 }
 
-class CheckVoucherLoaded extends CheckVoucherState {
-  const CheckVoucherLoaded({
-    required this.voucher,
+class CheckCouponLoaded extends CheckCouponState {
+  const CheckCouponLoaded({
+    required this.coupon,
   });
 
-  final VoucherEntity voucher;
+  final CouponEntity coupon;
 
   @override
   List<Object> get props => [];
 }
 
-class CheckVoucherError extends CheckVoucherState {
+class CheckCouponError extends CheckCouponState {
 
-  const CheckVoucherError(String? message): super(message: message);
+  const CheckCouponError(String? message): super(message: message);
 
   @override
   List<Object> get props => [];
 }
-//#endregion check voucher
+//#endregion check Coupon
 
 //#region cancel order
 abstract class CancelOrderState extends OrdersState {
@@ -389,6 +406,38 @@ class ResendPaymentCodeLoaded extends ResendPaymentCodeState {
 class ResendPaymentCodeError extends ResendPaymentCodeState {
 
   const ResendPaymentCodeError(String? message): super(message: message);
+
+  @override
+  List<Object> get props => [];
+}
+//#endregion Resend Payment Code
+
+//#region RefreshAvailableSeats
+abstract class RefreshAvailableSeatsState extends OrdersState {
+  const RefreshAvailableSeatsState({
+    String? message,
+  }) : super(message: message);
+
+}
+
+class RefreshAvailableSeatsLoading extends RefreshAvailableSeatsState {
+  const RefreshAvailableSeatsLoading();
+
+  @override
+  List<Object> get props => [];
+}
+
+class RefreshAvailableSeatsLoaded extends RefreshAvailableSeatsState {
+  const RefreshAvailableSeatsLoaded(this.seatsData);
+
+  final AvailableSeatsEntity seatsData;
+  @override
+  List<Object> get props => seatsData.seats ?? [];
+}
+
+class RefreshAvailableSeatsError extends RefreshAvailableSeatsState {
+
+  const RefreshAvailableSeatsError(String? message): super(message: message);
 
   @override
   List<Object> get props => [];

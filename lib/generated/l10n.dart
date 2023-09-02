@@ -180,10 +180,10 @@ class S {
     );
   }
 
-  /// `full name`
+  /// `Full name`
   String get fullName {
     return Intl.message(
-      'full name',
+      'Full name',
       name: 'fullName',
       desc: '',
       args: [],
@@ -730,21 +730,21 @@ class S {
     );
   }
 
-  /// `Voucher code`
-  String get voucherCode {
+  /// `Coupon code`
+  String get couponCode {
     return Intl.message(
-      'Voucher code',
-      name: 'voucherCode',
+      'Coupon code',
+      name: 'couponCode',
       desc: '',
       args: [],
     );
   }
 
   /// `If you have a discount code, enter it to get a discount on the ticket price`
-  String get enterVoucherCode {
+  String get enterCouponCode {
     return Intl.message(
       'If you have a discount code, enter it to get a discount on the ticket price',
-      name: 'enterVoucherCode',
+      name: 'enterCouponCode',
       desc: '',
       args: [],
     );
@@ -1031,10 +1031,10 @@ class S {
   }
 
   /// `Coupon should be requested`
-  String get voucherShouldBeRequested {
+  String get couponShouldBeRequested {
     return Intl.message(
       'Coupon should be requested',
-      name: 'voucherShouldBeRequested',
+      name: 'couponShouldBeRequested',
       desc: '',
       args: [],
     );
@@ -1340,14 +1340,14 @@ class S {
     );
   }
 
-  /// `Do you want to confirm sending a reservation request from {city1} to {city2} within {company} on {date} for {X} passengers at a cost of {price} Syrian pounds`
+  /// `Are you sure you want to send a reservation request from {city1} to {city2} for {company} on {date} for {X} passengers.The order cost is {price} {currency}?`
   String city1City2DateXPrice(Object city1, Object city2, Object company,
-      Object date, Object X, Object price) {
+      Object date, Object X, Object price, Object currency) {
     return Intl.message(
-      'Do you want to confirm sending a reservation request from $city1 to $city2 within $company on $date for $X passengers at a cost of $price Syrian pounds',
+      'Are you sure you want to send a reservation request from $city1 to $city2 for $company on $date for $X passengers.The order cost is $price $currency?',
       name: 'city1City2DateXPrice',
       desc: '',
-      args: [city1, city2, company, date, X, price],
+      args: [city1, city2, company, date, X, price, currency],
     );
   }
 
@@ -1566,6 +1566,26 @@ class S {
     return Intl.message(
       'Pay from wallet',
       name: 'payFromMyBalance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Not enough balance`
+  String get notEnoughBalance {
+    return Intl.message(
+      'Not enough balance',
+      name: 'notEnoughBalance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Available seats has changed`
+  String get availableSeatsHasChanged {
+    return Intl.message(
+      'Available seats has changed',
+      name: 'availableSeatsHasChanged',
       desc: '',
       args: [],
     );

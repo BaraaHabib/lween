@@ -93,8 +93,8 @@ class AppVideoState extends State<AppVideo> with AutomaticKeepAliveClientMixin{
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return IgnorePointer(
-      ignoring: true,
+    return AbsorbPointer(
+      absorbing: true,
       child: SizedBox(
           width: widget.width,
           height: widget.height,

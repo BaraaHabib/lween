@@ -71,7 +71,9 @@ class LoginController extends Controller {
         refreshToken: state.logInEntity.refreshToken,
       ).then((value) {
         SplashBloc.initApp(context)
-            .then((value) => NavigationService.of(context).clearAllAndPushNamed(const MainScreenRoute()));
+            .then((value) {
+              return NavigationService.of(context).clearAllAndPushNamed(const MainScreenStackRoute());
+            });
       });
     }
     else if(state is LogInError){

@@ -47,8 +47,8 @@ class ForgotPasswordCodeDialog extends HookWidget {
         listener: controller.listener,
         buildWhen: controller.buildWhen,
         builder: (ctx, cs) {
-          return IgnorePointer(
-            ignoring:
+          return AbsorbPointer(
+            absorbing:
             cs is ResendCodeLoading ||
             cs is CheckCodeLoading,
             child: FormBuilder(

@@ -26,17 +26,17 @@ abstract class ShimmerUI {
         height: h,
         decoration: BoxDecoration(
           color: color,
-          borderRadius: Styles.borderRadius30px,
+          // borderRadius: Styles.borderRadius30px,
         ),
       );
 
-  static Widget circle([double d = 10]) =>
+  static Widget circle([double d = 10, BorderRadiusGeometry? borderRadius ]) =>
       Container(
         height: d,
         width: d,
         decoration: BoxDecoration(
           color: Colors.grey.withOpacity(0.5),
-          borderRadius: Styles.borderRadius30px,
+          borderRadius: borderRadius ?? Styles.borderRadius30px,
         ),
       );
 

@@ -51,8 +51,8 @@ class OrderDetailsScreen extends HookWidget {
         listenWhen: controller.orderDetailsScreenListenWhen,
         listener:  controller.orderDetailsScreenListener,
         builder: (context,state) {
-        return IgnorePointer(
-          ignoring: state is CancelOrderLoading,
+        return AbsorbPointer(
+          absorbing: state is CancelOrderLoading,
           child: AppScaffold(
             title: S
                 .of(context)
@@ -231,19 +231,19 @@ class OrderDetailsScreen extends HookWidget {
                               // height: 100.hx,
                               child: Column(
                                 children: [
-                                  // if(order.isCanceled)
-                                  //   Row(
-                                  //     mainAxisAlignment:MainAxisAlignment.center,
-                                  //     children: [
-                                  //       AppTextWidget(
-                                  //         S.of(context).orderIsCanceled,
-                                  //         style: context.textTheme.headlineLarge?.copyWith(
-                                  //           color: order.paymentStatusTextColor(context),
-                                  //         ),
-                                  //       ),
-                                  //     ],
-                                  //   )
-                                  //   else
+                                  if(order.isCanceled)
+                                    Row(
+                                      mainAxisAlignment:MainAxisAlignment.center,
+                                      children: [
+                                        AppTextWidget(
+                                          S.of(context).orderIsCanceled,
+                                          style: context.textTheme.headlineLarge?.copyWith(
+                                            color: order.paymentStatusTextColor(context),
+                                          ),
+                                        ),
+                                      ],
+                                    )
+                                    else
                                       ...[
                                         Row(
                                           mainAxisAlignment:MainAxisAlignment.center,

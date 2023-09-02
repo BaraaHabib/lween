@@ -23,6 +23,7 @@ import 'package:lween/core/widgets/app_image.dart';
 import 'package:lween/core/widgets/app_text_button.dart';
 import 'package:lween/core/widgets/app_text_widget.dart';
 import 'package:lween/core/widgets/error_widget.dart';
+import 'package:lween/core/widgets/shimmer_ui.dart';
 import 'package:lween/features/account/repo/account_repository.dart';
 import 'package:lween/features/home/models/home_entity.dart';
 import 'package:lween/features/home/screens/home/home_screen_controller.dart';
@@ -32,6 +33,7 @@ import 'package:lween/features/orders/widgets/prev_orders.dart';
 import 'package:lween/features/transportation_entities/models/transportation_entities.dart';
 import 'package:lween/features/transportation_entities/screens/widgets/controller.dart';
 import 'package:lween/generated/l10n.dart';
+import 'package:lween/main.dart';
 import 'package:provider/provider.dart';
 
 class UpcomingTravelsList extends HookWidget {
@@ -41,7 +43,7 @@ class UpcomingTravelsList extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final HomeScreenController controller = Controller.getInstance();
-    if(AccountRepository.profile?.city?.id == null){
+    if(AppStateModel.of(context).profile.city?.id == null){
       return const SizedBox.shrink();
     }
     useEffect(() {
@@ -58,6 +60,9 @@ class UpcomingTravelsList extends HookWidget {
           return AppErrorWidget(
             onAction: () => HomeScreenController.getUpcomingTravels(),
           );
+        }
+        if(state is GetUpcomingTravelsLoading){
+          return const UpcomingTravelsListShimmer();
         }
         if(state is GetUpcomingTravelsLoaded){
           if(controller.upcomingTravels.isNotEmpty) {
@@ -229,3 +234,76 @@ class _UpcomingTravelWidget extends HookWidget{
   }
 
 }
+
+class UpcomingTravelsListShimmer extends StatelessWidget {
+  const UpcomingTravelsListShimmer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 22.hx,),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              AppTextWidget(
+                S.of(context).upcomingTrips,
+                style: context.theme.textTheme.headlineLarge,
+              ),
+            ],
+          ),
+        ),
+        8.vSpace,
+        SizedBox(
+          height: 150.hx,
+          child: ShimmerUI.widgetLoader(
+            enabled: true,
+            child: ListView.separated(
+              // controller: SCc,
+              scrollDirection: Axis.horizontal,
+              padding: EdgeInsetsDirectional.only(start: 22.wx,),
+              shrinkWrap: true,
+              itemCount: 4,
+              separatorBuilder: (ctx, index) => SizedBox(width: 18.hx,),
+              itemBuilder: (ctx, index) => Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ShimmerUI.circle(
+                      105.rx,
+                      Styles.borderRadius14px
+                  ),
+                  5.vSpace,
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      ShimmerUI.circle(
+                        14.rx,
+                      ),
+                      3.hSpace,
+                      ShimmerUI.text(w: 50.wx,h: 7.hx),
+                    ],
+                  ),
+                  // 5.vSpace,
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      // 2.hSpace,
+                      ShimmerUI.circle(
+                        14.rx,
+                      ),
+                      3.hSpace,
+                      ShimmerUI.text(w: 50.wx,h: 7.hx),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+        20.vSpace,
+      ],
+    );
+  }
+}
+

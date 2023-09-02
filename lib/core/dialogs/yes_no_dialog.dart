@@ -29,7 +29,7 @@ class YesNoDialog extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           mainAxisSize: MainAxisSize.min,
           children: [
-            20.vSpace,
+            15.vSpace,
             Text(
               message,
               style: Theme.of(context).textTheme.bodyLarge,
@@ -61,7 +61,7 @@ class YesNoDialog extends StatelessWidget {
                 ),
               ],
             ),
-            10.vSpace,
+            15.vSpace,
           ],
         ),
       ),

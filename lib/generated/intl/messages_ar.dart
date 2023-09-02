@@ -20,8 +20,8 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ar';
 
-  static String m0(city1, city2, company, date, X, price) =>
-      "هل تريد تأكيد ارسال طلب حجز من ${city1} الى ${city2} ضمن ${company} بتاريخ ${date} ل ${X} مسافر وبتكلفة ${price} ليرة سورية؟";
+  static String m0(city1, city2, company, date, X, price, currency) =>
+      "هل تريد تأكيد ارسال طلب حجز من ${city1} الى ${city2} ضمن ${company} بتاريخ ${date} ل ${X} مسافر وبتكلفة ${price} ${currency}؟";
 
   static String m1(count) =>
       "بسبب حجز ${count} مقعد فإنه لن تتمكن من جدولة طلبك دون دفعه مباشرة من التطبيق عبر وسائل الدفع الإلكتروني المتوفرة.";
@@ -52,6 +52,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "الرحلات المتوفرة في التاريخ المطلوب"),
         "availableDays":
             MessageLookupByLibrary.simpleMessage("الأيام المتوفرة"),
+        "availableSeatsHasChanged":
+            MessageLookupByLibrary.simpleMessage("تم حجز بعض المقاعد"),
         "bemoBank": MessageLookupByLibrary.simpleMessage("بنك بيمو"),
         "bookATrip": MessageLookupByLibrary.simpleMessage("حجز رحلة"),
         "bookingStatus": MessageLookupByLibrary.simpleMessage("حالة الحجز"),
@@ -85,6 +87,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("تأكيد كلمة المرور"),
         "country": MessageLookupByLibrary.simpleMessage("البلد"),
+        "couponCode": MessageLookupByLibrary.simpleMessage("كود الحسم"),
+        "couponShouldBeRequested":
+            MessageLookupByLibrary.simpleMessage("يجب إعادة طلب الكوبون"),
         "currency": MessageLookupByLibrary.simpleMessage("ل.س"),
         "currentBalance": MessageLookupByLibrary.simpleMessage("رصيدك الحالي"),
         "currentPassword":
@@ -98,6 +103,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "eCash": MessageLookupByLibrary.simpleMessage("إي كاش"),
         "editProfile": MessageLookupByLibrary.simpleMessage("تعديل الحساب"),
         "enter": MessageLookupByLibrary.simpleMessage("دخول"),
+        "enterCouponCode": MessageLookupByLibrary.simpleMessage(
+            "إن كنت تملك كود حسم أدخله لتحصل على حسم على سعر التذاكر"),
         "enterFullNameForSeats": MessageLookupByLibrary.simpleMessage(
             "قم بإدخال الأسماء الثلاثية للمسافرين في المقاعد المحجوزة"),
         "enterPasswordToContinueDeletingAccount":
@@ -109,8 +116,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "أدخل رقم الهاتف الذي استخدمته لإنشاء الحساب. سنقوم بإرسال رمز تحقق لك لإعادة ضبط كلمة المرور الخاصة بك"),
         "enterVerificationCode":
             MessageLookupByLibrary.simpleMessage("أدخل رمز التحقق"),
-        "enterVoucherCode": MessageLookupByLibrary.simpleMessage(
-            "إن كنت تملك كود حسم أدخله لتحصل على حسم على سعر التذاكر"),
         "error": MessageLookupByLibrary.simpleMessage("خطأ"),
         "exceededSeatsCountDialogMessage": m1,
         "fatora": MessageLookupByLibrary.simpleMessage("فاتورة"),
@@ -152,6 +157,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("تأكد من الاتصال بالانترنت"),
         "noTripsAvailableForThisDate":
             MessageLookupByLibrary.simpleMessage("لا يوجد رحلات في هذا الموعد"),
+        "notEnoughBalance":
+            MessageLookupByLibrary.simpleMessage("لا يوجد رصيد كافٍ"),
         "notifications": MessageLookupByLibrary.simpleMessage("الاشعارات"),
         "ok": MessageLookupByLibrary.simpleMessage("موافق"),
         "orderDeletionWarning": MessageLookupByLibrary.simpleMessage(
@@ -243,9 +250,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "vehicleNumber": MessageLookupByLibrary.simpleMessage("رقم الباص"),
         "verificationCode": MessageLookupByLibrary.simpleMessage("رمز التحقق"),
         "verify": MessageLookupByLibrary.simpleMessage("تأكيد"),
-        "voucherCode": MessageLookupByLibrary.simpleMessage("كود الحسم"),
-        "voucherShouldBeRequested":
-            MessageLookupByLibrary.simpleMessage("يجب إعادة طلب الكوبون"),
         "waitingPaymentInCompanyCenter": MessageLookupByLibrary.simpleMessage(
             "بانتظار الدفع ضمن مركز الشركة"),
         "welcomeToLweenApp":

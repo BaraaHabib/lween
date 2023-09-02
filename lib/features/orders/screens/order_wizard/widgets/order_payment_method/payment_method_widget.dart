@@ -36,8 +36,8 @@ class PaymentMethodWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final OrderWizardController controller = Controller.getInstance();
-    return IgnorePointer(
-      ignoring: disabled,
+    return AbsorbPointer(
+      absorbing: disabled,
       child: Card(
         child: InkWell(
           onTap: (){
@@ -60,8 +60,6 @@ class PaymentMethodWidget extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // if(subtitle != null)
-                      //   const Text('',),
                       Text(title,
                         style: context
                             .textTheme
@@ -78,7 +76,7 @@ class PaymentMethodWidget extends StatelessWidget {
                                 subtitle!,
                                 maxLines: 2,
                                 style: context.textTheme.bodySmall?.copyWith(
-                                  color: Styles.colorOrange,
+                                  color: disabled ? Styles.colorOrange : Styles.greenColor,
                                 ),
                               ),
                             ),

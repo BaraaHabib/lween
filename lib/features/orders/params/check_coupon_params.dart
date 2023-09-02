@@ -5,12 +5,12 @@ import 'package:lween/core/resources/api_consts.dart';
 import 'package:lween/core/resources/constants.dart';
 
 
-class CheckVoucherParams extends ParamsModel<CheckVoucherBodyParams> {
-  CheckVoucherParams({
+class CheckCouponParams extends ParamsModel<CheckCouponBodyParams> {
+  CheckCouponParams({
     this.paymentProvider,
     required this.code,
   })
-      : super(body: CheckVoucherBodyParams(),);
+      : super(body: CheckCouponBodyParams(),);
 
   final String code;
   final int? paymentProvider;
@@ -22,7 +22,7 @@ class CheckVoucherParams extends ParamsModel<CheckVoucherBodyParams> {
   RequestType? get requestType => RequestType.GET;
 
   @override
-  String? get url => ApiConstants.checkVoucher;
+  String? get url => ApiConstants.checkCoupon;
 
   @override
   Map<String, String> get urlParams => {
@@ -41,9 +41,9 @@ class CheckVoucherParams extends ParamsModel<CheckVoucherBodyParams> {
 
 }
 
-class CheckVoucherBodyParams extends BaseBodyModel  {
+class CheckCouponBodyParams extends BaseBodyModel  {
 
-  CheckVoucherBodyParams();
+  CheckCouponBodyParams();
 
   @override
   Map<String, dynamic> toJson() => {};

@@ -47,8 +47,8 @@ class UpdateProfileScreen extends HookWidget {
         listener: controller.updateProfileListener,
         buildWhen: controller.updateProfileBuildWhen,
         builder: (context,state) {
-          return IgnorePointer(
-            ignoring: state is UpdateProfileLoading,
+          return AbsorbPointer(
+            absorbing: state is UpdateProfileLoading,
             child: AppScaffold(
               title: S.of(context).editProfile,
               child: FormBuilder(

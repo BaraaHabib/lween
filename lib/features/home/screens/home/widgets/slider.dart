@@ -11,6 +11,7 @@ import 'package:lween/core/navigation/navigation_service.dart';
 import 'package:lween/core/routing/app_router.dart';
 import 'package:lween/core/widgets/app_image.dart';
 import 'package:lween/core/widgets/app_video.dart';
+import 'package:lween/core/widgets/shimmer_ui.dart';
 import 'package:lween/features/home/models/home_entity.dart';
 
 class HomeSlider extends HookWidget {
@@ -53,7 +54,7 @@ class HomeSlider extends HookWidget {
             return CarouselSlider(
               carouselController: controller.carouselController,
               options: CarouselOptions(
-                height: 180.hx,
+                height: (9/16).sw,
                 autoPlay: ads.length > 1,
                 enlargeCenterPage: false,
                 padEnds: false,
@@ -92,5 +93,30 @@ class HomeSliderController extends Controller{
         .of(context)
         .navigateTo(AppWebViewRoute(url: url,),);
   }
+}
+
+
+class HomeSliderSkeleton extends StatelessWidget{
+  const HomeSliderSkeleton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ShimmerUI.widgetLoader(
+      enabled: true,
+      child: Padding(
+        padding: EdgeInsets.only(bottom: 20.hx,),
+        child: AspectRatio(
+          aspectRatio: 1.sw / (9/16).sw,
+          child: Container(
+            decoration: const BoxDecoration(
+              color:Colors.grey,
+              // borderRadius: Styles.borderRadius30px,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
 }
 

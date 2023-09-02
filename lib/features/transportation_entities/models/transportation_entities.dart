@@ -97,7 +97,7 @@ class CompanyEntity extends ContentModel {
   List<Object?> get props => [id];
 }
 
-class LiteCompanyEntity extends Equatable {
+class LiteCompanyEntity extends ContentModel {
   int? id;
   String? name;
   int? futureAllowedSchedulingDays;
@@ -128,5 +128,9 @@ class LiteCompanyEntity extends Equatable {
   }
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [id,];
+
+  @override
+  fromJson(json) => LiteCompanyEntity.fromJson(json);
+
 }

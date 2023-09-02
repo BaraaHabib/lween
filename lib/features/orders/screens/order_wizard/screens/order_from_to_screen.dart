@@ -54,8 +54,8 @@ class OrderFromToScreen extends HookWidget {
       buildWhen: controller.buildWhen,
       listenWhen: controller.listenWhen,
       builder: (context,state) {
-        return IgnorePointer(
-          ignoring: state is CompanyFilteredTravelsLoading,
+        return AbsorbPointer(
+          absorbing: state is CompanyFilteredTravelsLoading,
           child: AppScaffold(
             title: controller.fromToTitle,
             child: Stack(

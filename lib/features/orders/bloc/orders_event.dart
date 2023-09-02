@@ -13,14 +13,12 @@ class GetLatestOrdersEvent extends OrdersEvent {
 class GetOrdersEvent extends OrdersEvent {
   const GetOrdersEvent({
     this.page = 0,
-    this.navigateToDetails = false,
     this.ids,
     this.notCompletedYet,
   });
 
   final List<String>? ids;
   final int page;
-  final bool navigateToDetails;
   final bool? notCompletedYet;
 
   @override
@@ -70,8 +68,8 @@ class CreateOrderEvent extends OrdersEvent {
   List<Object?> get props => [];
 }
 
-class CheckVoucherEvent extends OrdersEvent {
-  const CheckVoucherEvent({
+class CheckCouponEvent extends OrdersEvent {
+  const CheckCouponEvent({
     this.paymentProvider,
     required this.code,
   });
@@ -124,6 +122,17 @@ class ResendPaymentCodeEvent extends OrdersEvent {
   final String accountNumber;
   final PaymentMethod paymentType;
   final String transactionId;
+
+  @override
+  List<Object?> get props => [];
+}
+
+class RefreshAvailableSeatsEvent extends OrdersEvent {
+  const RefreshAvailableSeatsEvent({
+    required this.params,
+  });
+
+  final AvailableSeatsParams params;
 
   @override
   List<Object?> get props => [];

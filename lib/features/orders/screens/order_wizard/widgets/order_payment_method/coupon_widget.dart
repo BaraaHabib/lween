@@ -1,8 +1,8 @@
 part of '../../screens/order_person_info_screen.dart';
 
 
-class VoucherWidget extends HookWidget{
-  const VoucherWidget({super.key});
+class CouponWidget extends HookWidget{
+  const CouponWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -11,14 +11,14 @@ class VoucherWidget extends HookWidget{
     final selectedPaymentMethod = useValueListenable(controller.selectedPaymentMethod);
     return BlocConsumer<OrdersBloc,OrdersState>(
       bloc: OrdersBloc.instance,
-      listener: controller.voucherListener,
-      listenWhen: controller.voucherListenWhen,
-      buildWhen: controller.voucherBuildWhen,
+      listener: controller.couponListener,
+      listenWhen: controller.couponListenWhen,
+      buildWhen: controller.couponBuildWhen,
       builder: (context,state) {
         num newValue = controller.totalPrice;
         String discount = '';
-        if (state is CheckVoucherLoaded) {
-          final v = state.voucher;
+        if (state is CheckCouponLoaded) {
+          final v = state.coupon;
           if (v.percentage != 0 && v.percentage != null) {
             newValue = newValue - (v.percentage! / 100) * newValue;
             discount = '${v.percentage} %';
@@ -29,8 +29,8 @@ class VoucherWidget extends HookWidget{
             newValue = controller.totalPrice;
           }
         }
-        return IgnorePointer(
-          ignoring: state is CheckVoucherLoading,
+        return AbsorbPointer(
+          absorbing: state is CheckCouponLoading,
           child: Column(
             children: [
               // 2.vSpace,
@@ -41,30 +41,30 @@ class VoucherWidget extends HookWidget{
                   Expanded(
                     child: AppTextWidget(S
                         .of(context)
-                        .enterVoucherCode, maxLines: 2,),
+                        .enterCouponCode, maxLines: 2,),
                   ),
                 ],
               ),
               5.vSpace,
               AppTextField(
-                name: 'voucher',
+                name: 'coupon',
                 enabled: selectedPaymentMethod != null,
-                onChanged: controller.onVoucherChanged,
-                controller: controller.voucherController,
+                onChanged: controller.onCouponChanged,
+                controller: controller.couponController,
                 prefixIcon: SvgPicture.asset(Assets.priceTagSVG,),
                 label: S
                     .of(context)
-                    .voucherCode,
+                    .couponCode,
                 suffixIcon: _CheckCodeIconWidget(state: state,),
               ),
               SizedBox(
                 // color: Colors.red,
                 height: 70.hx,
                 child: AnimatedToggle(
-                  value: state is CheckVoucherLoading ,
+                  value: state is CheckCouponLoading ,
                   child: Column(
                     children: [
-                      if(state is CheckVoucherLoaded && controller.discount != 0)
+                      if(state is CheckCouponLoaded && controller.discount != 0)
                         ...[
                           8.vSpace,
                           Row(
@@ -125,12 +125,12 @@ class _CheckCodeIconWidget extends StatelessWidget {
       child: FittedBox(
         fit: BoxFit.scaleDown,
         child: AnimatedToggle(
-          value: state is CheckVoucherLoading ,
-          child: state is CheckVoucherLoading ? Transform.scale(scale:0.7, child: const WaitingWidget()) :
+          value: state is CheckCouponLoading ,
+          child: state is CheckCouponLoading ? Transform.scale(scale:0.7, child: const WaitingWidget()) :
           AppTextButton(
             onPressed: (){
               FocusManager.instance.primaryFocus?.unfocus();
-              controller.checkVoucher();
+              controller.checkCoupon();
             },
             child: Text(S.of(context).apply),
           ),

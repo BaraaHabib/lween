@@ -25,6 +25,7 @@ import 'package:lween/features/account/params/resend_code_params.dart';
 import 'package:lween/features/account/params/update_token_params.dart';
 import 'package:lween/features/account/params/verify_account_params.dart';
 import 'package:lween/features/account/repo/iaccount_repository.dart';
+import 'package:lween/main.dart';
 import '../../../../core/exceptions/app_exceptions.dart';
 
 class AccountRepository extends IAccountRepository {
@@ -32,7 +33,6 @@ class AccountRepository extends IAccountRepository {
 
   AccountRepository(this.remoteDataSource);
 
-  static ProfileEntity? profile;
 
   @override
   Future<Either<ErrorEntity, AuthenticateEntity>> logIn(LogInParams model) async {
@@ -140,7 +140,7 @@ class AccountRepository extends IAccountRepository {
     try {
       var res = await remoteDataSource.getRemoteData(model ?? GetProfileParams(),);
       Entity<ProfileEntity> data = Entity<ProfileEntity>.fromJson(res,parser: ProfileEntity.fromJson,);
-      profile = data.content;
+      Lween.storage.profile = data.content;
       return Right(data.content!);
     } on AppException catch (e) {
       return Left(ErrorEntity.fromAppException(e));

@@ -4,15 +4,15 @@ import 'package:lween/core/features/entities/entity.dart';
 import 'package:lween/core/features/entities/shared/lite_entity.dart';
 import 'package:lween/features/home/models/home_entity.dart';
 
-class VoucherEntity extends ContentModel {
+class CouponEntity extends ContentModel {
   num? percentage;
   num? value;
 
-  VoucherEntity({this.value,
+  CouponEntity({this.value,
     this.percentage,
   });
 
-  VoucherEntity.fromJson(json) {
+  CouponEntity.fromJson(json) {
     percentage = json['percentage'];
     value = json['value'];
   }
@@ -25,7 +25,7 @@ class VoucherEntity extends ContentModel {
   }
 
   @override
-  fromJson(json) => VoucherEntity.fromJson(json);
+  fromJson(json) => CouponEntity.fromJson(json);
 
   @override
   List<Object?> get props => [percentage,value,];

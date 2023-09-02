@@ -32,8 +32,8 @@ class FollowedWidget extends HookWidget {
       listenWhen: controller.listenWhen,
       buildWhen: controller.buildWhen,
       builder:(ctx, state) {
-        return IgnorePointer(
-          ignoring: state is ToggleFollowCompanyStateLoading,
+        return AbsorbPointer(
+          absorbing: state is ToggleFollowCompanyStateLoading,
           child: GestureDetector(
             onTap: controller.toggleFollow,
             child: Container(

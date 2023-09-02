@@ -15,7 +15,19 @@ class TripsWidgets extends StatelessWidget {
           buildWhen: controller.buildWhen,
           builder: (context, state) {
             if(state is CompanyTravelsLoading){
-              return const WaitingWidget();
+              return ShimmerUI.widgetLoader(
+                enabled: true,
+                child: ListView.separated(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  // padding: EdgeInsets.only(top: 15.hx),
+                  itemCount:  6,
+                  separatorBuilder: (ctx,index) => 12.vSpace,
+                  itemBuilder: (ctx, index) {
+                    return const TripCardSkeleton();
+                  },
+                ),
+              );
             }
             if(state is CompanyTravelsError){
               return AppErrorWidget(

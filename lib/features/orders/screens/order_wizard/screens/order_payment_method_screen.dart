@@ -17,11 +17,13 @@ import 'package:lween/core/widgets/app_button.dart';
 import 'package:lween/core/widgets/app_image.dart';
 import 'package:lween/core/widgets/app_text_widget.dart';
 import 'package:lween/core/widgets/waiting_widget.dart';
+import 'package:lween/features/account/repo/account_repository.dart';
 import 'package:lween/features/orders/bloc/orders_bloc.dart';
 import 'package:lween/features/orders/screens/order_wizard/order_wizard_controller.dart';
 import 'package:lween/features/orders/screens/order_wizard/screens/order_person_info_screen.dart';
 import 'package:lween/features/orders/screens/order_wizard/widgets/order_payment_method/payment_method_widget.dart';
 import 'package:lween/generated/l10n.dart';
+import 'package:lween/main.dart';
 
 @RoutePage()
 class OrderPaymentMethodScreen extends HookWidget {
@@ -31,14 +33,11 @@ class OrderPaymentMethodScreen extends HookWidget {
   Widget build(BuildContext context) {
     final OrderWizardController controller = Controller.getInstance();
     useEffect(() {
-      controller.checkVoucher();
+      controller.checkCoupon();
       controller.orderCreationTimestamp = DateTime
           .now()
           .millisecondsSinceEpoch
           .toString();
-      controller.baseController?.updateOrder(
-        price: controller.baseController?.totalPrice,
-      );
       return () {};
     }, const [],);
 
@@ -49,8 +48,10 @@ class OrderPaymentMethodScreen extends HookWidget {
         listener: controller.paymentMethodListener,
         builder: (context, state) {
           return SizedBox(
-            child: IgnorePointer(
-              ignoring: state is CreateOrderLoading || state is RequestPaymentLoading,
+            child: AbsorbPointer(
+              absorbing: state is CreateOrderLoading
+                  || state is RequestPaymentLoading
+                  || state is CheckCouponLoading,
               child: AppScaffold(
                 title: S
                     .of(context)
@@ -62,7 +63,6 @@ class OrderPaymentMethodScreen extends HookWidget {
                       children: [
                         20.vSpace,
                         Container(
-                          // height: 50.hx,
                           padding: EdgeInsets.all(10.rx),
                           decoration: BoxDecoration(
                             color: Styles.warningColor,
@@ -86,7 +86,9 @@ class OrderPaymentMethodScreen extends HookWidget {
                                       .of(context)
                                       .orderDeletionWarning,
                                   maxLines: 2,
-                                  style: context.textTheme.headlineMedium,
+                                  style: context.textTheme.headlineMedium?.copyWith(
+                                    fontSize: 11.spx,
+                                  ),
                                 ),
                               ),
                             ],
@@ -114,16 +116,24 @@ class OrderPaymentMethodScreen extends HookWidget {
                                       disabled: controller
                                           .userExceededAllowedSeatsWithoutPayment,
                                     ),
-                                    if(appState.profile.canPayFromWallet(controller.orderBody.price,))
-                                      PaymentMethodWidget(
-                                        icon: Assets.balancePaymentSVG,
-                                        title: S.of(context).payFromMyBalance,
-                                        paymentMethod: PaymentMethod.wallet,
-                                        onTap: controller
-                                            .changeSelectedPaymentMethod,
-                                        disabled: !appState.profile.canPayFromWallet(controller.orderBody.price,),
-                                        subtitle: '${S.current.currentBalance} ${appState.profile.balanceText}',
-                                      ),
+                                    Builder(
+                                      builder: (context) {
+                                        final profile = appState.profile;
+                                        final bool userCanPay = profile.canPayFromWallet(controller.orderBody.price,) ?? false;
+                                        return PaymentMethodWidget(
+                                            icon: Assets.balancePaymentSVG,
+                                            title: S.of(context).payFromMyBalance,
+                                            paymentMethod: PaymentMethod.wallet,
+                                            onTap: controller
+                                                .changeSelectedPaymentMethod,
+                                            disabled: !userCanPay,
+                                            subtitle:
+                                            !userCanPay ?
+                                            '${S.of(context).notEnoughBalance} ${appState.profile.balanceText}' :
+                                            '${S.current.currentBalance} ${appState.profile.balanceText}',
+                                          );
+                                      }
+                                    ),
                                     PaymentMethodWidget(
                                       icon: Assets.cashMobilePNG,
                                       title: S.of(context).cashMobile,
@@ -164,7 +174,7 @@ class OrderPaymentMethodScreen extends HookWidget {
                               }
                           ),
                         ),
-                        const VoucherWidget(),
+                        const CouponWidget(),
                         60.vSpace,
                       ],
                     ),
@@ -173,17 +183,17 @@ class OrderPaymentMethodScreen extends HookWidget {
                       bottom: 30.hx,
                       child: BlocBuilder<OrdersBloc, OrdersState>(
                           bloc: OrdersBloc.instance,
-                          buildWhen: controller.voucherBuildWhen,
-                          builder: (context, voucherState) {
-                            return IgnorePointer(
-                              ignoring: voucherState is CheckVoucherLoading,
+                          buildWhen: controller.couponBuildWhen,
+                          builder: (context, couponState) {
+                            return AbsorbPointer(
+                              absorbing: couponState is CheckCouponLoading,
                               child: Hero(
                                 tag: 'order-next',
                                 child: AppGradientTextButton(
                                   content: S.current.next,
                                   isLoading: state is CreateOrderLoading,
                                   gradientType: AppTextButtonGradientType.secondary,
-                                  onTap: () => controller.pay(context),
+                                  onTap: () => controller.submitOrder(context),
                                 ),
                               ),
                             );

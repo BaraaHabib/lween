@@ -4,6 +4,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lween/core/configurations/assets.dart';
 import 'package:lween/core/configurations/styles/styles.dart';
 import 'package:lween/core/controller/base_controller.dart';
@@ -17,11 +18,13 @@ import 'package:lween/core/widgets/app_button.dart';
 import 'package:lween/core/widgets/app_image.dart';
 import 'package:lween/core/widgets/app_text_button.dart';
 import 'package:lween/core/widgets/app_text_widget.dart';
+import 'package:lween/core/widgets/shimmer_ui.dart';
 import 'package:lween/features/home/models/home_entity.dart';
 import 'package:lween/features/transportation_entities/models/transportation_entities.dart';
 import 'package:lween/features/transportation_entities/screens/widgets/controller.dart';
 import 'package:lween/generated/l10n.dart';
 import 'package:provider/provider.dart';
+import 'package:shimmer/shimmer.dart';
 
 class TopCompaniesList extends HookWidget {
   const TopCompaniesList(this.data, {super.key});
@@ -112,4 +115,67 @@ class _CompanyWidget extends HookWidget{
     );
   }
 
+}
+
+
+class TopCompaniesSkeletonWidget extends StatelessWidget {
+  const TopCompaniesSkeletonWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 22.hx,),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              AppTextWidget(
+                S.current.transportationEntities,
+                style: context.theme.textTheme.headlineLarge,
+              ),
+              TextButton(
+                onPressed: () =>
+                    NavigationService.of(context).navigateTo(
+                      CompaniesScreenRoute(),
+                    ),
+                style: ButtonStyle(
+                  padding: MaterialStateProperty.all(EdgeInsets.zero,),
+                  visualDensity: VisualDensity.compact,
+                  alignment: AlignmentDirectional.centerEnd,
+                ),
+                child: Assets.arrowBackWidget(context),
+              ),
+            ],
+          ),
+          8.vSpace,
+          ShimmerUI.widgetLoader(
+            enabled: true,
+            child: SizedBox(
+              height: 80.hx,
+              child: ListView.separated(
+                scrollDirection: Axis.horizontal,
+                shrinkWrap: true,
+                itemCount: 5,
+                separatorBuilder: (ctx, index) => SizedBox(width: 18.hx,),
+                itemBuilder: (ctx, index) =>
+                    Column(
+                      children: [
+                        ClipRRect(
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(50,),
+                          ),
+                          child: ShimmerUI.circle(50.rx,),
+                        ),
+                        7.vSpace,
+                        ShimmerUI.text(h: 8.hx, w: 35.wx)
+                      ],
+                    ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }

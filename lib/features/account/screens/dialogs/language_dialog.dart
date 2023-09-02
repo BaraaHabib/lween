@@ -16,6 +16,8 @@ import 'package:lween/core/navigation/navigation_service.dart';
 import 'package:lween/core/widgets/app_button.dart';
 import 'package:lween/core/widgets/app_image.dart';
 import 'package:lween/core/widgets/app_text_button.dart';
+import 'package:lween/features/account/params/update_token_params.dart';
+import 'package:lween/features/account/repo/account_repository.dart';
 import 'package:lween/generated/l10n.dart';
 import 'package:lween/injection_container.dart';
 import 'package:provider/provider.dart';
@@ -33,14 +35,6 @@ class LanguageDialog extends HookWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          // Row(
-          //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          //   children: [
-          //     Text(S.current.selectPreferredLanguage,
-          //       style: Theme.of(context).textTheme.titleLarge,
-          //     ),
-          //   ],
-          // ),
           ...LocaleProvider.of(context)
               .languages
               .map((e) => _LanguageWidget(e,selectedLanguage),)
@@ -52,6 +46,12 @@ class LanguageDialog extends HookWidget {
               sl<LocaleProvider>().initLanguageSelected = true;
               Provider.of<LocaleProvider>(context,listen: false)
                   .changeLanguageWithoutRestart(Locale(selectedLanguage.value),).then((value) {
+                    sl<AccountRepository>().updateToken(
+                        UpdateTokenParams(
+                            body: UpdateTokenParamsBody(
+                                newToken: AppStateModel.of(context).firebaseToken,),
+                        ),
+                    );
                 if(value){
                   NavigationService.of(context).restart();
                 }

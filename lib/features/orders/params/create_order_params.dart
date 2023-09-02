@@ -72,7 +72,7 @@ class CreateOrderBodyParams extends BaseBodyModel with EquatableMixin {
       List<SeatParam>? seats,
       double? price,
       int? paymentMethod,
-        String? voucher}){
+        String? coupon}){
 
     return CreateOrderBodyParams(
       seats: seats ?? this.seats,
@@ -81,7 +81,7 @@ class CreateOrderBodyParams extends BaseBodyModel with EquatableMixin {
       paymentMethod: paymentMethod ?? this.paymentMethod,
       price: price ?? this.price,
       travelId: travelId ?? this.travelId,
-      couponCode: voucher ?? couponCode,
+      couponCode: coupon ?? couponCode,
     );
   }
 
@@ -97,7 +97,7 @@ class CreateOrderBodyParams extends BaseBodyModel with EquatableMixin {
       ];
 }
 
-class SeatParam {
+class SeatParam with EquatableMixin {
   String? personName;
   int? seatNumber;
 
@@ -114,4 +114,7 @@ class SeatParam {
     data['seatNumber'] = seatNumber;
     return data;
   }
+
+  @override
+  List<Object?> get props => [personName,seatNumber,];
 }

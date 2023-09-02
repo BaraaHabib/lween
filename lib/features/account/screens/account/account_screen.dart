@@ -5,6 +5,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:lween/core/app_state/appstate.dart';
 import 'package:lween/core/configurations/assets.dart';
 import 'package:lween/core/configurations/styles/styles.dart';
 import 'package:lween/core/controller/base_controller.dart';
@@ -20,6 +21,7 @@ import 'package:lween/features/account/models/profile_entity.dart';
 import 'package:lween/features/account/repo/account_repository.dart';
 import 'package:lween/features/account/screens/account/account_controller.dart';
 import 'package:lween/generated/l10n.dart';
+import 'package:lween/main.dart';
 
 @RoutePage()
 class AccountScreen extends HookWidget {
@@ -29,7 +31,7 @@ class AccountScreen extends HookWidget {
   Widget build(BuildContext context) {
     final AccountController controller = Controller.getInstance(
       instance: AccountController(
-        AccountRepository.profile ?? ProfileEntity(),
+        AppStateModel.of(context).profile,
       ),
     );
     return BlocConsumer<AccountBloc, AccountState>(

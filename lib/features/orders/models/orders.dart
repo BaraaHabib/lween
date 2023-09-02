@@ -1,4 +1,5 @@
 
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:lween/core/configurations/app_configuration.dart';
 import 'package:lween/core/configurations/styles/styles.dart';
@@ -50,20 +51,23 @@ class OrderEntity extends ContentModel {
   DateTime get travelTimeDate => DateTime.tryParse(travelTime ?? '')?.toLocal() ?? DateTime.now();
 
   OrderPaymentStatus get statusEnum {
-    switch(status){
-      case -2:
-        return OrderPaymentStatus.rejected;
-      case -1:
-        return OrderPaymentStatus.canceled;
-      case 1:
-        return OrderPaymentStatus.pending;
-      case 2:
-        return OrderPaymentStatus.paid;
-      case 3:
-        return OrderPaymentStatus.convertedToPhysicalTicket;
-        default:
-          return OrderPaymentStatus.pending;
-    }
+    return OrderPaymentStatus
+        .values
+        .firstWhereOrNull((s) => s.apiValue == status) ??  OrderPaymentStatus.pending;
+    // switch(status){
+    //   case -2:
+    //     return OrderPaymentStatus.rejected;
+    //   case -1:
+    //     return OrderPaymentStatus.canceled;
+    //   case 1:
+    //     return OrderPaymentStatus.pending;
+    //   case 2:
+    //     return OrderPaymentStatus.paid;
+    //   case 3:
+    //     return OrderPaymentStatus.convertedToPhysicalTicket;
+    //     default:
+    //       return OrderPaymentStatus.pending;
+    // }
   }
 
   PaymentMethod get paymentMethodEnum {
@@ -246,7 +250,7 @@ class SeatEntity extends ContentModel {
   fromJson(json) => SeatEntity.fromJson(json);
 
   @override
-  List<Object?> get props => [number,isAvailable,];
+  List<Object?> get props => [number,isAvailable,isDivider,];
 }
 
 class ReservedSeatEntity extends ContentModel {

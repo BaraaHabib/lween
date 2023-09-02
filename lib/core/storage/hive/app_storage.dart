@@ -4,6 +4,7 @@ import 'dart:async';
 
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:lween/core/navigation/logger.dart';
+import 'package:lween/features/account/models/profile_entity.dart';
 
 
 part 'boxes.dart';
@@ -12,6 +13,9 @@ class AppStorage with HiveBoxes {
   //#region profile
 
   //#endregion
+
+  ProfileEntity? profile;
+
 
   Future<void> init() async {
     try {

@@ -1,16 +1,20 @@
 
 import 'dart:async';
 
+import 'package:auto_route/auto_route.dart';
+import 'package:collection/collection.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lween/core/resources/constants.dart';
+import 'package:lween/core/routing/app_router.dart';
 import 'package:lween/features/orders/models/complete_payment.dart';
 import 'package:lween/features/orders/models/daily_travels.dart';
 import 'package:lween/features/orders/models/orders.dart';
 import 'package:lween/features/orders/models/request_payment.dart';
-import 'package:lween/features/orders/models/voucher.dart';
+import 'package:lween/features/orders/models/coupon.dart';
+import 'package:lween/features/orders/params/available_seats_params.dart';
 import 'package:lween/features/orders/params/cancel_order_params.dart';
-import 'package:lween/features/orders/params/check_voucher_params.dart';
+import 'package:lween/features/orders/params/check_coupon_params.dart';
 import 'package:lween/features/orders/params/complete_payment_params.dart';
 import 'package:lween/features/orders/params/create_order_params.dart';
 import 'package:lween/features/orders/params/daily_travel_params.dart';
@@ -37,11 +41,12 @@ class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
     on<GetFilteredTravelsEvent>(_getFilteredTravelsEventHandler);
     on<GetUpcomingTravelsEvent>(_getUpcomingTravelsEventHandler);
     on<CreateOrderEvent>(_createOrderEventHandler);
-    on<CheckVoucherEvent>(_checkVoucherEventHandler);
+    on<CheckCouponEvent>(_checkCouponEventHandler);
     on<CancelOrderEvent>(_cancelOrderEventHandler);
     on<RequestPaymentEvent>(_requestPaymentEventHandler);
     on<CompletePaymentEvent>(_completePaymentEventHandler);
     on<ResendPaymentCodeEvent>(_resendPaymentCodeEventHandler);
+    on<RefreshAvailableSeatsEvent>(_refreshAvailableSeatsEventHandler);
   }
 
 
@@ -51,7 +56,7 @@ class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
     final res = await sl<OrdersRepository>().getMyOrders(
       MyOrdersParams(
         pageLength: 4,
-        myRecentOrders : true,
+        myRecentOrders: true,
       ),
     );
     emit(
@@ -63,18 +68,20 @@ class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
 
   Future<FutureOr<void>> _ordersEventHandler(GetOrdersEvent event,
       Emitter<OrdersState> emit) async {
-    emit(MyOrdersLoading());
+    emit(const MyOrdersLoading());
     final res = await sl<OrdersRepository>().getMyOrders(
       MyOrdersParams(
         page: event.page,
         pageLength: 10,
-        ids:event.ids,
-        notCompletedYet:event.notCompletedYet,
+        ids: event.ids,
+        notCompletedYet: event.notCompletedYet,
       ),
     );
     emit(
       res.fold((l) => MyOrdersError(l.message,),
-            (r) => MyOrdersLoaded(ordersResult: r,navigateToDetails: event.navigateToDetails,),
+            (r) =>
+            MyOrdersLoaded(
+              ordersResult: r,),
       ),
     );
   }
@@ -128,24 +135,28 @@ class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
     emit(const CreateOrderLoading(),);
     final res = await sl<OrdersRepository>().createOrder(event.params,);
     emit(
-      res.fold((l) => CreateOrderError(l.errorMessage),
+      res.fold((l) {
+        final code = CreateOrderExceptionCode.values.firstWhereOrNull((v) =>
+        v.apiValue == l.code);
+        return CreateOrderError(l.errorMessage, code: code, data: l.data);
+      },
             (r) => CreateOrderLoaded(order: r,),
       ),
     );
   }
 
-  Future<FutureOr<void>> _checkVoucherEventHandler(CheckVoucherEvent event,
+  Future<FutureOr<void>> _checkCouponEventHandler(CheckCouponEvent event,
       Emitter<OrdersState> emit) async {
-    emit(const CheckVoucherLoading(),);
-    final res = await sl<OrdersRepository>().checkVoucher(
-      CheckVoucherParams(
+    emit(const CheckCouponLoading(),);
+    final res = await sl<OrdersRepository>().checkCoupon(
+      CheckCouponParams(
         code: event.code,
         paymentProvider: event.paymentProvider,
       ),
     );
     emit(
-      res.fold((l) => CheckVoucherError(l.errorMessage),
-            (r) => CheckVoucherLoaded(voucher: r,),
+      res.fold((l) => CheckCouponError(l.errorMessage),
+            (r) => CheckCouponLoaded(coupon: r,),
       ),
     );
   }
@@ -162,7 +173,8 @@ class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
     );
   }
 
-  Future<FutureOr<void>> _requestPaymentEventHandler(RequestPaymentEvent event, Emitter<OrdersState> emit) async {
+  Future<FutureOr<void>> _requestPaymentEventHandler(RequestPaymentEvent event,
+      Emitter<OrdersState> emit) async {
     emit(const RequestPaymentLoading(),);
     final res = await sl<OrdersRepository>().requestPayment(event.params,);
     emit(
@@ -172,7 +184,8 @@ class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
     );
   }
 
-  Future<FutureOr<void>> _resendPaymentCodeEventHandler(ResendPaymentCodeEvent event, Emitter<OrdersState> emit) async {
+  Future<FutureOr<void>> _resendPaymentCodeEventHandler(
+      ResendPaymentCodeEvent event, Emitter<OrdersState> emit) async {
     emit(const ResendPaymentCodeLoading(),);
     final res = await sl<OrdersRepository>().resendPaymentCode(
       ResendPaymentCodeParams(body: ResendPaymentCodeParamsBody(
@@ -189,14 +202,14 @@ class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
     );
   }
 
-  refreshOrders(){
+  refreshOrders() {
     add(const GetLatestOrdersEvent(),);
     add(const GetOrdersEvent(),);
   }
 
 
-
-  Future<FutureOr<void>> _completePaymentEventHandler(CompletePaymentEvent event, Emitter<OrdersState> emit) async {
+  Future<FutureOr<void>> _completePaymentEventHandler(
+      CompletePaymentEvent event, Emitter<OrdersState> emit) async {
     emit(const CompletePaymentLoading(),);
     final res = await sl<OrdersRepository>().completePayment(event.params,);
     emit(
@@ -206,7 +219,8 @@ class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
     );
   }
 
-  Future<FutureOr<void>> _getUpcomingTravelsEventHandler(GetUpcomingTravelsEvent event, Emitter<OrdersState> emit) async {
+  Future<FutureOr<void>> _getUpcomingTravelsEventHandler(
+      GetUpcomingTravelsEvent event, Emitter<OrdersState> emit) async {
     emit(const GetUpcomingTravelsLoading(),);
     final res = await sl<OrdersRepository>().getUpcomingTravels(
       GetUpcomingTravelsParams(
@@ -219,6 +233,35 @@ class OrdersBloc extends Bloc<OrdersEvent, OrdersState> {
             (r) =>
             GetUpcomingTravelsLoaded(
               travelsResult: r,),
+      ),
+    );
+  }
+
+  void getAndNavigateToOrderDetails(StackRouter currentRouter, String id) {
+    sl<OrdersRepository>().getMyOrders(MyOrdersParams(ids: [id,])).then((
+        value) {
+      value.fold((l) {
+        return null;
+      }, (r) {
+        currentRouter.navigate(
+            OrderDetailsScreenRoute(order: r.orders!.first,));
+      });
+    });
+  }
+
+  Future<FutureOr<void>> _refreshAvailableSeatsEventHandler(
+      RefreshAvailableSeatsEvent event, Emitter<OrdersState> emit) async {
+    emit(const RefreshAvailableSeatsLoading(),);
+    final res = await sl<OrdersRepository>().getAvailableSeats(
+      event.params,
+    );
+    emit(
+      res.fold((l) =>
+          RefreshAvailableSeatsError(l.errorMessage),
+            (r) =>
+            RefreshAvailableSeatsLoaded(
+               r,
+            ),
       ),
     );
   }

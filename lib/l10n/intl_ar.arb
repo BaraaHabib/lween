@@ -67,8 +67,8 @@
   "currency": "ل.س",
   "passsengersInfo": "معلومات الركاب",
   "enterFullNameForSeats": "قم بإدخال الأسماء الثلاثية للمسافرين في المقاعد المحجوزة",
-  "voucherCode": "كود الحسم",
-  "enterVoucherCode": "إن كنت تملك كود حسم أدخله لتحصل على حسم على سعر التذاكر",
+  "couponCode": "كود الحسم",
+  "enterCouponCode": "إن كنت تملك كود حسم أدخله لتحصل على حسم على سعر التذاكر",
   "syriatelCash": "سيريتيل كاش",
   "orderDeletionWarning": "في حال اختيار الدفع الالكتروني فيجب اكمال عملية الدفع خلال ١٠ دقائق على الاكثر..",
   "cashMtn": "كاش MTN",
@@ -97,7 +97,7 @@
   "payedWithValue": "payed with {value}",
   "payedAmount": "المبلغ المدفوع {value}",
   "requiredPayment": "المبلغ المترتب {value}",
-  "voucherShouldBeRequested": "يجب إعادة طلب الكوبون",
+  "couponShouldBeRequested": "يجب إعادة طلب الكوبون",
   "thisSeatIsNotAvailable": "هذا المقعد غير متوفر",
   "orderIsCanceled": "تم إلغاء الطلب",
   "areYouSureYouWantToCancelOrder": "هل انت متأكد من إلغاء الطلب؟",
@@ -128,7 +128,7 @@
   "orderNotCompletedMessage": "لم يتم اكمال عملية دفع الطلب الكترونيا وسيتم حذفه بعد عدة دقائق",
   "importantWarning": "ملاحظة هامة",
   "apply": "تطبيق",
-  "city1City2DateXPrice": "هل تريد تأكيد ارسال طلب حجز من {city1} الى {city2} ضمن {company} بتاريخ {date} ل {X} مسافر وبتكلفة {price} ليرة سورية؟",
+  "city1City2DateXPrice": "هل تريد تأكيد ارسال طلب حجز من {city1} الى {city2} ضمن {company} بتاريخ {date} ل {X} مسافر وبتكلفة {price} {currency}؟",
   "currentBalance": "رصيدك الحالي",
   "myReservations": "حجوزاتي / رحلاتي",
   "favoriteCompanies": "شركات النقل المفضلة",
@@ -150,5 +150,7 @@
   "enterPasswordToContinueDeletingAccount": "أدخل كلمة المرور لمتابعة حذف الحساب",
   "phoneNumberChangesSuccessfully": "تم تغيير رقم الهاتف بنجاح",
   "newPhoneNumber": "رقم الهاتف الجديد",
-  "payFromMyBalance": "دفع عن طريق رصيدي"
+  "payFromMyBalance": "دفع عن طريق رصيدي",
+  "notEnoughBalance": "لا يوجد رصيد كافٍ",
+  "availableSeatsHasChanged": "تم حجز بعض المقاعد"
 }

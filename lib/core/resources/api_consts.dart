@@ -16,9 +16,10 @@ abstract class ApiConstants{
   static const followCompany = 'Client/UserFollowedTransportationEntity/Follow';
   static const unfollowCompany = 'Client/UserFollowedTransportationEntity/Unfollow';
   static const dailyTravels = 'Client/DailyTravel/List';
+  static const availableSeats = 'Client/DailyTravel/AvailableSeats';
   static const upcomingTravels = 'Client/DailyTravel/UpcomingTravels';
   static const createOrder = 'Client/Order/Create';
-  static const checkVoucher = 'Client/Order/checkCode';
+  static const checkCoupon = 'Client/Order/checkCode';
   static const cancelOrder = 'Client/Order/Cancel';
   static const notifications = 'Client/Notification/List';
   static const requestPayment = 'Client/OnlinePayment/RequestPayment';

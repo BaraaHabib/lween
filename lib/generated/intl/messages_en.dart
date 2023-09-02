@@ -20,8 +20,8 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static String m0(city1, city2, company, date, X, price) =>
-      "Do you want to confirm sending a reservation request from ${city1} to ${city2} within ${company} on ${date} for ${X} passengers at a cost of ${price} Syrian pounds";
+  static String m0(city1, city2, company, date, X, price, currency) =>
+      "Are you sure you want to send a reservation request from ${city1} to ${city2} for ${company} on ${date} for ${X} passengers.The order cost is ${price} ${currency}?";
 
   static String m1(count) =>
       "Due to the reservation of ${count} seats, you will not be able to schedule your order without paying it directly from the application via the available electronic payment methods.";
@@ -51,6 +51,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "availableDateTravels": MessageLookupByLibrary.simpleMessage(
             "Available trips in selected date"),
         "availableDays": MessageLookupByLibrary.simpleMessage("Available days"),
+        "availableSeatsHasChanged":
+            MessageLookupByLibrary.simpleMessage("Available seats has changed"),
         "bemoBank": MessageLookupByLibrary.simpleMessage("Bemo Bank"),
         "bookATrip": MessageLookupByLibrary.simpleMessage("Book a trip"),
         "bookingStatus": MessageLookupByLibrary.simpleMessage("Booking status"),
@@ -86,6 +88,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("Confirm password"),
         "country": MessageLookupByLibrary.simpleMessage("Country"),
+        "couponCode": MessageLookupByLibrary.simpleMessage("Coupon code"),
+        "couponShouldBeRequested":
+            MessageLookupByLibrary.simpleMessage("Coupon should be requested"),
         "currency": MessageLookupByLibrary.simpleMessage("S.P"),
         "currentBalance":
             MessageLookupByLibrary.simpleMessage("Current balance"),
@@ -100,6 +105,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "eCash": MessageLookupByLibrary.simpleMessage("E-Cash"),
         "editProfile": MessageLookupByLibrary.simpleMessage("Edit profile"),
         "enter": MessageLookupByLibrary.simpleMessage("Enter"),
+        "enterCouponCode": MessageLookupByLibrary.simpleMessage(
+            "If you have a discount code, enter it to get a discount on the ticket price"),
         "enterFullNameForSeats": MessageLookupByLibrary.simpleMessage(
             "Enter full names of the passengers in the reserved seats"),
         "enterPasswordToContinueDeletingAccount":
@@ -111,8 +118,6 @@ class MessageLookup extends MessageLookupByLibrary {
             "Enter the phone number you used to create the account. We will send you a verification code to reset your password"),
         "enterVerificationCode":
             MessageLookupByLibrary.simpleMessage("Enter verification code"),
-        "enterVoucherCode": MessageLookupByLibrary.simpleMessage(
-            "If you have a discount code, enter it to get a discount on the ticket price"),
         "error": MessageLookupByLibrary.simpleMessage("Error"),
         "exceededSeatsCountDialogMessage": m1,
         "fatora": MessageLookupByLibrary.simpleMessage("Fatora"),
@@ -121,7 +126,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Forgot password"),
         "from": MessageLookupByLibrary.simpleMessage("from"),
-        "fullName": MessageLookupByLibrary.simpleMessage("full name"),
+        "fullName": MessageLookupByLibrary.simpleMessage("Full name"),
         "gallery": MessageLookupByLibrary.simpleMessage("Gallery"),
         "helpAndSupport":
             MessageLookupByLibrary.simpleMessage("Help and support"),
@@ -153,6 +158,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("No internet connection"),
         "noTripsAvailableForThisDate": MessageLookupByLibrary.simpleMessage(
             "No trips available for this date"),
+        "notEnoughBalance":
+            MessageLookupByLibrary.simpleMessage("Not enough balance"),
         "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),
         "orderDeletionWarning": MessageLookupByLibrary.simpleMessage(
@@ -243,9 +250,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "verificationCode":
             MessageLookupByLibrary.simpleMessage("Verification code"),
         "verify": MessageLookupByLibrary.simpleMessage("Verify"),
-        "voucherCode": MessageLookupByLibrary.simpleMessage("Voucher code"),
-        "voucherShouldBeRequested":
-            MessageLookupByLibrary.simpleMessage("Coupon should be requested"),
         "waitingPaymentInCompanyCenter": MessageLookupByLibrary.simpleMessage(
             "Waiting for payment in company center"),
         "welcomeToLweenApp":

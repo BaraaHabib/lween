@@ -102,17 +102,20 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
   static Future initApp(
     context,
   ) async {
+    // AccountBloc.instance.add(const GetProfileEvent());
+    await sl<AccountRepository>().getProfile();
     HomeScreenController.intiHomeScreen();
     CompanyBloc.instance.add(GetCompaniesEvent(params: GetCompaniesParams()));
-    AccountBloc.instance.add(const GetProfileEvent());
     final storage = Lween.storage; // sl<AppStorage>();
     final locale = Provider.of<LocaleProvider>(
       context,
       listen: false,
     );
-    await storage.init();
-    await locale.init();
-    await sl<FileManager>().init();
+    locale.init();
+    await Future.wait([storage.init(), sl<FileManager>().init()]);
+    // await storage.init();
+    // await locale.init();
+    // await sl<FileManager>().init();
 
     sl<NotificationService>().initFcmNotifications();
     _initClarity();
@@ -122,10 +125,11 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
     // Initialize Clarity.
     FlutterClarityPlugin().initialize(projectId: "ikxovf1t2y");
 
+    final profile = sl<AppStateModel>().profile;
     // Set custom user id.
-    if (Lween.appState.authenticated && AccountRepository.profile?.id != null) {
+    if (Lween.appState.authenticated && profile.id != null) {
       FlutterClarityPlugin().setCustomUserId(
-        AccountRepository.profile!.id!.toString(),);
+        profile.id!.toString(),);
     } else {
       if (Lween.appState.deviceId != null) {
         FlutterClarityPlugin().setCustomUserId(

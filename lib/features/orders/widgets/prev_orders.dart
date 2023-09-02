@@ -10,6 +10,7 @@ import 'package:lween/core/configurations/styles/styles.dart';
 import 'package:lween/core/controller/base_controller.dart';
 import 'package:lween/core/extended/get_utils/get_utils.dart';
 import 'package:lween/core/extended/numbers_ext.dart';
+import 'package:lween/core/lween/widgets/trip_card_skelton.dart';
 import 'package:lween/core/lween/widgets/trip_card_widget.dart';
 import 'package:lween/core/navigation/navigation_service.dart';
 import 'package:lween/core/routing/app_router.dart';
@@ -17,6 +18,7 @@ import 'package:lween/core/widgets/app_image.dart';
 import 'package:lween/core/widgets/app_text_widget.dart';
 import 'package:lween/core/widgets/empty_widget.dart';
 import 'package:lween/core/widgets/error_widget.dart';
+import 'package:lween/core/widgets/shimmer_ui.dart';
 import 'package:lween/features/account/repo/account_repository.dart';
 import 'package:lween/features/orders/bloc/orders_bloc.dart';
 import 'package:lween/features/orders/models/orders.dart';
@@ -41,11 +43,8 @@ class MyPreviousOrders extends HookWidget {
             message: S.of(context).reservations,
           );
         }
-        else if(state is MyRecentOrdersError){
-          return AppErrorWidget(
-            onAction: controller.getOrders,
-            message: S.of(context).reservations,
-          );
+        else if(state is MyRecentOrdersLoading){
+          return const MyPreviousOrdersSkeleton();
         }else if(state is MyRecentOrdersLoaded){
           final orders = state.ordersResult.orders ?? [];
           if(orders.isEmpty){
@@ -114,5 +113,42 @@ class OrdersController extends Controller{
     OrdersBloc.instance.add(const GetLatestOrdersEvent());
   }
 
+
+}
+
+class MyPreviousOrdersSkeleton extends StatelessWidget{
+  const MyPreviousOrdersSkeleton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return  Padding(
+      padding: EdgeInsets.only(left: 18.wx,right: 18.wx,bottom: 10.hx,),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              AppTextWidget(
+                S.of(context).previousTrips
+                ,style: context.theme.textTheme.headlineLarge,
+              ),
+            ],
+          ),
+          12.vSpace,
+          ShimmerUI.widgetLoader(
+            enabled: true,
+            child: ListView.separated(
+              itemCount: 4 ,
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              separatorBuilder: (ctx,index) => 12.vSpace,
+              itemBuilder: (ctx,index) {
+                return const TripCardSkeleton();
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
 }

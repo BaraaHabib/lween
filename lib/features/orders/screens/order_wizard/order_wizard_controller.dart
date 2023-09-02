@@ -111,41 +111,40 @@ class OrderWizardController extends Controller with PaymentMixin {
           '${isTravelAlreadySelected ? ' (${travelEntity!.transportationEntity?.name})' : ''}';
 
   void listener(BuildContext context, OrdersState state) {
+    /// clear selected travel on error
     if (state is CompanyFilteredTravelsError) {
       clearSelectedTravel();
       AppToast(state.message ?? '').show();
     }
     else if (state is CompanyFilteredTravelsLoaded) {
       fillTravels(state.travelsResult.travels ?? []);
+
+      /// clear selected travel and companies when no trips available
       if (state.travelsResult.travels?.isEmpty ?? true) {
         clearSelectedTravel();
         fillCompanies([]);
-        // AppToast(S
-        //     .of(context)
-        //     .noTripsAvailableForThisDate).show();
       }
       else {
-        ///
-        /// get and fill travels companies
+        /// ---- extract companies from travels and fill them in dropdown
         Set<LiteCompanyEntity> companies = {};
         companies.addAll(state.travelsResult.travels!.map((e) => e.transportationEntity!).toList());
+        /// when travel is selected, ensure travel company is present in companies
         if(isTravelAlreadySelected) {
-          // state.travelsResult.travels?.removeWhere((t) => t.id);
           companies.add(travelEntity!.transportationEntity!);
         }
         fillCompanies(companies.toList());
-        ///
+        /// ----
 
+        /// if extracted companies does not contain previously selected company, clear selection
         if (companies.none((c) => c.id == selectedCompany?.id)) {
           clearSelectedCompany();
         }
+        /// select first retrieved company
         else if (companies.isNotEmpty && selectedCompany == null) {
          setSelectedCompany(companies.first);
         }
-        else if(companies.length == 1){
-          setSelectedCompany(companies.first);
-        }
 
+        /// if we already selected travel, set it as selected, and select its company
         if(isTravelAlreadySelected){
           setSelectedCompany(travelEntity?.transportationEntity);
           var sTravel = state
@@ -153,27 +152,16 @@ class OrderWizardController extends Controller with PaymentMixin {
               .travels
               ?.firstWhereOrNull((e) => e.id == travelEntity?.id && e.transportationEntity?.id == selectedCompany?.id);
           selectTravel(sTravel);
-        }else {
-          // var sTravel = state
-          //     .travelsResult
-          //     .travels
-          //     ?.firstWhereOrNull((e) =>
-          //     e.transportationEntity?.id == selectedCompany?.id);
-          // selectTravel(sTravel);
         }
 
-
-
-        /// if i already selected a trip before starting the wizard
-        /// check if the trip exists in the selected date
-        if(isTravelAlreadySelected){
-          if(state.travelsResult.travels?.any((t) => t.id == travelEntity!.id,) ?? false){
-            selectedTravelEntity = state.travelsResult.travels?.firstWhereOrNull((e) => e.id == travelEntity?.id);
-          }
-          // else{
-          //   AppToast(S.current.noTripsAvailableForThisDate).show();
-          // }
-        }
+        // /// if i already selected a trip before starting the wizard
+        // /// check if the trip exists in the selected date
+        // if(isTravelAlreadySelected){
+        //   final sTravel = state.travelsResult.travels?.firstWhereOrNull((e) => e.id == travelEntity?.id);
+        //   if(sTravel != null){
+        //     selectTravel(sTravel);
+        //   }
+        // }
       }
     }
   }
@@ -292,6 +280,7 @@ class OrderWizardController extends Controller with PaymentMixin {
 
   void selectTravel(TravelEntity? sTravel) {
     selectedTravelEntity = sTravel;
+    orderBodyNotifier.value = CreateOrderBodyParams(seats: []);
   }
 
   //#endregion from-to screen
@@ -314,7 +303,7 @@ class OrderWizardController extends Controller with PaymentMixin {
   bool isSeatSelected(int number) =>
       orderBody.seats?.any((seat) => seat.seatNumber == number,) ?? false;
 
-  unSelectSeat(number) {
+  unSelectSeat(int number) {
     final seats = orderBody.seats?.toList();
     seats?.removeWhere((seat) => seat.seatNumber == number,);
     updateOrder(seats: seats,);
@@ -387,7 +376,7 @@ class OrderWizardController extends Controller with PaymentMixin {
   GlobalKey<FormBuilderState> passengersInfoFormKey = GlobalKey<FormBuilderState>();
 
 
-  void onVoucherChanged(String? p1) {
+  void onCouponChanged(String? p1) {
   }
 
 
@@ -404,6 +393,7 @@ class OrderWizardController extends Controller with PaymentMixin {
 
   goToPayment(BuildContext context) {
     if (passengersInfoFormKey.currentState?.saveAndValidate() ?? false) {
+      FocusManager.instance.primaryFocus?.unfocus();
       final newSeats = <SeatParam>[];
       for (SeatParam e in orderBody.seats ?? []) {
         final SeatParam newSeat = SeatParam(
@@ -413,9 +403,31 @@ class OrderWizardController extends Controller with PaymentMixin {
         newSeats.add(newSeat);
       }
       orderBody.seats = newSeats;
+      /// update price
+      baseController?.updateOrder(
+        price: baseController?.totalPrice,
+      );
+      checkPaymentMethodValidity();
       NavigationService.of(context).navigateTo(
           const OrderPaymentMethodScreenRoute(),
       );
+    }
+  }
+
+  checkPaymentMethodValidity(){
+
+    /// if user exceeded allowed number of seats without payment
+    if(selectedPaymentMethod.value?.isPayInCenter ?? false){
+      if(userExceededAllowedSeatsWithoutPayment ) {
+        selectedPaymentMethod.value = null;
+      }
+    }
+    /// if user can't pay from wallet
+    if(selectedPaymentMethod.value?.isFromWallet ?? false) {
+      if (!sl<AppStateModel>().profile.canPayFromWallet(
+          baseController?.orderBody.price)) {
+        selectedPaymentMethod.value = null;
+      }
     }
   }
 
@@ -438,7 +450,7 @@ class OrderWizardController extends Controller with PaymentMixin {
     List<SeatParam>? seats,
     int? paymentMethod,
     num? price,
-    String? voucher,
+    String? coupon,
   }) {
     orderBody = orderBody.copyWith(
       travelId: travelId,
@@ -447,7 +459,7 @@ class OrderWizardController extends Controller with PaymentMixin {
       paymentMethod: paymentMethod,
       orderCreationTimestamp: orderCreationTimestamp,
       executionDate: executionDate,
-      voucher: voucher,
+      coupon: coupon,
     );
   }
 

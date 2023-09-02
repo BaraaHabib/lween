@@ -76,6 +76,6 @@ class ProfileEntity extends ContentModel {
     );
   }
 
-  canPayFromWallet(num? price) => price != null && price <= (balance ?? 0);
+  bool canPayFromWallet(num? price) => price != null && price <= (balance ?? 0);
 }
 

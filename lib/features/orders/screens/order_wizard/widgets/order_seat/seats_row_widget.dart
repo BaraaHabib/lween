@@ -15,7 +15,10 @@ class SeatsRow extends StatelessWidget {
       children: seats.map((e) {
         return SizedBox.square(
           dimension: controller.seatDimension,
-          child: e.isDivider ? const SizedBox() : SeatWidget(seat: e),
+          child: e.isDivider ? const SizedBox() : SeatWidget(seat: e,
+            key: Key(
+                'seat${e.number}${e.isAvailable}${controller.isSeatSelected(
+                    e.number ?? 0)}'),),
         );
       }
       ).toList(),

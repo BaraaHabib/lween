@@ -39,8 +39,8 @@ class VerifyCodeScreen extends HookWidget {
         listener: bloc.listener,
         buildWhen: bloc.buildWhen,
         builder:(ctc, state)  {
-        return IgnorePointer(
-          ignoring: state is VerifyAccountLoading,
+        return AbsorbPointer(
+          absorbing: state is VerifyAccountLoading,
           child: AppScaffold(
             title: S.of(context).confirmAccount,
             withBackButton: true,

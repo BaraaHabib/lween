@@ -129,16 +129,8 @@ class NotificationItemSkeleton extends StatelessWidget {
         end: 18.wx,
       ),
       child: Row(
-        // crossAxisAlignment: CrossAxisAlignment.,
         children: [
           ShimmerUI.circle(60.rx),
-          // AppImage(
-          //   path: item.imageUrl,
-          //   type: ImageType.cachedNetwork,
-          //   width: 60.rx,
-          //   height: 60.rx,
-          //   borderRadius: BorderRadius.circular(50),
-          // ),
           10.hSpace,
           Expanded(
             child: Column(
@@ -194,7 +186,6 @@ class NotificationController extends Controller{
         if(data?['orderId'] is String){
           OrdersBloc.instance.add(GetOrdersEvent(
               ids: data?['orderId'],
-              navigateToDetails: true,
             ),
           );
         }

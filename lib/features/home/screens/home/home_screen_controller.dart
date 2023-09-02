@@ -3,6 +3,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:lween/core/app_state/appstate.dart';
 import 'package:lween/core/controller/base_controller.dart';
 import 'package:lween/core/navigation/navigation_service.dart';
 import 'package:lween/core/routing/app_router.dart';
@@ -10,6 +11,8 @@ import 'package:lween/features/account/repo/account_repository.dart';
 import 'package:lween/features/home/bloc/home_bloc.dart';
 import 'package:lween/features/orders/bloc/orders_bloc.dart';
 import 'package:lween/features/orders/models/daily_travels.dart';
+import 'package:lween/injection_container.dart';
+import 'package:lween/main.dart';
 
 class HomeScreenController extends Controller {
 
@@ -38,9 +41,10 @@ class HomeScreenController extends Controller {
   List<TravelEntity> upcomingTravels = [];
 
   static void getUpcomingTravels() {
-    if (AccountRepository.profile?.city?.id != null) {
+    final profile = sl<AppStateModel>().profile;
+    if (profile.city?.id != null) {
       OrdersBloc.instance.add(GetUpcomingTravelsEvent(
-        cityId: AccountRepository.profile!.city!.id!,));
+        cityId: profile.city!.id!,));
     }
   }
 

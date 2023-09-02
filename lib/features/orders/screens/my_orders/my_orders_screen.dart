@@ -19,6 +19,7 @@ import 'package:lween/features/orders/bloc/orders_bloc.dart';
 import 'package:lween/features/orders/models/orders.dart';
 import 'package:lween/features/orders/screens/my_orders/controller.dart';
 import 'package:lween/features/orders/screens/my_orders/widgets/order_item.dart';
+import 'package:lween/features/orders/screens/my_orders/widgets/skeleton.dart';
 import 'package:lween/generated/l10n.dart';
 
 @RoutePage()
@@ -46,19 +47,24 @@ class MyOrdersScreen extends HookWidget {
           builder: (context, state) {
             return Builder(
                 builder: (context) {
-                  if (state is MyOrdersLoading) {
-                    return ListView.builder(
-                      shrinkWrap: true,
-                      padding: EdgeInsets.only(top: 15.hx),
-                      itemCount:  6,
-                      itemBuilder: (ctx, index) {return ShimmerUI.widgetLoader(
-                        enabled: true,
-                        child: OrderItem(
-                          item: OrderEntity(),
-                          onTap: (){},
-                        ),
-                      );
-                      },
+                  if
+                  (state is MyOrdersLoading)
+                  // (true)
+                  {
+                    return ShimmerUI.widgetLoader(
+                      enabled: true,
+                      child: ListView.separated(
+                        shrinkWrap: true,
+                        padding: EdgeInsets.only(top: 15.hx),
+                        itemCount:  6,
+                        separatorBuilder: (ctx, index) => 15.vSpace,
+                        itemBuilder: (ctx, index) {return ShimmerUI.widgetLoader(
+                          enabled: true,
+                          child: const OrderItemSkeleton(
+                          ),
+                        );
+                        },
+                      ),
                     );
                     return const WaitingWidget();
                   } else if (state is MyOrdersError) {
@@ -89,10 +95,11 @@ class MyOrdersScreen extends HookWidget {
                         RefreshIndicator(
                           onRefresh: () async => controller.getData(),
                           child: Positioned.fill(
-                            child: ListView.builder(
+                            child: ListView.separated(
                               shrinkWrap: true,
                               padding: EdgeInsets.only(top: 15.hx),
                               itemCount:  state.ordersResult.orders?.length ?? 0,
+                              separatorBuilder: (ctx, index) => 5.vSpace,
                               itemBuilder: (ctx, index) {
                                 final item = state.ordersResult.orders![index];
                                 return OrderItem(

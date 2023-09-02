@@ -152,8 +152,8 @@ class Assets {
   static const seatSVG = 'assets/orders/SVG/seat.svg';
   static String bookedSeat(BuildContext context) =>
       AppStateModel.of(context).isLightTheme ?
-      bookedSeatLightSVG :  bookedSeatDarkSVG;
-  static const bookedSeatDarkSVG = 'assets/orders/SVG/seat-booked-dark.svg';
+      bookedSeatLightSVG :  bookedSeatDarkPNG;
+  static const bookedSeatDarkPNG = 'assets/orders/PNG/seat-booked-dark.png';
   static const bookedSeatLightSVG = 'assets/orders/SVG/seat-booked.svg';
   static const eyeSVG = 'assets/icons/SVG/ic_eye.svg';
   static const priceTagSVG = 'assets/orders/SVG/price-tag.svg';

@@ -15,15 +15,22 @@ class SeatWidget extends HookWidget {
         .reservedSeatColor;
     late Widget widget;
     if (isSelected.value) {
-      widget = SvgPicture.asset(
-          Assets.bookedSeat(context),
+      widget = AppImage(
+          path: Assets.bookedSeat(context),
+          type: ImageType.asset,
+          fit: BoxFit.scaleDown,
+          width: 23.wx,
+          height: 26.hx,
       );
     }
     else {
-      widget = SvgPicture.asset(
-        Assets.seatSVG,
-        colorFilter: isAvailable ? null : ColorFilter.mode(color,
-          BlendMode.srcIn,),
+      widget = AppImage(
+        path: Assets.seatSVG,
+        type: ImageType.asset,
+        color: isAvailable ? null : color,
+        fit: BoxFit.scaleDown,
+        width: 23.wx,
+        height: 26.hx,
       );
     }
 
@@ -44,10 +51,7 @@ class SeatWidget extends HookWidget {
             AnimatedToggle(
               value: isSelected.value,
               keyId: seat.number,
-              child: Transform.scale(
-                scale: 1.2,
-                child: widget,
-              ),
+              child: widget,
             ),
             5.vSpace,
             AppTextWidget(

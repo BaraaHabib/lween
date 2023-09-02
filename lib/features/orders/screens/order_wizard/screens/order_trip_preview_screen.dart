@@ -289,7 +289,7 @@ class _FromToWidget extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 60.hx,
+      height: 70.hx,
       child: Column(
         children: [
           Row(

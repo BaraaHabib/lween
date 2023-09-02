@@ -1,4 +1,5 @@
 
+import 'package:collection/collection.dart';
 import 'package:lween/core/configurations/app_configuration.dart';
 import 'package:lween/core/features/entities/entity.dart';
 import 'package:lween/core/features/entities/shared/lite_entity.dart';
@@ -66,6 +67,15 @@ class TravelEntity extends ContentModel {
         this.travelTime,
         this.availableDaysText,
 });
+  List<(int, int, SeatEntity)> get seatsMatrix {
+    final res = <(int, int, SeatEntity)>[];
+    for (var (rIndex, seatsRow) in seats!.indexed) {
+      for (var (cIndex, seat) in seatsRow.indexed) {
+        res.add((rIndex, cIndex, seat));
+      }
+    }
+    return res;
+  }
 
   factory TravelEntity.fromJson(Map<String?, dynamic> json) {
     return TravelEntity(
@@ -123,4 +133,32 @@ class TravelEntity extends ContentModel {
 
   @override
   List<Object?> get props => [id,];
+}
+
+class AvailableSeatsEntity extends ContentModel{
+
+  List<List<SeatEntity>>? seats;
+
+  @override
+  fromJson(json) => AvailableSeatsEntity.fromJson(json);
+
+  factory AvailableSeatsEntity.fromJson(json) {
+    return AvailableSeatsEntity(
+      seats: List<List<SeatEntity>>.from(json.map((x) =>
+      List<SeatEntity>.from(
+        x.map((x) =>
+            SeatEntity.fromJson(
+              x,
+            ),
+        ),
+      ),
+      ),
+      ),
+    );
+  }
+
+  @override
+  List<Object?> get props => (seats ?? []).flattened.toList();
+
+  AvailableSeatsEntity({this.seats,});
 }

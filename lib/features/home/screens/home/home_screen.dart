@@ -34,7 +34,8 @@ class HomeScreen extends HookWidget {
   Widget build(BuildContext context) {
     final HomeScreenController controller =
     Controller.getInstance(instance: HomeScreenController(),);
-    final OrdersController ordersController = Controller.getInstance(instance: OrdersController(),);
+    final OrdersController ordersController = Controller.getInstance(
+      instance: OrdersController(),);
     return BlocConsumer<HomeBloc, HomeState>(
         bloc: HomeBloc.instance,
         listener: controller.listener,
@@ -44,41 +45,44 @@ class HomeScreen extends HookWidget {
           return AppScaffold(
             centerTitle: true,
             withBackButton: false,
-            padding:EdgeInsets.zero,
+            padding: EdgeInsets.zero,
             title: AppConfigurations.ApplicationName,
-            icon:Image.asset(Assets.logoPNG,width: 26.rx,height: 26.rx,),
+            icon: Image.asset(Assets.logoPNG, width: 26.rx, height: 26.rx,),
             child: Builder(
-              builder: (context) {
-                if (state is GetHomeDataLoading) {
-                  return const WaitingWidget();
-                } else if (state is GetHomeDataError) {
-                  return AppErrorWidget(
-                    message: state.message,
-                    actionTitle: S
-                        .of(context)
-                        .retry,
-                    onAction: HomeScreenController.intiHomeScreen,
-                  );
-                }
-                else if (state is GetHomeDataLoaded) {
+                builder: (context) {
+                  if (state is GetHomeDataError) {
+                    return AppErrorWidget(
+                      message: state.message,
+                      actionTitle: S
+                          .of(context)
+                          .retry,
+                      onAction: HomeScreenController.intiHomeScreen,
+                    );
+                  }
                   return Stack(
                     children: [
                       RefreshIndicator(
-                        onRefresh: () async => HomeScreenController.intiHomeScreen(),
+                        onRefresh: () async =>
+                            HomeScreenController.intiHomeScreen(),
                         child: Positioned.fill(
                           child: ListView(
                             children: [
-                              // 5.vSpace,
-                              if(state.homeEntity.topCompanies
-                                  .isNotEmpty)
-                                TopCompaniesList(
-                                  state.homeEntity.topCompanies,),
-                              // 5.vSpace,
-                              if(state.homeEntity.advertisements.isNotEmpty)
-                                SizedBox(
-                                  width:1.sw,
-                                  child: HomeSlider(state.homeEntity.advertisements,),
-                                ),
+                              if(state is GetHomeDataLoading)
+                                const TopCompaniesSkeletonWidget()
+                              else
+                                if(state is GetHomeDataLoaded &&
+                                    state.homeEntity.topCompanies
+                                        .isNotEmpty)
+                                  TopCompaniesList(
+                                    state.homeEntity.topCompanies,
+                                  ),
+                              if(state is GetHomeDataLoading)
+                                const HomeSliderSkeleton()
+                              else
+                                if(state is GetHomeDataLoaded &&
+                                    state.homeEntity.advertisements.isNotEmpty)
+                                  HomeSlider(
+                                    state.homeEntity.advertisements,),
                               const UpcomingTravelsList(),
                               const MyPreviousOrders(),
                               // Padding(
@@ -94,23 +98,25 @@ class HomeScreen extends HookWidget {
                         ),
                       ),
                       Positioned(
-                          bottom: 0.hx,
-                          child: Container(
-                            color: context.theme.primaryColor.withOpacity(0.5),
-                            padding: EdgeInsets.symmetric(horizontal: 24.wx,vertical: 10.hx,),
-                            child: AppGradientTextButton(
-                              gradientType: AppTextButtonGradientType.secondary,
-                              content: S.of(context).bookATrip,
-                              onTap: () => controller.bookATrip(context),
-                            ),
+                        bottom: 0.hx,
+                        child: Container(
+                          color: context.theme.primaryColor.withOpacity(0.5),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 24.wx, vertical: 10.hx,),
+                          child: AppGradientTextButton(
+                            gradientType: AppTextButtonGradientType.secondary,
+                            content: S
+                                .of(context)
+                                .bookATrip,
+                            onTap: () => controller.bookATrip(context),
                           ),
+                        ),
                       )
                     ],
                   );
+                  return const EmptyWidget(
+                  );
                 }
-                return const EmptyWidget(
-                );
-              }
             ),
           );
         }

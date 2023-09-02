@@ -22,14 +22,15 @@ enum PaymentMethod{
   final int type;
   final int? paymentProviderEnum;
 
-  bool get isByPhoneNumber => this == PaymentMethod.cashMobile;
-  bool get isOnlinePayment => this != PaymentMethod.cash;
-  bool get isFromWallet => this == PaymentMethod.wallet;
+  bool get isByPhoneNumber => this == cashMobile;
+  bool get isFromWallet => this == wallet;
   bool get isWebView =>
       this == PaymentMethod.bemo ||
       this == PaymentMethod.eCash ||
       this == PaymentMethod.fatora
   ;
+  bool get isOnlinePayment => !isByPhoneNumber && !isFromWallet;
+  bool get isPayInCenter => this == cash;
 }
 
 enum VehicleType {

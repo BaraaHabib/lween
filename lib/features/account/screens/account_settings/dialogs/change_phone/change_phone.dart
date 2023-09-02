@@ -5,6 +5,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:lween/core/app_state/appstate.dart';
 import 'package:lween/core/configurations/app_configuration.dart';
 import 'package:lween/core/configurations/assets.dart';
 import 'package:lween/core/configurations/styles/styles.dart';
@@ -25,6 +26,7 @@ import 'package:lween/features/account/params/resend_code_params.dart';
 import 'package:lween/features/account/repo/account_repository.dart';
 import 'package:lween/generated/l10n.dart';
 import 'package:lween/injection_container.dart';
+import 'package:lween/main.dart';
 
 part 'confirm_phone_fields.dart';
 part 'resend_button.dart';
@@ -44,8 +46,8 @@ class ChangePhoneDialog extends HookWidget {
         listener: controller.listener,
         buildWhen: controller.buildWhen,
         builder: (ctx, cs) {
-          return IgnorePointer(
-            ignoring:
+          return AbsorbPointer(
+            absorbing:
             cs is ResendCodeLoading ||
             cs is CheckCodeLoading,
             child: FormBuilder(
@@ -161,7 +163,7 @@ class ChangePhoneDialogController extends Controller {
     else if(state is ConfirmChangePhoneCodeLoaded){
       AppToast(S.of(context).phoneNumberChangesSuccessfully,).show();
       AccountBloc.instance.add(const GetProfileEvent(),);
-      // AccountRepository.profile?.phoneNumber = formKey.currentState?.getRawValue('phone',);
+      // Lween.storage.profile?.phoneNumber = formKey.currentState?.getRawValue('phone',);
       NavigationService.of(context).pop();
     }
     else if(state is ResendCodeLoaded){
@@ -214,7 +216,7 @@ class ChangePhoneDialogController extends Controller {
     bloc.add(
       ResendCodeEvent(
         params: ResendCodeParams(
-          userName: AccountRepository.profile!.phoneNumber!,
+          userName: sl<AppStateModel>().profile.phoneNumber!,
           confirmationCodeType: ConfirmationCodeType.changePhoneNumber,
         ),
       ),

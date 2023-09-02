@@ -9,7 +9,7 @@
         </intent>
     </queries>
     <application
-        android:label="lween"
+        android:label="Lween"
         android:requestLegacyExternalStorage="true"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">

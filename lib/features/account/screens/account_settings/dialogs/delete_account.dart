@@ -34,8 +34,8 @@ class DeleteAccountDialog extends HookWidget {
       buildWhen: controller.deleteAccountListenBuildWhen,
       listener: controller.deleteAccountListener,
       builder: (context, state) {
-        return IgnorePointer(
-          ignoring: state is DeleteAccountLoading,
+        return AbsorbPointer(
+          absorbing: state is DeleteAccountLoading,
           child: FormBuilder(
             key: controller.deleteAccountFormKey,
             child: Column(

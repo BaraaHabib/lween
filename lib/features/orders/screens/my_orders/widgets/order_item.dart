@@ -35,7 +35,7 @@ class OrderItem extends HookWidget {
               Row(
                 children: [
                   SvgPicture.asset(Assets.ticketIconSVG),
-                  3.hSpace,
+                  5.hSpace,
                   AppTextWidget('#',
                     style: context
                         .textTheme
@@ -67,20 +67,28 @@ class OrderItem extends HookWidget {
                   ),
                   Expanded(
                     flex: 6,
-                    child: AppTextWidget(item.transportationCompany?.text ?? '',
-                      style: context.textTheme.displaySmall, maxLines: 2,),
+                    child: FittedBox(
+                      child: AppTextWidget(item.transportationCompany?.text ?? '',
+                        style: context.textTheme.displaySmall, maxLines: 2,),
+                    ),
                   ),
                   const Spacer(),
                   Expanded(
-                    flex: 2,
+                    flex: 3,
                     child: AppTextWidget(S
                         .of(context)
                         .from, style: context.textTheme.labelMedium),
                   ),
                   Expanded(
-                    flex: 5,
-                    child: AppTextWidget(item.fromCity?.text ?? '',
-                        style: context.textTheme.displaySmall),
+                    flex: 7,
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      alignment: AlignmentDirectional.centerStart,
+                      child: AppTextWidget(item.fromCity?.text ?? '',
+                          style: context.textTheme.displaySmall,
+                          maxLines: 2,
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -92,6 +100,7 @@ class OrderItem extends HookWidget {
                         .of(context)
                         .seatsCount, style: context.textTheme.labelMedium),
                   ),
+                  // 3.hSpace,
                   Expanded(
                     flex: 6,
                     child: Align(
@@ -101,15 +110,22 @@ class OrderItem extends HookWidget {
                   ),
                   const Spacer(),
                   Expanded(
-                    flex: 2,
+                    flex: 3,
                     child: AppTextWidget(S
                         .of(context)
-                        .to, style: context.textTheme.labelMedium),
+                        .to,
+                        textAlign: TextAlign.start,
+                        style: context.textTheme.labelMedium),
                   ),
                   Expanded(
-                    flex: 5,
-                    child: AppTextWidget(item.toCity?.text ?? '',
-                      style: context.textTheme.displaySmall,),
+                    flex: 7,
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      alignment: AlignmentDirectional.centerStart,
+                      child: AppTextWidget(item.toCity?.text ?? '',
+                        maxLines: 2,
+                        style: context.textTheme.displaySmall,),
+                    ),
                   ),
                 ],
               ),

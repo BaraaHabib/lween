@@ -32,8 +32,8 @@ class LogInScreen extends HookWidget {
     final controller = Controller.getInstance(instance: LoginController(context,));
     return BlocBuilder<AccountBloc,AccountState>(
       bloc: bloc,
-      builder:(ctc, state) => IgnorePointer(
-        ignoring: state is LogInLoading,
+      builder:(ctc, state) => AbsorbPointer(
+        absorbing: state is LogInLoading,
         child: AppScaffold(
           title: S.of(context).welcomeToLweenApp,
           withBackButton: false,

@@ -37,8 +37,8 @@ class RegisterScreen extends HookWidget {
     return BlocBuilder<AccountBloc,AccountState>(
       bloc: sl<AccountBloc>(),
       builder: (context,state) {
-        return IgnorePointer(
-          ignoring: state is RegisterLoading,
+        return AbsorbPointer(
+          absorbing: state is RegisterLoading,
           child: AppScaffold(
             backgroundImage: Assets.logInBackgroundPNG(context),
             title: S
