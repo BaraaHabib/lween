@@ -7,11 +7,13 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:lween/core/app_state/appstate.dart';
 import 'package:lween/core/configurations/assets.dart';
 import 'package:lween/core/configurations/styles/styles.dart';
 import 'package:lween/core/controller/base_controller.dart';
 import 'package:lween/core/extended/numbers_ext.dart';
 import 'package:lween/core/lween/widgets/app_scaffold.dart';
+import 'package:lween/core/validators/common_validators.dart';
 import 'package:lween/core/widgets/app_button.dart';
 import 'package:lween/core/widgets/app_text_button.dart';
 import 'package:lween/core/widgets/text_field.dart';
@@ -74,10 +76,8 @@ class ResetPasswordScreen extends HookWidget {
                         prefixIcon: SvgPicture.asset(
                           Assets.phoneIcon,
                         ),
-                        validator: FormBuilderValidators.compose([
-                          FormBuilderValidators.required(),
-                          FormBuilderValidators.equalLength(10),
-                        ]),
+                        validator: CommonValidators.phone,
+                        hint: AppStateModel.of(context).inStoreObject('09********') ?? '',
                         keyboardType: TextInputType.number,
                       ),
                       const Spacer(),

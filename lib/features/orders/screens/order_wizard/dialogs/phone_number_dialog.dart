@@ -7,6 +7,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:lween/core/app_state/appstate.dart';
 import 'package:lween/core/configurations/assets.dart';
 import 'package:lween/core/configurations/styles/styles.dart';
 import 'package:lween/core/configurations/styles/themes.dart';
@@ -14,6 +15,7 @@ import 'package:lween/core/controller/base_controller.dart';
 import 'package:lween/core/dialogs/app_dialogs.dart';
 import 'package:lween/core/extended/get_utils/get_utils.dart';
 import 'package:lween/core/extended/numbers_ext.dart';
+import 'package:lween/core/validators/common_validators.dart';
 import 'package:lween/core/widgets/app_button.dart';
 import 'package:lween/core/widgets/app_text_button.dart';
 import 'package:lween/core/widgets/app_text_widget.dart';
@@ -86,13 +88,9 @@ class OrderPhoneNumberDialog extends HookWidget{
                               formatters: [
                                 FilteringTextInputFormatter.digitsOnly,
                               ],
-                              validator: FormBuilderValidators.compose([
-                                FormBuilderValidators.required(),
-                                    (v) => v is String && v.startsWith('09') ? null : S.of(context).phoneShouldStartWith09,
-                                FormBuilderValidators.equalLength(10),
-                              ]),
+                              validator: CommonValidators.phone,
                               keyboardType: TextInputType.number,
-                              hint: '09********',
+                              hint: AppStateModel.of(context).inStoreObject('09********') ?? '',
                             ),
                             duration: 300.milliseconds,
                             secondChild: const SizedBox.shrink(),

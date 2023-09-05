@@ -13,6 +13,7 @@ import 'package:lween/core/controller/base_controller.dart';
 import 'package:lween/core/extended/numbers_ext.dart';
 import 'package:lween/core/features/entities/shared/city.dart';
 import 'package:lween/core/lween/widgets/app_scaffold.dart';
+import 'package:lween/core/validators/common_validators.dart';
 import 'package:lween/core/widgets/app_button.dart';
 import 'package:lween/core/widgets/app_drop_down.dart';
 import 'package:lween/core/widgets/text_field.dart';
@@ -86,10 +87,8 @@ class RegisterScreen extends HookWidget {
                         .phoneNumber,
                     prefixIcon: SvgPicture.asset(Assets.phoneIcon,),
                     keyboardType: TextInputType.number,
-                    validator: FormBuilderValidators.compose([
-                      FormBuilderValidators.required(),
-                      FormBuilderValidators.equalLength(10),
-                    ]),
+                    validator: CommonValidators.phone,
+                    hint: AppStateModel.of(context).inStoreObject('09********') ?? '',
                   ),
                   fieldSeparator,
                   AppTextField(

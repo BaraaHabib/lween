@@ -90,15 +90,23 @@ class _InfoRowWidget extends StatelessWidget {
             ),
           ),
           5.hSpace,
-          AppTextWidget(text1, style: context.textTheme.headlineMedium,),
+          Expanded(
+              flex: 3,
+              child: AppTextWidget(text1, style: context.textTheme.headlineMedium,)),
           10.hSpace,
-          AppTextWidget(text2, style: Theme
-              .of(context)
-              .textTheme
-              .bodyMedium
-              ?.copyWith(
-              color: Styles.textButtonColor
-          ),),
+          Expanded(
+            flex: 4,
+            child: AppTextWidget(
+              text2,
+              textAlign: TextAlign.start,
+              style: Theme
+                .of(context)
+                .textTheme
+                .bodyMedium
+                ?.copyWith(
+                color: Styles.textButtonColor
+            ),),
+          ),
         ],
       ),
     );

@@ -102,13 +102,15 @@ class HomeScreen extends HookWidget {
                         child: Container(
                           color: context.theme.primaryColor.withOpacity(0.5),
                           padding: EdgeInsets.symmetric(
-                            horizontal: 24.wx, vertical: 10.hx,),
+                            horizontal: 24.wx,
+                            vertical: 10.hx,
+                          ),
                           child: AppGradientTextButton(
                             gradientType: AppTextButtonGradientType.secondary,
                             content: S
                                 .of(context)
                                 .bookATrip,
-                            onTap: () => controller.bookATrip(context),
+                            onTap: () => controller.bookATrip(context,),
                           ),
                         ),
                       )

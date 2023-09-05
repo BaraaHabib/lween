@@ -15,6 +15,7 @@ import 'package:lween/core/extended/numbers_ext.dart';
 import 'package:lween/core/extended/string_ext.dart';
 import 'package:lween/core/messages/toast.dart';
 import 'package:lween/core/navigation/navigation_service.dart';
+import 'package:lween/core/validators/common_validators.dart';
 import 'package:lween/core/widgets/app_button.dart';
 import 'package:lween/core/widgets/app_text_button.dart';
 import 'package:lween/core/widgets/app_text_widget.dart';
@@ -69,13 +70,9 @@ class ChangePhoneDialog extends HookWidget {
                             formatters: [
                               FilteringTextInputFormatter.digitsOnly,
                             ],
-                            validator: FormBuilderValidators.compose([
-                              FormBuilderValidators.required(),
-                                  (v) => v is String && v.startsWith('09') ? null : S.of(context).phoneShouldStartWith09,
-                              FormBuilderValidators.equalLength(10),
-                            ]),
+                            validator: CommonValidators.phone,
                             keyboardType: TextInputType.number,
-                            hint: '09********',
+                            hint: AppStateModel.of(context).inStoreObject('09********') ?? '',
                           ),
                           if (controller.codeRequested.value)
                             Row(

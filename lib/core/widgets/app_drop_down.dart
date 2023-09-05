@@ -14,7 +14,7 @@ import 'package:lween/core/extended/numbers_ext.dart';
    final String name;
    final EdgeInsets? contentPadding;
    final GlobalKey<FormBuilderFieldState>? dropDownKey;
-
+   final bool enabled;
    const AppDropDownField({Key? key,
      this.dropDownKey,
      this.initValue,
@@ -23,6 +23,7 @@ import 'package:lween/core/extended/numbers_ext.dart';
      this.validator,
      required this.hintText,
      this.contentPadding,
+     this.enabled = true,
      required this.data,
    }) : super(key: key);
 
@@ -30,9 +31,6 @@ import 'package:lween/core/extended/numbers_ext.dart';
    Widget build(BuildContext context) {
      var selectedValue = useState<DropdownItemDataModel?>(initValue);
      DropdownItemDataModel? mInitValue;
-     // if(hintText.isNotEmpty && initValue == null && selectedValue.value == null){
-     //   mInitValue  = DropdownItemDataModel(name: hintText, id: -1);
-     // }
      useEffect(() {
        if (initValue != null) {
          for (var element in data) {
@@ -58,6 +56,7 @@ import 'package:lween/core/extended/numbers_ext.dart';
                  name: name,
                  borderRadius: BorderRadius.circular(28.0.rx),
                  alignment: AlignmentDirectional.center,
+                enabled: this.enabled,
                 key: dropDownKey,
                  items: data.map((DropdownItemDataModel value) {
                    return DropdownMenuItem<DropdownItemDataModel>(

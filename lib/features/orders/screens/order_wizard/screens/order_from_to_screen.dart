@@ -31,33 +31,30 @@ part '../widgets/label_with_field.dart';
 class OrderFromToScreen extends HookWidget {
   const OrderFromToScreen({
     this.travelEntity,
-    this.companyEntity,
     super.key,
   });
 
   final TravelEntity? travelEntity;
-  final CompanyEntity? companyEntity;
 
   @override
   Widget build(BuildContext context) {
     final OrderWizardController controller = Controller.getInstance(instance: OrderWizardController(
         travelEntity: travelEntity,
-        // selectedCompanyEntity: companyEntity?.toLite,
       ),
     );
     final selectedFromCity = useState<DropdownItemDataModel?>(controller.selectedFromCity,);
     final selectedToCity = useState<DropdownItemDataModel?>(controller.selectedToCity,);
 
-    return BlocConsumer<OrdersBloc,OrdersState>(
-      bloc: OrdersBloc.instance,
-      listener: controller.listener,
-      buildWhen: controller.buildWhen,
-      listenWhen: controller.listenWhen,
-      builder: (context,state) {
-        return AbsorbPointer(
-          absorbing: state is CompanyFilteredTravelsLoading,
-          child: AppScaffold(
-            title: controller.fromToTitle,
+    return AppScaffold(
+      title: controller.fromToTitle,
+      child: BlocConsumer<OrdersBloc,OrdersState>(
+        bloc: OrdersBloc.instance,
+        listener: controller.listener,
+        buildWhen: controller.buildWhen,
+        listenWhen: controller.listenWhen,
+        builder: (context,state) {
+          return AbsorbPointer(
+            absorbing: state is CompanyFilteredTravelsLoading,
             child: Stack(
               children: [
                 SingleChildScrollView(
@@ -90,6 +87,7 @@ class OrderFromToScreen extends HookWidget {
                               .source,
                           child: AppDropDownField(
                             dropDownKey: controller.fromCityKey,
+                            enabled: !controller.isTravelAlreadySelected,
                             onChange: (v) {
                               controller.selectedFromCity = v;
                               selectedFromCity.value = v;
@@ -102,7 +100,6 @@ class OrderFromToScreen extends HookWidget {
                             name: 'from',
                             data: controller.cities.toList()
                               ..remove(controller.selectedToCity),
-                            // validator: controller.validateDropDownCity,
                             initValue: controller.selectedFromCity,
                             validator: FormBuilderValidators.required(),
                           ),
@@ -114,6 +111,7 @@ class OrderFromToScreen extends HookWidget {
                               .destination,
                           child: AppDropDownField(
                             dropDownKey: controller.toCityKey,
+                            enabled: !controller.isTravelAlreadySelected,
                             onChange: (v) {
                               controller.selectedToCity = v;
                               selectedToCity.value = v;
@@ -238,10 +236,10 @@ class OrderFromToScreen extends HookWidget {
                   ),)
               ],
             ),
-          ),
-        );
-      }
+          );
+        }
 
+      ),
     );
   }
 

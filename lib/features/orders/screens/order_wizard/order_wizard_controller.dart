@@ -108,7 +108,7 @@ class OrderWizardController extends Controller with PaymentMixin {
 
   String get fromToTitle =>
       '${S.current.bookATrip}'
-          '${isTravelAlreadySelected ? ' (${travelEntity!.transportationEntity?.name})' : ''}';
+          '${isTravelAlreadySelected ? ' (${travelEntity!.transportationEntity?.name} ${travelEntity?.travelTime})' : ''}';
 
   void listener(BuildContext context, OrdersState state) {
     /// clear selected travel on error
@@ -280,7 +280,7 @@ class OrderWizardController extends Controller with PaymentMixin {
 
   void selectTravel(TravelEntity? sTravel) {
     selectedTravelEntity = sTravel;
-    orderBodyNotifier.value = CreateOrderBodyParams(seats: []);
+    orderBodyNotifier.value = CreateOrderBodyParams(seats: [],);
   }
 
   //#endregion from-to screen
@@ -466,13 +466,13 @@ class OrderWizardController extends Controller with PaymentMixin {
   double get totalPrice =>
       (orderBody.seats?.length ?? 0) * (selectedTravelEntity?.price?.toDouble() ?? 0);
 
-
-
 //endregion
 
 //#region travels screen
   List<VehicleType> get availableVehiclesTypes =>
-      travelsResult?.fold(<VehicleType>{}, (previousValue, element) => previousValue..add(element.travelMethodEnum)).toList() ?? [];
+      travelsResult?.fold(<VehicleType>{}, (previousValue, element)
+      => previousValue..add(element.travelMethodEnum)).sorted((a, b) => a.type.compareTo(b.type)).toList() ?? [];
+
   List<TravelEntity> travelsResultByVehicleType([VehicleType? type]) =>
       travelsResult?.where((e) => e.travelMethodEnum == type || type == null).toList() ?? [];
 

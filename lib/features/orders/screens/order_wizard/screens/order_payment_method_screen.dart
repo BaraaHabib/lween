@@ -134,40 +134,6 @@ class OrderPaymentMethodScreen extends HookWidget {
                                           );
                                       }
                                     ),
-                                    PaymentMethodWidget(
-                                      icon: Assets.cashMobilePNG,
-                                      title: S.of(context).cashMobile,
-                                      paymentMethod: PaymentMethod.cashMobile,
-                                      onTap: controller
-                                          .changeSelectedPaymentMethod,
-                                    ),
-                                    PaymentMethodWidget(
-                                      icon: Assets.bemoPNG,
-                                      title: S
-                                          .of(context)
-                                          .bemoBank,
-                                      paymentMethod: PaymentMethod.bemo,
-                                      onTap: controller
-                                          .changeSelectedPaymentMethod,
-                                    ),
-                                    PaymentMethodWidget(
-                                      icon: Assets.fatoraLogoPNG(context),
-                                      title: S
-                                          .of(context)
-                                          .fatora,
-                                      paymentMethod: PaymentMethod.fatora,
-                                      onTap: controller
-                                          .changeSelectedPaymentMethod,
-                                    ),
-                                    PaymentMethodWidget(
-                                      icon: Assets.eCashPNG(context),
-                                      title: S
-                                          .of(context)
-                                          .eCash,
-                                      paymentMethod: PaymentMethod.eCash,
-                                      onTap: controller
-                                          .changeSelectedPaymentMethod,
-                                    ),
 
                                   ],
                                 );
@@ -206,5 +172,53 @@ class OrderPaymentMethodScreen extends HookWidget {
           );
         }
     );
+  }
+
+  _supportedPaymentMethods(context) {
+    final OrderWizardController controller = Controller.getInstance();
+    final appState = AppStateModel
+        .of(context);
+    return [
+      if(appState.isPaymentMethodSupported(PaymentMethod.cashMobile))
+        PaymentMethodWidget(
+          icon: Assets.cashMobilePNG,
+          title: S
+              .of(context)
+              .cashMobile,
+          paymentMethod: PaymentMethod.cashMobile,
+          onTap: controller
+              .changeSelectedPaymentMethod,
+        ),
+      if(appState.isPaymentMethodSupported(PaymentMethod.bemo))
+        PaymentMethodWidget(
+          icon: Assets.bemoPNG,
+          title: S
+              .of(context)
+              .bemoBank,
+          paymentMethod: PaymentMethod.bemo,
+          onTap: controller
+              .changeSelectedPaymentMethod,
+        ),
+      if(appState.isPaymentMethodSupported(PaymentMethod.fatora))
+        PaymentMethodWidget(
+          icon: Assets.fatoraLogoPNG(context),
+          title: S
+              .of(context)
+              .fatora,
+          paymentMethod: PaymentMethod.fatora,
+          onTap: controller
+              .changeSelectedPaymentMethod,
+        ),
+      if(appState.isPaymentMethodSupported(PaymentMethod.eCash))
+        PaymentMethodWidget(
+          icon: Assets.eCashPNG(context),
+          title: S
+              .of(context)
+              .eCash,
+          paymentMethod: PaymentMethod.eCash,
+          onTap: controller
+              .changeSelectedPaymentMethod,
+        ),
+    ];
   }
 }

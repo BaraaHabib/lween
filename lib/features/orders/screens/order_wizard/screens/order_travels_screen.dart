@@ -25,7 +25,7 @@ import 'package:lween/generated/l10n.dart';
 part '../widgets/order_travels/company_card_widget.dart';
 @RoutePage()
 class OrderTravelsScreen extends HookWidget {
-  const  OrderTravelsScreen({super.key});
+  const OrderTravelsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -34,10 +34,6 @@ class OrderTravelsScreen extends HookWidget {
 
     return AppScaffold(
       title: S.current.bookATrip,
-      // padding: EdgeInsetsDirectional.only(
-      //     start: 17.wx,
-      //     end: 13.wx
-      // ),
       child: Column(
         children: [
           20.vSpace,
@@ -61,93 +57,108 @@ class OrderTravelsScreen extends HookWidget {
             child: Row(
               children: [
                 if(controller.availableVehiclesTypes.length > 1)
-                  Expanded(
-                    flex: 3,
-                    child: VehiclesTypeWidget(
-                      types: controller.availableVehiclesTypes,
-                      currentType : currentType.value,
-                      onTap: (t){
-                        if(currentType.value == t){
-                          currentType.value = null;
-                        }
-                        else{
-                          currentType.value = t;
-                        }
-                      },
+                  ...[
+                    Expanded(
+                      flex: 3,
+                      child: VehiclesTypeWidget(
+                        types: controller.availableVehiclesTypes,
+                        currentType: currentType.value,
+                        onTap: (t) {
+                          if (currentType.value == t) {
+                            currentType.value = null;
+                          }
+                          else {
+                            currentType.value = t;
+                          }
+                        },
+                      ),
                     ),
-                ),
-                5.hSpace,
+                    5.hSpace,
+                  ],
                 Expanded(
                   flex: 20,
                   child: ListView.separated(
-                    itemCount: controller.travelsResultByVehicleType(currentType.value).length,
+                    itemCount: controller
+                        .travelsResultByVehicleType(currentType.value)
+                        .length,
                     separatorBuilder: (ctx, index) => 18.vSpace,
                     itemBuilder: (ctx, index) {
-                      final item = controller.travelsResultByVehicleType(currentType.value)[index];
+                      final item = controller.travelsResultByVehicleType(
+                          currentType.value)[index];
                       return GestureDetector(
-                        onTap: (){
-                          controller.selectTripAndGoToSeats(context,item,);
+                        onTap: () {
+                          controller.selectTripAndGoToSeats(context, item,);
                         },
                         child: Card(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 12,vertical: 8,),
-                          child: Row(
-                            children: [
-                              AppImage(
-                                path: Assets.tripClockPNG(context,),
-                                type: ImageType.asset,
-                                height: 50.rx,
-                                width: 50.rx,
-                              ),
-                              8.hSpace,
-                              Expanded(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    AppTextWidget(item.travelTime ?? '',style: context.textTheme.titleMedium),
-                                    5.vSpace,
-                                    ConstrainedBox(
-                                      constraints: BoxConstraints(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 12, vertical: 8,),
+                            child: Row(
+                              children: [
+                                AppImage(
+                                  path: Assets.tripClockPNG(context,),
+                                  type: ImageType.asset,
+                                  height: 50.rx,
+                                  width: 50.rx,
+                                ),
+                                8.hSpace,
+                                Expanded(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment
+                                        .spaceAround,
+                                    crossAxisAlignment: CrossAxisAlignment
+                                        .start,
+                                    children: [
+                                      AppTextWidget(item.travelTime ?? '',
+                                          style: context.textTheme.titleMedium),
+                                      5.vSpace,
+                                      ConstrainedBox(
+                                        constraints: BoxConstraints(
                                           minHeight: 15.hx,
                                           maxHeight: 50.hx,
-                                      ),
-                                      // width: 220.wx,
-                                      child: Wrap(
-                                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        // spacing: 5,
-                                        children: [
-                                          Row(
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              Transform.scale(
-                                                scale: 0.7,
-                                                child: SvgPicture.asset(
-                                                  Assets.locationIcon,
-                                                  colorFilter: const ColorFilter.mode(
-                                                    Styles.headLineFontColor, BlendMode.srcIn,),
-                                                  fit: BoxFit.scaleDown,
+                                        ),
+                                        // width: 220.wx,
+                                        child: Wrap(
+                                          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          // spacing: 5,
+                                          children: [
+                                            Row(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                Transform.scale(
+                                                  scale: 0.7,
+                                                  child: SvgPicture.asset(
+                                                    Assets.locationIcon,
+                                                    colorFilter: const ColorFilter
+                                                        .mode(
+                                                      Styles.headLineFontColor,
+                                                      BlendMode.srcIn,),
+                                                    fit: BoxFit.scaleDown,
+                                                  ),
                                                 ),
-                                              ),
-                                              3.hSpace,
-                                              AppTextWidget(item.fromToText, style: context.textTheme.headlineSmall,),
-                                            ],
-                                          ),
-                                          // const Spacer(),
-                                          MiniVehicleWidget(
-                                            travelMethodEnum: item.travelMethodEnum,
-                                            travelMethodText: item.travelMethodText,
-                                          ),
-                                        ],
+                                                3.hSpace,
+                                                AppTextWidget(item.fromToText,
+                                                  style: context.textTheme
+                                                      .headlineSmall,),
+                                              ],
+                                            ),
+                                            // const Spacer(),
+                                            MiniVehicleWidget(
+                                              travelMethodEnum: item
+                                                  .travelMethodEnum,
+                                              travelMethodText: item
+                                                  .travelMethodText,
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
-                    ),
                       );
                     },
                   ),

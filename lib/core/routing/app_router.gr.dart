@@ -140,7 +140,7 @@ abstract class _$AppRouter extends RootStackRouter {
         routeData: routeData,
         child: OrderFromToScreen(
           travelEntity: args.travelEntity,
-          companyEntity: args.companyEntity,
+          // companyEntity: args.companyEntity,
           key: args.key,
         ),
       );

@@ -5,6 +5,7 @@ class InitAppEntity extends ContentModel {
   String? lastVersion;
   String? lastVersionUrl;
   bool? isUpToDate;
+  List<int>? supportedPaymentTypes;
   bool? isAuthenticated;
   bool? inStoreReview;
   String? phoneNumber1;
@@ -21,6 +22,7 @@ class InitAppEntity extends ContentModel {
         this.phoneNumber1,
         this.phoneNumber2,
         this.appSupportLink,
+        this.supportedPaymentTypes,
         this.countries});
 
   InitAppEntity.fromJson(json) {
@@ -32,6 +34,7 @@ class InitAppEntity extends ContentModel {
     phoneNumber1 = json['phoneNumber1'];
     phoneNumber2 = json['phoneNumber2'];
     appSupportLink = json['appSupportLink'];
+    supportedPaymentTypes = json['supportedPaymentTypes'] == null ? [] : List.castFrom(json['supportedPaymentTypes']);
     if (json['countries'] != null) {
       countries = <Country>[];
       json['countries'].forEach((v) {
@@ -50,6 +53,7 @@ class InitAppEntity extends ContentModel {
     data['phoneNumber1'] = phoneNumber1;
     data['phoneNumber2'] = phoneNumber2;
     data['appSupportLink'] = appSupportLink;
+    data['supportedPaymentTypes'] = supportedPaymentTypes;
     if (countries != null) {
       data['countries'] = countries!.map((v) => v.toJson()).toList();
     }
