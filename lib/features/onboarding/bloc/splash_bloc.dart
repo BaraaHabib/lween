@@ -8,6 +8,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_clarity/flutter_clarity.dart';
+import 'package:lween/core/configurations/app_configuration.dart';
 import 'package:lween/core/exceptions/app_exceptions.dart';
 import 'package:lween/core/resources/constants.dart';
 import 'package:lween/core/services/notification_service.dart';
@@ -67,7 +68,19 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
         });
       }
 
-      if (!appState.authenticated) {
+
+      if(!(appState.initAppEntity.isUpToDate ?? false)){
+        emit(
+          SplashLoaded(
+            SplashInitResult(
+              isAuthenticated: false,
+              isStayLoggedIn: false,
+              isUpToDate: appState.initAppEntity.isUpToDate ?? false,
+            ),
+          ),
+        );
+      }
+      else if (!appState.authenticated) {
         emit(
           SplashLoaded(
             SplashInitResult(
@@ -77,13 +90,15 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
           ),
         );
         return;
-      } else {
+      }
+      else {
         await initApp(event.context);
         emit(
           SplashLoaded(
             SplashInitResult(
               isAuthenticated: appState.authenticated,
               isStayLoggedIn: appState.stayLoggedIn,
+              isUpToDate: appState.initAppEntity.isUpToDate ?? false,
             ),
           ),
         );
@@ -112,18 +127,15 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
       listen: false,
     );
     locale.init();
-    await Future.wait([storage.init(), sl<FileManager>().init()]);
-    // await storage.init();
-    // await locale.init();
-    // await sl<FileManager>().init();
-
     sl<NotificationService>().initFcmNotifications();
+    await Future.wait([storage.init(), sl<FileManager>().init(),]);
+
     _initClarity();
   }
 
   static _initClarity() {
     // Initialize Clarity.
-    FlutterClarityPlugin().initialize(projectId: "ikxovf1t2y");
+    FlutterClarityPlugin().initialize(projectId: AppConfigurations.clarityProjectId,);
 
     final profile = sl<AppStateModel>().profile;
     // Set custom user id.
@@ -143,8 +155,10 @@ class SplashInitResult {
   SplashInitResult({
     required this.isAuthenticated,
     required this.isStayLoggedIn,
+    this.isUpToDate = true,
   });
 
   bool isAuthenticated = false;
   bool isStayLoggedIn = false;
+  bool isUpToDate;
 }

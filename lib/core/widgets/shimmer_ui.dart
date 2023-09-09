@@ -20,13 +20,18 @@ abstract class ShimmerUI {
       );
 
   static Widget widget(
-      [double h = 10, double w = 10, Color color = Colors.grey]) =>
+      {
+        double? h,
+        double? w,
+        Color? color,
+        BorderRadiusGeometry? borderRadius,
+      }) =>
       Container(
         width: w,
         height: h,
         decoration: BoxDecoration(
-          color: color,
-          // borderRadius: Styles.borderRadius30px,
+          color: color ?? Colors.grey.withOpacity(0.5),
+          borderRadius: borderRadius,
         ),
       );
 

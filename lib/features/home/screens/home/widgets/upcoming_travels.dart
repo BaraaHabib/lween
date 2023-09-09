@@ -83,7 +83,7 @@ class UpcomingTravelsList extends HookWidget {
                 ),
                 8.vSpace,
                 SizedBox(
-                  height: 150.hx,
+                  height: 160.hx,
                   child: ListView.separated(
                     // controller: SCc,
                     scrollDirection: Axis.horizontal,

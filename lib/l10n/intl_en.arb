@@ -152,5 +152,11 @@
   "newPhoneNumber": "New phone number",
   "payFromMyBalance": "Pay from wallet",
   "notEnoughBalance": "Not enough balance",
-  "availableSeatsHasChanged": "Available seats has changed"
+  "availableSeatsHasChanged": "Available seats has changed",
+  "appName": "Lween",
+  "updateToTheLatestVersion": "Your current version is no longer supported, please download the latest version of the app",
+  "newUpdateAvailable": "New update",
+  "skip": "Skip",
+  "update": "Update",
+  "couldNotSaveOrderImage": "Could not save order image."
 }

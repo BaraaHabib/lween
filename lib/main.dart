@@ -1,11 +1,11 @@
 import 'package:auto_route/annotations.dart';
+import 'package:bot_toast/bot_toast.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:lween/core/configurations/app_configuration.dart';
 import 'package:lween/core/configurations/styles/styles.dart';
@@ -54,7 +54,6 @@ class Lween extends HookWidget {
       Provider.of<LocaleProvider>(navigatorKey.currentContext!, listen: false);
 
   static final navigatorKey = GlobalKey<NavigatorState>();
-  static late final FToast fToast;
 
   // final appRouter = AppRouter(navigatorKey);
   // This widget is the root of your application.
@@ -63,16 +62,6 @@ class Lween extends HookWidget {
     appRouter ??= AppRouter(navigatorKey);
     useOnAppLifecycleStateChange((previous, current) =>
     AppStateModel.appLifecycleState = current,);
-    useEffect(() {
-      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-        fToast = FToast();
-        fToast.init(navigatorKey.currentContext!);
-      });
-
-      return (){};
-    },
-        const [],
-    );
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
@@ -97,10 +86,11 @@ class Lween extends HookWidget {
                     routerDelegate: appRouter!.delegate(
                       navigatorObservers: () =>
                       [
+                        BotToastNavigatorObserver(),
                         // NavigationService.navigatorObserver,
                       ],
                     ),
-                    builder: FToastBuilder(),
+                    builder: BotToastInit(),
                     theme: appState.currentThemeData,
                     localizationsDelegates: const [
                       S.delegate,
@@ -111,7 +101,7 @@ class Lween extends HookWidget {
                       FormBuilderLocalizations.delegate,
                     ],
                     supportedLocales: S.delegate.supportedLocales,
-                    locale: local.locale,
+                    locale: local.currentLocale,
                   );
                 }
             ),

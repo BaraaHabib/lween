@@ -65,7 +65,6 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
                     );
                   }
                   return const WaitingWidget();
-
                 }
               ),
             ),

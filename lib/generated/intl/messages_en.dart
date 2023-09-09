@@ -42,6 +42,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "You can view the vehicle, or reserve seats directly"),
         "accountSettings":
             MessageLookupByLibrary.simpleMessage("Account settings"),
+        "appName": MessageLookupByLibrary.simpleMessage("Lween"),
         "apply": MessageLookupByLibrary.simpleMessage("Apply"),
         "areYouSureYouWantToCancelOrder": MessageLookupByLibrary.simpleMessage(
             "Are you sure you want to cancel order?"),
@@ -87,6 +88,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Confirm operation"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("Confirm password"),
+        "couldNotSaveOrderImage":
+            MessageLookupByLibrary.simpleMessage("Could not save order image."),
         "country": MessageLookupByLibrary.simpleMessage("Country"),
         "couponCode": MessageLookupByLibrary.simpleMessage("Coupon code"),
         "couponShouldBeRequested":
@@ -152,6 +155,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("New phone number"),
         "newRequiredPayment":
             MessageLookupByLibrary.simpleMessage("Price after discount"),
+        "newUpdateAvailable":
+            MessageLookupByLibrary.simpleMessage("New update"),
         "next": MessageLookupByLibrary.simpleMessage("Next"),
         "no": MessageLookupByLibrary.simpleMessage("No"),
         "noInternetConnection":
@@ -225,6 +230,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "selectedSeats": MessageLookupByLibrary.simpleMessage("Selected seats"),
         "send": MessageLookupByLibrary.simpleMessage("Send"),
         "signup": MessageLookupByLibrary.simpleMessage("Signup"),
+        "skip": MessageLookupByLibrary.simpleMessage("Skip"),
         "sorryThereAreNoEntityYet": m5,
         "source": MessageLookupByLibrary.simpleMessage("From"),
         "startFrom": MessageLookupByLibrary.simpleMessage("Start from"),
@@ -246,6 +252,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "trips": MessageLookupByLibrary.simpleMessage("Trips"),
         "tripsCount": MessageLookupByLibrary.simpleMessage("Trips count"),
         "upcomingTrips": MessageLookupByLibrary.simpleMessage("Upcoming trips"),
+        "update": MessageLookupByLibrary.simpleMessage("Update"),
+        "updateToTheLatestVersion": MessageLookupByLibrary.simpleMessage(
+            "Your current version is no longer supported, please download the latest version of the app"),
         "vehicleNumber": MessageLookupByLibrary.simpleMessage("Vehicle number"),
         "verificationCode":
             MessageLookupByLibrary.simpleMessage("Verification code"),

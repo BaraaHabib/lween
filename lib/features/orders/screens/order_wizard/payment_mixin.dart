@@ -97,6 +97,8 @@ mixin PaymentMixin implements Controller{
   }
 
   submitOrder(BuildContext context) async {
+    // NavigationService.of(context).navigateTo(PaymentWebViewScreenRoute(order: OrderEntity()));
+    // return;
     if (selectedPaymentMethod.value == null) {
       return;
     }

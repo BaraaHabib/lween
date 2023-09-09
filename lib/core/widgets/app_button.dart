@@ -30,6 +30,7 @@ class AppButton extends StatelessWidget {
 
         style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
           backgroundColor: MaterialStateProperty.all(color),
+          padding: MaterialStateProperty.all(EdgeInsets.zero),
           side: borderColor == null
               ? null
               : MaterialStateProperty.all(BorderSide(color: borderColor!)),

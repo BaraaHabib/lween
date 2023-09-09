@@ -1590,6 +1590,66 @@ class S {
       args: [],
     );
   }
+
+  /// `Lween`
+  String get appName {
+    return Intl.message(
+      'Lween',
+      name: 'appName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your current version is no longer supported, please download the latest version of the app`
+  String get updateToTheLatestVersion {
+    return Intl.message(
+      'Your current version is no longer supported, please download the latest version of the app',
+      name: 'updateToTheLatestVersion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New update`
+  String get newUpdateAvailable {
+    return Intl.message(
+      'New update',
+      name: 'newUpdateAvailable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Skip`
+  String get skip {
+    return Intl.message(
+      'Skip',
+      name: 'skip',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Update`
+  String get update {
+    return Intl.message(
+      'Update',
+      name: 'update',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Could not save order image.`
+  String get couldNotSaveOrderImage {
+    return Intl.message(
+      'Could not save order image.',
+      name: 'couldNotSaveOrderImage',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

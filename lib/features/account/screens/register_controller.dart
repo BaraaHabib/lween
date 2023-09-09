@@ -96,7 +96,7 @@ class RegisterController extends Controller {
 
   void listener(BuildContext context, AccountState state) {
     if (state is RegisterLoaded) {
-      NavigationService.of(context).navigateTo(
+      NavigationService.of(context).replace(
         VerifyCodeScreenRoute(
             accountId: state.registerEntity.id,
             phoneNumber: formKey.currentState?.value['phone'],

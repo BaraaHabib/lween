@@ -85,7 +85,7 @@ class OrderPaymentMethodScreen extends HookWidget {
                                   S
                                       .of(context)
                                       .orderDeletionWarning,
-                                  maxLines: 2,
+                                  maxLines: 3,
                                   style: context.textTheme.headlineMedium?.copyWith(
                                     fontSize: 11.spx,
                                   ),
@@ -134,7 +134,7 @@ class OrderPaymentMethodScreen extends HookWidget {
                                           );
                                       }
                                     ),
-
+                                    ..._supportedPaymentMethods(context,),
                                   ],
                                 );
                               }
@@ -174,7 +174,7 @@ class OrderPaymentMethodScreen extends HookWidget {
     );
   }
 
-  _supportedPaymentMethods(context) {
+  List<PaymentMethodWidget> _supportedPaymentMethods(context) {
     final OrderWizardController controller = Controller.getInstance();
     final appState = AppStateModel
         .of(context);

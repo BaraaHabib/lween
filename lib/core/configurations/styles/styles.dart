@@ -175,6 +175,8 @@ class Styles {
   static const labelInsideCard = Color(0xFF110D32);
   static const textInsideCard = Color(0xFF89A3B4);
 
+  static const textFieldIconColor = Color(0xFF89A3B4);
+
   static Color unreadNotificationColor(BuildContext context) =>
       AppStateModel
           .of(context)

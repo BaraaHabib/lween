@@ -161,7 +161,7 @@ class RegisterScreen extends HookWidget {
                         ),
                       ),
                       10.hSpace,
-                      Flexible(
+                       Flexible(
                         child: AppDropDownField(
                           onChange: (v) {
                             controller.selectedCity = v;

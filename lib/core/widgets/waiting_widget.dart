@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:lween/core/app_state/appstate.dart';
+import 'package:lween/core/configurations/styles/styles.dart';
 import 'package:lween/core/extended/get_utils/get_utils.dart';
 
 enum WaitingWidgetType{
@@ -25,7 +27,7 @@ class WaitingWidget extends StatelessWidget {
         switch (type) {
           case WaitingWidgetType.pulse:
             return SpinKitPulse(
-              color: context.theme.primaryColor,
+              color: AppStateModel.of(context).isLightTheme ? Styles.colorPrimaryDark : Styles.colorPrimaryLight ,
               size: 50.0,
             );
           default:

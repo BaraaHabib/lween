@@ -152,5 +152,11 @@
   "newPhoneNumber": "رقم الهاتف الجديد",
   "payFromMyBalance": "دفع عن طريق رصيدي",
   "notEnoughBalance": "لا يوجد رصيد كافٍ",
-  "availableSeatsHasChanged": "تم حجز بعض المقاعد"
+  "availableSeatsHasChanged": "تم حجز بعض المقاعد",
+  "appName": "لوين",
+  "updateToTheLatestVersion": "الإصدار الحالي الذي لديك لم يعد مدعوماً، الرجاء تحميل أحدث نسخة من التطبيق",
+  "newUpdateAvailable": "تحديث جديد",
+  "skip": "تخطي",
+  "update": "تحديث",
+  "couldNotSaveOrderImage": "لا يمكن حفظ التذكرة"
 }

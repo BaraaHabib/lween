@@ -165,10 +165,7 @@ class OrderTripPreviewScreen extends StatelessWidget {
                                          icon: Assets.microbusPNG,
                                        ),
                                      ),
-                                     // const Expanded(
-                                     //   flex:2,
-                                     //   child: SizedBox(),
-                                     // ),
+                                     if(travelEntity.images?.isNotEmpty ?? false)
                                      Expanded(
                                        flex:12,
                                        child: Row(
@@ -176,29 +173,27 @@ class OrderTripPreviewScreen extends StatelessWidget {
                                            const Spacer(flex: 1),
                                            Expanded(
                                              flex: 5,
-                                             child: SizedBox(
-                                               // height: 30.hx,
-                                               // width: 90.wx,
-                                               child: FittedBox(
-                                                 fit: BoxFit.scaleDown,
-                                                 child: AppGradientTextButtonWithIcon(
-                                                   content: S
-                                                       .of(context)
-                                                       .previewVehicle,
-                                                   onTap: () {
-                                                     return NavigationService
-                                                       .of(context,)
-                                                        .navigateTo(
-                                                         withNavigation: false,
-                                                         OrderPreviewVehicleScreenRoute(
-                                                             images: travelEntity.images ?? [],
-                                                         ),
-                                                     );
-                                                   },
-                                                   fontSize: 11.spx,
-                                                   icon: Assets.eyeSVG,
-                                                   padding: const EdgeInsets.symmetric(
-                                                       horizontal: 15, vertical: 0),
+                                             child: FittedBox(
+                                               fit: BoxFit.scaleDown,
+                                               child: AppGradientTextButtonWithIcon(
+                                                 content: S
+                                                     .of(context)
+                                                     .previewVehicle,
+                                                 onTap: () {
+                                                   return NavigationService
+                                                     .of(context,)
+                                                      .navigateTo(
+                                                       withNavigation: false,
+                                                       OrderPreviewVehicleScreenRoute(
+                                                           images: travelEntity.images ?? [],
+                                                       ),
+                                                   );
+                                                 },
+                                                 fontSize: 11.spx,
+                                                 icon: Assets.eyeSVG,
+                                                 padding: const EdgeInsets.symmetric(
+                                                     horizontal: 15,
+                                                     vertical: 0,
                                                  ),
                                                ),
                                              ),

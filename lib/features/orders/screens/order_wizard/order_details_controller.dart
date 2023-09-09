@@ -4,14 +4,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:lween/core/app_state/appstate.dart';
 import 'package:lween/core/controller/base_controller.dart';
 import 'package:lween/core/dialogs/app_dialogs.dart';
 import 'package:lween/core/exceptions/app_exceptions.dart';
 import 'package:lween/core/messages/toast.dart';
 import 'package:lween/core/resources/constants.dart';
+import 'package:lween/core/services/permission_service.dart';
 import 'package:lween/features/orders/bloc/orders_bloc.dart';
 import 'package:lween/features/orders/models/orders.dart';
 import 'package:lween/generated/l10n.dart';
+import 'package:lween/injection_container.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:screenshot/screenshot.dart';
 
@@ -59,20 +62,28 @@ class OrderDetailsController extends Controller {
 
   }
 
-  Future<bool> saveOrder(BuildContext context) async {
+  Future<void> saveOrder(BuildContext context) async {
     try {
-      await Permission.storage.request();
-      Uint8List? image = await screenshotController.capture();
-      if(image == null){
-        throw const AppException('Could not save order');
+
+      if(await PermissionService.checkPhotosPermission){
+        Uint8List? image = await screenshotController.capture();
+        if(image == null){
+          throw AppException(S.current.couldNotSaveOrderImage);
+        }
+        await ImageGallerySaver.saveImage(image);
+        AppToast(S.current.orderSavedToGallery).show();
       }
-      await ImageGallerySaver.saveImage(image);
-      AppToast(S.current.orderSavedToGallery).show();
-      return true;
+      else {
+        throw AppException(S.current.couldNotSaveOrderImage);
+      }
     }
-    on Exception catch (e) {
+    on AppException catch (e) {
       AppToast(e.toString()).show();
-      return false;
+    }
+    on Exception{
+      AppToast(S.current.couldNotSaveOrderImage).show();
     }
   }
+
+
 }

@@ -168,11 +168,6 @@ class AppTextField extends HookWidget {
                               maxWidth: 100.wx,
                               // minHeight: 48,
                             ),
-                            // prefixIcon: prefixIcon,
-                            // prefixIconConstraints: BoxConstraints(
-                            //   minWidth: 46.wx,
-                            //   maxWidth: 100.wx,
-                            // ),
                             hintStyle: Theme.of(context).inputDecorationTheme.hintStyle?.copyWith(
                               color: hintFontColor,
                             ),
@@ -225,12 +220,13 @@ class AppTextField extends HookWidget {
             child: Padding(
               padding: EdgeInsetsDirectional.only(
                 end: 15.wx,
+                bottom: 8.hx,
               ),
               child: Icon(
                 Icons.remove_red_eye_rounded,
                 color: obscureText.value
                     ? Styles.colorSecondary2
-                    : Theme.of(useContext()).primaryColor,
+                    : Styles.textFieldIconColor,
               ),
             ),
           ),

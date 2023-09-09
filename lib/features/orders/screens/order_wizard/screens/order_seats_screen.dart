@@ -135,6 +135,7 @@ class OrderSeatsScreen extends HookWidget {
                               .of(context)
                               .YouCanViewOrReserveSeats, maxLines: 2,),
                         ),
+                        if(controller.selectedTravelEntity?.images?.isNotEmpty ?? false)
                         SizedBox(
                           height: 30.hx,
                           child: AppGradientTextButtonWithIcon(
@@ -145,7 +146,9 @@ class OrderSeatsScreen extends HookWidget {
                                 .of(context,)
                                 .navigateTo(
                                 withNavigation: false,
-                                OrderPreviewVehicleScreenRoute(images: controller.selectedTravelEntity?.images ?? [])),
+                                OrderPreviewVehicleScreenRoute(
+                                    images: controller.selectedTravelEntity?.images ?? [],
+                                )),
                             fontSize: 9.spx,
                             icon: Assets.eyeSVG,
                             padding: const EdgeInsets.symmetric(

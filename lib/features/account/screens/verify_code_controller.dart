@@ -47,7 +47,6 @@ class VerifyCodeController extends Controller{
         expires: state.verifyAccountEntity.expireInSeconds,
         refreshToken: state.verifyAccountEntity.refreshToken,
       ).then((value) {
-        SplashBloc.initApp(context);
         NavigationService.of(context).clearAllAndPushNamed(const MainScreenRoute());
       });
     }

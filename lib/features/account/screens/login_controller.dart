@@ -30,8 +30,8 @@ class LoginController extends Controller {
   void init() {
     super.init();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      if ( true
-      // !Lween.locale.initLanguageSelected
+      if (
+      !Lween.locale.initLanguageSelected
       ){
         AppDialogs.showGeneralDialog(
           context: Lween.navigatorKey.currentContext!,
@@ -65,16 +65,7 @@ class LoginController extends Controller {
 
   void listener(BuildContext context, AccountState state) {
     if(state is LogInLoaded){
-      sl<AppStateModel>().logIn(
-        token: state.logInEntity.accessToken,
-        expires: state.logInEntity.expireInSeconds,
-        refreshToken: state.logInEntity.refreshToken,
-      ).then((value) {
-        SplashBloc.initApp(context)
-            .then((value) {
-              return NavigationService.of(context).clearAllAndPushNamed(const MainScreenStackRoute());
-            });
-      });
+      NavigationService.of(context).clearAllAndPushNamed(const MainScreenStackRoute());
     }
     else if(state is LogInError){
       if(state.code == 9 && state.accountId is int){

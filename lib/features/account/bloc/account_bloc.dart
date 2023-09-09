@@ -6,6 +6,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lween/core/app_state/appstate.dart';
 import 'package:lween/core/configurations/app_configuration.dart';
 import 'package:lween/core/features/entities/shared/authenticate.dart';
 import 'package:lween/core/features/params/params_model.dart';
@@ -28,8 +29,10 @@ import 'package:lween/features/account/params/request_change_phone_params.dart';
 import 'package:lween/features/account/params/resend_code_params.dart';
 import 'package:lween/features/account/params/verify_account_params.dart';
 import 'package:lween/features/account/repo/account_repository.dart';
+import 'package:lween/features/onboarding/bloc/splash_bloc.dart';
 import 'package:lween/generated/l10n.dart';
 import 'package:lween/injection_container.dart';
+import 'package:lween/main.dart';
 
 
 part 'account_event.dart';
@@ -57,13 +60,32 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
   }
 
   FutureOr<void> _verifyAccountCallback(VerifyAccountEvent event, emit) async {
-    emit(VerifyAccountLoading());
-    var res = await accountRepo.verify(event.params,);
-    emit(res.fold(
-          (l) => VerifyAccountError(l.errorMessage,),
-          (r) => VerifyAccountLoaded(r,),
-    ),
-    );
+    try {
+      emit(VerifyAccountLoading());
+      var res = await accountRepo.verify(event.params,);
+
+      if (res.isRight()) {
+        await res.fold((l) => null, (r) async {
+          await sl<AppStateModel>().logIn(
+            token: r.accessToken,
+            expires: r.expireInSeconds,
+            refreshToken: r.refreshToken,
+          );
+        });
+        await SplashBloc.initApp(Lween.navigatorKey.currentContext!);
+      }
+
+      emit(res.fold(
+            (l) => VerifyAccountError(l.errorMessage,),
+            (r) {
+          return VerifyAccountLoaded(r,);
+        },
+      ),
+      );
+    }
+    catch (e) {
+      emit(VerifyAccountError(e.toString() ?? ''));
+    }
   }
 
 
@@ -124,12 +146,31 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
 
   Future<FutureOr<void>> _loginCallback(LogInEvent event,
       Emitter<AccountState> emit) async {
-    emit(LogInLoading());
-    var res = await accountRepo.logIn(event.params,);
-    emit(res.fold(
-          (l) => LogInError(l.errorMessage, l.code, l.data?['accountId']),
-          (r) => LogInLoaded(logInEntity: r,),
-    ));
+    try {
+      emit(LogInLoading());
+      var res = await accountRepo.logIn(event.params,);
+
+      if (res.isRight()) {
+        await res.fold((l) => null, (r) async {
+          await sl<AppStateModel>().logIn(
+            token: r.accessToken,
+            expires: r.expireInSeconds,
+            refreshToken: r.refreshToken,
+          );
+        });
+        await SplashBloc.initApp(Lween.navigatorKey.currentContext!);
+      }
+
+      emit(res.fold(
+            (l) => LogInError(l.errorMessage, l.code, l.data?['accountId']),
+            (r) {
+          return LogInLoaded(logInEntity: r,);
+        },
+      ));
+    }
+    on Exception catch (e) {
+      emit(LogInError(e.toString() ?? ''));
+    }
   }
 
   Future<FutureOr<void>> _forgetPasswordEventCallback(ForgetPasswordEvent event,

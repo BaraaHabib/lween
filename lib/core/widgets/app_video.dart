@@ -35,6 +35,7 @@ class AppVideo extends StatefulWidget {
   });
   @override
   AppVideoState createState() => AppVideoState();
+
 }
 
 class AppVideoState extends State<AppVideo> with AutomaticKeepAliveClientMixin{
@@ -98,7 +99,7 @@ class AppVideoState extends State<AppVideo> with AutomaticKeepAliveClientMixin{
       child: SizedBox(
           width: widget.width,
           height: widget.height,
-          child: videoPlayerController.value.isInitialized ?
+          child: videoPlayerController.value.isInitialized || videoPlayerController.value.isBuffering ?
           AspectRatio(
             aspectRatio: _customVideoPlayerController.videoPlayerController.value.aspectRatio,
             child: CustomVideoPlayer(

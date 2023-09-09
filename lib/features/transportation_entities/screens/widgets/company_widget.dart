@@ -41,63 +41,60 @@ class CompanyItemWidget extends HookWidget {
       child: Stack(
         children: [
           Positioned.fill(
-            child: SizedBox(
-              height: 205.hx,
-              child: Card(
-                clipBehavior: Clip.antiAliasWithSaveLayer,
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    SizedBox.square(
-                      dimension: 155.rx,
-                      child: AppImage(
-                        path: item.imageUrl ?? '',
-                        fit: BoxFit.fill,
-                        type: ImageType.cachedNetwork,
+            child: Card(
+              clipBehavior: Clip.antiAliasWithSaveLayer,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  AspectRatio(
+                    aspectRatio: 1,
+                    child: AppImage(
+                      path: item.imageUrl ?? '',
+                      fit: BoxFit.fill,
+                      type: ImageType.cachedNetwork,
+                    ),
+                  ),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              AppTextWidget(
+                                item.name ?? '',
+                                style: context
+                                    .textTheme
+                                    .titleSmall,
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              SvgPicture.asset(Assets.tripCountSVG,),
+                              2.hSpace,
+                              AppTextWidget(
+                                S
+                                    .of(context)
+                                    .tripsCount,
+                                style: context.textTheme.headlineSmall,
+                              ),
+                              2.hSpace,
+                              AppTextWidget(
+                                item.travelsCount.toString(),
+                                style: context
+                                    .textTheme
+                                    .headlineSmall?.copyWith(
+                                  color: Styles.tripsCountTextColor,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ),
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          children: [
-                            Row(
-                              children: [
-                                AppTextWidget(
-                                  item.name ?? '',
-                                  style: context
-                                      .textTheme
-                                      .titleSmall,
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                SvgPicture.asset(Assets.tripCountSVG,),
-                                2.hSpace,
-                                AppTextWidget(
-                                  S
-                                      .of(context)
-                                      .tripsCount,
-                                  style: context.textTheme.headlineSmall,
-                                ),
-                                2.hSpace,
-                                AppTextWidget(
-                                  item.travelsCount.toString(),
-                                  style: context
-                                      .textTheme
-                                      .headlineSmall?.copyWith(
-                                    color: Styles.tripsCountTextColor,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),

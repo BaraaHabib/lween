@@ -42,6 +42,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "يمكنك معاينة باص الرحلة, أو حجز المقاعد مباشرة"),
         "accountSettings":
             MessageLookupByLibrary.simpleMessage("إعدادات الحساب"),
+        "appName": MessageLookupByLibrary.simpleMessage("لوين"),
         "apply": MessageLookupByLibrary.simpleMessage("تطبيق"),
         "areYouSureYouWantToCancelOrder": MessageLookupByLibrary.simpleMessage(
             "هل انت متأكد من إلغاء الطلب؟"),
@@ -86,6 +87,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("تأكيد العملية"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("تأكيد كلمة المرور"),
+        "couldNotSaveOrderImage":
+            MessageLookupByLibrary.simpleMessage("لا يمكن حفظ التذكرة"),
         "country": MessageLookupByLibrary.simpleMessage("البلد"),
         "couponCode": MessageLookupByLibrary.simpleMessage("كود الحسم"),
         "couponShouldBeRequested":
@@ -151,6 +154,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("رقم الهاتف الجديد"),
         "newRequiredPayment":
             MessageLookupByLibrary.simpleMessage("قيمة الحجز بعد الخصم"),
+        "newUpdateAvailable":
+            MessageLookupByLibrary.simpleMessage("تحديث جديد"),
         "next": MessageLookupByLibrary.simpleMessage("التالي"),
         "no": MessageLookupByLibrary.simpleMessage("لا"),
         "noInternetConnection":
@@ -227,6 +232,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("المقاعد المحجوزة"),
         "send": MessageLookupByLibrary.simpleMessage("إرسال"),
         "signup": MessageLookupByLibrary.simpleMessage("إنشاء حساب"),
+        "skip": MessageLookupByLibrary.simpleMessage("تخطي"),
         "sorryThereAreNoEntityYet": m5,
         "source": MessageLookupByLibrary.simpleMessage("الانطلاق"),
         "startFrom": MessageLookupByLibrary.simpleMessage("الانطلاق من"),
@@ -247,6 +253,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "trips": MessageLookupByLibrary.simpleMessage("الرحلات"),
         "tripsCount": MessageLookupByLibrary.simpleMessage("عدد الرحلات"),
         "upcomingTrips": MessageLookupByLibrary.simpleMessage("رحلات قادمة"),
+        "update": MessageLookupByLibrary.simpleMessage("تحديث"),
+        "updateToTheLatestVersion": MessageLookupByLibrary.simpleMessage(
+            "الإصدار الحالي الذي لديك لم يعد مدعوماً، الرجاء تحميل أحدث نسخة من التطبيق"),
         "vehicleNumber": MessageLookupByLibrary.simpleMessage("رقم الباص"),
         "verificationCode": MessageLookupByLibrary.simpleMessage("رمز التحقق"),
         "verify": MessageLookupByLibrary.simpleMessage("تأكيد"),

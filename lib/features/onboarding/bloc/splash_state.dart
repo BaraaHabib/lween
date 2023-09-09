@@ -18,7 +18,10 @@ class SplashError extends SplashState {
   // final Function callBack;
   final String message;
 
-  const SplashError({required this.message});
+  const SplashError({
+    required this.message,
+  });
+
   @override
   List<Object?> get props => [];
 }

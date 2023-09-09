@@ -16,7 +16,7 @@ const langEN = 'en';
 class LocaleProvider extends ChangeNotifier {
   Locale _locale = const Locale(langAr);
 
-  Locale get locale => _locale;
+  Locale get currentLocale => _locale;
 
   //#region app languages
 

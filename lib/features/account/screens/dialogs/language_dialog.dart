@@ -28,7 +28,7 @@ class LanguageDialog extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final selectedLanguage = useState(
-      LocaleProvider.of(context).locale.languageCode,
+      LocaleProvider.of(context).currentLocale.languageCode,
     );
     return  SizedBox(
       width: 0.7.sw,
@@ -39,7 +39,7 @@ class LanguageDialog extends HookWidget {
               .languages
               .map((e) => _LanguageWidget(e,selectedLanguage),)
               .toList(),
-          20.vSpace,
+          5.vSpace,
           AppGradientTextButton(
             gradientType: AppTextButtonGradientType.secondary,
             onTap: () {

@@ -23,9 +23,11 @@ class GeneralDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final padding = EdgeInsets.symmetric(
-      vertical: 10.hx,
-      horizontal: 18.wx,
+    final padding = EdgeInsets.only(
+      top: 10.hx,
+      bottom: 10.hx,
+      left: 18.wx,
+      right: 18.wx,
     );
     return Dialog(
       surfaceTintColor: Colors.transparent,
@@ -81,17 +83,17 @@ class GeneralDialog extends StatelessWidget {
                     ),
                   ],
                 ),
-                Expanded(
+                Flexible(
                   child: Container(
                     padding: padding,
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         // 8.vSpace,
-                        Expanded(child: content),
+                        content,
                         if(actions != null && actions!.length > 1)...[
                           ...[
-                            15.vSpace,
+                            5.vSpace,
                             Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
@@ -111,11 +113,12 @@ class GeneralDialog extends StatelessWidget {
                                   ),
                                 ),
                             ],
-                          ),]
-                        ],
-                        if(actions != null && actions!.length == 1)...[
+                          ),
+                          ]
+                        ]
+                        else if(actions != null && actions!.length == 1)...[
                           Padding(
-                            padding: EdgeInsetsDirectional.only(start: 50.wx,end: 50.wx,top: 15.hx,),
+                            padding: EdgeInsetsDirectional.only(start: 50.wx,end: 50.wx,top: 0.hx,),
                             child: AppGradientTextButton(
                               onTap: () async {
                                 await NavigationService.of(context).pop();
@@ -133,7 +136,7 @@ class GeneralDialog extends StatelessWidget {
                     ),
                   ),
                 ),
-
+                // 20.vSpace,
               ],
             ),
           ],

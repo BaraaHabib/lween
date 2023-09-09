@@ -39,6 +39,8 @@ class AppConfigurations {
 
   static bool isArabicInputPrevented = false;
 
+  static const String clarityProjectId = "ikxovf1t2y";
+
 }
 
 const defaultFractionDigitsCount = 2;

@@ -30,6 +30,10 @@ class OrderPreviewVehicleScreen extends HookWidget {
     final currentIndex = useState(0);
     return AppScaffold(
       title: S.current.previewVehicle,
+      padding:  EdgeInsetsDirectional.only(
+          start: 22.wx,
+          end: 18.wx
+      ),
       child: Stack(
         children: [
           SizedBox(
@@ -55,7 +59,9 @@ class OrderPreviewVehicleScreen extends HookWidget {
             right: 0,
             left: 0,
             child: SliderIndicator(
-              count: images.length, selectedIndex: currentIndex.value,),
+              count: images.length,
+              selectedIndex: currentIndex.value,
+            ),
           ),
         ],
       ),

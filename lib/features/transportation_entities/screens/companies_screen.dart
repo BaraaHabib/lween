@@ -2,7 +2,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lween/core/controller/base_controller.dart';
+import 'package:lween/core/extended/get_utils/get_utils.dart';
 import 'package:lween/core/extended/numbers_ext.dart';
 import 'package:lween/core/locale/locale_provider.dart';
 import 'package:lween/core/lween/widgets/app_scaffold.dart';
@@ -16,6 +18,7 @@ import 'package:lween/core/widgets/shimmer_ui.dart';
 import 'package:lween/core/widgets/waiting_widget.dart';
 import 'package:lween/features/transportation_entities/bloc/transportation_entities_bloc.dart';
 import 'package:lween/features/transportation_entities/screens/controller.dart';
+import 'package:lween/features/transportation_entities/screens/widgets/company_skeleton.dart';
 import 'package:lween/features/transportation_entities/screens/widgets/company_widget.dart';
 import 'package:lween/generated/l10n.dart';
 import 'package:lween/main.dart';
@@ -45,16 +48,26 @@ class CompaniesScreen extends HookWidget {
           builder: (context, state) {
             return Builder(
                 builder: (context) {
-                  if (state is CompaniesLoading) {
-                    return  GridView.builder(
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  if (
+                  // true
+                  state is CompaniesLoading
+                  )
+                  {
+                    return  ShimmerUI.widgetLoader(
+                      enabled: true,
+                      child: GridView.builder(
+                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
-                            childAspectRatio: 0.7.rx
-                        ),
-                        itemCount: 6,
-                        itemBuilder: (ctx, index) {
-                          return _shimmer;
-                        }
+                            childAspectRatio: 0.75,
+                            mainAxisSpacing: 5,
+                            crossAxisSpacing: 5
+                          ),
+                          padding: EdgeInsets.only(top: 15.hx),
+                          itemCount: 6,
+                          itemBuilder: (ctx, index) {
+                            return const CompanyItemSkeletonWidget();
+                          }
+                      ),
                     );
                   }
                   else if (state is CompaniesError) {
@@ -84,10 +97,12 @@ class CompaniesScreen extends HookWidget {
                         onRefresh: () async => controller.refresh(),
                         child: Positioned.fill(
                           child: GridView.builder(
-                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                              // maxCrossAxisExtent: 110.hx,
+                              // mainAxisSpacing: 110.hx,
                               crossAxisCount: 2,
-                              // childAspectRatio: 0.7.rx,
-                              mainAxisExtent: 210.hx,
+                              childAspectRatio: 0.75,
+                              // mainAxisExtent: (context.mediaQuery.size.height) * 0.27,
                             ),
                             padding: EdgeInsets.only(top: 15.hx),
                             itemCount:  controller.companies.length,
@@ -108,13 +123,6 @@ class CompaniesScreen extends HookWidget {
     );
   }
 
-  Widget get _shimmer => ShimmerUI.widgetLoader(
-    enabled: true,
-    child: SizedBox(
-        height: 205.hx,
-        child: const Card(),
-    )
-  );
 }
 
 @RoutePage()

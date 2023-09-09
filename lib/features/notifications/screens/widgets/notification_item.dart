@@ -168,9 +168,6 @@ class NotificationController extends Controller{
   @override
   init(){
     super.init();
-    // Future.delayed(1.seconds).then((value) {
-    //   item.isViewed = true;
-    // });
   }
 
   static void onTap(Map? data) {

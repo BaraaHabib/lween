@@ -37,7 +37,7 @@ class LogInError extends LogInState {
   final int? code;
   final int? accountId;
 
-  const LogInError(String message, this.code,this.accountId,) : super(message: message);
+  const LogInError(String message,[ this.code,this.accountId,]) : super(message: message);
 
   @override
   List<Object?> get props => [message];

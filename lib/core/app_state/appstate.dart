@@ -119,25 +119,29 @@ class AppStateModel extends AppStateComponent with _DeviceInfoMixin, ThemeManage
         UpdateTokenParams(
           body: UpdateTokenParamsBody(
             oldToken: sl<AppStateModel>().firebaseToken,
-            isLogingOut: true,
+            isLoggingOut: true,
           ),
         ),
       );
     }
-
     _firebaseToken = null;
     ///
 
     _refreshToken = null;
-    // _expires = null;
     _expiresAt = null;
+
+    /// reset shared preferences
+    /// without clearing language
+    final isLanguageSet = prefs.getBool(SharedPreferencesKeys.LANGUAGE_SELECTED);
     await prefs.clear();
-    final currentLocale = Lween.locale.locale;
+
+    prefs.setBool(SharedPreferencesKeys.LANGUAGE_SELECTED,isLanguageSet ?? false);
     await prefs.setString(
       SharedPreferencesKeys.LanguageCode,
-      currentLocale.languageCode,
+      Lween.locale.currentLocale.languageCode,
     );
-
+    ///
+    ///
     await resetInjection();
     await Lween.storage.init();
     NavigationService.of(Lween.navigatorKey.currentContext!,).restart();
@@ -211,14 +215,10 @@ class AppStateModel extends AppStateComponent with _DeviceInfoMixin, ThemeManage
     // fbToken,
   }) async {
     _userToken = token;
-    // _firebaseToken = fbToken;
     _refreshToken = refreshToken;
     _expiresAt = DateTime.now().add(Duration(seconds: expires ?? 86400));
     _authenticated = true;
 
-    // if (fbToken != null) {
-    //   await prefs.setString(SharedPreferencesKeys.FB_TOKEN, fbToken);
-    // }
     await prefs.setString(SharedPreferencesKeys.TOKEN, token);
     await prefs.setString(SharedPreferencesKeys.RefreshTOKEN, refreshToken);
     await prefs.setString(

@@ -65,22 +65,7 @@ class AppImage extends StatelessWidget {
       );
     }
 
-    loadingWidget ??= Center(
-      child: Shimmer(
-        period: shimmerDuration,
-        gradient: shimmerGradient,
-        direction: shimmerDirection,
-        child: Container(
-          height: height,
-          width: width,
-          decoration: BoxDecoration(
-              color: Styles.colorSecondary,
-              borderRadius: borderRadius,
-          ),
-          // child: Image.asset(AppAssets.logo,scale: 1.5,),
-        ),
-      ),
-    );
+    loadingWidget ??= const WaitingWidget(type: WaitingWidgetType.pulse,);
   }
 
   @override

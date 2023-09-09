@@ -15,11 +15,7 @@ class YesNoDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      constraints: BoxConstraints(
-        // minHeight: 0.25.sh,
-        maxHeight: 0.7.sh,
-      ),
-      width: 0.7.sw,
+      width: 0.8.sw,
       decoration: BoxDecoration(
         color: Theme.of(context).scaffoldBackgroundColor,
         borderRadius: Styles.borderRadius30px,
@@ -29,7 +25,7 @@ class YesNoDialog extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           mainAxisSize: MainAxisSize.min,
           children: [
-            15.vSpace,
+            5.vSpace,
             Text(
               message,
               style: Theme.of(context).textTheme.bodyLarge,
@@ -37,6 +33,7 @@ class YesNoDialog extends StatelessWidget {
             ),
             20.vSpace,
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 AppButton(
                   onTap: () async {
@@ -47,7 +44,7 @@ class YesNoDialog extends StatelessWidget {
                     S.of(context).yes,
                   ),
                 ),
-                const Spacer(),
+                // const Spacer(),
                 AppButton(
                   onTap: () async {
                     await NavigationService.of(context).pop(false,);
@@ -61,7 +58,7 @@ class YesNoDialog extends StatelessWidget {
                 ),
               ],
             ),
-            15.vSpace,
+            5.vSpace,
           ],
         ),
       ),

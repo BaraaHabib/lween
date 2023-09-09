@@ -1,14 +1,22 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:auto_route/auto_route.dart';
 
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lween/core/app_state/appstate.dart';
 import 'package:lween/core/dialogs/app_dialogs.dart';
+import 'package:lween/core/extended/get_utils/get_utils.dart';
 import 'package:lween/core/navigation/logger.dart';
 import 'package:lween/core/routing/app_router.dart';
+import 'package:lween/core/widgets/app_text_widget.dart';
 import 'package:lween/core/widgets/app_video.dart';
+import 'package:lween/generated/l10n.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../../../core/configurations/assets.dart';
 import '../../../../../../core/navigation/navigation_service.dart';
@@ -34,6 +42,7 @@ class SplashScreen extends HookWidget {
       ));
       return null;
     }, const []);
+
     return WillPopScope(
       onWillPop: () => Future.value(false),
       child: BlocListener<SplashBloc, SplashState>(
@@ -64,28 +73,27 @@ class SplashScreen extends HookWidget {
     );
   }
 
-  void _handleLoaded(
+  Future<void> _handleLoaded(
     BuildContext context, {
     SplashState? state,
-  }) {
-    // AppDialogs.showRetryDialog(
-    //   context: context,
-    //   content: 'state.message',
-    //   retryCallBack: () {
-    //     sl<SplashBloc>().add(SplashInitEvent(
-    //       context,
-    //     ));
-    //   },
-    // );
-    // return;
+  }) async {
     if (completedSteps.length >= 1) {
       var splashLoaded =
           completedSteps.firstWhereOrNull((element) => element is SplashLoaded);
+      if(state is SplashLoaded && !state.initResult.isUpToDate){
+        final update = await showUpdateDialog(context,);
+        if(update){
+          final lastVersionUrl = AppStateModel.of(context).initAppEntity.lastVersionUrl;
+          if(lastVersionUrl != null) {
+            final Uri lastVersionUri = Uri.parse(lastVersionUrl);
+            launchUrl(lastVersionUri,mode: LaunchMode.externalApplication,);
+          }
+          SystemNavigator.pop();
+          return;
+        }
+      }
       if (splashLoaded != null &&
           (splashLoaded as SplashLoaded).initResult.isAuthenticated) {
-        // NavigationService.of(context).replace(
-        //   const InboxScreenRoute(),
-        // );
         NavigationService.of(context).clearAllAndPushNamed(
           const MainScreenRoute(),
         );
@@ -98,7 +106,6 @@ class SplashScreen extends HookWidget {
   }
 
   void _handleError(BuildContext context, SplashError state) {
-    
     AppDialogs.showRetryDialog(
       context: context,
       content: state.message,
@@ -107,6 +114,36 @@ class SplashScreen extends HookWidget {
           context,
         ));
       },
+    );
+  }
+
+  Future<bool> showUpdateDialog(BuildContext context) async {
+    return await AppDialogs.showGeneralDialog(
+        title: S.of(context).newUpdateAvailable,
+        context: context,
+        content: WillPopScope(
+          onWillPop: () async => false,
+          child: Row(
+            children: [
+              Expanded(
+                  child: AppTextWidget(
+                    S.of(context).updateToTheLatestVersion,
+                    maxLines: 3,
+                    style: context.textTheme.bodyLarge,
+                    textAlign: TextAlign.justify,
+                  ),
+              ),
+            ],
+          ),
+        ),
+        actions: [
+          DialogAction(
+            text: S.of(context).update,
+            callback: (){
+              Navigator.of(context,).pop(true);
+            },
+          ),
+        ]
     );
   }
 

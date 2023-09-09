@@ -25,16 +25,16 @@ class UpdateTokenParamsBody extends BaseBodyModel {
   UpdateTokenParamsBody({
     this.oldToken,
     this.newToken,
-    this.isLogingOut = false,
+    this.isLoggingOut = false,
   });
   late final String? oldToken;
   late final String? newToken;
-  late final bool isLogingOut;
+  late final bool isLoggingOut;
 
   UpdateTokenParamsBody.fromJson(Map<String, dynamic> json){
     oldToken = json['oldToken'];
     newToken = json['newToken'];
-    isLogingOut = json['isLogingOut'];
+    isLoggingOut = json['isLoggingOut'];
   }
 
   @override
@@ -42,7 +42,7 @@ class UpdateTokenParamsBody extends BaseBodyModel {
     final data = <String, dynamic>{};
     data['oldToken'] = oldToken;
     data['newToken'] = newToken;
-    data['isLogingOut'] = isLogingOut;
+    data['isLoggingOut'] = isLoggingOut;
     return data;
   }
 }
