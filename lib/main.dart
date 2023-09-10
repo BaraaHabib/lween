@@ -55,8 +55,7 @@ class Lween extends HookWidget {
 
   static final navigatorKey = GlobalKey<NavigatorState>();
 
-  // final appRouter = AppRouter(navigatorKey);
-  // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
     appRouter ??= AppRouter(navigatorKey);

@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
@@ -32,11 +33,19 @@ class LocaleProvider extends ChangeNotifier {
 
   factory LocaleProvider.of(BuildContext context) => Provider.of<LocaleProvider>(context,listen: false);
 
-  void setLocale(Locale locale) {
+   ui.Locale? setLocale(Locale locale) {
+    /// ensure locale match app locals
+    if (locale.languageCode.contains(langAr)) {
+      locale = const Locale(langAr);
+    } else if (locale.languageCode.contains(langEN)) {
+      locale = const Locale(langEN);
+    }
+    ///
     if (!L10n.all.contains(locale)) {
-      return;
+      return null;
     }
     _locale = locale;
+    return _locale;
   }
 
   /// This for know if this first time run the application or not
@@ -103,9 +112,11 @@ class LocaleProvider extends ChangeNotifier {
   Future fetchLocale(SharedPreferences prefs) async {
 
     /// check if language selected
-    if (prefs.getBool(SharedPreferencesKeys.LANGUAGE_SELECTED) == null) {
+    if (prefs.getBool(SharedPreferencesKeys.LANGUAGE_SELECTED) ?? true) {
       /// set first start is true
       await prefs.setBool(SharedPreferencesKeys.LANGUAGE_SELECTED, false);
+
+
 
       /// Set first time run the application true
       _initLanguageSelected = false;
@@ -123,8 +134,10 @@ class LocaleProvider extends ChangeNotifier {
       setFirstStart(false);
     }
     if (prefs.getString(SharedPreferencesKeys.LanguageCode) == null) {
-      _locale = const Locale(langAr);
-      await prefs.setString(SharedPreferencesKeys.LanguageCode, langAr);
+      /// get system locale
+      var locale = setLocale(Locale(Platform.localeName,),);
+      locale ??= const Locale(langAr,);
+      await prefs.setString(SharedPreferencesKeys.LanguageCode, locale.languageCode);
       return Null;
     }
     _locale =
@@ -150,9 +163,10 @@ class LocaleProvider extends ChangeNotifier {
         ? Lween.appState.prefs.getString(SharedPreferencesKeys.LanguageCode)
         : langAr;
 
-    changeLanguageWithoutRestart(
-      Locale(local ?? langAr),
-    );
+    setLocale(Locale(local ?? Platform.localeName));
+    // changeLanguageWithoutRestart(
+    //   Locale(local ?? langAr),
+    // );
   }
 
   LocaleProvider();

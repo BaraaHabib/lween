@@ -29,17 +29,6 @@ class LoginController extends Controller {
   @override
   void init() {
     super.init();
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      if (
-      !Lween.locale.initLanguageSelected
-      ){
-        AppDialogs.showGeneralDialog(
-          context: Lween.navigatorKey.currentContext!,
-          title: S.current.selectPreferredLanguage,
-          content: const LanguageDialog(),
-        );
-      }
-    });
   }
 
   signup(context) {
