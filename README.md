@@ -33,11 +33,6 @@ A feature-rich Flutter application that demonstrates modern development patterns
    flutter run
    ```
 
-### Running Tests
-
-```bash
-flutter test
-```
 
 ## Project Structure
 
