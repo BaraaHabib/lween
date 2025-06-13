@@ -10,20 +10,20 @@ abstract class BaseConfig {
 class DevConfig extends BaseConfig {
 
   @override
-  String get baseUrl => 'https://api.zanqa.app/lween/api/';
+  String get baseUrl => 'API_URL';
 
   @override
-  String get googleApiKey => 'AIzaSyBz4HDgENtCtYB0lz7j3u1-1v7Rj497U9c';
+  String get googleApiKey => '';
 
   DevConfig() : super(index: 1);
 }
 
 class TestConfig extends BaseConfig {
   @override
-  String get baseUrl => 'https://test-yolo-api.azurewebsites.net/api/';
+  String get baseUrl => '';
 
   @override
-  String get googleApiKey => 'AIzaSyBz4HDgENtCtYB0lz7j3u1-1v7Rj497U9c';
+  String get googleApiKey => '';
 
 
   TestConfig() : super(index: 2);
@@ -32,20 +32,20 @@ class TestConfig extends BaseConfig {
 
 class CertConfig extends BaseConfig {
   @override
-  String get baseUrl => 'https://cert-yolo-api.azurewebsites.net/api/';
+  String get baseUrl => '';
 
   @override
-  String get googleApiKey => 'AIzaSyBz4HDgENtCtYB0lz7j3u1-1v7Rj497U9c';
+  String get googleApiKey => '';
 
   CertConfig() : super(index: 3);
 }
 
 class DemoConfig extends BaseConfig {
   @override
-  String get baseUrl => 'https://demo-yolo-api.azurewebsites.net/api/';
+  String get baseUrl => '';
 
   @override
-  String get googleApiKey => 'AIzaSyBz4HDgENtCtYB0lz7j3u1-1v7Rj497U9c';
+  String get googleApiKey => '';
 
   DemoConfig() : super(index: 4);
 
