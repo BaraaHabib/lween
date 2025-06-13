@@ -46,4 +46,11 @@ flutter test
 - `assets/` – images, icons and fonts
 - `test/` – basic widget tests
 
+## Downloads
+
+You can install the app or browse screenshots using the links below:
+
+- [APK Download](https://drive.google.com/file/d/13YTsDDfQHxvoTc7sac3W5xnm7u7cYw8G/view?usp=drive_link)
+- [App Images](https://drive.google.com/drive/folders/1xDNaGVstvZOsLmLmY_vHDNSfVGXQa95o?usp=drive_link)
+
 ---
