@@ -37,11 +37,18 @@ The project follows a modular structure separating **features** from reusable **
    flutter pub get
    ```
 3. Configure API keys and endpoints in `lib/core/configurations/env_config.dart`.
-4. Generate code and localization files:
+4. Generate Firebase configuration with the [FlutterFire CLI](https://firebase.flutter.dev/docs/cli):
+   ```bash
+   flutterfire configure
+   ```
+   This populates `lib/firebase_options.dart`, `android/app/google-services.json`
+   and `ios/Runner/GoogleService-Info.plist`. You can also copy the provided
+   `*.example` files and fill in your project values manually.
+5. Generate code and localization files:
    ```bash
    flutter pub run build_runner build --delete-conflicting-outputs
    ```
-5. Run the app:
+6. Run the app:
    ```bash
    flutter run
    ```
