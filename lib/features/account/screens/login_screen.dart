@@ -65,6 +65,7 @@ class LogInScreen extends HookWidget {
                     15.vSpace,
                     AppTextField(
                       name: 'phone',
+                      initialValue: '0994488302',
                       prefixIcon: SvgPicture.asset(Assets.profileIcon,),
                       label: S.current.phoneNumber,
                       maxLength: 10,
@@ -79,6 +80,7 @@ class LogInScreen extends HookWidget {
                     8.vSpace,
                     AppTextField(
                       name: 'password',
+                      initialValue: '123456',
                       prefixIcon: SvgPicture.asset(Assets.lockIcon,),
                       type: AppTextFieldType.password,
                       label: S.current.password,

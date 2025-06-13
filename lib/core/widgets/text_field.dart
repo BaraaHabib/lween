@@ -55,7 +55,8 @@ class AppTextField extends HookWidget {
       this.autofocus,
       this.label,
         this.readOnly,
-        this.onTap
+        this.onTap,
+        this.initialValue,
       });
   final BoxConstraints? constraints;
   final AppTextFieldType type;
@@ -93,6 +94,7 @@ class AppTextField extends HookWidget {
   final bool? readOnly;
   final VoidCallback? onTap;
   final String? label;
+  final String? initialValue;
   @override
   Widget build(BuildContext context) {
     ///
@@ -126,6 +128,7 @@ class AppTextField extends HookWidget {
                       padding: padding ?? const EdgeInsets.only(top: 10,bottom: 2),
                       child: FormBuilderTextField(
                         key: validationKey,
+                        initialValue: initialValue,
                         inputFormatters: [
                           LengthLimitingTextInputFormatter(maxLength),
                           ...formatters
